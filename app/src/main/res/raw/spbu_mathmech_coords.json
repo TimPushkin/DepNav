@@ -1,0 +1,22 @@
+{
+  "Entrance": {
+    "first": 1.0,
+    "second": 1.0
+  },
+  "Library": {
+    "first": 2.0,
+    "second": 2.0
+  },
+  "405": {
+    "first": 3.0,
+    "second": 3.0
+  },
+  "2201": {
+    "first": 4.0,
+    "second": 4.0
+  },
+  "3224": {
+    "first": 5.0,
+    "second": 5.0
+  }
+}
