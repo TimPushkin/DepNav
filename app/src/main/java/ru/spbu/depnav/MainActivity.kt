@@ -7,8 +7,8 @@ import androidx.activity.compose.setContent
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.gestures.detectTransformGestures
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.absoluteOffset
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -29,9 +29,13 @@ import kotlin.math.roundToInt
 private const val TAG = "MainActivity"
 
 class MainActivity : ComponentActivity() {
+    private lateinit var mCoordsProvider: CoordinatesProvider
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+
+        mCoordsProvider = CoordinatesProvider(resources.openRawResource(R.raw.spbu_mathmech_coords))
+
         setContent {
             DepNavTheme {
                 Surface(
@@ -41,10 +45,14 @@ class MainActivity : ComponentActivity() {
                     Box(
                         contentAlignment = Alignment.TopCenter
                     ) {
-                        var searchValue by remember { mutableStateOf("") }
+                        var mapOffset by remember { mutableStateOf(Offset.Zero) }
 
-                        NavigationMap()
-                        SearchField { searchValue = it }
+                        NavigationMap(mapOffset)
+                        SearchField {
+                            mCoordsProvider.getCoordinatesOf(it)?.run {
+                                mapOffset = Offset(first, second)
+                            }
+                        }
                     }
                 }
             }
@@ -72,14 +80,14 @@ fun SearchField(onSearch: (String) -> Unit) {
 }
 
 @Composable
-fun NavigationMap() {
+fun NavigationMap(initOffset: Offset) {
     var scale by remember { mutableStateOf(1f) }
-    var offset by remember { mutableStateOf(Offset.Zero) }
+    var offset by remember(initOffset) { mutableStateOf(initOffset) }
 
     Box(
         modifier = Modifier
             .fillMaxSize()
-            .pointerInput(Unit) {
+            .pointerInput(initOffset) {
                 detectTransformGestures { _, pan, zoom, _ ->
                     offset += pan
                     scale *= zoom
@@ -90,7 +98,7 @@ fun NavigationMap() {
             painter = painterResource(R.drawable.map),
             contentDescription = "Navigation map",
             modifier = Modifier
-                .offset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
+                .absoluteOffset { IntOffset(offset.x.roundToInt(), offset.y.roundToInt()) }
                 .graphicsLayer(
                     scaleX = scale,
                     scaleY = scale

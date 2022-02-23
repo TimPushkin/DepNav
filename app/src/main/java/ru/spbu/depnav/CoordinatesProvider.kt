@@ -10,10 +10,12 @@ private const val TAG = "CoordinatesProvider"
 
 @OptIn(ExperimentalSerializationApi::class)
 class CoordinatesProvider(inputStream: InputStream) {
-    val coordinates: Map<String, Pair<Float, Float>> = Json.decodeFromStream(inputStream)
+    private val mCoordinates = Json.decodeFromStream<Map<String, Pair<Float, Float>>>(inputStream)
 
-    fun getCoordinatesOf(name: String): Pair<Float, Float>? {
-        Log.i(TAG, "Searching for the coordinates of $name")
-        return coordinates[name]
+    fun getCoordinatesOf(name: String) = mCoordinates[name]?.apply {
+        Log.i(TAG, "Coordinates of $name: ($first, $second)")
+    } ?: run {
+        Log.i(TAG, "Coordinates of $name: not found")
+        null
     }
 }
