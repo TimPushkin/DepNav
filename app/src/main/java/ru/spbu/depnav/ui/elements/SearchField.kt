@@ -8,15 +8,17 @@ import androidx.compose.material.TextField
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.input.ImeAction
 
 @Composable
-fun SearchField(onSearch: (String) -> Unit) {
+fun SearchField(modifier: Modifier = Modifier, onSearch: (String) -> Unit) {
     var value by remember { mutableStateOf("") }
 
     TextField(
         value = value,
         onValueChange = { value = it },
+        modifier = modifier,
         placeholder = { Text("Search...") },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search icon") },
         keyboardOptions = KeyboardOptions(

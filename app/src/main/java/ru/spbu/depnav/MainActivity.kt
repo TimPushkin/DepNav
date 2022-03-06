@@ -4,7 +4,9 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -12,18 +14,25 @@ import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.providers.MarkerProvider
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.models.MapViewModel
+import ru.spbu.depnav.providers.TileProviderFactory
+import ru.spbu.depnav.ui.elements.FloorSwitch
 import ru.spbu.depnav.ui.elements.SearchField
 
 private const val TAG = "MainActivity"
 
+private const val TILES_PATH = "tiles/spbu-mm"
+private const val FLOOR_NUM = 4
+
 class MainActivity : ComponentActivity() {
     private lateinit var mMapViewModel: MapViewModel
+    private lateinit var mTileProviderFactory: TileProviderFactory
     private val mMarkerProvider = MarkerProvider()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mMapViewModel = MapViewModel(applicationContext.assets, "tiles/spbu-mm", emptyList())
+        mTileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH, FLOOR_NUM)
+        mMapViewModel = MapViewModel(mTileProviderFactory.makeTilesProvider(), emptyList())
 
         setContent {
             DepNavTheme {
@@ -31,17 +40,34 @@ class MainActivity : ComponentActivity() {
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    Box(
-                        contentAlignment = Alignment.TopCenter
-                    ) {
+                    Box {
                         MapUI(
                             modifier = Modifier.fillMaxSize(),
                             state = mMapViewModel.state
                         )
-                        SearchField {
-                            mMarkerProvider.getMarkerInfo(it)?.run {
-                                mMapViewModel.centerOnMarker(id)
+
+                        Column(
+                            modifier = Modifier.fillMaxWidth(),
+                            horizontalAlignment = Alignment.CenterHorizontally
+                        ) {
+                            SearchField {
+                                mMarkerProvider.getMarkerInfo(it)?.run {
+                                    mMapViewModel.centerOnMarker(id)
+                                }
                             }
+
+                            val onFloorSwitch = { it: Int ->
+                                mMapViewModel.changeTileProvider(
+                                    mTileProviderFactory.makeTilesProvider(it)
+                                )
+                            }
+
+                            FloorSwitch(
+                                modifier = Modifier.align(Alignment.End),
+                                onUpClick = onFloorSwitch,
+                                onDownClick = onFloorSwitch,
+                                maxFloor = FLOOR_NUM
+                            )
                         }
                     }
                 }
