@@ -16,12 +16,21 @@ import ru.spbu.depnav.providers.MarkerIconProvider
 
 private const val TAG = "MapViewModel"
 
-class MapViewModel(tileProvider: TileStreamProvider, markers: List<Marker>) : ViewModel() {
+class MapViewModel(
+    width: Int,
+    height: Int,
+    tileSize: Int = 1024,
+    tileProvider: TileStreamProvider,
+    markers: List<Marker>
+) : ViewModel() {
     private val mMarkerIconProvider = MarkerIconProvider()
     private var mPrimaryLayerId: String
 
     val state by mutableStateOf(
-        MapState(1, 11264, 5120, 1024).apply {
+        MapState(1, width, height, tileSize) {
+            scroll(0.5, 0.5)
+            scale(0f)
+        }.apply {
             mPrimaryLayerId = addLayer(tileProvider)
 
             for (marker in markers) addMarker(marker.id, marker.x, marker.y) {

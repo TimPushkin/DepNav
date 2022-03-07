@@ -14,7 +14,7 @@ class TileProviderFactory(
     var floorPrefix: String = "floor"
 ) {
 
-    fun makeTilesProvider(floor: Int = minFloor) =
+    fun makeTileProviderForFloor(floor: Int = minFloor) =
         TileStreamProvider { row, col, lvl ->
             if (floor < minFloor || floor > maxFloor) {
                 Log.e(TAG, "Floor $floor is not in [minFloor, maxFloor] = [$minFloor, $maxFloor]")

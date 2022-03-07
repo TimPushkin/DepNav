@@ -20,6 +20,8 @@ import ru.spbu.depnav.ui.elements.SearchField
 
 private const val TAG = "MainActivity"
 
+private const val MAP_WIDTH = 11264
+private const val MAP_HEIGHT = 5120
 private const val TILES_PATH = "tiles/spbu-mm"
 private const val FLOOR_NUM = 4
 
@@ -32,7 +34,12 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         mTileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH, FLOOR_NUM)
-        mMapViewModel = MapViewModel(mTileProviderFactory.makeTilesProvider(), emptyList())
+        mMapViewModel = MapViewModel(
+            MAP_WIDTH,
+            MAP_HEIGHT,
+            tileProvider = mTileProviderFactory.makeTileProviderForFloor(),
+            markers = emptyList()
+        )
 
         setContent {
             DepNavTheme {
@@ -56,9 +63,9 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
 
-                            val onFloorSwitch = { it: Int ->
+                            val onFloorSwitch = { floor: Int ->
                                 mMapViewModel.changeTileProvider(
-                                    mTileProviderFactory.makeTilesProvider(it)
+                                    mTileProviderFactory.makeTileProviderForFloor(floor)
                                 )
                             }
 
