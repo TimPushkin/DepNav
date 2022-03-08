@@ -9,18 +9,11 @@ private const val TAG = "TileProviderFactory"
 class TileProviderFactory(
     private val assets: AssetManager,
     var rootPath: String,
-    var maxFloor: Int,
-    var minFloor: Int = 1,
     var floorPrefix: String = "floor"
 ) {
 
-    fun makeTileProviderForFloor(floor: Int = minFloor) =
+    fun makeTileProviderForFloor(floor: Int) =
         TileStreamProvider { row, col, lvl ->
-            if (floor < minFloor || floor > maxFloor) {
-                Log.e(TAG, "Floor $floor is not in [minFloor, maxFloor] = [$minFloor, $maxFloor]")
-                return@TileStreamProvider null
-            }
-
             val path = "$rootPath/$floorPrefix$floor/$lvl/${row}_$col.png"
 
             runCatching {

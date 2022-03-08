@@ -11,6 +11,8 @@ import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ovh.plrapps.mapcompose.ui.MapUI
+import ru.spbu.depnav.controllers.MapFloorSwitcher
+import ru.spbu.depnav.models.Floor
 import ru.spbu.depnav.providers.MarkerProvider
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.models.MapViewModel
@@ -28,18 +30,23 @@ private const val FLOOR_NUM = 4
 class MainActivity : ComponentActivity() {
     private lateinit var mMapViewModel: MapViewModel
     private lateinit var mTileProviderFactory: TileProviderFactory
+    private lateinit var mMapFloorSwitcher: MapFloorSwitcher
     private val mMarkerProvider = MarkerProvider()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mTileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH, FLOOR_NUM)
-        mMapViewModel = MapViewModel(
-            MAP_WIDTH,
-            MAP_HEIGHT,
-            tileProvider = mTileProviderFactory.makeTileProviderForFloor(),
-            markers = emptyList()
-        )
+        mTileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH)
+        mMapViewModel = MapViewModel(MAP_WIDTH, MAP_HEIGHT)
+
+        val floors = List(FLOOR_NUM) {
+            val floor = it + 1
+            floor to Floor(
+                listOf(mTileProviderFactory.makeTileProviderForFloor(floor)),
+                emptyList()
+            )
+        }.toMap()
+        mMapFloorSwitcher = MapFloorSwitcher(mMapViewModel, floors).apply { setFloor(1) }
 
         setContent {
             DepNavTheme {
@@ -63,16 +70,9 @@ class MainActivity : ComponentActivity() {
                                 }
                             }
 
-                            val onFloorSwitch = { floor: Int ->
-                                mMapViewModel.changeTileProvider(
-                                    mTileProviderFactory.makeTileProviderForFloor(floor)
-                                )
-                            }
-
                             FloorSwitch(
                                 modifier = Modifier.align(Alignment.End),
-                                onUpClick = onFloorSwitch,
-                                onDownClick = onFloorSwitch,
+                                onClick = mMapFloorSwitcher::setFloor,
                                 maxFloor = FLOOR_NUM
                             )
                         }

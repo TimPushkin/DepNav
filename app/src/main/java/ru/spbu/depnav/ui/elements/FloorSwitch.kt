@@ -14,8 +14,7 @@ import androidx.compose.ui.Modifier
 @Composable
 fun FloorSwitch(
     modifier: Modifier = Modifier,
-    onUpClick: (new: Int) -> Unit,
-    onDownClick: (new: Int) -> Unit,
+    onClick: (new: Int) -> Unit,
     minFloor: Int = 1,
     maxFloor: Int
 ) {
@@ -29,7 +28,7 @@ fun FloorSwitch(
             onClick = {
                 if (currentFloor < maxFloor) {
                     currentFloor++
-                    onUpClick(currentFloor)
+                    onClick(currentFloor)
                 }
             }
         ) {
@@ -42,7 +41,7 @@ fun FloorSwitch(
             onClick = {
                 if (currentFloor > minFloor) {
                     currentFloor--
-                    onDownClick(currentFloor)
+                    onClick(currentFloor)
                 }
             }
         ) {
