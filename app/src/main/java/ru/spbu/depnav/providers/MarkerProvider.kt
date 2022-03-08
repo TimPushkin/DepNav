@@ -7,7 +7,7 @@ private const val TAG = "MarkerProvider"
 
 class MarkerProvider {
 
-    fun getMarkerInfo(id: String): Marker? {
+    fun getMarker(id: String): Marker? {
         Log.d(TAG, "Received query for \"$id\"")
         TODO("Not implemented")
     }

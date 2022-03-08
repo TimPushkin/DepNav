@@ -65,7 +65,7 @@ class MainActivity : ComponentActivity() {
                             horizontalAlignment = Alignment.CenterHorizontally
                         ) {
                             SearchField {
-                                mMarkerProvider.getMarkerInfo(it)?.run {
+                                mMarkerProvider.getMarker(it)?.run {
                                     mMapViewModel.centerOnMarker(id)
                                 }
                             }
