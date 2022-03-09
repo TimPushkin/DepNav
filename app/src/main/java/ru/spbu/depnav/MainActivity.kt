@@ -24,7 +24,7 @@ private const val TAG = "MainActivity"
 
 private const val MAP_WIDTH = 11264
 private const val MAP_HEIGHT = 5120
-private const val TILES_PATH = "tiles/spbu-mm"
+private const val TILES_PATH = "spbu-mm/tiles"
 private const val FLOOR_NUM = 4
 
 class MainActivity : ComponentActivity() {

@@ -9,16 +9,25 @@ data class Marker(val id: String, val type: MarkerType, val x: Double, val y: Do
         /** Room entrance */
         ROOM,
 
-        /** Staircase */
-        STAIRS,
+        /** Staircase leading up */
+        STAIRS_UP,
+
+        /** Staircase leading down */
+        STAIRS_DOWN,
+
+        /** Staircase leading both up and down */
+        STAIRS_BOTH,
 
         /** Elevator entrance */
         ELEVATOR,
 
         /** Men's restroom */
-        WC_MALE,
+        WC_MAN,
 
         /** Women's restroom */
-        WC_FEMALE
+        WC_WOMAN,
+
+        /** Restroom */
+        WC
     }
 }

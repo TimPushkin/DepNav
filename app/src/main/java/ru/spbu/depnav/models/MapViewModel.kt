@@ -9,7 +9,7 @@ import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.*
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
-import ru.spbu.depnav.providers.MarkerIconProvider
+import ru.spbu.depnav.ui.elements.MarkerView
 
 private const val TAG = "MapViewModel"
 
@@ -18,7 +18,6 @@ class MapViewModel(
     height: Int,
     tileSize: Int = 1024
 ) : ViewModel() {
-    private val mMarkerIconProvider = MarkerIconProvider()
     private var mMarkerIds = emptyList<Marker>()
 
     val state by mutableStateOf(
@@ -39,8 +38,8 @@ class MapViewModel(
         Log.d(TAG, "Replacing markers...")
 
         mMarkerIds.forEach { state.removeMarker(it.id) }
-        for (marker in markers) state.addMarker(marker.id, marker.x, marker.y) {
-            mMarkerIconProvider.getIcon(marker.type)
+        for (marker in markers) state.addMarker(marker.id, marker.x, marker.y, clipShape = null) {
+            MarkerView(marker.type)
         }
     }
 
