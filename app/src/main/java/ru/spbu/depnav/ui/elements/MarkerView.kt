@@ -20,4 +20,5 @@ fun MarkerView(type: Marker.MarkerType, modifier: Modifier = Modifier) = when (t
     Marker.MarkerType.WC_MAN -> Text("🚹", modifier.size(SIZE.dp))
     Marker.MarkerType.WC_WOMAN -> Text("🚺", modifier.size(SIZE.dp))
     Marker.MarkerType.WC -> Text("🚻", modifier.size(SIZE.dp))
+    Marker.MarkerType.OTHER -> Text("🔶", modifier.size(SIZE.dp))
 }

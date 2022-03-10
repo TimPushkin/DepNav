@@ -28,6 +28,9 @@ data class Marker(val id: String, val type: MarkerType, val x: Double, val y: Do
         WC_WOMAN,
 
         /** Restroom */
-        WC
+        WC,
+
+        /** Anything else */
+        OTHER
     }
 }
