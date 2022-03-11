@@ -1,0 +1,106 @@
+{
+  "$schema": "http://json-schema.org/draft-04/schema#",
+  "type": "object",
+  "properties": {
+    "mapName": {
+      "type": "string"
+    },
+    "floorWidth": {
+      "type": "integer"
+    },
+    "floorHeight": {
+      "type": "integer"
+    },
+    "floors": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "properties": {
+          "floor": {
+            "type": "integer"
+          },
+          "markers": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "properties": {
+                "type": {
+                  "type": "string",
+                  "enum": [
+                    "ENTRANCE",
+                    "ROOM",
+                    "STAIRS_UP",
+                    "STAIRS_DOWN",
+                    "STAIRS_BOTH",
+                    "ELEVATOR",
+                    "WC_MAN",
+                    "WC_WOMAN",
+                    "WC",
+                    "OTHER"
+                  ]
+                },
+                "closed": {
+                  "type": "boolean"
+                },
+                "x": {
+                  "type": "integer"
+                },
+                "y": {
+                  "type": "integer"
+                },
+                "ru": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "description"
+                  ]
+                },
+                "en": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": "string"
+                    },
+                    "description": {
+                      "type": "string"
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "description"
+                  ]
+                }
+              },
+              "required": [
+                "type",
+                "closed",
+                "x",
+                "y",
+                "ru",
+                "en"
+              ]
+            }
+          }
+        },
+        "required": [
+          "floor",
+          "markers"
+        ]
+      }
+    }
+  },
+  "required": [
+    "mapName",
+    "floorWidth",
+    "floorHeight",
+    "floors"
+  ]
+}
