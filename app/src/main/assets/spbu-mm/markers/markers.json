@@ -8,7 +8,7 @@
       "markers": [
         {
           "type": "STAIRS_UP",
-          "closed": true,
+          "is_closed": true,
           "x": 10525,
           "y": 4220,
           "ru": {
@@ -22,7 +22,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10525,
           "y": 4352,
           "ru": {
@@ -36,7 +36,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10504,
           "y": 4537,
           "ru": {
@@ -50,7 +50,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10972,
           "y": 4463,
           "ru": {
@@ -64,7 +64,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10972,
           "y": 4330,
           "ru": {
@@ -78,7 +78,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 10555,
           "y": 4115,
           "ru": {
@@ -92,7 +92,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 10639,
           "y": 4115,
           "ru": {
@@ -106,7 +106,7 @@
         },
         {
           "type": "ENTRANCE",
-          "closed": false,
+          "is_closed": false,
           "x": 11076,
           "y": 3731,
           "ru": {
@@ -120,7 +120,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 10877,
           "y": 3341,
           "ru": {
@@ -134,7 +134,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 8684,
           "y": 2907,
           "ru": {
@@ -148,7 +148,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 8684,
           "y": 4524,
           "ru": {
@@ -162,7 +162,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 8424,
           "y": 3735,
           "ru": {
@@ -176,7 +176,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 8342,
           "y": 3550,
           "ru": {
@@ -190,7 +190,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 7915,
           "y": 3735,
           "ru": {
@@ -204,7 +204,7 @@
         },
         {
           "type": "WC_WOMAN",
-          "closed": false,
+          "is_closed": false,
           "x": 9160,
           "y": 3511,
           "ru": {
@@ -218,7 +218,7 @@
         },
         {
           "type": "WC_MAN",
-          "closed": false,
+          "is_closed": false,
           "x": 9160,
           "y": 3945,
           "ru": {
@@ -232,7 +232,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9181,
           "y": 3607,
           "ru": {
@@ -246,7 +246,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9181,
           "y": 3853,
           "ru": {
@@ -260,7 +260,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 9837,
           "y": 3546,
           "ru": {
@@ -274,7 +274,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 10517,
           "y": 3260,
           "ru": {
@@ -288,7 +288,7 @@
         },
         {
           "type": "ELEVATOR",
-          "closed": false,
+          "is_closed": false,
           "x": 10597,
           "y": 3179,
           "ru": {
@@ -302,7 +302,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10502,
           "y": 3140,
           "ru": {
@@ -316,7 +316,7 @@
         },
         {
           "type": "WC_MAN",
-          "closed": false,
+          "is_closed": false,
           "x": 10502,
           "y": 2998,
           "ru": {
@@ -330,7 +330,7 @@
         },
         {
           "type": "WC_WOMAN",
-          "closed": false,
+          "is_closed": false,
           "x": 10502,
           "y": 2869,
           "ru": {
@@ -344,7 +344,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10502,
           "y": 2869,
           "ru": {
@@ -358,7 +358,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 2468,
           "ru": {
@@ -372,7 +372,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 2330,
           "ru": {
@@ -386,7 +386,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 2127,
           "ru": {
@@ -400,7 +400,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 1869,
           "ru": {
@@ -414,7 +414,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 1600,
           "ru": {
@@ -428,7 +428,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 1327,
           "ru": {
@@ -442,7 +442,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 1143,
           "ru": {
@@ -456,7 +456,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 1049,
           "ru": {
@@ -470,7 +470,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10588,
           "y": 630,
           "ru": {
@@ -484,7 +484,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 3190,
           "ru": {
@@ -498,7 +498,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 2940,
           "ru": {
@@ -512,7 +512,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 2536,
           "ru": {
@@ -526,7 +526,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 1956,
           "ru": {
@@ -540,7 +540,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 1456,
           "ru": {
@@ -554,7 +554,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 1093,
           "ru": {
@@ -568,7 +568,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 840,
           "ru": {
@@ -582,7 +582,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10939,
           "y": 565,
           "ru": {
@@ -596,7 +596,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10666,
           "y": 530,
           "ru": {
@@ -610,7 +610,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10400,
           "y": 565,
           "ru": {
@@ -624,7 +624,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 10400,
           "y": 934,
           "ru": {
@@ -638,7 +638,7 @@
         },
         {
           "type": "OTHER",
-          "closed": true,
+          "is_closed": true,
           "x": 10289,
           "y": 758,
           "ru": {
@@ -646,13 +646,13 @@
             "description": ""
           },
           "en": {
-            "title": "Closed passage",
+            "title": "is_Closed passage",
             "description": ""
           }
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 10035,
           "y": 604,
           "ru": {
@@ -666,7 +666,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10137,
           "y": 212,
           "ru": {
@@ -680,7 +680,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9732,
           "y": 212,
           "ru": {
@@ -694,7 +694,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9408,
           "y": 212,
           "ru": {
@@ -708,7 +708,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9276,
           "y": 146,
           "ru": {
@@ -722,7 +722,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9276,
           "y": 255,
           "ru": {
@@ -736,7 +736,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9408,
           "y": 545,
           "ru": {
@@ -750,7 +750,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 9141,
           "y": 545,
           "ru": {
@@ -764,7 +764,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 8823,
           "y": 911,
           "ru": {
@@ -778,7 +778,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 8823,
           "y": 242,
           "ru": {
@@ -792,7 +792,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 8294,
           "y": 122,
           "ru": {
@@ -806,7 +806,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 7574,
           "y": 270,
           "ru": {
@@ -820,7 +820,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 7584,
           "y": 600,
           "ru": {
@@ -834,7 +834,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 6236,
           "y": 777,
           "ru": {
@@ -848,7 +848,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 5700,
           "y": 860,
           "ru": {
@@ -862,7 +862,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 5384,
           "y": 860,
           "ru": {
@@ -876,7 +876,7 @@
         },
         {
           "type": "WC_WOMAN",
-          "closed": false,
+          "is_closed": false,
           "x": 5280,
           "y": 766,
           "ru": {
@@ -890,7 +890,7 @@
         },
         {
           "type": "ELEVATOR",
-          "closed": true,
+          "is_closed": true,
           "x": 5206,
           "y": 766,
           "ru": {
@@ -904,7 +904,7 @@
         },
         {
           "type": "ELEVATOR",
-          "closed": true,
+          "is_closed": true,
           "x": 5133,
           "y": 766,
           "ru": {
@@ -918,7 +918,7 @@
         },
         {
           "type": "ENTRANCE",
-          "closed": false,
+          "is_closed": false,
           "x": 4654,
           "y": 552,
           "ru": {
@@ -932,7 +932,7 @@
         },
         {
           "type": "OTHER",
-          "closed": false,
+          "is_closed": false,
           "x": 4332,
           "y": 766,
           "ru": {
@@ -946,7 +946,7 @@
         },
         {
           "type": "ELEVATOR",
-          "closed": false,
+          "is_closed": false,
           "x": 4177,
           "y": 766,
           "ru": {
@@ -960,7 +960,7 @@
         },
         {
           "type": "ELEVATOR",
-          "closed": true,
+          "is_closed": true,
           "x": 4102,
           "y": 766,
           "ru": {
@@ -974,7 +974,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 4654,
           "y": 1376,
           "ru": {
@@ -988,7 +988,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 4172,
           "y": 1361,
           "ru": {
@@ -1002,7 +1002,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 4221,
           "y": 1060,
           "ru": {
@@ -1016,7 +1016,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 3548,
           "y": 863,
           "ru": {
@@ -1030,7 +1030,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 3060,
           "y": 863,
           "ru": {
@@ -1044,7 +1044,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 2797,
           "y": 863,
           "ru": {
@@ -1058,7 +1058,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1811,
           "y": 926,
           "ru": {
@@ -1072,7 +1072,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1365,
           "y": 833,
           "ru": {
@@ -1086,7 +1086,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 942,
           "y": 1365,
           "ru": {
@@ -1100,7 +1100,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 922,
           "y": 1723,
           "ru": {
@@ -1114,7 +1114,7 @@
         },
         {
           "type": "WC_WOMAN",
-          "closed": false,
+          "is_closed": false,
           "x": 1204,
           "y": 2222,
           "ru": {
@@ -1128,7 +1128,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1196,
           "y": 2316,
           "ru": {
@@ -1142,7 +1142,7 @@
         },
         {
           "type": "ENTRANCE",
-          "closed": false,
+          "is_closed": false,
           "x": 122,
           "y": 3037,
           "ru": {
@@ -1156,7 +1156,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 945,
           "y": 3035,
           "ru": {
@@ -1170,7 +1170,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 924,
           "y": 2700,
           "ru": {
@@ -1184,7 +1184,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 675,
           "y": 2700,
           "ru": {
@@ -1198,7 +1198,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 340,
           "y": 2760,
           "ru": {
@@ -1212,7 +1212,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 340,
           "y": 2966,
           "ru": {
@@ -1226,7 +1226,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 340,
           "y": 2107,
           "ru": {
@@ -1240,7 +1240,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 511,
           "y": 3303,
           "ru": {
@@ -1254,7 +1254,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 924,
           "y": 3343,
           "ru": {
@@ -1268,7 +1268,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1204,
           "y": 3564,
           "ru": {
@@ -1282,7 +1282,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1360,
           "y": 3564,
           "ru": {
@@ -1296,7 +1296,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1515,
           "y": 3564,
           "ru": {
@@ -1310,7 +1310,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1761,
           "y": 3564,
           "ru": {
@@ -1324,7 +1324,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1805,
           "y": 3763,
           "ru": {
@@ -1338,7 +1338,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1805,
           "y": 3906,
           "ru": {
@@ -1352,7 +1352,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1204,
           "y": 4110,
           "ru": {
@@ -1366,7 +1366,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1360,
           "y": 4110,
           "ru": {
@@ -1380,7 +1380,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1515,
           "y": 4110,
           "ru": {
@@ -1394,7 +1394,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1761,
           "y": 4110,
           "ru": {
@@ -1408,7 +1408,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 1439,
           "y": 3837,
           "ru": {
@@ -1422,7 +1422,7 @@
         },
         {
           "type": "WC_MAN",
-          "closed": false,
+          "is_closed": false,
           "x": 1761,
           "y": 3837,
           "ru": {
@@ -1436,7 +1436,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 922,
           "y": 4316,
           "ru": {
@@ -1450,7 +1450,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 674,
           "y": 4316,
           "ru": {
@@ -1464,7 +1464,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 342,
           "y": 4635,
           "ru": {
@@ -1478,7 +1478,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 745,
           "y": 4561,
           "ru": {
@@ -1492,7 +1492,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 745,
           "y": 4652,
           "ru": {
@@ -1506,7 +1506,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 745,
           "y": 4743,
           "ru": {
@@ -1520,7 +1520,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 674,
           "y": 4951,
           "ru": {
@@ -1534,7 +1534,7 @@
         },
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 681,
           "y": 4951,
           "ru": {
@@ -1548,7 +1548,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "closed": false,
+          "is_closed": false,
           "x": 941,
           "y": 4602,
           "ru": {
@@ -1567,7 +1567,7 @@
       "markers": [
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 8078,
           "y": 3077,
           "ru": {
@@ -1586,7 +1586,7 @@
       "markers": [
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10500,
           "y": 4848,
           "ru": {
@@ -1605,7 +1605,7 @@
       "markers": [
         {
           "type": "ROOM",
-          "closed": false,
+          "is_closed": false,
           "x": 10500,
           "y": 4947,
           "ru": {

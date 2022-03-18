@@ -1,8 +1,8 @@
-package ru.spbu.depnav.controllers
+package ru.spbu.depnav.controller
 
 import android.util.Log
-import ru.spbu.depnav.models.Floor
-import ru.spbu.depnav.models.MapViewModel
+import ru.spbu.depnav.model.Floor
+import ru.spbu.depnav.viewmodel.MapViewModel
 
 private const val TAG = "MapFloorSwitcher"
 

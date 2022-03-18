@@ -1,7 +1,7 @@
-package ru.spbu.depnav.providers
+package ru.spbu.depnav.provider
 
 import android.util.Log
-import ru.spbu.depnav.models.Marker
+import ru.spbu.depnav.model.Marker
 
 private const val TAG = "MarkerProvider"
 

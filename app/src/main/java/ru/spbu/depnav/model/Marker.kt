@@ -1,6 +1,17 @@
-package ru.spbu.depnav.models
+package ru.spbu.depnav.model
 
-data class Marker(val id: String, val type: MarkerType, val x: Double, val y: Double) {
+import androidx.room.*
+
+@Entity(tableName = "markers")
+data class Marker(
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    val type: MarkerType,
+    @ColumnInfo(name = "is_closed") val isClosed: Boolean,
+    val floor: Int,
+    val x: Double,
+    val y: Double
+) {
+    @Ignore val idStr = id.toString(10)
 
     enum class MarkerType {
         /** Building entrance */

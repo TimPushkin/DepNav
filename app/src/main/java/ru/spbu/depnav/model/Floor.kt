@@ -1,4 +1,4 @@
-package ru.spbu.depnav.models
+package ru.spbu.depnav.model
 
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 

@@ -1,4 +1,4 @@
-package ru.spbu.depnav.providers
+package ru.spbu.depnav.provider
 
 import android.content.res.AssetManager
 import android.util.Log

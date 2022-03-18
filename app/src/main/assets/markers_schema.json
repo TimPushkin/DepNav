@@ -39,7 +39,7 @@
                     "OTHER"
                   ]
                 },
-                "closed": {
+                "is_closed": {
                   "type": "boolean"
                 },
                 "x": {
@@ -81,7 +81,7 @@
               },
               "required": [
                 "type",
-                "closed",
+                "is_closed",
                 "x",
                 "y",
                 "ru",

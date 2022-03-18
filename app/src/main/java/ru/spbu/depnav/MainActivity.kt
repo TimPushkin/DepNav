@@ -11,14 +11,14 @@ import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ovh.plrapps.mapcompose.ui.MapUI
-import ru.spbu.depnav.controllers.MapFloorSwitcher
-import ru.spbu.depnav.models.Floor
-import ru.spbu.depnav.providers.MarkerProvider
+import ru.spbu.depnav.controller.MapFloorSwitcher
+import ru.spbu.depnav.model.Floor
+import ru.spbu.depnav.provider.MarkerProvider
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.models.MapViewModel
-import ru.spbu.depnav.providers.TileProviderFactory
+import ru.spbu.depnav.provider.TileProviderFactory
 import ru.spbu.depnav.ui.elements.FloorSwitch
 import ru.spbu.depnav.ui.elements.SearchField
+import ru.spbu.depnav.viewmodel.MapViewModel
 
 private const val TAG = "MainActivity"
 
@@ -66,7 +66,7 @@ class MainActivity : ComponentActivity() {
                         ) {
                             SearchField {
                                 mMarkerProvider.getMarker(it)?.run {
-                                    mMapViewModel.centerOnMarker(id)
+                                    mMapViewModel.centerOnMarker(idStr)
                                 }
                             }
 

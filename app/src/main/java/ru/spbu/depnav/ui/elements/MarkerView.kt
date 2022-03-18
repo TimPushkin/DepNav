@@ -5,7 +5,7 @@ import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import ru.spbu.depnav.models.Marker
+import ru.spbu.depnav.model.Marker
 
 private const val SIZE = 20
 
