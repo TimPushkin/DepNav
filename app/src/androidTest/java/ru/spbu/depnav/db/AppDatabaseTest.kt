@@ -10,19 +10,22 @@ import org.junit.After
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
+import ru.spbu.depnav.model.MapInfo
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
 
 @RunWith(AndroidJUnit4::class)
-class MarkerDatabaseTest {
-    private lateinit var db: MarkerDatabase
+class AppDatabaseTest {
+    private lateinit var db: AppDatabase
+    private lateinit var mapInfoDao: MapInfoDao
     private lateinit var markerDao: MarkerDao
     private lateinit var markerTextDao: MarkerTextDao
 
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, MarkerDatabase::class.java).build()
+        db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        mapInfoDao = db.mapInfoDao()
         markerDao = db.markerDao()
         markerTextDao = db.markerTextDao()
     }
@@ -30,6 +33,26 @@ class MarkerDatabaseTest {
     @After
     fun tearDown() {
         db.close()
+    }
+
+    /* MapInfo tests */
+
+    @Test
+    fun loadByName_returnsMapInfoWithQueriedName() {
+        val expected = listOf(
+            MapInfo("abc", 100, 100, 5),
+            MapInfo("cba", 100, 200, 100)
+        )
+        runBlocking { mapInfoDao.insertAll(*expected.toTypedArray()) }
+
+        val actual = runBlocking {
+            listOf(
+                mapInfoDao.loadByName(expected[0].mapName),
+                mapInfoDao.loadByName(expected[1].mapName)
+            )
+        }
+
+        for (i in 0..1) assertEquals(expected[i], actual[i])
     }
 
     /* Marker tests */
@@ -60,8 +83,7 @@ class MarkerDatabaseTest {
         listOf(1, 2, 5).forEach { floor ->
             markers.getOrPut(floor) { mutableListOf() } +=
                 Marker(id, Marker.MarkerType.OTHER, false, floor, 1.1, -2.0)
-            markerTexts += MarkerText(id, MarkerText.LanguageId.EN, null, null)
-            id += 1
+            markerTexts += MarkerText(id++, MarkerText.LanguageId.EN, null, null)
         }
         runBlocking {
             markerDao.insertAll(*markers.values.flatten().toTypedArray())

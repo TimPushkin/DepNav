@@ -4,7 +4,7 @@ import androidx.room.*
 
 @Entity(tableName = "markers")
 data class Marker(
-    @PrimaryKey(autoGenerate = true) val id: Int,
+    @PrimaryKey val id: Int,
     val type: MarkerType,
     @ColumnInfo(name = "is_closed") val isClosed: Boolean,
     val floor: Int,

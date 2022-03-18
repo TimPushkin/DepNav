@@ -11,9 +11,10 @@ import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.room.Room
+import kotlinx.coroutines.runBlocking
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.controller.MapFloorSwitcher
-import ru.spbu.depnav.db.MarkerDatabase
+import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.provider.MarkerProvider
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
@@ -23,30 +24,32 @@ import ru.spbu.depnav.viewmodel.MapViewModel
 
 private const val TAG = "MainActivity"
 
-private const val MAP_WIDTH = 11264 // TODO: add these to the database
-private const val MAP_HEIGHT = 5120
-private const val DB_ASSET = "spbu-mm/markers/markers.db" // TODO: retrieve from saved state
-private const val TILES_PATH = "spbu-mm/tiles"
-private const val FLOOR_NUM = 4
+// TODO: retrieve from saved state
+private const val MAP_NAME = "spbu-mm"
+private const val DB_ASSET = "$MAP_NAME/markers/markers.db"
+private const val TILES_PATH = "$MAP_NAME/tiles"
 
 class MainActivity : ComponentActivity() {
+    private lateinit var mAppDatabase: AppDatabase
     private lateinit var mMapViewModel: MapViewModel
-    private lateinit var mMarkerDatabase: MarkerDatabase
     private lateinit var mMapFloorSwitcher: MapFloorSwitcher
     private val mMarkerProvider = MarkerProvider()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mMapViewModel = MapViewModel(MAP_WIDTH, MAP_HEIGHT)
-        mMarkerDatabase = Room.databaseBuilder(this, MarkerDatabase::class.java, "markers.db")
+        mAppDatabase = Room.databaseBuilder(this, AppDatabase::class.java, "markers.db")
             .createFromAsset(DB_ASSET)
             .build()
+
+        val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
+
+        mMapViewModel = MapViewModel(mapInfo.floorWidth, mapInfo.floorHeight)
         mMapFloorSwitcher = MapFloorSwitcher(
             mMapViewModel,
             TileProviderFactory(applicationContext.assets, TILES_PATH),
-            mMarkerDatabase.markerDao(),
-            FLOOR_NUM
+            mAppDatabase.markerDao(),
+            mapInfo.floorsNum
         ).apply { setFloor(1) }
 
         setContent {
@@ -74,7 +77,7 @@ class MainActivity : ComponentActivity() {
                             FloorSwitch(
                                 modifier = Modifier.align(Alignment.End),
                                 onClick = mMapFloorSwitcher::setFloor,
-                                maxFloor = FLOOR_NUM
+                                maxFloor = mapInfo.floorsNum
                             )
                         }
                     }

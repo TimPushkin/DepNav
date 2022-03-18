@@ -2,11 +2,49 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "6ce0b3aecae0bf73e49a56b72763559d",
+    "identityHash": "11493c94086c631e26c23980d07a055a",
     "entities": [
       {
+        "tableName": "map_infos",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`map_name` TEXT NOT NULL, `floor_width` INTEGER NOT NULL, `floor_height` INTEGER NOT NULL, `floors_num` INTEGER NOT NULL, PRIMARY KEY(`map_name`))",
+        "fields": [
+          {
+            "fieldPath": "mapName",
+            "columnName": "map_name",
+            "affinity": "TEXT",
+            "notNull": true
+          },
+          {
+            "fieldPath": "floorWidth",
+            "columnName": "floor_width",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "floorHeight",
+            "columnName": "floor_height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "floorsNum",
+            "columnName": "floors_num",
+            "affinity": "INTEGER",
+            "notNull": true
+          }
+        ],
+        "primaryKey": {
+          "columnNames": [
+            "map_name"
+          ],
+          "autoGenerate": false
+        },
+        "indices": [],
+        "foreignKeys": []
+      },
+      {
         "tableName": "markers",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, `type` TEXT NOT NULL, `is_closed` INTEGER NOT NULL, `floor` INTEGER NOT NULL, `x` REAL NOT NULL, `y` REAL NOT NULL)",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`id` INTEGER NOT NULL, `type` TEXT NOT NULL, `is_closed` INTEGER NOT NULL, `floor` INTEGER NOT NULL, `x` REAL NOT NULL, `y` REAL NOT NULL, PRIMARY KEY(`id`))",
         "fields": [
           {
             "fieldPath": "id",
@@ -49,7 +87,7 @@
           "columnNames": [
             "id"
           ],
-          "autoGenerate": true
+          "autoGenerate": false
         },
         "indices": [],
         "foreignKeys": []
@@ -100,7 +138,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6ce0b3aecae0bf73e49a56b72763559d')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '11493c94086c631e26c23980d07a055a')"
     ]
   }
 }
