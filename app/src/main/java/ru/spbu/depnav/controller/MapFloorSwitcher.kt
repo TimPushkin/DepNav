@@ -13,7 +13,10 @@ class MapFloorSwitcher(
 
     fun setFloor(floor: Int) {
         floors[floor]?.run {
-            Log.i(TAG, "Switching to floor $floor")
+            Log.i(
+                TAG,
+                "Switching to floor $floor: ${layers.count()} layers, ${markers.count()} markers"
+            )
 
             mMapViewModel.replaceLayersWith(layers)
             mMapViewModel.replaceMarkersWith(markers)

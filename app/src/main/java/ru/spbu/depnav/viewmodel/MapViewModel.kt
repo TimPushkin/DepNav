@@ -3,6 +3,7 @@ package ru.spbu.depnav.viewmodel
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -15,8 +16,8 @@ import ru.spbu.depnav.ui.elements.MarkerView
 private const val TAG = "MapViewModel"
 
 class MapViewModel(
-    width: Int,
-    height: Int,
+    private val width: Int,
+    private val height: Int,
     tileSize: Int = 1024
 ) : ViewModel() {
     private val mMarkerIds = mutableListOf<String>()
@@ -28,23 +29,32 @@ class MapViewModel(
         }
     )
 
-    fun replaceLayersWith(tileProviders: List<TileStreamProvider>) {
+    fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
         Log.d(TAG, "Replacing layers...")
 
         state.removeAllLayers()
         for (tileProvider in tileProviders) state.addLayer(tileProvider)
     }
 
-    fun replaceMarkersWith(markers: List<Marker>) {
+    fun replaceMarkersWith(markers: Iterable<Marker>) {
         Log.d(TAG, "Replacing markers...")
 
         mMarkerIds.forEach { state.removeMarker(it) }
         mMarkerIds.clear()
 
         for (marker in markers) marker.run {
-            state.addMarker(idStr, x, y, clipShape = null) { MarkerView(type) }
+            // TODO: store normalized coordinates in the database
+            state.addMarker(
+                id = idStr,
+                x = x / width,
+                y = y / height,
+                relativeOffset = Offset(-0.5f, -0.5f),
+                clipShape = null
+            ) { MarkerView(type) }
             mMarkerIds += idStr
         }
+
+        Log.i(TAG, "Placed ${mMarkerIds.size} markers")
     }
 
     fun centerOnMarker(id: String) {

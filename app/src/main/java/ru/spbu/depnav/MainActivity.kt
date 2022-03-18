@@ -10,8 +10,11 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.*
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.room.Room
+import kotlinx.coroutines.runBlocking
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.controller.MapFloorSwitcher
+import ru.spbu.depnav.db.MarkerDatabase
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.provider.MarkerProvider
 import ru.spbu.depnav.ui.theme.DepNavTheme
@@ -22,14 +25,16 @@ import ru.spbu.depnav.viewmodel.MapViewModel
 
 private const val TAG = "MainActivity"
 
-private const val MAP_WIDTH = 11264
+private const val MAP_WIDTH = 11264 // TODO: add these to the database
 private const val MAP_HEIGHT = 5120
+private const val DB_ASSET = "spbu-mm/markers/markers.db" // TODO: retrieve from saved state
 private const val TILES_PATH = "spbu-mm/tiles"
 private const val FLOOR_NUM = 4
 
 class MainActivity : ComponentActivity() {
     private lateinit var mMapViewModel: MapViewModel
     private lateinit var mTileProviderFactory: TileProviderFactory
+    private lateinit var mMarkerDatabase: MarkerDatabase
     private lateinit var mMapFloorSwitcher: MapFloorSwitcher
     private val mMarkerProvider = MarkerProvider()
 
@@ -38,13 +43,15 @@ class MainActivity : ComponentActivity() {
 
         mTileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH)
         mMapViewModel = MapViewModel(MAP_WIDTH, MAP_HEIGHT)
+        mMarkerDatabase = Room.databaseBuilder(this, MarkerDatabase::class.java, "markers.db")
+            .createFromAsset(DB_ASSET)
+            .build()
 
         val floors = List(FLOOR_NUM) {
             val floor = it + 1
-            floor to Floor(
-                listOf(mTileProviderFactory.makeTileProviderForFloor(floor)),
-                emptyList()
-            )
+            floor to Floor(listOf(mTileProviderFactory.makeTileProviderForFloor(floor))) {
+                runBlocking { mMarkerDatabase.markerDao().loadWithTextByFloor(floor).keys }
+            }
         }.toMap()
         mMapFloorSwitcher = MapFloorSwitcher(mMapViewModel, floors).apply { setFloor(1) }
 

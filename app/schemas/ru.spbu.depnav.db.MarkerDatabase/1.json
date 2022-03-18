@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "dc58e8cbadff6c65226a5ff8cd0f5c70",
+    "identityHash": "6ce0b3aecae0bf73e49a56b72763559d",
     "entities": [
       {
         "tableName": "markers",
@@ -100,7 +100,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'dc58e8cbadff6c65226a5ff8cd0f5c70')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '6ce0b3aecae0bf73e49a56b72763559d')"
     ]
   }
 }

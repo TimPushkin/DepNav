@@ -8,7 +8,7 @@ import ru.spbu.depnav.model.MarkerText
 
 @Database(entities = [Marker::class, MarkerText::class], version = 1)
 @TypeConverters(Converters::class)
-abstract class AppDatabase : RoomDatabase() {
+abstract class MarkerDatabase : RoomDatabase() {
     abstract fun markerDao(): MarkerDao
 
     abstract fun markerTextDao(): MarkerTextDao

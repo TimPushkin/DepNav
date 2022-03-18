@@ -14,15 +14,15 @@ import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
 
 @RunWith(AndroidJUnit4::class)
-class AppDatabaseTest {
-    private lateinit var db: AppDatabase
+class MarkerDatabaseTest {
+    private lateinit var db: MarkerDatabase
     private lateinit var markerDao: MarkerDao
     private lateinit var markerTextDao: MarkerTextDao
 
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
+        db = Room.inMemoryDatabaseBuilder(context, MarkerDatabase::class.java).build()
         markerDao = db.markerDao()
         markerTextDao = db.markerTextDao()
     }
