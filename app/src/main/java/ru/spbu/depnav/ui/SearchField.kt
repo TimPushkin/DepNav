@@ -1,4 +1,4 @@
-package ru.spbu.depnav.ui.elements
+package ru.spbu.depnav.ui
 
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions

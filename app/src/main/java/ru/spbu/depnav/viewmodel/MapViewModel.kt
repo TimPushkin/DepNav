@@ -14,7 +14,7 @@ import ovh.plrapps.mapcompose.api.*
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.ui.elements.MarkerView
+import ru.spbu.depnav.ui.MarkerView
 
 private const val TAG = "MapViewModel"
 

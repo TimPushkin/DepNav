@@ -18,8 +18,8 @@ import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.provider.MarkerProvider
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
-import ru.spbu.depnav.ui.elements.FloorSwitch
-import ru.spbu.depnav.ui.elements.SearchField
+import ru.spbu.depnav.ui.FloorSwitch
+import ru.spbu.depnav.ui.SearchField
 import ru.spbu.depnav.viewmodel.MapViewModel
 
 private const val TAG = "MainActivity"

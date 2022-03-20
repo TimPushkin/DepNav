@@ -1,4 +1,4 @@
-package ru.spbu.depnav.ui.elements.search
+package ru.spbu.depnav.ui.search
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.material.ExtendedFloatingActionButton

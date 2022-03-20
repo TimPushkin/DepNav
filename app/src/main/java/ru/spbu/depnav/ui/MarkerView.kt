@@ -1,4 +1,4 @@
-package ru.spbu.depnav.ui.elements
+package ru.spbu.depnav.ui
 
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
