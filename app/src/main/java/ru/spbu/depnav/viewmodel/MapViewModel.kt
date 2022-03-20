@@ -1,9 +1,12 @@
 package ru.spbu.depnav.viewmodel
 
 import android.util.Log
+import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
@@ -50,7 +53,7 @@ class MapViewModel(
                 y = y / height,
                 relativeOffset = Offset(-0.5f, -0.5f),
                 clipShape = null
-            ) { MarkerView(type) }
+            ) { MarkerView(type, modifier = Modifier.size(20.dp)) }
             mMarkerIds += idStr
         }
 
