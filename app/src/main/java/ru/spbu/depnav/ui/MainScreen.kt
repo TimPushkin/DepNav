@@ -10,14 +10,14 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ovh.plrapps.mapcompose.ui.MapUI
-import ru.spbu.depnav.provider.MarkerProvider
+import ru.spbu.depnav.ui.search.SearchButton
 import ru.spbu.depnav.viewmodel.MapViewModel
 
 @Composable
 fun MainScreen(
     mapViewModel: MapViewModel,
-    markerProvider: MarkerProvider,
     floorsNum: Int,
+    onStartSearch: () -> Unit,
     onFloorSwitch: (Int) -> Unit,
 ) {
     Surface(
@@ -34,9 +34,10 @@ fun MainScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SearchField {
-                    markerProvider.getMarker(it)?.run { mapViewModel.centerOnMarker(idStr) }
-                }
+                SearchButton(
+                    text = "",
+                    onClick = onStartSearch
+                )
 
                 FloorSwitch(
                     modifier = Modifier.align(Alignment.End),
