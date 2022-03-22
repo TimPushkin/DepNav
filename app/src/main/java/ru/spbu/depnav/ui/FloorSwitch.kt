@@ -13,37 +13,28 @@ import androidx.compose.ui.Modifier
 
 @Composable
 fun FloorSwitch(
+    floor: Int,
     modifier: Modifier = Modifier,
     onClick: (new: Int) -> Unit,
     minFloor: Int = 1,
     maxFloor: Int
 ) {
-    var currentFloor by remember { mutableStateOf(1) }
-
     Column(
         modifier = modifier,
         horizontalAlignment = Alignment.CenterHorizontally
     ) {
         Button(
-            onClick = {
-                if (currentFloor < maxFloor) {
-                    currentFloor++
-                    onClick(currentFloor)
-                }
-            }
+            onClick = { onClick(floor + 1) },
+            enabled = floor < maxFloor
         ) {
             Icon(Icons.Default.KeyboardArrowUp, contentDescription = "Up arrow")
         }
 
-        Text(currentFloor.toString(10))
+        Text(floor.toString(10))
 
         Button(
-            onClick = {
-                if (currentFloor > minFloor) {
-                    currentFloor--
-                    onClick(currentFloor)
-                }
-            }
+            onClick = { onClick(floor - 1) },
+            enabled = floor > minFloor
         ) {
             Icon(Icons.Default.KeyboardArrowDown, contentDescription = "Down arrow")
         }

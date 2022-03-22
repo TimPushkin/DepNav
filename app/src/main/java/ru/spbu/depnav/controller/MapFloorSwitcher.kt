@@ -35,6 +35,7 @@ class MapFloorSwitcher(
                 "Switching to floor $floor: ${layers.count()} layers, ${markers.count()} markers"
             )
 
+            mMapViewModel.currentFloor = floor
             mMapViewModel.replaceLayersWith(layers)
             mMapViewModel.replaceMarkersWith(markers)
         } ?: run { Log.e(TAG, "Cannot switch to the floor $floor which does not exist") }

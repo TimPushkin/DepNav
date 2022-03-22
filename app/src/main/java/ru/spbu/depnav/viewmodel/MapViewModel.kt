@@ -4,6 +4,7 @@ import android.util.Log
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.unit.dp
@@ -21,16 +22,18 @@ private const val TAG = "MapViewModel"
 class MapViewModel(
     private val width: Int,
     private val height: Int,
-    tileSize: Int = 1024
+    tileSize: Int = 1024,
+    initFloor: Int = 0
 ) : ViewModel() {
-    private val mMarkerIds = mutableListOf<String>()
-
+    var currentFloor by mutableStateOf(initFloor)
     val state by mutableStateOf(
         MapState(1, width, height, tileSize) {
             scroll(0.5, 0.5)
             scale(0f)
         }
     )
+
+    private val mMarkerIds = mutableListOf<String>()
 
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
         Log.d(TAG, "Replacing layers...")

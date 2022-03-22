@@ -40,6 +40,7 @@ fun MainScreen(
                 )
 
                 FloorSwitch(
+                    floor = mapViewModel.currentFloor,
                     modifier = Modifier.align(Alignment.End),
                     onClick = onFloorSwitch,
                     maxFloor = floorsNum
