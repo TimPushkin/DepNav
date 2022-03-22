@@ -4,6 +4,7 @@ import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
+import androidx.compose.material.Icon
 import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.TextField
@@ -40,10 +41,15 @@ fun SearchField(
             .focusRequester(focusRequester)
             .then(modifier),
         placeholder = { Text(placeholder) },
-        leadingIcon = { Icons.Default.Search },
+        leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
         trailingIcon = {
             AnimatedVisibility(visible = isFocused && text.isNotEmpty()) {
-                IconButton(onClick = onClear) { Icons.Default.Close }
+                IconButton(onClick = onClear) {
+                    Icon(
+                        Icons.Default.Close,
+                        contentDescription = "Clear field"
+                    )
+                }
             }
         },
         singleLine = true,

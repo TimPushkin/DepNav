@@ -32,7 +32,10 @@ fun MarkerSearchView(
                 searchText = it
                 markerSearchViewModel.onSearch(it)
             },
-            onClear = markerSearchViewModel::onClear
+            onClear = {
+                searchText = ""
+                markerSearchViewModel.onClear()
+            }
         )
         SearchResults(
             markerTexts = matches,
