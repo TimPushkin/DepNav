@@ -19,6 +19,8 @@ import ru.spbu.depnav.ui.MarkerView
 
 private const val TAG = "MapViewModel"
 
+// TODO: instead of placing all markers, create a layer with marker graphics adding markers by one dynamically when needed to center and removing afterwards
+
 class MapViewModel(
     private val width: Int,
     private val height: Int,
