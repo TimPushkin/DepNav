@@ -49,11 +49,10 @@ class MapViewModel(
         mMarkerIds.clear()
 
         for (marker in markers) marker.run {
-            // TODO: store normalized coordinates in the database
             state.addMarker(
                 id = idStr,
-                x = x / width,
-                y = y / height,
+                x = x,
+                y = y,
                 relativeOffset = Offset(-0.5f, -0.5f),
                 clipShape = null
             ) { MarkerView(type, modifier = Modifier.size(20.dp)) }

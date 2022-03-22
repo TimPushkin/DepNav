@@ -61,6 +61,8 @@ db.commit()
 jf = json.load(open(args.json_file, encoding="utf8"))
 
 floor_num = 0
+floor_width = jf["floorWidth"]
+floor_height = jf["floorHeight"]
 
 rowid = 1
 for f in jf["floors"]:
@@ -69,7 +71,7 @@ for f in jf["floors"]:
     for m in sorted(f["markers"], key=lambda marker: marker["type"]):
         marker_type, is_closed, x, y, ru, en = m.values()
         cur.execute("INSERT INTO markers VALUES (?, ?, ?, ?, ?, ?)",
-                    (rowid, marker_type, is_closed, floor, x, y))
+                    (rowid, marker_type, is_closed, floor, x / floor_width, y / floor_height))
         cur.execute(
             "INSERT INTO marker_texts"
             "(`marker_id`,`lid`,`title`,`description`) VALUES (:id, :lid, :title, :description)",
@@ -81,7 +83,7 @@ for f in jf["floors"]:
         rowid += 1
 
 cur.execute("INSERT INTO 'map_infos' VALUES (?, ?, ?, ?)",
-            (jf["mapName"], jf["floorWidth"], jf["floorHeight"], floor_num))
+            (jf["mapName"], floor_width, floor_height, floor_num))
 
 db.commit()
 cur.close()
