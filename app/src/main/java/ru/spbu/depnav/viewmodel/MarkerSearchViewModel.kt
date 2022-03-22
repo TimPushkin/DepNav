@@ -25,8 +25,11 @@ class MarkerSearchViewModel(
         }
 
         viewModelScope.launch {
-            Log.v(TAG, "Processing query: $text")
-            _matchedMarkers.value = mMarkerTextDao.loadByTokens(text, language)
+            Log.v(TAG, "Processing query $text with language $language")
+            val query = text.split(' ').joinToString(" ") { "$it*" }
+            val matches = mMarkerTextDao.loadByTokens(query, language)
+            Log.v(TAG, "Found ${matches.size} matches")
+            _matchedMarkers.value = matches
         }
     }
 

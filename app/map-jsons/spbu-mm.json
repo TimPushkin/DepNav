@@ -12,12 +12,12 @@
           "x": 10525,
           "y": 4220,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -27,11 +27,11 @@
           "y": 4352,
           "ru": {
             "title": "1517",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1517",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -40,12 +40,12 @@
           "x": 10504,
           "y": 4537,
           "ru": {
-            "title": "1517",
-            "description": ""
+            "title": "1519",
+            "description": null
           },
           "en": {
-            "title": "1517",
-            "description": ""
+            "title": "1519",
+            "description": null
           }
         },
         {
@@ -55,11 +55,11 @@
           "y": 4463,
           "ru": {
             "title": "1528",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1528",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -69,11 +69,11 @@
           "y": 4330,
           "ru": {
             "title": "1530",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1530",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -111,11 +111,11 @@
           "y": 3731,
           "ru": {
             "title": "Студенческий вход",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Student entrance",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -125,11 +125,11 @@
           "y": 3341,
           "ru": {
             "title": "Вендинговые автоматы",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Vending machines",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -139,11 +139,11 @@
           "y": 2907,
           "ru": {
             "title": "2",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "2",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -153,11 +153,11 @@
           "y": 4524,
           "ru": {
             "title": "4",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "4",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -167,11 +167,11 @@
           "y": 3735,
           "ru": {
             "title": "\"Аквариум\"",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "\"Aquarium\"",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -181,11 +181,11 @@
           "y": 3550,
           "ru": {
             "title": "Питьевой фонтанчик",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Drinking fountain",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -195,11 +195,11 @@
           "y": 3735,
           "ru": {
             "title": "3",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "3",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -208,12 +208,12 @@
           "x": 9160,
           "y": 3511,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -222,12 +222,12 @@
           "x": 9160,
           "y": 3945,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -237,11 +237,11 @@
           "y": 3607,
           "ru": {
             "title": "Зал бокса",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Boxing gym",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -251,11 +251,11 @@
           "y": 3853,
           "ru": {
             "title": "Зал борьбы",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Wrestling gym",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -265,11 +265,11 @@
           "y": 3546,
           "ru": {
             "title": "Гардероб",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Cloakroom",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -278,12 +278,12 @@
           "x": 10517,
           "y": 3260,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -292,12 +292,12 @@
           "x": 10597,
           "y": 3179,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -306,12 +306,12 @@
           "x": 10502,
           "y": 3140,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -320,12 +320,12 @@
           "x": 10502,
           "y": 2998,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -334,12 +334,12 @@
           "x": 10502,
           "y": 2869,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -349,11 +349,11 @@
           "y": 2678,
           "ru": {
             "title": "1513",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1513",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -363,11 +363,11 @@
           "y": 2468,
           "ru": {
             "title": "1513б",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1513b",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -377,11 +377,11 @@
           "y": 2330,
           "ru": {
             "title": "1513а",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1513a",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -405,11 +405,11 @@
           "y": 1869,
           "ru": {
             "title": "1509",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1509",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -419,11 +419,11 @@
           "y": 1600,
           "ru": {
             "title": "1507",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1507",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -433,11 +433,11 @@
           "y": 1327,
           "ru": {
             "title": "1505",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1505",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -447,11 +447,11 @@
           "y": 1143,
           "ru": {
             "title": "1503",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1503",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -461,11 +461,11 @@
           "y": 1049,
           "ru": {
             "title": "1503а",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1503a",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -475,11 +475,11 @@
           "y": 630,
           "ru": {
             "title": "1504",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1504",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -489,11 +489,11 @@
           "y": 3190,
           "ru": {
             "title": "1522",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1522",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -503,11 +503,11 @@
           "y": 2940,
           "ru": {
             "title": "1520",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1520",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -517,11 +517,11 @@
           "y": 2536,
           "ru": {
             "title": "1518",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1518",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -531,11 +531,11 @@
           "y": 1956,
           "ru": {
             "title": "1516",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1516",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -545,11 +545,11 @@
           "y": 1456,
           "ru": {
             "title": "1514",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1514",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -559,11 +559,11 @@
           "y": 1093,
           "ru": {
             "title": "1512",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1512",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -573,11 +573,11 @@
           "y": 840,
           "ru": {
             "title": "1510",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1510",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -587,11 +587,11 @@
           "y": 565,
           "ru": {
             "title": "1508",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1508",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -601,11 +601,11 @@
           "y": 530,
           "ru": {
             "title": "1506",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1506",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -615,11 +615,11 @@
           "y": 565,
           "ru": {
             "title": "1502",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1502",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -628,12 +628,12 @@
           "x": 10400,
           "y": 934,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -643,11 +643,11 @@
           "y": 758,
           "ru": {
             "title": "Закрытый проход",
-            "description": ""
+            "description": null
           },
           "en": {
-            "title": "is_Closed passage",
-            "description": ""
+            "title": "Closed passage",
+            "description": null
           }
         },
         {
@@ -656,12 +656,12 @@
           "x": 10035,
           "y": 604,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -671,11 +671,11 @@
           "y": 212,
           "ru": {
             "title": "1387",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1387",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -685,11 +685,11 @@
           "y": 212,
           "ru": {
             "title": "1386",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1386",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -699,11 +699,11 @@
           "y": 212,
           "ru": {
             "title": "1385",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1385",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -713,11 +713,11 @@
           "y": 146,
           "ru": {
             "title": "1385а",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1385a",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -727,11 +727,11 @@
           "y": 255,
           "ru": {
             "title": "1385б",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1385b",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -741,11 +741,11 @@
           "y": 545,
           "ru": {
             "title": "1383",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1383",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -755,11 +755,11 @@
           "y": 545,
           "ru": {
             "title": "1382",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1382",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -782,12 +782,12 @@
           "x": 8823,
           "y": 242,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -797,11 +797,11 @@
           "y": 122,
           "ru": {
             "title": "1381",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1381",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -824,12 +824,12 @@
           "x": 7584,
           "y": 600,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -839,11 +839,11 @@
           "y": 777,
           "ru": {
             "title": "1345",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1345",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -853,11 +853,11 @@
           "y": 860,
           "ru": {
             "title": "1344",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1344",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -867,11 +867,11 @@
           "y": 860,
           "ru": {
             "title": "1343",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1343",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -880,12 +880,12 @@
           "x": 5280,
           "y": 766,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -894,12 +894,12 @@
           "x": 5206,
           "y": 766,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -908,12 +908,12 @@
           "x": 5133,
           "y": 766,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -923,11 +923,11 @@
           "y": 552,
           "ru": {
             "title": "Главный вход",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Main entrance",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -937,11 +937,11 @@
           "y": 766,
           "ru": {
             "title": "Вендинговые автоматы",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Vending machines",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -950,12 +950,12 @@
           "x": 4177,
           "y": 766,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -964,12 +964,12 @@
           "x": 4102,
           "y": 766,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -978,12 +978,12 @@
           "x": 4654,
           "y": 1376,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -993,11 +993,11 @@
           "y": 1361,
           "ru": {
             "title": "1404",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1404",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1007,11 +1007,11 @@
           "y": 1060,
           "ru": {
             "title": "1402",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1402",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1021,11 +1021,11 @@
           "y": 863,
           "ru": {
             "title": "1304",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1304",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1035,11 +1035,11 @@
           "y": 863,
           "ru": {
             "title": "1303",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1303",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1049,11 +1049,11 @@
           "y": 863,
           "ru": {
             "title": "1302",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1302",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1063,11 +1063,11 @@
           "y": 926,
           "ru": {
             "title": "1251",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1251",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1077,11 +1077,11 @@
           "y": 833,
           "ru": {
             "title": "1241",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1241",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1090,12 +1090,12 @@
           "x": 942,
           "y": 1365,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -1105,11 +1105,11 @@
           "y": 1723,
           "ru": {
             "title": "1222",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1222",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1118,12 +1118,12 @@
           "x": 1204,
           "y": 2222,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -1133,11 +1133,11 @@
           "y": 2316,
           "ru": {
             "title": "1201",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1201",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1147,11 +1147,11 @@
           "y": 3037,
           "ru": {
             "title": "Астрономический вход",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "Astronomer entrance",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1160,12 +1160,12 @@
           "x": 945,
           "y": 3035,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -1175,11 +1175,11 @@
           "y": 2700,
           "ru": {
             "title": "1160",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1160",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1189,11 +1189,11 @@
           "y": 2700,
           "ru": {
             "title": "1147",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1147",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1203,11 +1203,11 @@
           "y": 2760,
           "ru": {
             "title": "1146",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1146",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1217,11 +1217,11 @@
           "y": 2966,
           "ru": {
             "title": "1145",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1145",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1231,11 +1231,11 @@
           "y": 3097,
           "ru": {
             "title": "1144",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1144",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1244,12 +1244,12 @@
           "x": 511,
           "y": 3303,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -1259,11 +1259,11 @@
           "y": 3343,
           "ru": {
             "title": "1142",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1142",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1273,11 +1273,11 @@
           "y": 3564,
           "ru": {
             "title": "1131",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1131",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1287,11 +1287,11 @@
           "y": 3564,
           "ru": {
             "title": "1130",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1130",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1301,11 +1301,11 @@
           "y": 3564,
           "ru": {
             "title": "1129",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1129",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1315,11 +1315,11 @@
           "y": 3564,
           "ru": {
             "title": "1128",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1128",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1329,11 +1329,11 @@
           "y": 3763,
           "ru": {
             "title": "1127",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1127",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1343,11 +1343,11 @@
           "y": 3906,
           "ru": {
             "title": "1126",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1126",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1357,11 +1357,11 @@
           "y": 4110,
           "ru": {
             "title": "1125",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1125",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1371,11 +1371,11 @@
           "y": 4110,
           "ru": {
             "title": "1124",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1124",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1385,11 +1385,11 @@
           "y": 4110,
           "ru": {
             "title": "1123",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1123",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1399,11 +1399,11 @@
           "y": 4110,
           "ru": {
             "title": "1122",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1122",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1413,11 +1413,11 @@
           "y": 3837,
           "ru": {
             "title": "1132",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1132",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1426,12 +1426,12 @@
           "x": 1204,
           "y": 3837,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         },
         {
@@ -1441,11 +1441,11 @@
           "y": 4316,
           "ru": {
             "title": "1106",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1106",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1455,11 +1455,11 @@
           "y": 4316,
           "ru": {
             "title": "1105",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1105",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1469,11 +1469,11 @@
           "y": 4635,
           "ru": {
             "title": "1104",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1104",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1483,11 +1483,11 @@
           "y": 4561,
           "ru": {
             "title": "1109",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1109",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1497,11 +1497,11 @@
           "y": 4652,
           "ru": {
             "title": "1108",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1108",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1511,11 +1511,11 @@
           "y": 4743,
           "ru": {
             "title": "1107",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1107",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1525,11 +1525,11 @@
           "y": 4951,
           "ru": {
             "title": "1103",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1103",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1539,11 +1539,11 @@
           "y": 4951,
           "ru": {
             "title": "1102",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "1102",
-            "description": ""
+            "description": null
           }
         },
         {
@@ -1552,12 +1552,12 @@
           "x": 941,
           "y": 4602,
           "ru": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           },
           "en": {
-            "title": "",
-            "description": ""
+            "title": null,
+            "description": null
           }
         }
       ]
@@ -1572,11 +1572,11 @@
           "y": 3077,
           "ru": {
             "title": "6",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "6",
-            "description": ""
+            "description": null
           }
         }
       ]
@@ -1610,11 +1610,11 @@
           "y": 4947,
           "ru": {
             "title": "4533",
-            "description": ""
+            "description": null
           },
           "en": {
             "title": "4533",
-            "description": ""
+            "description": null
           }
         }
       ]

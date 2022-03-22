@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "11493c94086c631e26c23980d07a055a",
+    "identityHash": "934c309a826b71ad29edfd9e80a40f9f",
     "entities": [
       {
         "tableName": "map_infos",
@@ -100,13 +100,15 @@
           "contentTable": "",
           "languageIdColumnName": "lid",
           "matchInfo": "FTS4",
-          "notIndexedColumns": [],
+          "notIndexedColumns": [
+            "marker_id"
+          ],
           "prefixSizes": [],
           "preferredOrder": "ASC"
         },
         "contentSyncTriggers": [],
         "tableName": "marker_texts",
-        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`marker_id` INTEGER NOT NULL, `title` TEXT, `description` TEXT, tokenize=unicode61, languageid=`lid`)",
+        "createSql": "CREATE VIRTUAL TABLE IF NOT EXISTS `${TABLE_NAME}` USING FTS4(`marker_id` INTEGER NOT NULL, `title` TEXT, `description` TEXT, tokenize=unicode61, languageid=`lid`, notindexed=`marker_id`)",
         "fields": [
           {
             "fieldPath": "markerId",
@@ -138,7 +140,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '11493c94086c631e26c23980d07a055a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '934c309a826b71ad29edfd9e80a40f9f')"
     ]
   }
 }

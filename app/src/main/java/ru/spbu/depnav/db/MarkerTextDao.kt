@@ -11,8 +11,7 @@ interface MarkerTextDao {
     suspend fun insertAll(vararg markerTexts: MarkerText)
 
     @Query(
-        "SELECT * FROM marker_texts " +
-                "WHERE marker_texts MATCH :tokens AND lid = :language"
+        "SELECT *, lid FROM marker_texts WHERE marker_texts MATCH :tokens AND lid = :language"
     )
     suspend fun loadByTokens(tokens: String, language: MarkerText.LanguageId): List<MarkerText>
 }
