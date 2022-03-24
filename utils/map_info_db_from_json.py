@@ -7,6 +7,8 @@ import sqlite3
 # This script adds the contents of the specified map info json file corresponding to
 # 'map-info-schema.json' into the specified SQLite database, creating the database file and the
 # needed tables if necessary.
+# Json is expected to have absolute coordinates, while the database will have them normalized.
+# Coordinates start from top left corner of an image.
 # - Prerequisites: json file corresponding to 'map-info-schema.json'.
 # - Result: database file with the contents of the json file.
 

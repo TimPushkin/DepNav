@@ -7,10 +7,332 @@
       "floor": 1,
       "markers": [
         {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 10597,
+          "y": 3179,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5208,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5133,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 4177,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 4102,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": true,
+          "x": 8385,
+          "y": 3069,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 9115,
+          "y": 3608,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 9115,
+          "y": 3846,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 9382,
+          "y": 3381,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 9382,
+          "y": 4079,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
           "type": "STAIRS_UP",
           "is_closed": true,
           "x": 10525,
           "y": 4220,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 10525,
+          "y": 3260,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 10400,
+          "y": 934,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 10035,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 8823,
+          "y": 242,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 7584,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": true,
+          "x": 6661,
+          "y": 876,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 5122,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 4191,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": true,
+          "x": 4654,
+          "y": 1376,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": true,
+          "x": 2610,
+          "y": 859,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 942,
+          "y": 1365,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 942,
+          "y": 3035,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "is_closed": false,
+          "x": 942,
+          "y": 4602,
           "ru": {
             "title": null,
             "description": null
@@ -269,34 +591,6 @@
           },
           "en": {
             "title": "Cloakroom",
-            "description": null
-          }
-        },
-        {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 10517,
-          "y": 3260,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
-          "type": "ELEVATOR",
-          "is_closed": false,
-          "x": 10597,
-          "y": 3179,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
             "description": null
           }
         },
@@ -623,20 +917,6 @@
           }
         },
         {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 10400,
-          "y": 934,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
           "type": "OTHER",
           "is_closed": true,
           "x": 10289,
@@ -647,20 +927,6 @@
           },
           "en": {
             "title": "Closed passage",
-            "description": null
-          }
-        },
-        {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 10035,
-          "y": 604,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
             "description": null
           }
         },
@@ -777,20 +1043,6 @@
           }
         },
         {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 8823,
-          "y": 242,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
           "type": "ROOM",
           "is_closed": false,
           "x": 8294,
@@ -816,20 +1068,6 @@
           "en": {
             "title": "Dining room",
             "description": "\"Yama\""
-          }
-        },
-        {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 7584,
-          "y": 600,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
           }
         },
         {
@@ -889,34 +1127,6 @@
           }
         },
         {
-          "type": "ELEVATOR",
-          "is_closed": true,
-          "x": 5206,
-          "y": 766,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
-          "type": "ELEVATOR",
-          "is_closed": true,
-          "x": 5133,
-          "y": 766,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
           "type": "ENTRANCE",
           "is_closed": false,
           "x": 4654,
@@ -941,48 +1151,6 @@
           },
           "en": {
             "title": "Vending machines",
-            "description": null
-          }
-        },
-        {
-          "type": "ELEVATOR",
-          "is_closed": false,
-          "x": 4177,
-          "y": 766,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
-          "type": "ELEVATOR",
-          "is_closed": true,
-          "x": 4102,
-          "y": 766,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 4654,
-          "y": 1376,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
             "description": null
           }
         },
@@ -1085,20 +1253,6 @@
           }
         },
         {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 942,
-          "y": 1365,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
-            "description": null
-          }
-        },
-        {
           "type": "ROOM",
           "is_closed": false,
           "x": 922,
@@ -1151,20 +1305,6 @@
           },
           "en": {
             "title": "Astronomer entrance",
-            "description": null
-          }
-        },
-        {
-          "type": "STAIRS_UP",
-          "is_closed": false,
-          "x": 945,
-          "y": 3035,
-          "ru": {
-            "title": null,
-            "description": null
-          },
-          "en": {
-            "title": null,
             "description": null
           }
         },
@@ -1545,11 +1685,324 @@
             "title": "1102",
             "description": null
           }
+        }
+      ]
+    },
+    {
+      "floor": 2,
+      "markers": [
+        {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 10597,
+          "y": 3179,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
         },
         {
-          "type": "STAIRS_UP",
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5208,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5133,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
           "is_closed": false,
-          "x": 941,
+          "x": 4177,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 4102,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": true,
+          "x": 8385,
+          "y": 3069,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 9208,
+          "y": 3731,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 9382,
+          "y": 3381,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 9382,
+          "y": 4079,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": true,
+          "x": 10525,
+          "y": 4220,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 10525,
+          "y": 3260,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 10400,
+          "y": 934,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 10035,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 8823,
+          "y": 242,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 7584,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": true,
+          "x": 6661,
+          "y": 876,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 5122,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 4191,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": true,
+          "x": 4654,
+          "y": 1376,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 2558,
+          "y": 854,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 942,
+          "y": 1365,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 942,
+          "y": 3035,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 942,
           "y": 4602,
           "ru": {
             "title": null,
@@ -1559,12 +2012,21 @@
             "title": null,
             "description": null
           }
-        }
-      ]
-    },
-    {
-      "floor": 2,
-      "markers": [
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9303,
+          "y": 3077,
+          "ru": {
+            "title": "5",
+            "description": null
+          },
+          "en": {
+            "title": "5",
+            "description": null
+          }
+        },
         {
           "type": "ROOM",
           "is_closed": false,
@@ -1578,12 +2040,2462 @@
             "title": "6",
             "description": null
           }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8078,
+          "y": 4391,
+          "ru": {
+            "title": "7",
+            "description": null
+          },
+          "en": {
+            "title": "7",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9303,
+          "y": 4391,
+          "ru": {
+            "title": "8",
+            "description": null
+          },
+          "en": {
+            "title": "8",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9616,
+          "y": 3716,
+          "ru": {
+            "title": "1",
+            "description": null
+          },
+          "en": {
+            "title": "1",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "is_closed": false,
+          "x": 10507,
+          "y": 3716,
+          "ru": {
+            "title": "\"Баобаб\"",
+            "description": null
+          },
+          "en": {
+            "title": "\"Baobab\"",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10726,
+          "y": 4615,
+          "ru": {
+            "title": "\"Библиотека\"",
+            "description": null
+          },
+          "en": {
+            "title": "\"Library\"",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 3716,
+          "ru": {
+            "title": "2528",
+            "description": null
+          },
+          "en": {
+            "title": "2528",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 3451,
+          "ru": {
+            "title": "2526",
+            "description": null
+          },
+          "en": {
+            "title": "2526",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 3190,
+          "ru": {
+            "title": "2524",
+            "description": null
+          },
+          "en": {
+            "title": "2524",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 2946,
+          "ru": {
+            "title": "2522",
+            "description": null
+          },
+          "en": {
+            "title": "2522",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 2684,
+          "ru": {
+            "title": "2520",
+            "description": null
+          },
+          "en": {
+            "title": "2520",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 2417,
+          "ru": {
+            "title": "2518",
+            "description": null
+          },
+          "en": {
+            "title": "2518",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 2157,
+          "ru": {
+            "title": "2516",
+            "description": null
+          },
+          "en": {
+            "title": "2516",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 1893,
+          "ru": {
+            "title": "2514",
+            "description": null
+          },
+          "en": {
+            "title": "2514",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 1632,
+          "ru": {
+            "title": "2512",
+            "description": null
+          },
+          "en": {
+            "title": "2512",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 1369,
+          "ru": {
+            "title": "2510",
+            "description": null
+          },
+          "en": {
+            "title": "2510",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 1050,
+          "ru": {
+            "title": "2508",
+            "description": null
+          },
+          "en": {
+            "title": "2508",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10935,
+          "y": 674,
+          "ru": {
+            "title": "2506",
+            "description": null
+          },
+          "en": {
+            "title": "2506",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10503,
+          "y": 3142,
+          "ru": {
+            "title": "2513",
+            "description": null
+          },
+          "en": {
+            "title": "2513",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 10503,
+          "y": 3002,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 10503,
+          "y": 2869,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10503,
+          "y": 2684,
+          "ru": {
+            "title": "2511",
+            "description": null
+          },
+          "en": {
+            "title": "2511",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 2417,
+          "ru": {
+            "title": "2515",
+            "description": null
+          },
+          "en": {
+            "title": "2515",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 2157,
+          "ru": {
+            "title": "2509",
+            "description": null
+          },
+          "en": {
+            "title": "2509",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1893,
+          "ru": {
+            "title": "2507",
+            "description": null
+          },
+          "en": {
+            "title": "2507",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1632,
+          "ru": {
+            "title": "2505",
+            "description": null
+          },
+          "en": {
+            "title": "2505",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1369,
+          "ru": {
+            "title": "2503",
+            "description": null
+          },
+          "en": {
+            "title": "2503",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1183,
+          "ru": {
+            "title": "2501",
+            "description": null
+          },
+          "en": {
+            "title": "2501",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10653,
+          "y": 600,
+          "ru": {
+            "title": "2504",
+            "description": null
+          },
+          "en": {
+            "title": "2504",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10407,
+          "y": 600,
+          "ru": {
+            "title": "2502",
+            "description": null
+          },
+          "en": {
+            "title": "2502",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": true,
+          "x": 10131,
+          "y": 900,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10146,
+          "y": 225,
+          "ru": {
+            "title": "2389",
+            "description": null
+          },
+          "en": {
+            "title": "2389",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9752,
+          "y": 225,
+          "ru": {
+            "title": "2388",
+            "description": null
+          },
+          "en": {
+            "title": "2388",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9380,
+          "y": 225,
+          "ru": {
+            "title": "2387",
+            "description": null
+          },
+          "en": {
+            "title": "2387",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9110,
+          "y": 225,
+          "ru": {
+            "title": "2386",
+            "description": null
+          },
+          "en": {
+            "title": "2386",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8669,
+          "y": 225,
+          "ru": {
+            "title": "2385",
+            "description": null
+          },
+          "en": {
+            "title": "2385",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8460,
+          "y": 225,
+          "ru": {
+            "title": "2384",
+            "description": null
+          },
+          "en": {
+            "title": "2384",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8254,
+          "y": 225,
+          "ru": {
+            "title": "2383",
+            "description": null
+          },
+          "en": {
+            "title": "2383",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7918,
+          "y": 225,
+          "ru": {
+            "title": "2382",
+            "description": null
+          },
+          "en": {
+            "title": "2382",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7500,
+          "y": 225,
+          "ru": {
+            "title": "2381",
+            "description": null
+          },
+          "en": {
+            "title": "2381",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9388,
+          "y": 507,
+          "ru": {
+            "title": "2390",
+            "description": "Спортзал (трибуны)"
+          },
+          "en": {
+            "title": "2390",
+            "description": "Gym (stands)"
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8855,
+          "y": 507,
+          "ru": {
+            "title": "2391",
+            "description": "Спортзал (трибуны)"
+          },
+          "en": {
+            "title": "2391",
+            "description": "Gym (stands)"
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8302,
+          "y": 507,
+          "ru": {
+            "title": "2392",
+            "description": "Спортзал (трибуны)"
+          },
+          "en": {
+            "title": "2392",
+            "description": "Gym (stands)"
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 7500,
+          "y": 922,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7127,
+          "y": 863,
+          "ru": {
+            "title": "2359",
+            "description": null
+          },
+          "en": {
+            "title": "2359",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6800,
+          "y": 863,
+          "ru": {
+            "title": "2357",
+            "description": null
+          },
+          "en": {
+            "title": "2357",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6490,
+          "y": 863,
+          "ru": {
+            "title": "2355",
+            "description": null
+          },
+          "en": {
+            "title": "2355",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6360,
+          "y": 863,
+          "ru": {
+            "title": "2353",
+            "description": null
+          },
+          "en": {
+            "title": "2353",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6230,
+          "y": 863,
+          "ru": {
+            "title": "2351",
+            "description": null
+          },
+          "en": {
+            "title": "2351",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6098,
+          "y": 863,
+          "ru": {
+            "title": "2349",
+            "description": null
+          },
+          "en": {
+            "title": "2349",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5965,
+          "y": 863,
+          "ru": {
+            "title": "2347",
+            "description": null
+          },
+          "en": {
+            "title": "2347",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5835,
+          "y": 863,
+          "ru": {
+            "title": "2345",
+            "description": null
+          },
+          "en": {
+            "title": "2345",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5705,
+          "y": 863,
+          "ru": {
+            "title": "2343",
+            "description": null
+          },
+          "en": {
+            "title": "2343",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5441,
+          "y": 863,
+          "ru": {
+            "title": "2339",
+            "description": null
+          },
+          "en": {
+            "title": "2339",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5376,
+          "y": 776,
+          "ru": {
+            "title": "2339а",
+            "description": null
+          },
+          "en": {
+            "title": "2339a",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 5313,
+          "y": 863,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 3992,
+          "y": 863,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3719,
+          "y": 863,
+          "ru": {
+            "title": "2317",
+            "description": null
+          },
+          "en": {
+            "title": "2317",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3584,
+          "y": 863,
+          "ru": {
+            "title": "2315",
+            "description": null
+          },
+          "en": {
+            "title": "2315",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3352,
+          "y": 863,
+          "ru": {
+            "title": "2313",
+            "description": null
+          },
+          "en": {
+            "title": "2313",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3051,
+          "y": 751,
+          "ru": {
+            "title": "2311",
+            "description": null
+          },
+          "en": {
+            "title": "2311",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2845,
+          "y": 863,
+          "ru": {
+            "title": "2309",
+            "description": null
+          },
+          "en": {
+            "title": "2309",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2715,
+          "y": 863,
+          "ru": {
+            "title": "2307",
+            "description": null
+          },
+          "en": {
+            "title": "2307",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6791,
+          "y": 526,
+          "ru": {
+            "title": "2364",
+            "description": null
+          },
+          "en": {
+            "title": "2364",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": true,
+          "x": 6632,
+          "y": 526,
+          "ru": {
+            "title": "2362",
+            "description": null
+          },
+          "en": {
+            "title": "2362",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6490,
+          "y": 526,
+          "ru": {
+            "title": "2360",
+            "description": null
+          },
+          "en": {
+            "title": "2360",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6360,
+          "y": 526,
+          "ru": {
+            "title": "2358",
+            "description": null
+          },
+          "en": {
+            "title": "2358",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6230,
+          "y": 526,
+          "ru": {
+            "title": "2356",
+            "description": null
+          },
+          "en": {
+            "title": "2356",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6098,
+          "y": 526,
+          "ru": {
+            "title": "2354",
+            "description": null
+          },
+          "en": {
+            "title": "2354",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5965,
+          "y": 526,
+          "ru": {
+            "title": "2352",
+            "description": null
+          },
+          "en": {
+            "title": "2352",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5835,
+          "y": 526,
+          "ru": {
+            "title": "2350",
+            "description": null
+          },
+          "en": {
+            "title": "2350",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5705,
+          "y": 526,
+          "ru": {
+            "title": "2348",
+            "description": null
+          },
+          "en": {
+            "title": "2348",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5570,
+          "y": 526,
+          "ru": {
+            "title": "2346",
+            "description": null
+          },
+          "en": {
+            "title": "2346",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5441,
+          "y": 526,
+          "ru": {
+            "title": "2344",
+            "description": null
+          },
+          "en": {
+            "title": "2344",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5313,
+          "y": 526,
+          "ru": {
+            "title": "2342",
+            "description": null
+          },
+          "en": {
+            "title": "2342",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5120,
+          "y": 526,
+          "ru": {
+            "title": "2340",
+            "description": null
+          },
+          "en": {
+            "title": "2340",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4185,
+          "y": 526,
+          "ru": {
+            "title": "2320",
+            "description": null
+          },
+          "en": {
+            "title": "2320",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3992,
+          "y": 526,
+          "ru": {
+            "title": "2318",
+            "description": null
+          },
+          "en": {
+            "title": "2318",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3848,
+          "y": 526,
+          "ru": {
+            "title": "2316",
+            "description": null
+          },
+          "en": {
+            "title": "2316",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3719,
+          "y": 526,
+          "ru": {
+            "title": "2314а",
+            "description": null
+          },
+          "en": {
+            "title": "2314a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3584,
+          "y": 526,
+          "ru": {
+            "title": "2314",
+            "description": null
+          },
+          "en": {
+            "title": "2314",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3426,
+          "y": 526,
+          "ru": {
+            "title": "2312а",
+            "description": null
+          },
+          "en": {
+            "title": "2312a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3276,
+          "y": 526,
+          "ru": {
+            "title": "2312",
+            "description": null
+          },
+          "en": {
+            "title": "2312",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3125,
+          "y": 526,
+          "ru": {
+            "title": "2310а",
+            "description": null
+          },
+          "en": {
+            "title": "2310a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2975,
+          "y": 526,
+          "ru": {
+            "title": "2310",
+            "description": null
+          },
+          "en": {
+            "title": "2310",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2845,
+          "y": 526,
+          "ru": {
+            "title": "2308а",
+            "description": null
+          },
+          "en": {
+            "title": "2308a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2715,
+          "y": 526,
+          "ru": {
+            "title": "2308",
+            "description": null
+          },
+          "en": {
+            "title": "2308",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2527,
+          "y": 526,
+          "ru": {
+            "title": "2306",
+            "description": null
+          },
+          "en": {
+            "title": "2306",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5084,
+          "y": 1061,
+          "ru": {
+            "title": "2452",
+            "description": null
+          },
+          "en": {
+            "title": "2452",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5084,
+          "y": 1179,
+          "ru": {
+            "title": "2450",
+            "description": null
+          },
+          "en": {
+            "title": "2450",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 1387,
+          "ru": {
+            "title": "2448",
+            "description": null
+          },
+          "en": {
+            "title": "2448",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 1707,
+          "ru": {
+            "title": "2446",
+            "description": null
+          },
+          "en": {
+            "title": "2446",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 2087,
+          "ru": {
+            "title": "2444",
+            "description": null
+          },
+          "en": {
+            "title": "2444",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 2474,
+          "ru": {
+            "title": "2442",
+            "description": null
+          },
+          "en": {
+            "title": "2442",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 2833,
+          "ru": {
+            "title": "2440",
+            "description": null
+          },
+          "en": {
+            "title": "2440",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 3303,
+          "ru": {
+            "title": "2436",
+            "description": null
+          },
+          "en": {
+            "title": "2436",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5130,
+          "y": 3678,
+          "ru": {
+            "title": "2432",
+            "description": null
+          },
+          "en": {
+            "title": "2432",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4944,
+          "y": 3731,
+          "ru": {
+            "title": "2430",
+            "description": null
+          },
+          "en": {
+            "title": "2430",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4831,
+          "y": 3731,
+          "ru": {
+            "title": "2428",
+            "description": null
+          },
+          "en": {
+            "title": "2428",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4736,
+          "y": 3731,
+          "ru": {
+            "title": "2426",
+            "description": null
+          },
+          "en": {
+            "title": "2426",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4600,
+          "y": 3731,
+          "ru": {
+            "title": "2424",
+            "description": null
+          },
+          "en": {
+            "title": "2424",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4456,
+          "y": 3731,
+          "ru": {
+            "title": "2422",
+            "description": null
+          },
+          "en": {
+            "title": "2422",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4353,
+          "y": 3731,
+          "ru": {
+            "title": "2420",
+            "description": null
+          },
+          "en": {
+            "title": "2420",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 3656,
+          "ru": {
+            "title": "2418",
+            "description": null
+          },
+          "en": {
+            "title": "2418",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 3282,
+          "ru": {
+            "title": "2416",
+            "description": null
+          },
+          "en": {
+            "title": "2416",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 2830,
+          "ru": {
+            "title": "2414",
+            "description": null
+          },
+          "en": {
+            "title": "2414",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 2463,
+          "ru": {
+            "title": "2412",
+            "description": null
+          },
+          "en": {
+            "title": "2412",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 2081,
+          "ru": {
+            "title": "2410",
+            "description": null
+          },
+          "en": {
+            "title": "2410",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 1700,
+          "ru": {
+            "title": "2408",
+            "description": null
+          },
+          "en": {
+            "title": "2408",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4176,
+          "y": 1380,
+          "ru": {
+            "title": "2406",
+            "description": null
+          },
+          "en": {
+            "title": "2406",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4222,
+          "y": 1179,
+          "ru": {
+            "title": "2404",
+            "description": null
+          },
+          "en": {
+            "title": "2404",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4655,
+          "y": 3303,
+          "ru": {
+            "title": "2415",
+            "description": null
+          },
+          "en": {
+            "title": "2415",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 4474,
+          "y": 2950,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 4474,
+          "y": 2840,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4525,
+          "y": 2400,
+          "ru": {
+            "title": "2409",
+            "description": null
+          },
+          "en": {
+            "title": "2409",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4800,
+          "y": 2400,
+          "ru": {
+            "title": "2417",
+            "description": null
+          },
+          "en": {
+            "title": "2417",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4655,
+          "y": 1738,
+          "ru": {
+            "title": "2401",
+            "description": null
+          },
+          "en": {
+            "title": "2401",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2347,
+          "y": 820,
+          "ru": {
+            "title": "2303",
+            "description": null
+          },
+          "en": {
+            "title": "2303",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2160,
+          "y": 820,
+          "ru": {
+            "title": "2302",
+            "description": null
+          },
+          "en": {
+            "title": "2302",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1992,
+          "y": 820,
+          "ru": {
+            "title": "2301",
+            "description": null
+          },
+          "en": {
+            "title": "2301",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1808,
+          "y": 820,
+          "ru": {
+            "title": "2251",
+            "description": null
+          },
+          "en": {
+            "title": "2251",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 1475,
+          "y": 820,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 920,
+          "y": 1088,
+          "ru": {
+            "title": "2232",
+            "description": null
+          },
+          "en": {
+            "title": "2232",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 750,
+          "y": 1088,
+          "ru": {
+            "title": "2237",
+            "description": null
+          },
+          "en": {
+            "title": "2237",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 585,
+          "y": 1088,
+          "ru": {
+            "title": "2230",
+            "description": null
+          },
+          "en": {
+            "title": "2230",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 340,
+          "y": 1188,
+          "ru": {
+            "title": "2229",
+            "description": null
+          },
+          "en": {
+            "title": "2229",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 1200,
+          "y": 2222,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1200,
+          "y": 2497,
+          "ru": {
+            "title": "2202",
+            "description": null
+          },
+          "en": {
+            "title": "2202",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 2700,
+          "ru": {
+            "title": "2147",
+            "description": null
+          },
+          "en": {
+            "title": "2147",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 750,
+          "y": 2700,
+          "ru": {
+            "title": "2146",
+            "description": null
+          },
+          "en": {
+            "title": "2146",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 580,
+          "y": 2700,
+          "ru": {
+            "title": "2145",
+            "description": null
+          },
+          "en": {
+            "title": "2145",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 338,
+          "y": 2766,
+          "ru": {
+            "title": "2144",
+            "description": null
+          },
+          "en": {
+            "title": "2144",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 338,
+          "y": 3150,
+          "ru": {
+            "title": "2143",
+            "description": null
+          },
+          "en": {
+            "title": "2143",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 750,
+          "y": 2945,
+          "ru": {
+            "title": "2150",
+            "description": null
+          },
+          "en": {
+            "title": "2150",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 750,
+          "y": 3038,
+          "ru": {
+            "title": "2149",
+            "description": null
+          },
+          "en": {
+            "title": "2149",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 750,
+          "y": 3131,
+          "ru": {
+            "title": "2148",
+            "description": null
+          },
+          "en": {
+            "title": "2148",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 3339,
+          "ru": {
+            "title": "2142",
+            "description": null
+          },
+          "en": {
+            "title": "2142",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1007,
+          "y": 2871,
+          "ru": {
+            "title": "2160",
+            "description": null
+          },
+          "en": {
+            "title": "2160",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1007,
+          "y": 3184,
+          "ru": {
+            "title": "2141",
+            "description": null
+          },
+          "en": {
+            "title": "2141",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 3563,
+          "ru": {
+            "title": "2131",
+            "description": null
+          },
+          "en": {
+            "title": "2131",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1365,
+          "y": 3563,
+          "ru": {
+            "title": "2130",
+            "description": null
+          },
+          "en": {
+            "title": "2130",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1513,
+          "y": 3563,
+          "ru": {
+            "title": "2129",
+            "description": null
+          },
+          "en": {
+            "title": "2129",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1760,
+          "y": 3563,
+          "ru": {
+            "title": "2128",
+            "description": null
+          },
+          "en": {
+            "title": "2128",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1810,
+          "y": 3765,
+          "ru": {
+            "title": "2127",
+            "description": null
+          },
+          "en": {
+            "title": "2127",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1810,
+          "y": 3902,
+          "ru": {
+            "title": "2126",
+            "description": null
+          },
+          "en": {
+            "title": "2126",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 4107,
+          "ru": {
+            "title": "2122",
+            "description": null
+          },
+          "en": {
+            "title": "2122",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1365,
+          "y": 4107,
+          "ru": {
+            "title": "2123",
+            "description": null
+          },
+          "en": {
+            "title": "2123",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1513,
+          "y": 4107,
+          "ru": {
+            "title": "2124",
+            "description": null
+          },
+          "en": {
+            "title": "2124",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1760,
+          "y": 4107,
+          "ru": {
+            "title": "2125",
+            "description": null
+          },
+          "en": {
+            "title": "2125",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1196,
+          "y": 3739,
+          "ru": {
+            "title": "2140",
+            "description": null
+          },
+          "en": {
+            "title": "2140",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1196,
+          "y": 3927,
+          "ru": {
+            "title": "2121",
+            "description": null
+          },
+          "en": {
+            "title": "2121",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1440,
+          "y": 3835,
+          "ru": {
+            "title": "2132",
+            "description": null
+          },
+          "en": {
+            "title": "2132",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 1202,
+          "y": 3835,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 4315,
+          "ru": {
+            "title": "2105",
+            "description": null
+          },
+          "en": {
+            "title": "2105",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 680,
+          "y": 4315,
+          "ru": {
+            "title": "2104",
+            "description": null
+          },
+          "en": {
+            "title": "2104",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 680,
+          "y": 4950,
+          "ru": {
+            "title": "2103",
+            "description": null
+          },
+          "en": {
+            "title": "2103",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 976,
+          "y": 4946,
+          "ru": {
+            "title": "2102",
+            "description": null
+          },
+          "en": {
+            "title": "2102",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1007,
+          "y": 4452,
+          "ru": {
+            "title": "2120",
+            "description": null
+          },
+          "en": {
+            "title": "2120",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1065,
+          "y": 4670,
+          "ru": {
+            "title": "2101",
+            "description": null
+          },
+          "en": {
+            "title": "2101",
+            "description": null
+          }
         }
       ]
     },
     {
       "floor": 3,
       "markers": [
+        {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 10597,
+          "y": 3179,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5208,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5133,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 4177,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 4102,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": true,
+          "x": 10525,
+          "y": 4220,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 10525,
+          "y": 3260,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 10400,
+          "y": 934,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 10035,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 7584,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": true,
+          "x": 6661,
+          "y": 876,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 5122,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 4191,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 2558,
+          "y": 854,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 942,
+          "y": 1365,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 942,
+          "y": 3035,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "is_closed": false,
+          "x": 942,
+          "y": 4602,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
         {
           "type": "ROOM",
           "is_closed": false,
@@ -1603,6 +4515,244 @@
     {
       "floor": 4,
       "markers": [
+        {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 10597,
+          "y": 3179,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5208,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 5133,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": false,
+          "x": 4177,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "is_closed": true,
+          "x": 4102,
+          "y": 766,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": true,
+          "x": 10525,
+          "y": 4220,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 10525,
+          "y": 3260,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 10400,
+          "y": 934,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 10035,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 7584,
+          "y": 604,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": true,
+          "x": 6661,
+          "y": 876,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 5122,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 4191,
+          "y": 907,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 2558,
+          "y": 854,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 942,
+          "y": 1365,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 942,
+          "y": 3035,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "is_closed": false,
+          "x": 942,
+          "y": 4602,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
         {
           "type": "ROOM",
           "is_closed": false,
