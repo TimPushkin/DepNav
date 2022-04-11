@@ -1,4 +1,4 @@
-package ru.spbu.depnav.ui
+package ru.spbu.depnav.ui.map
 
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -11,11 +11,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.ui.search.SearchButton
-import ru.spbu.depnav.viewmodel.MapViewModel
 
 @Composable
-fun MainScreen(
-    mapViewModel: MapViewModel,
+fun MapScreen(
+    mapScreenState: MapScreenState,
     floorsNum: Int,
     onStartSearch: () -> Unit,
     onFloorSwitch: (Int) -> Unit,
@@ -27,7 +26,7 @@ fun MainScreen(
         Box {
             MapUI(
                 modifier = Modifier.fillMaxSize(),
-                state = mapViewModel.state
+                state = mapScreenState.state
             )
 
             Column(
@@ -40,7 +39,7 @@ fun MainScreen(
                 )
 
                 FloorSwitch(
-                    floor = mapViewModel.currentFloor,
+                    floor = mapScreenState.currentFloor,
                     modifier = Modifier.align(Alignment.End),
                     onClick = onFloorSwitch,
                     maxFloor = floorsNum

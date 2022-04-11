@@ -17,9 +17,9 @@ import ru.spbu.depnav.controller.MapFloorSwitcher
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
-import ru.spbu.depnav.ui.MainScreen
-import ru.spbu.depnav.viewmodel.FLOOR_UNINITIALIZED
-import ru.spbu.depnav.viewmodel.MapViewModel
+import ru.spbu.depnav.ui.map.FLOOR_UNINITIALIZED
+import ru.spbu.depnav.ui.map.MapScreen
+import ru.spbu.depnav.ui.map.MapScreenState
 
 private const val TAG = "MainActivity"
 
@@ -28,7 +28,7 @@ private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 
 class MainActivity : ComponentActivity() {
-    private val mMapViewModel: MapViewModel by viewModels()
+    private val mMapScreenState: MapScreenState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
     private lateinit var mMapFloorSwitcher: MapFloorSwitcher
 
@@ -39,7 +39,7 @@ class MainActivity : ComponentActivity() {
         lifecycleScope.launch {
             val marker = mAppDatabase.markerDao().loadById(markerId)
             mMapFloorSwitcher.setFloor(marker.floor)
-            mMapViewModel.centerOnMarker(marker.idStr)
+            mMapScreenState.centerOnMarker(marker.idStr)
         }
     }
 
@@ -50,21 +50,21 @@ class MainActivity : ComponentActivity() {
         val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
 
         mMapFloorSwitcher = MapFloorSwitcher(
-            mapViewModel = mMapViewModel,
+            mapScreenState = mMapScreenState,
             tileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH),
             markerDao = mAppDatabase.markerDao(),
             floorsNum = mapInfo.floorsNum
         )
 
-        if (mMapViewModel.currentFloor == FLOOR_UNINITIALIZED) {
-            mMapViewModel.setParams(mapInfo.floorWidth, mapInfo.floorHeight)
+        if (mMapScreenState.currentFloor == FLOOR_UNINITIALIZED) {
+            mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight)
             mMapFloorSwitcher.setFloor(1)
         }
 
         setContent {
             DepNavTheme {
-                MainScreen(
-                    mapViewModel = mMapViewModel,
+                MapScreen(
+                    mapScreenState = mMapScreenState,
                     floorsNum = mapInfo.floorsNum,
                     onStartSearch = startSearch::launch,
                     onFloorSwitch = mMapFloorSwitcher::setFloor

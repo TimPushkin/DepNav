@@ -5,21 +5,21 @@ import kotlinx.coroutines.runBlocking
 import ru.spbu.depnav.db.MarkerDao
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.provider.TileProviderFactory
-import ru.spbu.depnav.viewmodel.MapViewModel
+import ru.spbu.depnav.ui.map.MapScreenState
 
 private const val TAG = "MapFloorSwitcher"
 
 class MapFloorSwitcher(
-    private val mMapViewModel: MapViewModel,
+    private val mMapScreenState: MapScreenState,
     private val floors: Map<Int, Floor>
 ) {
     constructor(
-        mapViewModel: MapViewModel,
+        mapScreenState: MapScreenState,
         tileProviderFactory: TileProviderFactory,
         markerDao: MarkerDao,
         floorsNum: Int
     ) : this(
-        mapViewModel,
+        mapScreenState,
         List(floorsNum) {
             val floor = it + 1
             floor to Floor(listOf(tileProviderFactory.makeTileProviderForFloor(floor))) {
@@ -35,9 +35,9 @@ class MapFloorSwitcher(
                 "Switching to floor $floor: ${layers.count()} layers, ${markers.count()} markers"
             )
 
-            mMapViewModel.currentFloor = floor
-            mMapViewModel.replaceLayersWith(layers)
-            mMapViewModel.replaceMarkersWith(markers)
+            mMapScreenState.currentFloor = floor
+            mMapScreenState.replaceLayersWith(layers)
+            mMapScreenState.replaceMarkersWith(markers)
         } ?: run { Log.e(TAG, "Cannot switch to the floor $floor which does not exist") }
     }
 }

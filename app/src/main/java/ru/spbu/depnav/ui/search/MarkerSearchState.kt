@@ -1,4 +1,4 @@
-package ru.spbu.depnav.viewmodel
+package ru.spbu.depnav.ui.search
 
 import android.util.Log
 import androidx.lifecycle.*
@@ -10,7 +10,7 @@ import ru.spbu.depnav.model.MarkerText
 
 private const val TAG = "MarkerSearchViewModel"
 
-class MarkerSearchViewModel : ViewModel() {
+class MarkerSearchState : ViewModel() {
     private val _matchedMarkers = MutableStateFlow(emptyList<MarkerText>())
     val matchedMarkers: StateFlow<List<MarkerText>>
         get() = _matchedMarkers

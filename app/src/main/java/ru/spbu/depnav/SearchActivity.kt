@@ -16,16 +16,16 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.intl.Locale
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.MarkerText.LanguageId
-import ru.spbu.depnav.ui.search.MarkerSearchView
+import ru.spbu.depnav.ui.search.MarkerSearch
+import ru.spbu.depnav.ui.search.MarkerSearchState
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.viewmodel.MarkerSearchViewModel
 
 private const val TAG = "SearchActivity"
 
 const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
 class SearchActivity : ComponentActivity() {
-    private val mMarkerSearchViewModel: MarkerSearchViewModel by viewModels()
+    private val mMarkerSearchState: MarkerSearchState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
 
     private val systemLanguage: LanguageId
@@ -47,14 +47,14 @@ class SearchActivity : ComponentActivity() {
         mAppDatabase = AppDatabase.getInstance(this)
 
         setContent {
-            val searchMatches by mMarkerSearchViewModel.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
+            val searchMatches by mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
 
             DepNavTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
-                    MarkerSearchView(
+                    MarkerSearch(
                         matches = searchMatches,
                         onSearch = this::onSearch,
                         onClear = this::onClear,
@@ -66,11 +66,11 @@ class SearchActivity : ComponentActivity() {
     }
 
     private fun onSearch(text: String) {
-        mMarkerSearchViewModel.search(text, mAppDatabase.markerTextDao(), systemLanguage)
+        mMarkerSearchState.search(text, mAppDatabase.markerTextDao(), systemLanguage)
     }
 
     private fun onClear() {
-        mMarkerSearchViewModel.clear()
+        mMarkerSearchState.clear()
     }
 
     private fun onMarkerSelected(id: Int) {

@@ -1,4 +1,4 @@
-package ru.spbu.depnav.viewmodel
+package ru.spbu.depnav.ui.map
 
 import android.util.Log
 import androidx.compose.foundation.layout.size
@@ -15,7 +15,6 @@ import ovh.plrapps.mapcompose.api.*
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.ui.MarkerView
 
 private const val TAG = "MapViewModel"
 
@@ -23,7 +22,7 @@ const val FLOOR_UNINITIALIZED = Int.MIN_VALUE
 
 // TODO: instead of placing all markers, create a layer with marker graphics adding markers by one dynamically when needed to center and removing afterwards
 
-class MapViewModel : ViewModel() {
+class MapScreenState : ViewModel() {
     var state by mutableStateOf(MapState(0, 0, 0))
         private set
     var currentFloor by mutableStateOf(FLOOR_UNINITIALIZED)

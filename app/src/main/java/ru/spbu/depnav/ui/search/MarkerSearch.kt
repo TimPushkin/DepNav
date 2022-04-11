@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.model.MarkerText
 
 @Composable
-fun MarkerSearchView(
+fun MarkerSearch(
     matches: List<MarkerText>,
     onSearch: (String) -> Unit,
     onClear: () -> Unit,

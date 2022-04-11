@@ -1,4 +1,4 @@
-package ru.spbu.depnav.ui
+package ru.spbu.depnav.ui.map
 
 import androidx.compose.foundation.layout.Column
 import androidx.compose.material.Button
