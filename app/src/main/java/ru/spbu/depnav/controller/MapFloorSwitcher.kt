@@ -17,10 +17,10 @@ class MapFloorSwitcher(
         mapViewModel: MapViewModel,
         tileProviderFactory: TileProviderFactory,
         markerDao: MarkerDao,
-        floorNum: Int
+        floorsNum: Int
     ) : this(
         mapViewModel,
-        List(floorNum) {
+        List(floorsNum) {
             val floor = it + 1
             floor to Floor(listOf(tileProviderFactory.makeTileProviderForFloor(floor))) {
                 runBlocking { markerDao.loadWithTextByFloor(floor).keys } // TODO: fix blocking

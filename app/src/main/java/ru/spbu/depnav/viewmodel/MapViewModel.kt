@@ -19,21 +19,23 @@ import ru.spbu.depnav.ui.MarkerView
 
 private const val TAG = "MapViewModel"
 
+const val FLOOR_UNINITIALIZED = Int.MIN_VALUE
+
 // TODO: instead of placing all markers, create a layer with marker graphics adding markers by one dynamically when needed to center and removing afterwards
 
-class MapViewModel(
-    width: Int,
-    height: Int,
-    tileSize: Int = 1024,
-    initFloor: Int = 0
-) : ViewModel() {
-    var currentFloor by mutableStateOf(initFloor)
-    val state by mutableStateOf(
-        MapState(1, width, height, tileSize) {
+class MapViewModel : ViewModel() {
+    var state by mutableStateOf(MapState(0, 0, 0))
+        private set
+    var currentFloor by mutableStateOf(FLOOR_UNINITIALIZED)
+
+    fun setParams(width: Int, height: Int, tileSize: Int = 1024) {
+        state.shutdown()
+        state = MapState(1, width, height, tileSize) {
             scroll(0.5, 0.5)
             scale(0f)
         }
-    )
+        currentFloor = 0
+    }
 
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
         Log.d(TAG, "Replacing layers...")

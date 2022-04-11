@@ -10,15 +10,12 @@ import ru.spbu.depnav.model.MarkerText
 
 private const val TAG = "MarkerSearchViewModel"
 
-class MarkerSearchViewModel(
-    private val mMarkerTextDao: MarkerTextDao,
-    var language: MarkerText.LanguageId
-) : ViewModel() {
+class MarkerSearchViewModel : ViewModel() {
     private val _matchedMarkers = MutableStateFlow(emptyList<MarkerText>())
     val matchedMarkers: StateFlow<List<MarkerText>>
         get() = _matchedMarkers
 
-    fun onSearch(text: String) {
+    fun search(text: String, markerTextDao: MarkerTextDao, language: MarkerText.LanguageId) {
         if (text.isBlank()) {
             _matchedMarkers.value = emptyList()
             return
@@ -27,13 +24,13 @@ class MarkerSearchViewModel(
         viewModelScope.launch {
             Log.v(TAG, "Processing query $text with language $language")
             val query = text.split(' ').joinToString(" ") { "$it*" }
-            val matches = mMarkerTextDao.loadByTokens(query, language)
+            val matches = markerTextDao.loadByTokens(query, language)
             Log.v(TAG, "Found ${matches.size} matches")
             _matchedMarkers.value = matches
         }
     }
 
-    fun onClear() {
+    fun clear() {
         _matchedMarkers.value = emptyList()
     }
 }

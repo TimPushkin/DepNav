@@ -11,16 +11,16 @@ import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.model.MarkerText
-import ru.spbu.depnav.viewmodel.MarkerSearchViewModel
 
 @Composable
 fun MarkerSearchView(
-    markerSearchViewModel: MarkerSearchViewModel,
+    matches: List<MarkerText>,
+    onSearch: (String) -> Unit,
+    onClear: () -> Unit,
     onResultClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
     var searchText by remember { mutableStateOf("") }
-    val matches by markerSearchViewModel.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
 
     Column(
         modifier = Modifier
@@ -32,11 +32,11 @@ fun MarkerSearchView(
             placeholder = "Search markers",
             onTextChange = {
                 searchText = it
-                markerSearchViewModel.onSearch(it)
+                onSearch(it)
             },
             onClear = {
                 searchText = ""
-                markerSearchViewModel.onClear()
+                onClear()
             }
         )
 

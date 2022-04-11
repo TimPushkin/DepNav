@@ -9,6 +9,7 @@ import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
+import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
@@ -17,6 +18,7 @@ import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
 import ru.spbu.depnav.ui.MainScreen
+import ru.spbu.depnav.viewmodel.FLOOR_UNINITIALIZED
 import ru.spbu.depnav.viewmodel.MapViewModel
 
 private const val TAG = "MainActivity"
@@ -26,8 +28,8 @@ private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 
 class MainActivity : ComponentActivity() {
+    private val mMapViewModel: MapViewModel by viewModels()
     private lateinit var mAppDatabase: AppDatabase
-    private lateinit var mMapViewModel: MapViewModel
     private lateinit var mMapFloorSwitcher: MapFloorSwitcher
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
@@ -45,16 +47,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         mAppDatabase = AppDatabase.getInstance(this)
-
         val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
 
-        mMapViewModel = MapViewModel(mapInfo.floorWidth, mapInfo.floorHeight)
         mMapFloorSwitcher = MapFloorSwitcher(
-            mMapViewModel,
-            TileProviderFactory(applicationContext.assets, TILES_PATH),
-            mAppDatabase.markerDao(),
-            mapInfo.floorsNum
-        ).apply { setFloor(1) }
+            mapViewModel = mMapViewModel,
+            tileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH),
+            markerDao = mAppDatabase.markerDao(),
+            floorsNum = mapInfo.floorsNum
+        )
+
+        if (mMapViewModel.currentFloor == FLOOR_UNINITIALIZED) {
+            mMapViewModel.setParams(mapInfo.floorWidth, mapInfo.floorHeight)
+            mMapFloorSwitcher.setFloor(1)
+        }
 
         setContent {
             DepNavTheme {

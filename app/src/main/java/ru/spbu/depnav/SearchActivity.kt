@@ -6,9 +6,12 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
+import androidx.activity.viewModels
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.intl.Locale
 import ru.spbu.depnav.db.AppDatabase
@@ -22,8 +25,8 @@ private const val TAG = "SearchActivity"
 const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
 class SearchActivity : ComponentActivity() {
+    private val mMarkerSearchViewModel: MarkerSearchViewModel by viewModels()
     private lateinit var mAppDatabase: AppDatabase
-    private lateinit var mMarkerSearchViewModel: MarkerSearchViewModel
 
     private val systemLanguage: LanguageId
         get() {
@@ -42,21 +45,32 @@ class SearchActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         mAppDatabase = AppDatabase.getInstance(this)
-        mMarkerSearchViewModel = MarkerSearchViewModel(mAppDatabase.markerTextDao(), systemLanguage)
 
         setContent {
+            val searchMatches by mMarkerSearchViewModel.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
+
             DepNavTheme {
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
                     MarkerSearchView(
-                        markerSearchViewModel = mMarkerSearchViewModel,
+                        matches = searchMatches,
+                        onSearch = this::onSearch,
+                        onClear = this::onClear,
                         onResultClick = this::onMarkerSelected
                     )
                 }
             }
         }
+    }
+
+    private fun onSearch(text: String) {
+        mMarkerSearchViewModel.search(text, mAppDatabase.markerTextDao(), systemLanguage)
+    }
+
+    private fun onClear() {
+        mMarkerSearchViewModel.clear()
     }
 
     private fun onMarkerSelected(id: Int) {
