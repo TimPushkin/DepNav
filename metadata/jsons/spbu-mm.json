@@ -4509,6 +4509,2274 @@
             "title": "3523",
             "description": "Educational department"
           }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10500,
+          "y": 4599,
+          "ru": {
+            "title": "3521",
+            "description": null
+          },
+          "en": {
+            "title": "3521",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10500,
+          "y": 4469,
+          "ru": {
+            "title": "3519",
+            "description": null
+          },
+          "en": {
+            "title": "3519",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10500,
+          "y": 4317,
+          "ru": {
+            "title": "3517",
+            "description": null
+          },
+          "en": {
+            "title": "3517",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 4848,
+          "ru": {
+            "title": "3548",
+            "description": null
+          },
+          "en": {
+            "title": "3548",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 4599,
+          "ru": {
+            "title": "3546",
+            "description": null
+          },
+          "en": {
+            "title": "3546",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 4469,
+          "ru": {
+            "title": "3544",
+            "description": null
+          },
+          "en": {
+            "title": "3544",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 4317,
+          "ru": {
+            "title": "3542",
+            "description": null
+          },
+          "en": {
+            "title": "3542",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 4202,
+          "ru": {
+            "title": "3540",
+            "description": null
+          },
+          "en": {
+            "title": "3540",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10426,
+          "y": 4006,
+          "ru": {
+            "title": "3503",
+            "description": null
+          },
+          "en": {
+            "title": "3503",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10426,
+          "y": 3728,
+          "ru": {
+            "title": "3535/26",
+            "description": null
+          },
+          "en": {
+            "title": "3535/26",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10426,
+          "y": 3463,
+          "ru": {
+            "title": "3501",
+            "description": null
+          },
+          "en": {
+            "title": "3501",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 4006,
+          "ru": {
+            "title": "3538",
+            "description": null
+          },
+          "en": {
+            "title": "3538",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 3793,
+          "ru": {
+            "title": "3536",
+            "description": null
+          },
+          "en": {
+            "title": "3536",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 3661,
+          "ru": {
+            "title": "3534",
+            "description": null
+          },
+          "en": {
+            "title": "3534",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 3463,
+          "ru": {
+            "title": "3532",
+            "description": null
+          },
+          "en": {
+            "title": "3532",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 3253,
+          "ru": {
+            "title": "3530",
+            "description": "Учебный отдел (аспирантура)"
+          },
+          "en": {
+            "title": "3530",
+            "description": "Educational department (postgraduate studies)"
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 3132,
+          "ru": {
+            "title": "3528",
+            "description": null
+          },
+          "en": {
+            "title": "3528",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 2936,
+          "ru": {
+            "title": "3526",
+            "description": null
+          },
+          "en": {
+            "title": "3526",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 2664,
+          "ru": {
+            "title": "3524",
+            "description": null
+          },
+          "en": {
+            "title": "3524",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 2406,
+          "ru": {
+            "title": "3522",
+            "description": null
+          },
+          "en": {
+            "title": "3522",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 2199,
+          "ru": {
+            "title": "3520",
+            "description": null
+          },
+          "en": {
+            "title": "3520",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 2066,
+          "ru": {
+            "title": "3518",
+            "description": null
+          },
+          "en": {
+            "title": "3518",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 1845,
+          "ru": {
+            "title": "3516",
+            "description": null
+          },
+          "en": {
+            "title": "3516",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 1585,
+          "ru": {
+            "title": "3514",
+            "description": null
+          },
+          "en": {
+            "title": "3514",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 1383,
+          "ru": {
+            "title": "3512",
+            "description": null
+          },
+          "en": {
+            "title": "3512",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 1067,
+          "ru": {
+            "title": "3510",
+            "description": null
+          },
+          "en": {
+            "title": "3510",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 836,
+          "ru": {
+            "title": "3508",
+            "description": null
+          },
+          "en": {
+            "title": "3508",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10940,
+          "y": 634,
+          "ru": {
+            "title": "3506",
+            "description": null
+          },
+          "en": {
+            "title": "3506",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10500,
+          "y": 3143,
+          "ru": {
+            "title": "3515",
+            "description": null
+          },
+          "en": {
+            "title": "3515",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 10500,
+          "y": 3005,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 10500,
+          "y": 2870,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10500,
+          "y": 2729,
+          "ru": {
+            "title": "3513",
+            "description": null
+          },
+          "en": {
+            "title": "3513",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10500,
+          "y": 2602,
+          "ru": {
+            "title": "3511",
+            "description": null
+          },
+          "en": {
+            "title": "3511",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 2150,
+          "ru": {
+            "title": "3509",
+            "description": null
+          },
+          "en": {
+            "title": "3509",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1901,
+          "ru": {
+            "title": "3507",
+            "description": null
+          },
+          "en": {
+            "title": "3507",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1642,
+          "ru": {
+            "title": "3505",
+            "description": null
+          },
+          "en": {
+            "title": "3505",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1383,
+          "ru": {
+            "title": "3503",
+            "description": null
+          },
+          "en": {
+            "title": "3503",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10590,
+          "y": 1189,
+          "ru": {
+            "title": "3501",
+            "description": null
+          },
+          "en": {
+            "title": "3501",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10564,
+          "y": 1074,
+          "ru": {
+            "title": "3500",
+            "description": null
+          },
+          "en": {
+            "title": "3500",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10650,
+          "y": 597,
+          "ru": {
+            "title": "3504",
+            "description": null
+          },
+          "en": {
+            "title": "3504",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10402,
+          "y": 597,
+          "ru": {
+            "title": "3502",
+            "description": null
+          },
+          "en": {
+            "title": "3502",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 10132,
+          "y": 940,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 10148,
+          "y": 220,
+          "ru": {
+            "title": "3397",
+            "description": null
+          },
+          "en": {
+            "title": "3397",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9934,
+          "y": 220,
+          "ru": {
+            "title": "3396",
+            "description": null
+          },
+          "en": {
+            "title": "3396",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9793,
+          "y": 220,
+          "ru": {
+            "title": "3395",
+            "description": null
+          },
+          "en": {
+            "title": "3395",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9601,
+          "y": 220,
+          "ru": {
+            "title": "3394",
+            "description": null
+          },
+          "en": {
+            "title": "3394",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9398,
+          "y": 220,
+          "ru": {
+            "title": "3393",
+            "description": null
+          },
+          "en": {
+            "title": "3393",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9266,
+          "y": 220,
+          "ru": {
+            "title": "3392",
+            "description": null
+          },
+          "en": {
+            "title": "3392",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9139,
+          "y": 220,
+          "ru": {
+            "title": "3391",
+            "description": null
+          },
+          "en": {
+            "title": "3391",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 9004,
+          "y": 220,
+          "ru": {
+            "title": "3390",
+            "description": null
+          },
+          "en": {
+            "title": "3390",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8812,
+          "y": 220,
+          "ru": {
+            "title": "3389",
+            "description": null
+          },
+          "en": {
+            "title": "3389",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8612,
+          "y": 220,
+          "ru": {
+            "title": "3388",
+            "description": null
+          },
+          "en": {
+            "title": "3388",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8478,
+          "y": 220,
+          "ru": {
+            "title": "3387",
+            "description": null
+          },
+          "en": {
+            "title": "3387",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8284,
+          "y": 317,
+          "ru": {
+            "title": "3386",
+            "description": null
+          },
+          "en": {
+            "title": "3386",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 8084,
+          "y": 220,
+          "ru": {
+            "title": "3385",
+            "description": null
+          },
+          "en": {
+            "title": "3385",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7954,
+          "y": 220,
+          "ru": {
+            "title": "3384",
+            "description": null
+          },
+          "en": {
+            "title": "3384",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7823,
+          "y": 220,
+          "ru": {
+            "title": "3383",
+            "description": null
+          },
+          "en": {
+            "title": "3383",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7691,
+          "y": 220,
+          "ru": {
+            "title": "3382",
+            "description": null
+          },
+          "en": {
+            "title": "3382",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7500,
+          "y": 220,
+          "ru": {
+            "title": "3381",
+            "description": null
+          },
+          "en": {
+            "title": "3381",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 7516,
+          "y": 920,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7300,
+          "y": 862,
+          "ru": {
+            "title": "3359",
+            "description": null
+          },
+          "en": {
+            "title": "3359",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7065,
+          "y": 862,
+          "ru": {
+            "title": "3357",
+            "description": null
+          },
+          "en": {
+            "title": "3357",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6811,
+          "y": 862,
+          "ru": {
+            "title": "3355",
+            "description": null
+          },
+          "en": {
+            "title": "3355",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6493,
+          "y": 862,
+          "ru": {
+            "title": "3353",
+            "description": null
+          },
+          "en": {
+            "title": "3353",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6360,
+          "y": 862,
+          "ru": {
+            "title": "3351",
+            "description": null
+          },
+          "en": {
+            "title": "3351",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6166,
+          "y": 862,
+          "ru": {
+            "title": "3349",
+            "description": null
+          },
+          "en": {
+            "title": "3349",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5967,
+          "y": 862,
+          "ru": {
+            "title": "3347",
+            "description": null
+          },
+          "en": {
+            "title": "3347",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5836,
+          "y": 862,
+          "ru": {
+            "title": "3345",
+            "description": null
+          },
+          "en": {
+            "title": "3345",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5705,
+          "y": 862,
+          "ru": {
+            "title": "3343а",
+            "description": null
+          },
+          "en": {
+            "title": "3343a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5575,
+          "y": 862,
+          "ru": {
+            "title": "3343б",
+            "description": null
+          },
+          "en": {
+            "title": "3343b",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5445,
+          "y": 862,
+          "ru": {
+            "title": "3343в",
+            "description": null
+          },
+          "en": {
+            "title": "3343v",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 5314,
+          "y": 862,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6792,
+          "y": 555,
+          "ru": {
+            "title": "3364",
+            "description": null
+          },
+          "en": {
+            "title": "3364",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6632,
+          "y": 555,
+          "ru": {
+            "title": "3362",
+            "description": null
+          },
+          "en": {
+            "title": "3362",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6493,
+          "y": 555,
+          "ru": {
+            "title": "3360",
+            "description": null
+          },
+          "en": {
+            "title": "3360",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6360,
+          "y": 555,
+          "ru": {
+            "title": "3358",
+            "description": null
+          },
+          "en": {
+            "title": "3358",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6228,
+          "y": 555,
+          "ru": {
+            "title": "3356",
+            "description": null
+          },
+          "en": {
+            "title": "3356",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 6096,
+          "y": 555,
+          "ru": {
+            "title": "3354",
+            "description": null
+          },
+          "en": {
+            "title": "3354",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5967,
+          "y": 555,
+          "ru": {
+            "title": "3352",
+            "description": null
+          },
+          "en": {
+            "title": "3352",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5836,
+          "y": 555,
+          "ru": {
+            "title": "3350",
+            "description": null
+          },
+          "en": {
+            "title": "3350",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5705,
+          "y": 555,
+          "ru": {
+            "title": "3348",
+            "description": null
+          },
+          "en": {
+            "title": "3348",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5575,
+          "y": 555,
+          "ru": {
+            "title": "3346",
+            "description": null
+          },
+          "en": {
+            "title": "3346",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5445,
+          "y": 555,
+          "ru": {
+            "title": "3344",
+            "description": null
+          },
+          "en": {
+            "title": "3344",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5314,
+          "y": 555,
+          "ru": {
+            "title": "3342",
+            "description": null
+          },
+          "en": {
+            "title": "3342",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 5180,
+          "y": 555,
+          "ru": {
+            "title": "3342а",
+            "description": null
+          },
+          "en": {
+            "title": "3342a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4822,
+          "y": 862,
+          "ru": {
+            "title": "3315",
+            "description": null
+          },
+          "en": {
+            "title": "3315",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 4481,
+          "y": 862,
+          "ru": {
+            "title": "Библиотека программиста",
+            "description": null
+          },
+          "en": {
+            "title": "Programmer's library",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 3995,
+          "y": 862,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3847,
+          "y": 862,
+          "ru": {
+            "title": "3313а",
+            "description": null
+          },
+          "en": {
+            "title": "3313a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3643,
+          "y": 862,
+          "ru": {
+            "title": "3313",
+            "description": null
+          },
+          "en": {
+            "title": "3313",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3357,
+          "y": 862,
+          "ru": {
+            "title": "3311",
+            "description": null
+          },
+          "en": {
+            "title": "3311",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3129,
+          "y": 862,
+          "ru": {
+            "title": "3309а",
+            "description": null
+          },
+          "en": {
+            "title": "3309a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2972,
+          "y": 862,
+          "ru": {
+            "title": "3309б",
+            "description": null
+          },
+          "en": {
+            "title": "3309b",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2843,
+          "y": 862,
+          "ru": {
+            "title": "3307а",
+            "description": null
+          },
+          "en": {
+            "title": "3307a",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2713,
+          "y": 862,
+          "ru": {
+            "title": "3307б",
+            "description": null
+          },
+          "en": {
+            "title": "3307b",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "is_closed": false,
+          "x": 4187,
+          "y": 555,
+          "ru": {
+            "title": "Буфет",
+            "description": null
+          },
+          "en": {
+            "title": "Canteen",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3577,
+          "y": 555,
+          "ru": {
+            "title": "3322",
+            "description": null
+          },
+          "en": {
+            "title": "3322",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3426,
+          "y": 555,
+          "ru": {
+            "title": "3320",
+            "description": null
+          },
+          "en": {
+            "title": "33220",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3275,
+          "y": 555,
+          "ru": {
+            "title": "3318",
+            "description": null
+          },
+          "en": {
+            "title": "3318",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 3129,
+          "y": 555,
+          "ru": {
+            "title": "3316",
+            "description": null
+          },
+          "en": {
+            "title": "3316",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2972,
+          "y": 555,
+          "ru": {
+            "title": "3314",
+            "description": null
+          },
+          "en": {
+            "title": "3314",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2843,
+          "y": 555,
+          "ru": {
+            "title": "3312",
+            "description": null
+          },
+          "en": {
+            "title": "3312",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2713,
+          "y": 555,
+          "ru": {
+            "title": "3310",
+            "description": null
+          },
+          "en": {
+            "title": "3310",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2583,
+          "y": 527,
+          "ru": {
+            "title": "3308",
+            "description": null
+          },
+          "en": {
+            "title": "3308",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2474,
+          "y": 527,
+          "ru": {
+            "title": "3306",
+            "description": null
+          },
+          "en": {
+            "title": "3306",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2346,
+          "y": 814,
+          "ru": {
+            "title": "3303",
+            "description": null
+          },
+          "en": {
+            "title": "3303",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 2163,
+          "y": 814,
+          "ru": {
+            "title": "3302",
+            "description": null
+          },
+          "en": {
+            "title": "3302",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1992,
+          "y": 814,
+          "ru": {
+            "title": "3301",
+            "description": null
+          },
+          "en": {
+            "title": "3301",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1590,
+          "y": 787,
+          "ru": {
+            "title": "3248",
+            "description": "Лаборатория языковых инструментов"
+          },
+          "en": {
+            "title": "3248",
+            "description": "Programming language tools lab"
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1362,
+          "y": 787,
+          "ru": {
+            "title": "3241",
+            "description": null
+          },
+          "en": {
+            "title": "3241",
+            "description": null
+          }
+        },
+        {
+          "type": "WC",
+          "is_closed": false,
+          "x": 1475,
+          "y": 867,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 926,
+          "y": 1222,
+          "ru": {
+            "title": "3240",
+            "description": null
+          },
+          "en": {
+            "title": "3240",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 342,
+          "y": 1345,
+          "ru": {
+            "title": "3228",
+            "description": null
+          },
+          "en": {
+            "title": "3228",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 342,
+          "y": 1464,
+          "ru": {
+            "title": "3227",
+            "description": null
+          },
+          "en": {
+            "title": "3227",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 464,
+          "y": 1587,
+          "ru": {
+            "title": "3226",
+            "description": null
+          },
+          "en": {
+            "title": "3226",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 575,
+          "y": 1725,
+          "ru": {
+            "title": "3225",
+            "description": null
+          },
+          "en": {
+            "title": "3225",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 745,
+          "y": 1725,
+          "ru": {
+            "title": "3224",
+            "description": null
+          },
+          "en": {
+            "title": "3224",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 745,
+          "y": 1318,
+          "ru": {
+            "title": "3234",
+            "description": null
+          },
+          "en": {
+            "title": "3234",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 745,
+          "y": 1410,
+          "ru": {
+            "title": "3235",
+            "description": null
+          },
+          "en": {
+            "title": "3235",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 745,
+          "y": 1509,
+          "ru": {
+            "title": "3236",
+            "description": null
+          },
+          "en": {
+            "title": "3236",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 1944,
+          "ru": {
+            "title": "3211",
+            "description": null
+          },
+          "en": {
+            "title": "3211",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1364,
+          "y": 1944,
+          "ru": {
+            "title": "3210",
+            "description": null
+          },
+          "en": {
+            "title": "3210",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1513,
+          "y": 1944,
+          "ru": {
+            "title": "3209",
+            "description": null
+          },
+          "en": {
+            "title": "3209",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1764,
+          "y": 1944,
+          "ru": {
+            "title": "3208",
+            "description": null
+          },
+          "en": {
+            "title": "3208",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1814,
+          "y": 2146,
+          "ru": {
+            "title": "3207",
+            "description": null
+          },
+          "en": {
+            "title": "3207",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1814,
+          "y": 2296,
+          "ru": {
+            "title": "3206",
+            "description": null
+          },
+          "en": {
+            "title": "3206",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 2496,
+          "ru": {
+            "title": "3202",
+            "description": null
+          },
+          "en": {
+            "title": "3202",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1364,
+          "y": 2496,
+          "ru": {
+            "title": "3203",
+            "description": null
+          },
+          "en": {
+            "title": "3203",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1513,
+          "y": 2496,
+          "ru": {
+            "title": "3204",
+            "description": null
+          },
+          "en": {
+            "title": "3204",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1764,
+          "y": 2496,
+          "ru": {
+            "title": "3205",
+            "description": null
+          },
+          "en": {
+            "title": "3205",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1195,
+          "y": 2315,
+          "ru": {
+            "title": "3201",
+            "description": null
+          },
+          "en": {
+            "title": "3201",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "is_closed": false,
+          "x": 1195,
+          "y": 2223,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 2710,
+          "ru": {
+            "title": "3146",
+            "description": null
+          },
+          "en": {
+            "title": "3146",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 673,
+          "y": 2710,
+          "ru": {
+            "title": "3145",
+            "description": null
+          },
+          "en": {
+            "title": "3145",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 340,
+          "y": 2760,
+          "ru": {
+            "title": "3144",
+            "description": null
+          },
+          "en": {
+            "title": "3144",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 340,
+          "y": 3152,
+          "ru": {
+            "title": "3143",
+            "description": null
+          },
+          "en": {
+            "title": "3143",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 754,
+          "y": 3337,
+          "ru": {
+            "title": "3142",
+            "description": null
+          },
+          "en": {
+            "title": "3142",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 2870,
+          "ru": {
+            "title": "3160",
+            "description": null
+          },
+          "en": {
+            "title": "3160",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 3190,
+          "ru": {
+            "title": "3141",
+            "description": null
+          },
+          "en": {
+            "title": "3141",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 3560,
+          "ru": {
+            "title": "3131",
+            "description": null
+          },
+          "en": {
+            "title": "3131",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1364,
+          "y": 3560,
+          "ru": {
+            "title": "3130",
+            "description": null
+          },
+          "en": {
+            "title": "3130",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1513,
+          "y": 3560,
+          "ru": {
+            "title": "3129",
+            "description": null
+          },
+          "en": {
+            "title": "3129",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1764,
+          "y": 3560,
+          "ru": {
+            "title": "3128",
+            "description": null
+          },
+          "en": {
+            "title": "3128",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1814,
+          "y": 3766,
+          "ru": {
+            "title": "3127",
+            "description": null
+          },
+          "en": {
+            "title": "3127",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1814,
+          "y": 3906,
+          "ru": {
+            "title": "3126",
+            "description": null
+          },
+          "en": {
+            "title": "3126",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 4110,
+          "ru": {
+            "title": "3122",
+            "description": null
+          },
+          "en": {
+            "title": "3122",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1364,
+          "y": 4110,
+          "ru": {
+            "title": "3123",
+            "description": null
+          },
+          "en": {
+            "title": "3123",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1513,
+          "y": 4110,
+          "ru": {
+            "title": "3124",
+            "description": null
+          },
+          "en": {
+            "title": "3124",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1764,
+          "y": 4110,
+          "ru": {
+            "title": "3125",
+            "description": null
+          },
+          "en": {
+            "title": "3125",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 3741,
+          "ru": {
+            "title": "3140",
+            "description": null
+          },
+          "en": {
+            "title": "3140",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "is_closed": false,
+          "x": 1202,
+          "y": 3833,
+          "ru": {
+            "title": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1202,
+          "y": 3928,
+          "ru": {
+            "title": "3121",
+            "description": null
+          },
+          "en": {
+            "title": "3121",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 923,
+          "y": 4315,
+          "ru": {
+            "title": "3108",
+            "description": null
+          },
+          "en": {
+            "title": "3108",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 671,
+          "y": 4315,
+          "ru": {
+            "title": "3107",
+            "description": null
+          },
+          "en": {
+            "title": "3107",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 342,
+          "y": 4379,
+          "ru": {
+            "title": "3106",
+            "description": null
+          },
+          "en": {
+            "title": "3106",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 342,
+          "y": 4652,
+          "ru": {
+            "title": "3105",
+            "description": null
+          },
+          "en": {
+            "title": "3105",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 342,
+          "y": 4915,
+          "ru": {
+            "title": "3104",
+            "description": null
+          },
+          "en": {
+            "title": "3104",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 590,
+          "y": 4949,
+          "ru": {
+            "title": "3103",
+            "description": null
+          },
+          "en": {
+            "title": "3103",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 763,
+          "y": 4949,
+          "ru": {
+            "title": "3102",
+            "description": null
+          },
+          "en": {
+            "title": "3102",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 974,
+          "y": 4953,
+          "ru": {
+            "title": "3101",
+            "description": null
+          },
+          "en": {
+            "title": "3101",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1065,
+          "y": 4731,
+          "ru": {
+            "title": "3110",
+            "description": null
+          },
+          "en": {
+            "title": "3110",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 1005,
+          "y": 4457,
+          "ru": {
+            "title": "3120",
+            "description": null
+          },
+          "en": {
+            "title": "3120",
+            "description": null
+          }
         }
       ]
     },
