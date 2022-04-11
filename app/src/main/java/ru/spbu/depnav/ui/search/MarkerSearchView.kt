@@ -20,24 +20,16 @@ fun MarkerSearchView(
     onResultClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
-    var searchText by remember { mutableStateOf("") }
-
     Column(
         modifier = Modifier
             .fillMaxWidth()
             .then(modifier)
     ) {
         SearchField(
-            text = searchText,
+            modifier = Modifier.fillMaxWidth(),
             placeholder = "Search markers",
-            onTextChange = {
-                searchText = it
-                onSearch(it)
-            },
-            onClear = {
-                searchText = ""
-                onClear()
-            }
+            onTextChange = onSearch,
+            onClear = onClear
         )
 
         Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
@@ -50,10 +42,7 @@ fun MarkerSearchView(
 }
 
 @Composable
-private fun SearchResults(
-    markerTexts: List<MarkerText>,
-    onResultClick: (Int) -> Unit
-) {
+private fun SearchResults(markerTexts: List<MarkerText>, onResultClick: (Int) -> Unit) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(markerTexts) { markerText ->
             if (markerText.title == null) return@items

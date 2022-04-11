@@ -1,7 +1,6 @@
 package ru.spbu.depnav.ui.search
 
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.*
@@ -9,10 +8,10 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
+import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
-import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalFocusManager
@@ -20,29 +19,34 @@ import androidx.compose.ui.text.input.ImeAction
 
 @Composable
 fun SearchField(
-    text: String,
     modifier: Modifier = Modifier,
     placeholder: String = "",
     onTextChange: (String) -> Unit = {},
     onClear: () -> Unit = {}
 ) {
+    var text by rememberSaveable { mutableStateOf("") }
     val focusManager = LocalFocusManager.current
     val focusRequester = remember { FocusRequester() }
-    var isFocused by remember { mutableStateOf(false) }
 
     TextField(
         value = text,
-        onValueChange = onTextChange,
+        onValueChange = {
+            text = it
+            onTextChange(it)
+        },
         modifier = Modifier
-            .fillMaxWidth()
-            .onFocusChanged { isFocused = it.isFocused }
             .focusRequester(focusRequester)
             .then(modifier),
         placeholder = { Text(placeholder) },
         leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
         trailingIcon = {
-            AnimatedVisibility(visible = isFocused && text.isNotEmpty()) {
-                IconButton(onClick = onClear) {
+            AnimatedVisibility(visible = text.isNotEmpty()) {
+                IconButton(
+                    onClick = {
+                        text = ""
+                        onClear()
+                    }
+                ) {
                     Icon(
                         Icons.Default.Close,
                         contentDescription = "Clear field"
