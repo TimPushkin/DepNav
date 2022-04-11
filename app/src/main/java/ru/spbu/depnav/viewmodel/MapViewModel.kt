@@ -35,8 +35,6 @@ class MapViewModel(
         }
     )
 
-    private val mMarkerIds = mutableListOf<String>()
-
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
         Log.d(TAG, "Replacing layers...")
 
@@ -47,21 +45,15 @@ class MapViewModel(
     fun replaceMarkersWith(markers: Iterable<Marker>) {
         Log.d(TAG, "Replacing markers...")
 
-        mMarkerIds.forEach { state.removeMarker(it) }
-        mMarkerIds.clear()
+        state.removeAllMarkers()
 
-        for (marker in markers) marker.run {
-            state.addMarker(
-                id = idStr,
-                x = x,
-                y = y,
-                relativeOffset = Offset(-0.5f, -0.5f),
-                clipShape = null
-            ) { MarkerView(type, modifier = Modifier.size(20.dp)) }
-            mMarkerIds += idStr
-        }
-
-        Log.i(TAG, "Placed ${mMarkerIds.size} markers")
+        for (marker in markers) state.addMarker(
+            id = marker.idStr,
+            x = marker.x,
+            y = marker.y,
+            relativeOffset = Offset(-0.5f, -0.5f),
+            clipShape = null
+        ) { MarkerView(marker.type, modifier = Modifier.size(20.dp)) }
     }
 
     fun centerOnMarker(id: String) {
