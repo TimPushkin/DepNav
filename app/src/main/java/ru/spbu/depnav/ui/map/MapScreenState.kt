@@ -66,7 +66,12 @@ class MapScreenState : ViewModel() {
                             displayMarkerText = true
                         }
                     else Modifier
-                MarkerView(markerText.title ?: "", marker.type, modifier = modifier)
+                MarkerView(
+                    markerText.title ?: "",
+                    marker.type,
+                    marker.isClosed,
+                    modifier = modifier
+                )
             }
         }
     }
