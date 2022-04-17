@@ -52,9 +52,12 @@ fun MapScreen(
 
                 FloorSwitch(
                     floor = mapScreenState.currentFloor,
-                    modifier = Modifier.align(Alignment.End),
-                    onClick = onFloorSwitch,
-                    maxFloor = floorsNum
+                    minFloor = 1,
+                    maxFloor = floorsNum,
+                    modifier = Modifier
+                        .padding(10.dp)
+                        .align(Alignment.End),
+                    onClick = onFloorSwitch
                 )
             }
         }
