@@ -7,8 +7,10 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ovh.plrapps.mapcompose.ui.MapUI
+import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.search.SearchButton
 
 @OptIn(ExperimentalMaterialApi::class)
@@ -24,8 +26,10 @@ fun MapScreen(
     BottomSheetScaffold(
         sheetContent = {
             MarkerInfo(
-                title = mapScreenState.displayedMarkerText.title ?: "No title",
-                description = mapScreenState.displayedMarkerText.description ?: "No description"
+                title = mapScreenState.displayedMarkerText.title
+                    ?: stringResource(R.string.no_title),
+                description = mapScreenState.displayedMarkerText.description
+                    ?: stringResource(R.string.no_description)
             )
         },
         modifier = Modifier.fillMaxSize(),
@@ -47,7 +51,7 @@ fun MapScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SearchButton(
-                    text = "Search...",
+                    text = stringResource(R.string.search_markers),
                     onClick = onStartSearch,
                     modifier = Modifier
                         .fillMaxWidth(0.8f)

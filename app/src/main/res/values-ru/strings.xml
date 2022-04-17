@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Навигатор по факультету</string>
+    <string name="no_title">Без названия</string>
+    <string name="no_description">Без описания</string>
+    <string name="search_markers">Поиск меток</string>
+</resources>

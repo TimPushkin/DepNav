@@ -9,7 +9,9 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
+import ru.spbu.depnav.R
 import ru.spbu.depnav.model.MarkerText
 
 @Composable
@@ -27,7 +29,7 @@ fun MarkerSearch(
     ) {
         SearchField(
             modifier = Modifier.fillMaxWidth(),
-            placeholder = "Search markers",
+            placeholder = stringResource(R.string.search_markers),
             onTextChange = onSearch,
             onClear = onClear
         )
