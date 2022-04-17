@@ -11,8 +11,7 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
+import kotlinx.coroutines.*
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.ui.theme.DepNavTheme
@@ -29,6 +28,7 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 
 class MainActivity : ComponentActivity() {
     private val mMapScreenState: MapScreenState by viewModels()
+    private val mScope = CoroutineScope(Dispatchers.Main)
     private lateinit var mAppDatabase: AppDatabase
     private lateinit var mFloors: Map<Int, Floor>
 
@@ -83,24 +83,30 @@ class MainActivity : ComponentActivity() {
         val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
         val markerDao = mAppDatabase.markerDao()
 
-        mFloors = List(floorsNum) {
-            val floor = it + 1
-            floor to Floor(listOf(factory.makeTileProviderForFloor(floor))) {
-                runBlocking { markerDao.loadWithTextByFloor(floor).keys } // TODO: fix blocking
-            }
-        }.toMap()
+        runBlocking {
+            mFloors = List(floorsNum) {
+                val floor = it + 1
+                floor to Floor(
+                    layers = listOf(factory.makeTileProviderForFloor(floor)),
+                    markers = async(Dispatchers.IO) { markerDao.loadWithTextByFloor(floor).keys }
+                )
+            }.toMap()
+        }
     }
 
     private fun setFloor(floor: Int) {
         mFloors[floor]?.run {
-            Log.i(
-                TAG,
-                "Switching to floor $floor: ${layers.count()} layers, ${markers.count()} markers"
-            )
+            Log.i(TAG, "Switching to floor $floor")
 
             mMapScreenState.currentFloor = floor
-            mMapScreenState.replaceLayersWith(layers)
-            mMapScreenState.replaceMarkersWith(markers)
+            mMapScreenState.replaceLayersWith(emptyList())
+            mMapScreenState.replaceMarkersWith(emptyList())
+
+            mScope.launch(Dispatchers.Main) {
+                mMapScreenState.replaceLayersWith(layers)
+                mMapScreenState.replaceMarkersWith(markers.await())
+                Log.d(TAG, "Switched to floor $floor")
+            }
         } ?: run { Log.e(TAG, "Cannot switch to floor $floor which does not exist") }
     }
 }
