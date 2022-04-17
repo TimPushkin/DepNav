@@ -43,8 +43,11 @@ fun MapScreen(
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 SearchButton(
-                    text = "",
-                    onClick = onStartSearch
+                    text = "Search...",
+                    onClick = onStartSearch,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .padding(top = 10.dp, bottom = 10.dp)
                 )
 
                 FloorSwitch(
