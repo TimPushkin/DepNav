@@ -1,0 +1,14 @@
+<!--This file was generated from the corresponding Twitter emoji SVG-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+    <path
+        android:fillColor="#3B88C3"
+        android:pathData="M36,32c0,2.209 -1.791,4 -4,4H4c-2.209,0 -4,-1.791 -4,-4V4c0,-2.209 1.791,-4 4,-4h28c2.209,0 4,1.791 4,4v28z" />
+    <path
+        android:fillColor="#FFF"
+        android:pathData="M22,7v9h7L18,29 7,16h7V7z" />
+</vector>

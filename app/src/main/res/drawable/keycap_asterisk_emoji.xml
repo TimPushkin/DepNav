@@ -1,0 +1,20 @@
+<!--This file was generated from the corresponding Twitter emoji SVG-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+    <path
+        android:fillColor="#3B88C3"
+        android:pathData="M32,0H4C1.791,0 0,1.791 0,4v28c0,2.209 1.791,4 4,4h28c2.209,0 4,-1.791 4,-4V4c0,-2.209 -1.791,-4 -4,-4z" />
+    <path
+        android:fillColor="#FFF"
+        android:pathData="M19,7h-2c-0.552,0 -1,0.448 -1,1v20c0,0.553 0.448,1 1,1h2c0.553,0 1,-0.447 1,-1V8c0,-0.552 -0.447,-1 -1,-1z" />
+    <path
+        android:fillColor="#FFF"
+        android:pathData="M26.617,11.09l1.105,1.667c0.305,0.46 0.179,1.081 -0.281,1.386L10.769,25.191c-0.461,0.305 -1.081,0.179 -1.386,-0.281l-1.105,-1.667c-0.305,-0.461 -0.18,-1.081 0.281,-1.386L25.231,10.81c0.461,-0.306 1.081,-0.18 1.386,0.28z" />
+    <path
+        android:fillColor="#FFF"
+        android:pathData="M9.383,11.09l-1.105,1.667c-0.305,0.46 -0.179,1.081 0.281,1.386L25.231,25.19c0.461,0.305 1.081,0.179 1.386,-0.281l1.105,-1.667c0.305,-0.461 0.18,-1.081 -0.281,-1.386L10.769,10.809c-0.461,-0.305 -1.081,-0.179 -1.386,0.281z" />
+</vector>

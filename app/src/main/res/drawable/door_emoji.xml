@@ -1,0 +1,26 @@
+<!--This file was generated from the corresponding Twitter emoji SVG-->
+
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="36dp"
+    android:height="36dp"
+    android:viewportWidth="36"
+    android:viewportHeight="36">
+    <path
+        android:fillColor="#BF6952"
+        android:pathData="M29,34c0,1.105 -0.895,2 -2,2H9c-1.105,0 -2,-0.895 -2,-2V2c0,-1.105 0.895,-2 2,-2h18c1.105,0 2,0.895 2,2v32z" />
+    <path
+        android:fillColor="#FFAC33"
+        android:pathData="M11,18m-1.5,0a1.5,1.5 0,1 1,3 0a1.5,1.5 0,1 1,-3 0" />
+    <path
+        android:fillColor="#AC5640"
+        android:pathData="M25,3c-0.552,0 -1,0.448 -1,1v9L11,13c-0.552,0 -1,0.448 -1,1s0.448,1 1,1h14c0.552,0 1,-0.448 1,-1L26,4c0,-0.552 -0.448,-1 -1,-1zM25,28c0.552,0 1,0.448 1,1v3c0,0.552 -0.448,1 -1,1L11,33c-0.552,0 -1,-0.448 -1,-1s0.448,-1 1,-1h13v-2c0,-0.552 0.448,-1 1,-1z" />
+    <path
+        android:fillColor="#854836"
+        android:pathData="M11,33c-0.552,0 -1,-0.448 -1,-1v-3c0,-0.552 0.448,-1 1,-1h14c0.552,0 1,0.448 1,1s-0.448,1 -1,1H12v2c0,0.552 -0.448,1 -1,1z" />
+    <path
+        android:fillColor="#AC5640"
+        android:pathData="M25,21c0.552,0 1,0.448 1,1v3c0,0.552 -0.448,1 -1,1H11c-0.552,0 -1,-0.448 -1,-1s0.448,-1 1,-1h13v-2c0,-0.552 0.448,-1 1,-1z" />
+    <path
+        android:fillColor="#854836"
+        android:pathData="M11,26c-0.552,0 -1,-0.448 -1,-1v-3c0,-0.552 0.448,-1 1,-1h14c0.552,0 1,0.448 1,1s-0.448,1 -1,1L12,23v2c0,0.552 -0.448,1 -1,1zM11,15c-0.552,0 -1,-0.448 -1,-1L10,4c0,-0.552 0.448,-1 1,-1h14c0.552,0 1,0.448 1,1s-0.448,1 -1,1L12,5v9c0,0.552 -0.448,1 -1,1z" />
+</vector>

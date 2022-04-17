@@ -1,6 +1,7 @@
 package ru.spbu.depnav.ui.map
 
 import android.util.Log
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.size
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -61,8 +62,9 @@ class MapScreenState : ViewModel() {
                 x = marker.x,
                 y = marker.y,
                 relativeOffset = Offset(-0.5f, -0.5f),
+                clickable = !markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank(),
                 clipShape = null
-            ) { MarkerView(marker.type, modifier = Modifier.size(20.dp)) }
+            ) { MarkerView(markerText.title ?: "", marker.type) }
             markerTexts += marker.idStr to markerText
         }
 
