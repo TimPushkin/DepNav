@@ -18,8 +18,6 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.model.Marker.MarkerType
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
-// TODO: try to use clickable icons instead of clickable markers
-
 @Composable
 fun MarkerView(title: String, type: MarkerType, modifier: Modifier = Modifier) = when (type) {
     MarkerType.ENTRANCE -> MarkerIcon(
