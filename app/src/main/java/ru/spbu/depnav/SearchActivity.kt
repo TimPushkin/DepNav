@@ -7,13 +7,16 @@ import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.toArgb
 import androidx.compose.ui.text.intl.Locale
+import androidx.core.view.WindowInsetsControllerCompat
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.MarkerText.LanguageId
 import ru.spbu.depnav.ui.search.MarkerSearch
@@ -48,6 +51,16 @@ class SearchActivity : ComponentActivity() {
 
         setContent {
             val searchMatches by mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
+
+            window.statusBarColor = MaterialTheme.colors.background.toArgb()
+            window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
+
+            if (!isSystemInDarkTheme()) {
+                WindowInsetsControllerCompat(window, window.decorView).apply {
+                    isAppearanceLightStatusBars = true
+                    isAppearanceLightNavigationBars = true
+                }
+            }
 
             DepNavTheme {
                 Surface(
