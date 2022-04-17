@@ -94,19 +94,23 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setFloor(floor: Int) {
-        mFloors[floor]?.run {
-            Log.i(TAG, "Switching to floor $floor")
+    private fun setFloor(floorIndex: Int) {
+        val floor = mFloors[floorIndex]
+        if (floor == null) {
+            Log.e(TAG, "Cannot switch to floor $floorIndex which does not exist")
+            return
+        }
 
-            mMapScreenState.currentFloor = floor
-            mMapScreenState.replaceLayersWith(emptyList())
-            mMapScreenState.replaceMarkersWith(emptyList())
+        Log.i(TAG, "Switching to floor $floorIndex")
 
-            mScope.launch(Dispatchers.Main) {
-                mMapScreenState.replaceLayersWith(layers)
-                mMapScreenState.replaceMarkersWith(markers.await())
-                Log.d(TAG, "Switched to floor $floor")
-            }
-        } ?: run { Log.e(TAG, "Cannot switch to floor $floor which does not exist") }
+        mMapScreenState.currentFloor = floorIndex
+        mMapScreenState.replaceLayersWith(emptyList())
+        mMapScreenState.replaceMarkersWith(emptyList())
+
+        mScope.launch {
+            mMapScreenState.replaceLayersWith(floor.layers)
+            mMapScreenState.replaceMarkersWith(floor.markers.await())
+            Log.d(TAG, "Switched to floor $floorIndex")
+        }
     }
 }
