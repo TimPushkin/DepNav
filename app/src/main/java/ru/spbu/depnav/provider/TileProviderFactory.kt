@@ -11,7 +11,6 @@ class TileProviderFactory(
     var rootPath: String,
     var floorPrefix: String = "floor"
 ) {
-
     fun makeTileProviderForFloor(floor: Int) =
         TileStreamProvider { row, col, lvl ->
             val path = "$rootPath/$floorPrefix$floor/$lvl/${row}_$col.png"

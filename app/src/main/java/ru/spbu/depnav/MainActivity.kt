@@ -13,8 +13,8 @@ import androidx.activity.viewModels
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
-import ru.spbu.depnav.controller.MapFloorSwitcher
 import ru.spbu.depnav.db.AppDatabase
+import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
 import ru.spbu.depnav.ui.map.FLOOR_UNINITIALIZED
@@ -30,7 +30,7 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 class MainActivity : ComponentActivity() {
     private val mMapScreenState: MapScreenState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
-    private lateinit var mMapFloorSwitcher: MapFloorSwitcher
+    private lateinit var mFloors: Map<Int, Floor>
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received ${result.toString()} as a search result")
@@ -38,38 +38,8 @@ class MainActivity : ComponentActivity() {
         val markerId = result ?: return@registerForActivityResult
         lifecycleScope.launch {
             val marker = mAppDatabase.markerDao().loadById(markerId)
-            mMapFloorSwitcher.setFloor(marker.floor)
+            setFloor(marker.floor)
             mMapScreenState.centerOnMarker(marker.idStr)
-        }
-    }
-
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-
-        mAppDatabase = AppDatabase.getInstance(this)
-        val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
-
-        mMapFloorSwitcher = MapFloorSwitcher(
-            mapScreenState = mMapScreenState,
-            tileProviderFactory = TileProviderFactory(applicationContext.assets, TILES_PATH),
-            markerDao = mAppDatabase.markerDao(),
-            floorsNum = mapInfo.floorsNum
-        )
-
-        if (mMapScreenState.currentFloor == FLOOR_UNINITIALIZED) {
-            mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight)
-            mMapFloorSwitcher.setFloor(1)
-        }
-
-        setContent {
-            DepNavTheme {
-                MapScreen(
-                    mapScreenState = mMapScreenState,
-                    floorsNum = mapInfo.floorsNum,
-                    onStartSearch = startSearch::launch,
-                    onFloorSwitch = mMapFloorSwitcher::setFloor
-                )
-            }
         }
     }
 
@@ -82,5 +52,55 @@ class MainActivity : ComponentActivity() {
             // getInt() is not used as it requires a default value
             return intent?.extras?.get(EXTRA_MARKER_ID)?.run { toString().toInt() }
         }
+    }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+
+        mAppDatabase = AppDatabase.getInstance(this)
+        val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
+
+        initFloors(mapInfo.floorsNum)
+
+        if (mMapScreenState.currentFloor == FLOOR_UNINITIALIZED) {
+            mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight)
+            setFloor(mFloors.keys.first())
+        }
+
+        setContent {
+            DepNavTheme {
+                MapScreen(
+                    mapScreenState = mMapScreenState,
+                    floorsNum = mapInfo.floorsNum,
+                    onStartSearch = startSearch::launch,
+                    onFloorSwitch = this::setFloor
+                )
+            }
+        }
+    }
+
+    private fun initFloors(floorsNum: Int) {
+        val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
+        val markerDao = mAppDatabase.markerDao()
+
+        mFloors = List(floorsNum) {
+            val floor = it + 1
+            floor to Floor(listOf(factory.makeTileProviderForFloor(floor))) {
+                runBlocking { markerDao.loadWithTextByFloor(floor).keys } // TODO: fix blocking
+            }
+        }.toMap()
+    }
+
+    private fun setFloor(floor: Int) {
+        mFloors[floor]?.run {
+            Log.i(
+                TAG,
+                "Switching to floor $floor: ${layers.count()} layers, ${markers.count()} markers"
+            )
+
+            mMapScreenState.currentFloor = floor
+            mMapScreenState.replaceLayersWith(layers)
+            mMapScreenState.replaceMarkersWith(markers)
+        } ?: run { Log.e(TAG, "Cannot switch to floor $floor which does not exist") }
     }
 }
