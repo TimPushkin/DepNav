@@ -10,6 +10,10 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.material.MaterialTheme
+import androidx.compose.ui.graphics.toArgb
+import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import ru.spbu.depnav.db.AppDatabase
@@ -70,6 +74,16 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DepNavTheme {
+                window.statusBarColor = MaterialTheme.colors.background.toArgb()
+                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
+
+                if (!isSystemInDarkTheme()) {
+                    WindowInsetsControllerCompat(window, window.decorView).apply {
+                        isAppearanceLightStatusBars = true
+                        isAppearanceLightNavigationBars = true
+                    }
+                }
+
                 MapScreen(
                     mapScreenState = mMapScreenState,
                     floorsNum = mapInfo.floorsNum,
