@@ -1,6 +1,7 @@
 package ru.spbu.depnav.ui.map
 
 import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
@@ -30,6 +31,10 @@ fun MapScreen(
         },
         modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
+        sheetShape = MaterialTheme.shapes.large.copy(
+            bottomStart = CornerSize(0),
+            bottomEnd = CornerSize(0)
+        ),
         sheetPeekHeight = 0.dp
     ) { contentPadding ->
         Box(modifier = Modifier.padding(contentPadding)) {
