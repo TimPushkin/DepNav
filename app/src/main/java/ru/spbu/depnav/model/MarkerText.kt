@@ -10,5 +10,9 @@ data class MarkerText(
     val title: String?,
     val description: String?
 ) {
+    companion object {
+        val EMPTY = MarkerText(Int.MIN_VALUE, LanguageId.EN, null, null)
+    }
+
     enum class LanguageId { EN, RU }
 }

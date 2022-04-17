@@ -14,6 +14,7 @@ import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.*
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
+import ru.spbu.depnav.model.MarkerText
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
 import ru.spbu.depnav.ui.map.FLOOR_UNINITIALIZED
@@ -88,7 +89,15 @@ class MainActivity : ComponentActivity() {
                 val floor = it + 1
                 floor to Floor(
                     layers = listOf(factory.makeTileProviderForFloor(floor)),
-                    markers = async(Dispatchers.IO) { markerDao.loadWithTextByFloor(floor).keys }
+                    markers = async(Dispatchers.IO) {
+                        markerDao.loadWithTextByFloor(floor).entries.associate { (marker, markerTexts) ->
+                            val markerText = markerTexts.firstOrNull() ?: run {
+                                Log.e(TAG, "Marker $marker has no text")
+                                MarkerText.EMPTY
+                            }
+                            marker to markerText
+                        }
+                    }
                 )
             }.toMap()
         }
@@ -104,8 +113,9 @@ class MainActivity : ComponentActivity() {
         Log.i(TAG, "Switching to floor $floorIndex")
 
         mMapScreenState.currentFloor = floorIndex
+        mMapScreenState.displayedMarkerText = null
         mMapScreenState.replaceLayersWith(emptyList())
-        mMapScreenState.replaceMarkersWith(emptyList())
+        mMapScreenState.replaceMarkersWith(emptyMap())
 
         mScope.launch {
             mMapScreenState.replaceLayersWith(floor.layers)
