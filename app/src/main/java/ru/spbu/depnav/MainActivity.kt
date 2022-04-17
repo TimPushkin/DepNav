@@ -38,13 +38,13 @@ class MainActivity : ComponentActivity() {
     private lateinit var mFloors: Map<Int, Floor>
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
-        Log.i(TAG, "Received ${result.toString()} as a search result")
+        Log.i(TAG, "Received $result as a search result")
 
         val markerId = result ?: return@registerForActivityResult
         lifecycleScope.launch {
             val marker = mAppDatabase.markerDao().loadById(markerId)
-            setFloor(marker.floor)
-            mMapScreenState.centerOnMarker(marker.idStr)
+            Log.i(TAG, "Loaded searched marker: $marker")
+            setFloor(marker.floor) { mMapScreenState.centerOnMarker(marker.idStr) }
         }
     }
 
@@ -117,7 +117,7 @@ class MainActivity : ComponentActivity() {
         }
     }
 
-    private fun setFloor(floorIndex: Int) {
+    private fun setFloor(floorIndex: Int, onFinished: () -> Unit = {}) {
         val floor = mFloors[floorIndex]
         if (floor == null) {
             Log.e(TAG, "Cannot switch to floor $floorIndex which does not exist")
@@ -135,6 +135,7 @@ class MainActivity : ComponentActivity() {
             mMapScreenState.replaceLayersWith(floor.layers)
             mMapScreenState.replaceMarkersWith(floor.markers.await())
             Log.d(TAG, "Switched to floor $floorIndex")
+            onFinished()
         }
     }
 }
