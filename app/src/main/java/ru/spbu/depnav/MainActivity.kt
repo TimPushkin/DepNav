@@ -127,7 +127,7 @@ class MainActivity : ComponentActivity() {
         Log.i(TAG, "Switching to floor $floorIndex")
 
         mMapScreenState.currentFloor = floorIndex
-        mMapScreenState.displayedMarkerText = null
+        mMapScreenState.displayMarkerText = false
         mMapScreenState.replaceLayersWith(emptyList())
         mMapScreenState.replaceMarkersWith(emptyMap())
 

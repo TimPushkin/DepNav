@@ -26,14 +26,16 @@ class MapScreenState : ViewModel() {
     var state by mutableStateOf(MapState(0, 0, 0))
         private set
     var currentFloor by mutableStateOf(FLOOR_UNINITIALIZED)
-    var displayedMarkerText by mutableStateOf<MarkerText?>(null)
+    var displayMarkerText by mutableStateOf(false)
+    var displayedMarkerText by mutableStateOf(MarkerText.EMPTY)
+        private set
 
     fun setParams(width: Int, height: Int, tileSize: Int = 1024) {
         state.shutdown()
         state = MapState(1, width, height, tileSize) {
             scroll(0.5, 0.5)
             scale(0f)
-        }.apply { onTap { _, _ -> displayedMarkerText = null } }
+        }.apply { onTap { _, _ -> displayMarkerText = false } }
     }
 
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
@@ -59,7 +61,10 @@ class MapScreenState : ViewModel() {
             ) {
                 val modifier =
                     if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank())
-                        Modifier.clickable { displayedMarkerText = markerText }
+                        Modifier.clickable {
+                            displayedMarkerText = markerText
+                            displayMarkerText = true
+                        }
                     else Modifier
                 MarkerView(markerText.title ?: "", marker.type, modifier = modifier)
             }

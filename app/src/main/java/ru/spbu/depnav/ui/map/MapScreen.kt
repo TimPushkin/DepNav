@@ -4,6 +4,7 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
@@ -22,12 +23,10 @@ fun MapScreen(
 
     BottomSheetScaffold(
         sheetContent = {
-            mapScreenState.displayedMarkerText?.run {
-                MarkerInfo(
-                    title = title ?: "",
-                    description = description
-                )
-            }
+            MarkerInfo(
+                title = mapScreenState.displayedMarkerText.title ?: "No title",
+                description = mapScreenState.displayedMarkerText.description ?: "No description"
+            )
         },
         modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
@@ -66,5 +65,10 @@ fun MapScreen(
                 )
             }
         }
+    }
+
+    LaunchedEffect(mapScreenState.displayMarkerText) {
+        if (mapScreenState.displayMarkerText) scaffoldState.bottomSheetState.expand()
+        else scaffoldState.bottomSheetState.collapse()
     }
 }
