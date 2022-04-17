@@ -4,4 +4,5 @@
     <string name="no_title">Без названия</string>
     <string name="no_description">Без описания</string>
     <string name="search_markers">Поиск меток</string>
+    <string name="closed">Закрыто</string>
 </resources>

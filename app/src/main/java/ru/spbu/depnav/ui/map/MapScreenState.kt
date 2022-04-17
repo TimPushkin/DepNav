@@ -14,6 +14,7 @@ import ovh.plrapps.mapcompose.api.*
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ru.spbu.depnav.model.Marker
+import ru.spbu.depnav.model.MarkerInfo
 import ru.spbu.depnav.model.MarkerText
 
 private const val TAG = "MapViewModel"
@@ -26,8 +27,8 @@ class MapScreenState : ViewModel() {
     var state by mutableStateOf(MapState(0, 0, 0))
         private set
     var currentFloor by mutableStateOf(FLOOR_UNINITIALIZED)
-    var displayMarkerText by mutableStateOf(false)
-    var displayedMarkerText by mutableStateOf(MarkerText.EMPTY)
+    var displayMarkerInfo by mutableStateOf(false)
+    var displayedMarkerInfo by mutableStateOf(MarkerInfo(MarkerText.EMPTY, false))
         private set
 
     fun setParams(width: Int, height: Int, tileSize: Int = 1024) {
@@ -35,7 +36,7 @@ class MapScreenState : ViewModel() {
         state = MapState(1, width, height, tileSize) {
             scroll(0.5, 0.5)
             scale(0f)
-        }.apply { onTap { _, _ -> displayMarkerText = false } }
+        }.apply { onTap { _, _ -> displayMarkerInfo = false } }
     }
 
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
@@ -62,10 +63,11 @@ class MapScreenState : ViewModel() {
                 val modifier =
                     if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank())
                         Modifier.clickable {
-                            displayedMarkerText = markerText
-                            displayMarkerText = true
+                            displayedMarkerInfo = MarkerInfo(markerText, marker.isClosed)
+                            displayMarkerInfo = true
                         }
                     else Modifier
+
                 MarkerView(
                     markerText.title ?: "",
                     marker.type,
