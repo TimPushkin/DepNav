@@ -68,7 +68,7 @@ class MainActivity : ComponentActivity() {
         initFloors(mapInfo.floorsNum)
 
         if (mMapScreenState.currentFloor == FLOOR_UNINITIALIZED) {
-            mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight)
+            mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight, mapInfo.tileSize)
             setFloor(mFloors.keys.first())
         }
 

@@ -2,6 +2,7 @@
   "mapName": "spbu-mm",
   "floorWidth": 11264,
   "floorHeight": 5120,
+  "tileSize": 1024,
   "floors": [
     {
       "floor": 1,

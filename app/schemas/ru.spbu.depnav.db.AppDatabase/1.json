@@ -2,11 +2,11 @@
   "formatVersion": 1,
   "database": {
     "version": 1,
-    "identityHash": "934c309a826b71ad29edfd9e80a40f9f",
+    "identityHash": "face75d9fccc5261ae4a525ed9a9c7e0",
     "entities": [
       {
         "tableName": "map_infos",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`map_name` TEXT NOT NULL, `floor_width` INTEGER NOT NULL, `floor_height` INTEGER NOT NULL, `floors_num` INTEGER NOT NULL, PRIMARY KEY(`map_name`))",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`map_name` TEXT NOT NULL, `floor_width` INTEGER NOT NULL, `floor_height` INTEGER NOT NULL, `tile_size` INTEGER NOT NULL, `floors_num` INTEGER NOT NULL, PRIMARY KEY(`map_name`))",
         "fields": [
           {
             "fieldPath": "mapName",
@@ -23,6 +23,12 @@
           {
             "fieldPath": "floorHeight",
             "columnName": "floor_height",
+            "affinity": "INTEGER",
+            "notNull": true
+          },
+          {
+            "fieldPath": "tileSize",
+            "columnName": "tile_size",
             "affinity": "INTEGER",
             "notNull": true
           },
@@ -140,7 +146,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '934c309a826b71ad29edfd9e80a40f9f')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, 'face75d9fccc5261ae4a525ed9a9c7e0')"
     ]
   }
 }

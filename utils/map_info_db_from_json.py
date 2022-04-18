@@ -32,6 +32,7 @@ CREATE TABLE IF NOT EXISTS `map_infos` (
 `map_name` TEXT NOT NULL,
 `floor_width` INTEGER NOT NULL,
 `floor_height` INTEGER NOT NULL,
+`tile_size` INTEGER NOT NULL,
 `floors_num` INTEGER NOT NULL,
 PRIMARY KEY(`map_name`)
 )
@@ -62,16 +63,17 @@ db.commit()
 
 jf = json.load(open(args.json_file, encoding="utf8"))
 
-floor_num = 0
+floors_num = 0
 floor_width = jf["floorWidth"]
 floor_height = jf["floorHeight"]
+tile_size = jf["tileSize"]
 
 rowid = 1
-for f in jf["floors"]:
-    floor_num += 1
-    floor = f["floor"]
-    for m in sorted(f["markers"], key=lambda marker: marker["type"]):
-        marker_type, is_closed, x, y, ru, en = m.values()
+for floor_obj in jf["floors"]:
+    floors_num += 1
+    floor = floor_obj["floor"]
+    for marker_obj in sorted(floor_obj["markers"], key=lambda marker: marker["type"]):
+        marker_type, is_closed, x, y, ru, en = marker_obj.values()
         cur.execute("INSERT INTO markers VALUES (?, ?, ?, ?, ?, ?)",
                     (rowid, marker_type, is_closed, floor, x / floor_width, y / floor_height))
         cur.execute(
@@ -84,8 +86,8 @@ for f in jf["floors"]:
             {"id": rowid, "lid": LID.RU.value, **ru})
         rowid += 1
 
-cur.execute("INSERT INTO 'map_infos' VALUES (?, ?, ?, ?)",
-            (jf["mapName"], floor_width, floor_height, floor_num))
+cur.execute("INSERT INTO 'map_infos' VALUES (?, ?, ?, ?, ?)",
+            (jf["mapName"], floor_width, floor_height, tile_size, floors_num))
 
 db.commit()
 cur.close()
