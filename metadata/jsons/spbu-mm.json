@@ -601,11 +601,11 @@
           "x": 10502,
           "y": 3140,
           "ru": {
-            "title": null,
+            "title": "1515",
             "description": null
           },
           "en": {
-            "title": null,
+            "title": "1515",
             "description": null
           }
         },
@@ -2926,7 +2926,7 @@
         },
         {
           "type": "ROOM",
-          "is_closed": true,
+          "is_closed": false,
           "x": 6632,
           "y": 526,
           "ru": {
