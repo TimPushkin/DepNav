@@ -3,6 +3,7 @@ package ru.spbu.depnav
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
+import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.ComponentActivity
@@ -10,7 +11,6 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
-import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowInsetsControllerCompat
@@ -21,7 +21,6 @@ import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.model.MarkerText
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
-import ru.spbu.depnav.ui.map.FLOOR_UNINITIALIZED
 import ru.spbu.depnav.ui.map.MapScreen
 import ru.spbu.depnav.ui.map.MapScreenState
 
@@ -36,6 +35,10 @@ class MainActivity : ComponentActivity() {
     private val mScope = CoroutineScope(Dispatchers.Main)
     private lateinit var mAppDatabase: AppDatabase
     private lateinit var mFloors: Map<Int, Floor>
+
+    private val isInDarkTheme: Boolean
+        get() = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
+                Configuration.UI_MODE_NIGHT_YES
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
@@ -62,27 +65,30 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        if (!isInDarkTheme) {
+            WindowInsetsControllerCompat(window, window.decorView).apply {
+                isAppearanceLightStatusBars = true
+                isAppearanceLightNavigationBars = true
+            }
+        }
+
         mAppDatabase = AppDatabase.getInstance(this)
         val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
 
         initFloors(mapInfo.floorsNum)
 
-        if (mMapScreenState.currentFloor == FLOOR_UNINITIALIZED) {
-            mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight, mapInfo.tileSize)
-            setFloor(mFloors.keys.first())
+        when {
+            mMapScreenState.usesDarkThemeTiles == null -> {
+                mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight, mapInfo.tileSize)
+                setFloor(mFloors.keys.first())
+            }
+            mMapScreenState.usesDarkThemeTiles != isInDarkTheme -> setFloor(mMapScreenState.currentFloor)
         }
 
         setContent {
             DepNavTheme {
                 window.statusBarColor = MaterialTheme.colors.background.toArgb()
                 window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
-
-                if (!isSystemInDarkTheme()) {
-                    WindowInsetsControllerCompat(window, window.decorView).apply {
-                        isAppearanceLightStatusBars = true
-                        isAppearanceLightNavigationBars = true
-                    }
-                }
 
                 MapScreen(
                     mapScreenState = mMapScreenState,
@@ -102,7 +108,7 @@ class MainActivity : ComponentActivity() {
             mFloors = List(floorsNum) {
                 val floor = it + 1
                 floor to Floor(
-                    layers = listOf(factory.makeTileProviderForFloor(floor)),
+                    layers = listOf(factory.makeTileProviderForFloor(floor, isInDarkTheme)),
                     markers = async(Dispatchers.IO) {
                         markerDao.loadWithTextByFloor(floor).entries.associate { (marker, markerTexts) ->
                             val markerText = markerTexts.firstOrNull() ?: run {
@@ -126,14 +132,14 @@ class MainActivity : ComponentActivity() {
 
         Log.i(TAG, "Switching to floor $floorIndex")
 
+        val shouldReplaceMarkers = floorIndex != mMapScreenState.currentFloor
+
         mMapScreenState.currentFloor = floorIndex
         mMapScreenState.displayMarkerInfo = false
-        mMapScreenState.replaceLayersWith(emptyList())
-        mMapScreenState.replaceMarkersWith(emptyMap())
 
         mScope.launch {
-            mMapScreenState.replaceLayersWith(floor.layers)
-            mMapScreenState.replaceMarkersWith(floor.markers.await())
+            mMapScreenState.replaceLayersWith(floor.layers, isInDarkTheme)
+            if (shouldReplaceMarkers) mMapScreenState.replaceMarkersWith(floor.markers.await())
             Log.d(TAG, "Switched to floor $floorIndex")
             onFinished()
         }

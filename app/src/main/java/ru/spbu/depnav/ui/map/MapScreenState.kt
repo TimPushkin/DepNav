@@ -19,14 +19,15 @@ import ru.spbu.depnav.model.MarkerText
 
 private const val TAG = "MapViewModel"
 
-const val FLOOR_UNINITIALIZED = Int.MIN_VALUE
-
 // TODO: instead of placing all markers, create a layer with marker graphics adding markers by one dynamically when needed to center and removing afterwards
 
 class MapScreenState : ViewModel() {
     var state by mutableStateOf(MapState(0, 0, 0))
         private set
-    var currentFloor by mutableStateOf(FLOOR_UNINITIALIZED)
+    var usesDarkThemeTiles: Boolean? = null
+        private set
+    var currentFloor by mutableStateOf(1)
+
     var displayMarkerInfo by mutableStateOf(false)
     var displayedMarkerInfo by mutableStateOf(MarkerInfo(MarkerText.EMPTY, false))
         private set
@@ -39,11 +40,12 @@ class MapScreenState : ViewModel() {
         }.apply { onTap { _, _ -> displayMarkerInfo = false } }
     }
 
-    fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
+    fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>, isDark: Boolean) {
         Log.d(TAG, "Replacing layers...")
 
         state.removeAllLayers()
         for (tileProvider in tileProviders) state.addLayer(tileProvider)
+        usesDarkThemeTiles = isDark
     }
 
     fun replaceMarkersWith(markersWithText: Map<Marker, MarkerText>) {
