@@ -26,7 +26,7 @@ class MapScreenState : ViewModel() {
         private set
     var usesDarkThemeTiles: Boolean? = null
         private set
-    var currentFloor by mutableStateOf(1)
+    var currentFloor by mutableStateOf(Int.MIN_VALUE)
 
     var displayMarkerInfo by mutableStateOf(false)
     var displayedMarkerInfo by mutableStateOf(MarkerInfo(MarkerText.EMPTY, false))
