@@ -52,9 +52,6 @@ class SearchActivity : ComponentActivity() {
         setContent {
             val searchMatches by mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
 
-            window.statusBarColor = MaterialTheme.colors.background.toArgb()
-            window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
-
             if (!isSystemInDarkTheme()) {
                 WindowInsetsControllerCompat(window, window.decorView).apply {
                     isAppearanceLightStatusBars = true
@@ -63,6 +60,9 @@ class SearchActivity : ComponentActivity() {
             }
 
             DepNavTheme {
+                window.statusBarColor = MaterialTheme.colors.background.toArgb()
+                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
+
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
