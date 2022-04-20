@@ -55,6 +55,8 @@ fun ColumnScope.MarkerInfoLines(
             modifier = Modifier.padding(start = 10.dp, end = 10.dp)
         )
     }
+
+    Spacer(modifier = Modifier.height(10.dp))
 }
 
 @Preview
