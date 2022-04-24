@@ -42,10 +42,7 @@ class MapScreenState : ViewModel() {
             onTap { _, _ ->
                 if (!highlightMarker) showUI = !showUI
                 highlightMarker = false
-                highlightedMarker?.let { (marker, markerText) ->
-                    state.removeMarker(marker.idStr)
-                    placeMarker(marker, markerText, isHighlighted = false)
-                }
+                highlightedMarker?.let { (marker, _) -> state.removeMarker(marker.idStr) }
             }
         }
     }
@@ -55,7 +52,7 @@ class MapScreenState : ViewModel() {
             id = marker.idStr,
             x = marker.x,
             y = marker.y,
-            zIndex = if (isHighlighted) 1f else 0f, // TODO: fix as it doesn't seem to work
+            zIndex = if (isHighlighted) 1f else 0f,
             relativeOffset = Offset(-0.5f, -0.5f),
             clickable = false,
             clipShape = null
@@ -74,17 +71,16 @@ class MapScreenState : ViewModel() {
     }
 
     private fun highlightMarker(marker: Marker, markerText: MarkerText) {
-        highlightedMarker?.let { (oldMarker, oldMarkerText) ->
-            state.removeMarker(oldMarker.idStr)
-            placeMarker(oldMarker, oldMarkerText, isHighlighted = false)
-        }
+        val newMarker = marker.copy(id = Int.MIN_VALUE) // Real IDs start from 1
+        val newMarkerText = markerText.copy(markerId = newMarker.id)
+
+        highlightedMarker?.let { (oldMarker, _) -> state.removeMarker(oldMarker.idStr) }
 
         showUI = true
-        highlightedMarker = marker to markerText
+        highlightedMarker = newMarker to newMarkerText
         highlightMarker = true
 
-        state.removeMarker(marker.idStr)
-        placeMarker(marker, markerText, isHighlighted = true)
+        placeMarker(newMarker, newMarkerText, isHighlighted = true)
     }
 
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>, isDark: Boolean) {
