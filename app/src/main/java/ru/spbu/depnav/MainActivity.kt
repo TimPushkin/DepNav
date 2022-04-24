@@ -6,7 +6,6 @@ import android.content.Intent
 import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
@@ -30,9 +29,8 @@ private const val TAG = "MainActivity"
 private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 
-class MainActivity : ComponentActivity() {
+class MainActivity : LanguageAwareActivity() {
     private val mMapScreenState: MapScreenState by viewModels()
-    private val mScope = CoroutineScope(Dispatchers.Main)
     private lateinit var mAppDatabase: AppDatabase
     private lateinit var mFloors: Map<Int, Floor>
 
@@ -45,9 +43,17 @@ class MainActivity : ComponentActivity() {
 
         val markerId = result ?: return@registerForActivityResult
         lifecycleScope.launch {
-            val marker = mAppDatabase.markerDao().loadById(markerId)
-            Log.i(TAG, "Loaded searched marker: $marker")
-            setFloor(marker.floor) { mMapScreenState.centerOnMarker(marker.idStr) }
+            val (marker, markerTexts) =
+                mAppDatabase.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
+
+            Log.d(TAG, "Loaded searched marker: $marker")
+
+            val markerText = markerTexts.firstOrNull() ?: run {
+                Log.w(TAG, "Marker $marker has no text on $systemLanguage")
+                MarkerText(marker.id, systemLanguage, null, null)
+            }
+
+            setFloor(marker.floor) { mMapScreenState.focusOnMarker(marker, markerText) }
         }
     }
 
@@ -110,10 +116,13 @@ class MainActivity : ComponentActivity() {
                 floor to Floor(
                     layers = listOf(factory.makeTileProviderForFloor(floor, isInDarkTheme)),
                     markers = async(Dispatchers.IO) {
-                        markerDao.loadWithTextByFloor(floor).entries.associate { (marker, markerTexts) ->
+                        markerDao.loadWithTextByFloor(
+                            floor,
+                            systemLanguage
+                        ).entries.associate { (marker, markerTexts) ->
                             val markerText = markerTexts.firstOrNull() ?: run {
-                                Log.e(TAG, "Marker $marker has no text")
-                                MarkerText.EMPTY
+                                Log.w(TAG, "Marker $marker has no text on $systemLanguage")
+                                MarkerText(marker.id, systemLanguage, null, null)
                             }
                             marker to markerText
                         }
@@ -135,9 +144,9 @@ class MainActivity : ComponentActivity() {
         val shouldReplaceMarkers = floorIndex != mMapScreenState.currentFloor
 
         mMapScreenState.currentFloor = floorIndex
-        mMapScreenState.displayMarkerInfo = false
+        mMapScreenState.highlightMarker = false
 
-        mScope.launch {
+        lifecycleScope.launch {
             mMapScreenState.replaceLayersWith(floor.layers, isInDarkTheme)
             if (shouldReplaceMarkers) mMapScreenState.replaceMarkersWith(floor.markers.await())
             Log.d(TAG, "Switched to floor $floorIndex")

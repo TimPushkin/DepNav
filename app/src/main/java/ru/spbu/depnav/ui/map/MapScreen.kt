@@ -25,13 +25,13 @@ fun MapScreen(
 
     BottomSheetScaffold(
         sheetContent = {
-            MarkerInfoLines(
-                title = mapScreenState.displayedMarkerInfo.text.title
-                    ?: stringResource(R.string.no_title),
-                isClosed = mapScreenState.displayedMarkerInfo.isClosed,
-                description = mapScreenState.displayedMarkerInfo.text.description
-                    ?: stringResource(R.string.no_description)
-            )
+            mapScreenState.highlightedMarker?.let { (marker, markerText) ->
+                MarkerInfoLines(
+                    title = markerText.title ?: stringResource(R.string.no_title),
+                    isClosed = marker.isClosed,
+                    description = markerText.description ?: stringResource(R.string.no_description)
+                )
+            }
         },
         modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
@@ -72,8 +72,8 @@ fun MapScreen(
         }
     }
 
-    LaunchedEffect(mapScreenState.displayMarkerInfo) {
-        if (mapScreenState.displayMarkerInfo) scaffoldState.bottomSheetState.expand()
+    LaunchedEffect(mapScreenState.highlightMarker) {
+        if (mapScreenState.highlightMarker) scaffoldState.bottomSheetState.expand()
         else scaffoldState.bottomSheetState.collapse()
     }
 }

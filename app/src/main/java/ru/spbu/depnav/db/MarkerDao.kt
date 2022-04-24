@@ -11,13 +11,23 @@ interface MarkerDao {
     @Insert
     suspend fun insertAll(vararg markers: Marker)
 
-    @Query("SELECT * FROM markers WHERE id = :id")
-    suspend fun loadById(id: Int): Marker
+    @Query(
+        "SELECT *, marker_texts.lid FROM markers " +
+                "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
+                "WHERE markers.id = :id AND marker_texts.lid = :language"
+    )
+    suspend fun loadWithTextById(
+        id: Int,
+        language: MarkerText.LanguageId
+    ): Map<Marker, List<MarkerText>>
 
     @Query(
         "SELECT *, marker_texts.lid FROM markers " +
                 "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
-                "WHERE markers.floor = :floor"
+                "WHERE markers.floor = :floor AND marker_texts.lid = :language"
     )
-    suspend fun loadWithTextByFloor(floor: Int): Map<Marker, List<MarkerText>>
+    suspend fun loadWithTextByFloor(
+        floor: Int,
+        language: MarkerText.LanguageId
+    ): Map<Marker, List<MarkerText>>
 }

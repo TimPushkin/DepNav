@@ -14,11 +14,7 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 @Composable
-fun ColumnScope.MarkerInfoLines(
-    title: String,
-    isClosed: Boolean,
-    description: String? = null
-) {
+fun MarkerInfoLines(title: String, description: String, isClosed: Boolean) {
     Row(
         modifier = Modifier.padding(10.dp),
         verticalAlignment = Alignment.Bottom
@@ -49,7 +45,7 @@ fun ColumnScope.MarkerInfoLines(
         }
     }
 
-    if (description != null && description.isNotBlank()) {
+    if (description.isNotBlank()) {
         Text(
             text = description,
             modifier = Modifier.padding(start = 10.dp, end = 10.dp)
