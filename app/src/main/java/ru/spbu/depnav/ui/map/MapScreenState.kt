@@ -25,6 +25,9 @@ class MapScreenState : ViewModel() {
         private set
     var currentFloor by mutableStateOf(Int.MIN_VALUE)
 
+    var showUI by mutableStateOf(true)
+        private set
+
     // These are separated because text needs to stay visible while hiding animation is playing
     var highlightMarker by mutableStateOf(false)
     var highlightedMarker by mutableStateOf<Pair<Marker, MarkerText>?>(null)
@@ -37,6 +40,7 @@ class MapScreenState : ViewModel() {
             scale(0f)
         }.apply {
             onTap { _, _ ->
+                if (!highlightMarker) showUI = !showUI
                 highlightMarker = false
                 highlightedMarker?.let { (marker, markerText) ->
                     state.removeMarker(marker.idStr)
@@ -75,6 +79,7 @@ class MapScreenState : ViewModel() {
             placeMarker(oldMarker, oldMarkerText, isHighlighted = false)
         }
 
+        showUI = true
         highlightedMarker = marker to markerText
         highlightMarker = true
 
