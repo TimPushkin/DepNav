@@ -19,10 +19,10 @@ import kotlinx.coroutines.*
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.model.MarkerText
-import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.provider.TileProviderFactory
 import ru.spbu.depnav.ui.map.MapScreen
 import ru.spbu.depnav.ui.map.MapScreenState
+import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private const val TAG = "MainActivity"
 
