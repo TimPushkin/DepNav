@@ -68,9 +68,9 @@ fun MapScreen(
                     )
                 }
 
-                val layoutDirection = LocalLayoutDirection.current
                 val horizontalOffset =
-                    { it: Int -> if (layoutDirection == LayoutDirection.Ltr) it else -it }
+                    if (LocalLayoutDirection.current == LayoutDirection.Ltr) { it: Int -> it }
+                    else { it: Int -> -it }
 
                 AnimatedVisibility(
                     visible = mapScreenState.showUI,
