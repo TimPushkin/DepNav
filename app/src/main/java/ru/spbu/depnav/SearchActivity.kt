@@ -4,7 +4,6 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
@@ -15,10 +14,8 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.toArgb
-import androidx.compose.ui.text.intl.Locale
 import androidx.core.view.WindowInsetsControllerCompat
 import ru.spbu.depnav.db.AppDatabase
-import ru.spbu.depnav.model.MarkerText.LanguageId
 import ru.spbu.depnav.ui.search.MarkerSearch
 import ru.spbu.depnav.ui.search.MarkerSearchState
 import ru.spbu.depnav.ui.theme.DepNavTheme
@@ -27,22 +24,9 @@ private const val TAG = "SearchActivity"
 
 const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
-class SearchActivity : ComponentActivity() {
+class SearchActivity : LanguageAwareActivity() {
     private val mMarkerSearchState: MarkerSearchState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
-
-    private val systemLanguage: LanguageId
-        get() {
-            val language = Locale.current.language
-
-            Log.d(TAG, "Current system language is $language")
-
-            return when (language) {
-                "en" -> LanguageId.EN
-                "ru" -> LanguageId.RU
-                else -> LanguageId.EN
-            }
-        }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)

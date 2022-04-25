@@ -58,32 +58,66 @@ class AppDatabaseTest {
     /* Marker tests */
 
     @Test
-    fun loadById_returnsMarkerWithQueriedId() {
-        val expected = listOf(
-            Marker(1, Marker.MarkerType.ELEVATOR, false, 1, 0.0, 0.0),
-            Marker(3, Marker.MarkerType.WC, true, 1, 0.1, 1.0)
-        )
-        runBlocking { markerDao.insertAll(*expected.toTypedArray()) }
-
-        val actual = runBlocking {
-            listOf(
-                markerDao.loadById(expected[0].id),
-                markerDao.loadById(expected[1].id)
-            )
+    fun loadWithTextById_returnsQueriedMarker() {
+        val expected = mutableListOf<Pair<Marker, MarkerText>>()
+        for (id in listOf(1, 2, 5)) {
+            expected += Marker(id, Marker.MarkerType.OTHER, false, 1, 0.0, 0.0) to
+                    MarkerText(id, MarkerText.LanguageId.EN, null, null)
+        }
+        runBlocking {
+            markerDao.insertAll(*expected.map { it.first }.toTypedArray())
+            markerTextDao.insertAll(*expected.map { it.second }.toTypedArray())
         }
 
-        for (i in 0..1) assertEquals(expected[i], actual[i])
+        for ((expectedMarker, markerText) in expected) {
+            val actual =
+                runBlocking { markerDao.loadWithTextById(expectedMarker.id, markerText.languageId) }
+            val (actualMarker, _) = actual.entries.firstOrNull()?.toPair() ?: null to null
+
+            assertEquals(1, actual.size)
+            assertEquals(expectedMarker, actualMarker)
+        }
     }
 
     @Test
-    fun loadByFloor_returnsAllMarkersOnSpecifiedFloor() {
+    fun loadWithTextById_returnedMarkerHasSpecifiedLanguage() {
+        val markersWithTexts = mutableMapOf<Marker, List<MarkerText>>()
+        for (id in listOf(1, 2, 5)) {
+            val marker = Marker(id, Marker.MarkerType.OTHER, false, 1, 0.0, 0.0)
+            markersWithTexts[marker] = listOf(
+                MarkerText(id, MarkerText.LanguageId.EN, null, null),
+                MarkerText(id, MarkerText.LanguageId.RU, null, null)
+            )
+        }
+        runBlocking {
+            markerDao.insertAll(*markersWithTexts.keys.toTypedArray())
+            markerTextDao.insertAll(*markersWithTexts.values.flatten().toTypedArray())
+        }
+
+        for ((expectedMarker, markerTexts) in markersWithTexts) {
+            for (expectedMarkerText in markerTexts) {
+                val actual = runBlocking {
+                    markerDao.loadWithTextById(expectedMarker.id, expectedMarkerText.languageId)
+                }
+                val actualMarkerTexts = actual.values.firstOrNull()
+
+                assertEquals(1, actual.size)
+                assertEquals(1, actualMarkerTexts?.size)
+                assertEquals(expectedMarkerText, actualMarkerTexts?.first())
+            }
+        }
+    }
+
+    @Test
+    fun loadWithTextByFloor_returnsAllMarkersWithSpecifiedFloor() {
+        val languageId = MarkerText.LanguageId.EN
         val markers = mutableMapOf<Int, MutableList<Marker>>()
         val markerTexts = mutableListOf<MarkerText>()
         var id = 1
-        listOf(1, 2, 5).forEach { floor ->
+        for (floor in listOf(1, 2, 5)) {
             markers.getOrPut(floor) { mutableListOf() } +=
                 Marker(id, Marker.MarkerType.OTHER, false, floor, 1.1, -2.0)
-            markerTexts += MarkerText(id++, MarkerText.LanguageId.EN, null, null)
+            markerTexts += MarkerText(id++, languageId, null, null)
         }
         runBlocking {
             markerDao.insertAll(*markers.values.flatten().toTypedArray())
@@ -91,10 +125,34 @@ class AppDatabaseTest {
         }
 
         for (floor in markers.keys) {
-            val actualMarkers = runBlocking { markerDao.loadWithTextByFloor(floor).keys }
+            val actualMarkers =
+                runBlocking { markerDao.loadWithTextByFloor(floor, languageId).keys }
 
             assert(actualMarkers.isNotEmpty())
             for (marker in actualMarkers) assertEquals(floor, marker.floor)
+        }
+    }
+
+    @Test
+    fun loadWithTextByFloor_returnedMarkersHaveSpecifiedLanguage() {
+        val floors = listOf(1, 2, 5)
+        var id = 1
+        for (floor in floors) runBlocking {
+            markerDao.insertAll(Marker(id, Marker.MarkerType.OTHER, false, floor, 0.0, 0.0))
+            for (languageId in MarkerText.LanguageId.values())
+                markerTextDao.insertAll(MarkerText(id, languageId, null, null))
+            id++
+        }
+
+        for (floor in floors) {
+            for (languageId in MarkerText.LanguageId.values()) {
+                val actual = runBlocking {
+                    markerDao.loadWithTextByFloor(floor, languageId).values.flatten()
+                }
+
+                assert(actual.isNotEmpty())
+                actual.forEach { assertEquals(languageId, it.languageId) }
+            }
         }
     }
 

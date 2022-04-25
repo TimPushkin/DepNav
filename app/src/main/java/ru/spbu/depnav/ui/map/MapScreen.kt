@@ -1,5 +1,6 @@
 package ru.spbu.depnav.ui.map
 
+import androidx.compose.animation.*
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.*
@@ -7,7 +8,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
@@ -25,13 +28,13 @@ fun MapScreen(
 
     BottomSheetScaffold(
         sheetContent = {
-            MarkerInfoLines(
-                title = mapScreenState.displayedMarkerInfo.text.title
-                    ?: stringResource(R.string.no_title),
-                isClosed = mapScreenState.displayedMarkerInfo.isClosed,
-                description = mapScreenState.displayedMarkerInfo.text.description
-                    ?: stringResource(R.string.no_description)
-            )
+            mapScreenState.highlightedMarker?.let { (marker, markerText) ->
+                MarkerInfoLines(
+                    title = markerText.title ?: stringResource(R.string.no_title),
+                    isClosed = marker.isClosed,
+                    description = markerText.description ?: stringResource(R.string.no_description)
+                )
+            }
         },
         modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
@@ -51,29 +54,45 @@ fun MapScreen(
                 modifier = Modifier.fillMaxWidth(),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
-                SearchButton(
-                    text = stringResource(R.string.search_markers),
-                    onClick = onStartSearch,
-                    modifier = Modifier
-                        .fillMaxWidth(0.8f)
-                        .padding(top = 10.dp, bottom = 10.dp)
-                )
+                AnimatedVisibility(
+                    visible = mapScreenState.showUI,
+                    enter = slideInVertically(initialOffsetY = { -it }),
+                    exit = slideOutVertically(targetOffsetY = { -it })
+                ) {
+                    SearchButton(
+                        text = stringResource(R.string.search_markers),
+                        onClick = onStartSearch,
+                        modifier = Modifier
+                            .fillMaxWidth(0.8f)
+                            .padding(top = 10.dp, bottom = 10.dp)
+                    )
+                }
 
-                FloorSwitch(
-                    floor = mapScreenState.currentFloor,
-                    minFloor = 1,
-                    maxFloor = floorsNum,
-                    modifier = Modifier
-                        .padding(10.dp)
-                        .align(Alignment.End),
-                    onClick = onFloorSwitch
-                )
+                val horizontalOffset =
+                    if (LocalLayoutDirection.current == LayoutDirection.Ltr) { it: Int -> it }
+                    else { it: Int -> -it }
+
+                AnimatedVisibility(
+                    visible = mapScreenState.showUI,
+                    modifier = Modifier.align(Alignment.End),
+                    enter = slideInHorizontally(initialOffsetX = horizontalOffset),
+                    exit = slideOutHorizontally(targetOffsetX = horizontalOffset)
+                ) {
+                    FloorSwitch(
+                        floor = mapScreenState.currentFloor,
+                        minFloor = 1,
+                        maxFloor = floorsNum,
+                        modifier = Modifier.padding(10.dp),
+                        onClick = onFloorSwitch
+                    )
+                }
             }
         }
     }
 
-    LaunchedEffect(mapScreenState.displayMarkerInfo) {
-        if (mapScreenState.displayMarkerInfo) scaffoldState.bottomSheetState.expand()
-        else scaffoldState.bottomSheetState.collapse()
+    LaunchedEffect(mapScreenState.showUI, mapScreenState.highlightMarker) {
+        if (mapScreenState.showUI && mapScreenState.highlightMarker)
+            scaffoldState.bottomSheetState.expand()
+        else if (mapScreenState.highlightedMarker != null) scaffoldState.bottomSheetState.collapse()
     }
 }
