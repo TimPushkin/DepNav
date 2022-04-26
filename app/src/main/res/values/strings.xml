@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">Department navigator</string>
+    <string name="app_name" translatable="false">DepNav</string>
     <string name="no_title">No title</string>
     <string name="no_description">No description</string>
     <string name="search_markers">Search markers</string>
