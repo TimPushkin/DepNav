@@ -27,10 +27,10 @@ jobs:
           STORE_FILE: depnav.jks
         run: |
           echo -n ${{ secrets.Keystore }} | base64 -d > $STORE_FILE
-          echo "storeFile=$STORE_FILE" > keystore.properties
-          echo "storePassword=${{ secrets.StorePassword }}" > keystore.properties
-          echo "keyAlias=${{ secrets.KeyAlias }}" > keystore.properties
-          echo "keyPassword=${{ secrets.KeyPassword }}" > keystore.properties
+          echo "storeFile=$GITHUB_WORKSPACE/$STORE_FILE" > keystore.properties
+          echo "storePassword=${{ secrets.StorePassword }}" >> keystore.properties
+          echo "keyAlias=${{ secrets.KeyAlias }}" >> keystore.properties
+          echo "keyPassword=${{ secrets.KeyPassword }}" >> keystore.properties
 
       - name: Assemble release
         run: ./gradlew assembleRelease
