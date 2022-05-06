@@ -35,10 +35,8 @@ class MapScreenState : ViewModel() {
 
     fun setParams(width: Int, height: Int, tileSize: Int = 1024) {
         state.shutdown()
-        state = MapState(1, width, height, tileSize) {
-            scroll(0.5, 0.5)
-            scale(0f)
-        }.apply {
+        state = MapState(1, width, height, tileSize) { scale(0f) }.apply {
+            setScrollOffsetRatio(0.5f, 0.5f)
             onTap { _, _ ->
                 if (!highlightMarker) showUI = !showUI
                 highlightMarker = false
