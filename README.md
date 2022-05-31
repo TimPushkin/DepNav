@@ -18,15 +18,13 @@ With **DepNav** you can do the following:
 - Enjoy the graphic interface in light and dark themes
 - Two languages available: English and Russian
 
-<p>
-    <img src="https://i.imgur.com/SsslKgp.jpg" width="32%" alt="Map light" />
-    <img src="https://i.imgur.com/jpYNy09.jpg" width="32%" alt="Map dark" />
-    <img src="https://i.imgur.com/bken4gD.jpg" width="32%" alt="Search" />
-</p>
+<img src="https://i.imgur.com/SsslKgp.jpg" width="32%" alt="Map light" />
+<img src="https://i.imgur.com/jpYNy09.jpg" width="32%" alt="Map dark" />
+<img src="https://i.imgur.com/bken4gD.jpg" width="32%" alt="Search" />
 
 ## Download and install
 
-Go to [Releases](https://github.com/TimPushkin/DepNav/releases) section, download the latest available APK, and install
-it on your device. Android 5.0 or newer is supported.
+Go to [Releases](https://github.com/TimPushkin/DepNav/releases) section, download the latest
+available APK, and install it on your device. Android 5.0 or newer is supported.
 
 Google Play release is planned in the future.
