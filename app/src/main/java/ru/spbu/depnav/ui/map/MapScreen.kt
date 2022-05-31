@@ -1,9 +1,20 @@
 package ru.spbu.depnav.ui.map
 
-import androidx.compose.animation.*
-import androidx.compose.foundation.layout.*
+import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.slideInHorizontally
+import androidx.compose.animation.slideInVertically
+import androidx.compose.animation.slideOutHorizontally
+import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.*
+import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.ExperimentalMaterialApi
+import androidx.compose.material.MaterialTheme
+import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.ui.Alignment
@@ -68,9 +79,12 @@ fun MapScreen(
                     )
                 }
 
-                val horizontalOffset =
-                    if (LocalLayoutDirection.current == LayoutDirection.Ltr) { it: Int -> it }
-                    else { it: Int -> -it }
+                val horizontalOffset: (Int) -> Int =
+                    if (LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                        { it }
+                    } else {
+                        { -it }
+                    }
 
                 AnimatedVisibility(
                     visible = mapScreenState.showUI,
@@ -91,8 +105,10 @@ fun MapScreen(
     }
 
     LaunchedEffect(mapScreenState.showUI, mapScreenState.highlightMarker) {
-        if (mapScreenState.showUI && mapScreenState.highlightMarker)
+        if (mapScreenState.showUI && mapScreenState.highlightMarker) {
             scaffoldState.bottomSheetState.expand()
-        else if (mapScreenState.highlightedMarker != null) scaffoldState.bottomSheetState.collapse()
+        } else if (mapScreenState.highlightedMarker != null) {
+            scaffoldState.bottomSheetState.collapse()
+        }
     }
 }

@@ -6,7 +6,9 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "map_infos")
 data class MapInfo(
-    @PrimaryKey @ColumnInfo(name = "map_name") val mapName: String,
+    @PrimaryKey
+    @ColumnInfo(name = "map_name")
+    val mapName: String,
     @ColumnInfo(name = "floor_width") val floorWidth: Int,
     @ColumnInfo(name = "floor_height") val floorHeight: Int,
     @ColumnInfo(name = "tile_size") val tileSize: Int,

@@ -1,6 +1,9 @@
 package ru.spbu.depnav.model
 
-import androidx.room.*
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.Ignore
+import androidx.room.PrimaryKey
 
 @Entity(tableName = "markers")
 data class Marker(
@@ -11,37 +14,38 @@ data class Marker(
     val x: Double,
     val y: Double
 ) {
-    @Ignore val idStr = id.toString(10)
+    @Ignore
+    val idStr = id.toString(10)
 
     enum class MarkerType {
-        /** Building entrance */
+        /** Building entrance. */
         ENTRANCE,
 
-        /** Room entrance */
+        /** Room entrance. */
         ROOM,
 
-        /** Staircase leading up */
+        /** Staircase leading up. */
         STAIRS_UP,
 
-        /** Staircase leading down */
+        /** Staircase leading down. */
         STAIRS_DOWN,
 
-        /** Staircase leading both up and down */
+        /** Staircase leading both up and down. */
         STAIRS_BOTH,
 
-        /** Elevator entrance */
+        /** Elevator entrance. */
         ELEVATOR,
 
-        /** Men's restroom */
+        /** Men's restroom. */
         WC_MAN,
 
-        /** Women's restroom */
+        /** Women's restroom. */
         WC_WOMAN,
 
-        /** Restroom */
+        /** Restroom. */
         WC,
 
-        /** Anything else */
+        /** Anything else. */
         OTHER
     }
 }
