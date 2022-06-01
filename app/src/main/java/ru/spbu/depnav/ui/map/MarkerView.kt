@@ -122,8 +122,7 @@ private fun MarkerIcon(
             .then(modifier),
         alpha = if (faded) 0.5f else 1f,
         colorFilter =
-        if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
-        else null
+        if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }) else null
     )
 }
 
@@ -144,8 +143,7 @@ private fun RoomIcon(name: String, faded: Boolean, large: Boolean, modifier: Mod
             modifier = Modifier.padding(if (large) textPadding * LARGE_SCALE_FACTOR else textPadding),
             maxLines = 1,
             style = MaterialTheme.typography.body1.let { style ->
-                if (large) style.copy(fontSize = style.fontSize * LARGE_SCALE_FACTOR)
-                else style
+                if (large) style.copy(fontSize = style.fontSize * LARGE_SCALE_FACTOR) else style
             }
         )
     }

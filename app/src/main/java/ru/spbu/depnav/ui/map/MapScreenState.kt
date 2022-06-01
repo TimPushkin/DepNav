@@ -10,7 +10,14 @@ import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
-import ovh.plrapps.mapcompose.api.*
+import ovh.plrapps.mapcompose.api.addLayer
+import ovh.plrapps.mapcompose.api.addMarker
+import ovh.plrapps.mapcompose.api.centerOnMarker
+import ovh.plrapps.mapcompose.api.onTap
+import ovh.plrapps.mapcompose.api.removeAllLayers
+import ovh.plrapps.mapcompose.api.removeAllMarkers
+import ovh.plrapps.mapcompose.api.removeMarker
+import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ru.spbu.depnav.model.Marker
@@ -61,9 +68,11 @@ class MapScreenState : ViewModel() {
                 isClosed = marker.isClosed,
                 isHighlighted = isHighlighted,
                 modifier =
-                if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank())
+                if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank()) {
                     Modifier.clickable { highlightMarker(marker, markerText) }
-                else Modifier
+                } else {
+                    Modifier
+                }
             )
         }
     }
@@ -94,8 +103,9 @@ class MapScreenState : ViewModel() {
 
         state.removeAllMarkers()
 
-        for ((marker, markerText) in markersWithText)
+        for ((marker, markerText) in markersWithText) {
             placeMarker(marker, markerText, isHighlighted = false)
+        }
     }
 
     fun focusOnMarker(marker: Marker, markerText: MarkerText) {

@@ -6,7 +6,7 @@ import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
 import org.junit.After
-import org.junit.Assert.*
+import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
@@ -72,7 +72,7 @@ class AppDatabaseTest {
         for ((expectedMarker, markerText) in expected) {
             val actual =
                 runBlocking { markerDao.loadWithTextById(expectedMarker.id, markerText.languageId) }
-            val (actualMarker, _) = actual.entries.firstOrNull()?.toPair() ?: null to null
+            val (actualMarker, _) = actual.entries.firstOrNull()?.toPair() ?: (null to null)
 
             assertEquals(1, actual.size)
             assertEquals(expectedMarker, actualMarker)
@@ -139,8 +139,9 @@ class AppDatabaseTest {
         var id = 1
         for (floor in floors) runBlocking {
             markerDao.insertAll(Marker(id, Marker.MarkerType.OTHER, false, floor, 0.0, 0.0))
-            for (languageId in MarkerText.LanguageId.values())
+            for (languageId in MarkerText.LanguageId.values()) {
                 markerTextDao.insertAll(MarkerText(id, languageId, null, null))
+            }
             id++
         }
 
