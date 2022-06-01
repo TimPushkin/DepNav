@@ -1,5 +1,8 @@
 # DepNav – Department Navigator
 
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/c24bf04feb8840ebb9a6fea2f0389020)](https://www.codacy.com/gh/TimPushkin/DepNav/dashboard?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=TimPushkin/DepNav&amp;utm_campaign=Badge_Grade)
+[![Known Vulnerabilities](https://snyk.io/test/github/TimPushkin/DepNav/badge.svg)](https://snyk.io/test/github/TimPushkin/DepNav)
+
 <img src="https://i.imgur.com/brORQ91.png" align="right" height="200"  alt="App icon"/>
 
 **DepNav** is an Android application for viewing indoor maps of departments and searching for
