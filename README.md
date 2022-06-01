@@ -18,9 +18,8 @@ With **DepNav** you can do the following:
 - Enjoy the graphic interface in light and dark themes
 - Two languages available: English and Russian
 
-<img src="https://i.imgur.com/SsslKgp.jpg" width="32%" alt="Map light" />
-<img src="https://i.imgur.com/jpYNy09.jpg" width="32%" alt="Map dark" />
-<img src="https://i.imgur.com/bken4gD.jpg" width="32%" alt="Search" />
+| ![Map light](https://i.imgur.com/SsslKgp.jpg) | ![Map dark](https://i.imgur.com/jpYNy09.jpg) | ![Search](https://i.imgur.com/bken4gD.jpg) |
+|:---------------------------------------------:|:--------------------------------------------:|:------------------------------------------:|
 
 ## Download and install
 
