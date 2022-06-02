@@ -18,6 +18,9 @@ private val DarkColorPalette = darkColors(
     secondary = BlueGrey200Light
 )
 
+/**
+ * Theme of the application.
+ */
 @Composable
 fun DepNavTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) DarkColorPalette else LightColorPalette

@@ -18,6 +18,9 @@ import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
+/**
+ * Lines with text information about a marker.
+ */
 @Composable
 fun MarkerInfoLines(title: String, description: String, isClosed: Boolean) {
     Row(
