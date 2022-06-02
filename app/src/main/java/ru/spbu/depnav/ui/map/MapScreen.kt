@@ -27,6 +27,9 @@ import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.search.SearchButton
 
+/**
+ * Screen containing a navigable map.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MapScreen(

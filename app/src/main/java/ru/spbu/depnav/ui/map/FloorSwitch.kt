@@ -13,6 +13,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
+/**
+ * Two buttons to switch the current map one floor up or down.
+ */
 @Composable
 fun FloorSwitch(
     floor: Int,
@@ -48,7 +51,7 @@ fun FloorSwitch(
 
 @Preview
 @Composable
-fun FloorSwitchPreview() {
+private fun FloorSwitchPreview() {
     DepNavTheme {
         FloorSwitch(
             floor = 1,

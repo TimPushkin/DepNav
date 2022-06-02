@@ -16,6 +16,9 @@ import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.model.MarkerText
 
+/**
+ * Screen containing a marker search and the results found.
+ */
 @Composable
 fun MarkerSearch(
     matches: List<MarkerText>,

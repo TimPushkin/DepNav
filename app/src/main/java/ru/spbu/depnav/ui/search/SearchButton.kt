@@ -17,6 +17,9 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 
+/**
+ * Button with a search icon and text.
+ */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun SearchButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {

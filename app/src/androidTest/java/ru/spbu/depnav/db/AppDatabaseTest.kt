@@ -14,6 +14,9 @@ import ru.spbu.depnav.model.MapInfo
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
 
+/**
+ * Instrumentation texts for [AppDatabase].
+ */
 @RunWith(AndroidJUnit4::class)
 class AppDatabaseTest {
     private lateinit var db: AppDatabase
@@ -21,6 +24,9 @@ class AppDatabaseTest {
     private lateinit var markerDao: MarkerDao
     private lateinit var markerTextDao: MarkerTextDao
 
+    /**
+     * Initializes an instance of a database and related DAOs.
+     */
     @Before
     fun setUp() {
         val context = ApplicationProvider.getApplicationContext<Context>()
@@ -30,6 +36,9 @@ class AppDatabaseTest {
         markerTextDao = db.markerTextDao()
     }
 
+    /**
+     * Closes the database instance.
+     */
     @After
     fun tearDown() {
         db.close()
@@ -37,6 +46,9 @@ class AppDatabaseTest {
 
     /* MapInfo tests */
 
+    /**
+     * Checks that [MapInfoDao.loadByName] returns a [MapInfo] with the queried name.
+     */
     @Test
     fun loadByName_returnsMapInfoWithQueriedName() {
         val expected = listOf(
@@ -57,6 +69,9 @@ class AppDatabaseTest {
 
     /* Marker tests */
 
+    /**
+     * Checks that [MarkerDao.loadWithTextById] returns the queried [Marker].
+     */
     @Test
     fun loadWithTextById_returnsQueriedMarker() {
         val expected = mutableListOf<Pair<Marker, MarkerText>>()
@@ -79,6 +94,9 @@ class AppDatabaseTest {
         }
     }
 
+    /**
+     * Checks that [MarkerDao.loadWithTextById] returns a [MarkerText] with the specified language.
+     */
     @Test
     fun loadWithTextById_returnedMarkerHasSpecifiedLanguage() {
         val markersWithTexts = mutableMapOf<Marker, List<MarkerText>>()
@@ -108,6 +126,10 @@ class AppDatabaseTest {
         }
     }
 
+    /**
+     * Checks that [MarkerDao.loadWithTextByFloor] returns all [Markers][Marker] placed on the
+     * specified floor.
+     */
     @Test
     fun loadWithTextByFloor_returnsAllMarkersWithSpecifiedFloor() {
         val languageId = MarkerText.LanguageId.EN
@@ -133,6 +155,10 @@ class AppDatabaseTest {
         }
     }
 
+    /**
+     * Checks that [MarkerDao.loadWithTextByFloor] returns [MarkerTexts][MarkerText] with the
+     * specified language.
+     */
     @Test
     fun loadWithTextByFloor_returnedMarkersHaveSpecifiedLanguage() {
         val floors = listOf(1, 2, 5)
@@ -159,6 +185,10 @@ class AppDatabaseTest {
 
     /* MarkerText tests */
 
+    /**
+     * Checks that [MarkerTextDao.loadByTokens] returns all inserted [MarkerTexts][MarkerText] with
+     * the queried tokens on the default language (English).
+     */
     @Test
     fun loadByTokensEnglish_returnsAllTextsWithAllQueriedTokensInDescription() {
         val expectedTitle = "+"
@@ -182,6 +212,10 @@ class AppDatabaseTest {
         assertEquals(markerTexts.count { it.title == expectedTitle }, actual.size)
     }
 
+    /**
+     * Checks that [MarkerTextDao.loadByTokens] returns all inserted [MarkerTexts][MarkerText] with
+     * the queried tokens on a non-default language.
+     */
     @Test
     fun loadByTokensNotEnglish_returnsAllTextsWithAllQueriedTokensInDescription() {
         val expectedTitle = "+"

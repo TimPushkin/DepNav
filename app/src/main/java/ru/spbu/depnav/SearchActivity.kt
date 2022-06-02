@@ -22,8 +22,14 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private const val TAG = "SearchActivity"
 
+/**
+ * ID of an extra containing the marker ID selected by a user after a search.
+ */
 const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
+/**
+ * Activity which displays the search screen.
+ */
 class SearchActivity : LanguageAwareActivity() {
     private val mMarkerSearchState: MarkerSearchState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
