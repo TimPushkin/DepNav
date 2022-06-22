@@ -12,7 +12,7 @@ import ru.spbu.depnav.model.MarkerText
 /**
  * Room database containing information about maps and their markers.
  */
-@Database(entities = [MapInfo::class, Marker::class, MarkerText::class], version = 1)
+@Database(entities = [MapInfo::class, Marker::class, MarkerText::class], version = 2)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     /**
@@ -40,11 +40,15 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase {
             synchronized(AppDatabase::class.java) {
                 if (!this::instance.isInitialized) {
-                    instance = Room.databaseBuilder(
-                        context.applicationContext,
-                        AppDatabase::class.java,
-                        "markers.db"
-                    ).createFromAsset(DB_ASSET).build()
+                    instance = Room
+                        .databaseBuilder(
+                            context.applicationContext,
+                            AppDatabase::class.java,
+                            DB_ASSET
+                        )
+                        .createFromAsset(DB_ASSET)
+                        .fallbackToDestructiveMigration()
+                        .build()
                 }
             }
             return instance

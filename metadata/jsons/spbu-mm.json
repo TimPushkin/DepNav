@@ -1,8 +1,9 @@
 {
   "mapName": "spbu-mm",
-  "floorWidth": 11264,
-  "floorHeight": 5120,
-  "tileSize": 1024,
+  "floorWidth": 8192,
+  "floorHeight": 4096,
+  "tileSize": 256,
+  "levelsNum": 4,
   "floors": [
     {
       "floor": 1,
@@ -10,8 +11,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 10597,
-          "y": 3179,
+          "x": 7825,
+          "y": 2513,
           "ru": {
             "title": null,
             "description": null
@@ -24,8 +25,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5208,
-          "y": 766,
+          "x": 3778,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -38,8 +39,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5133,
-          "y": 766,
+          "x": 3722,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -52,8 +53,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 4177,
-          "y": 766,
+          "x": 3004,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -66,8 +67,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 4102,
-          "y": 766,
+          "x": 2947,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -80,8 +81,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": true,
-          "x": 8385,
-          "y": 3069,
+          "x": 6164,
+          "y": 2431,
           "ru": {
             "title": null,
             "description": null
@@ -94,8 +95,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 9115,
-          "y": 3608,
+          "x": 6712,
+          "y": 2836,
           "ru": {
             "title": null,
             "description": null
@@ -108,8 +109,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 9115,
-          "y": 3846,
+          "x": 6712,
+          "y": 3014,
           "ru": {
             "title": null,
             "description": null
@@ -122,8 +123,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 9382,
-          "y": 3381,
+          "x": 6913,
+          "y": 2665,
           "ru": {
             "title": null,
             "description": null
@@ -136,8 +137,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 9382,
-          "y": 4079,
+          "x": 6913,
+          "y": 3189,
           "ru": {
             "title": null,
             "description": null
@@ -150,8 +151,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": true,
-          "x": 10525,
-          "y": 4220,
+          "x": 7771,
+          "y": 3295,
           "ru": {
             "title": null,
             "description": null
@@ -164,8 +165,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 10525,
-          "y": 3260,
+          "x": 7771,
+          "y": 2574,
           "ru": {
             "title": null,
             "description": null
@@ -178,8 +179,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 10400,
-          "y": 934,
+          "x": 7678,
+          "y": 827,
           "ru": {
             "title": null,
             "description": null
@@ -192,8 +193,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 10035,
-          "y": 604,
+          "x": 7403,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -206,8 +207,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 8823,
-          "y": 242,
+          "x": 6493,
+          "y": 307,
           "ru": {
             "title": null,
             "description": null
@@ -220,8 +221,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 7584,
-          "y": 604,
+          "x": 5562,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -234,8 +235,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": true,
-          "x": 6661,
-          "y": 876,
+          "x": 4869,
+          "y": 783,
           "ru": {
             "title": null,
             "description": null
@@ -248,8 +249,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 5122,
-          "y": 907,
+          "x": 3713,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -262,8 +263,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 4191,
-          "y": 907,
+          "x": 3014,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -276,8 +277,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": true,
-          "x": 4654,
-          "y": 1376,
+          "x": 3362,
+          "y": 1159,
           "ru": {
             "title": null,
             "description": null
@@ -290,8 +291,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": true,
-          "x": 2610,
-          "y": 859,
+          "x": 1827,
+          "y": 771,
           "ru": {
             "title": null,
             "description": null
@@ -304,8 +305,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 942,
-          "y": 1365,
+          "x": 574,
+          "y": 1151,
           "ru": {
             "title": null,
             "description": null
@@ -318,8 +319,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 942,
-          "y": 3035,
+          "x": 574,
+          "y": 2405,
           "ru": {
             "title": null,
             "description": null
@@ -332,8 +333,8 @@
         {
           "type": "STAIRS_UP",
           "is_closed": false,
-          "x": 942,
-          "y": 4602,
+          "x": 574,
+          "y": 3582,
           "ru": {
             "title": null,
             "description": null
@@ -346,8 +347,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10525,
-          "y": 4352,
+          "x": 7771,
+          "y": 3394,
           "ru": {
             "title": "1517",
             "description": null
@@ -360,8 +361,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10504,
-          "y": 4537,
+          "x": 7756,
+          "y": 3533,
           "ru": {
             "title": "1519",
             "description": null
@@ -374,8 +375,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10972,
-          "y": 4463,
+          "x": 8107,
+          "y": 3478,
           "ru": {
             "title": "1528",
             "description": null
@@ -388,8 +389,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10972,
-          "y": 4330,
+          "x": 8107,
+          "y": 3378,
           "ru": {
             "title": "1530",
             "description": null
@@ -402,8 +403,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 10555,
-          "y": 4115,
+          "x": 7794,
+          "y": 3216,
           "ru": {
             "title": "Банкоматы",
             "description": "Сбербанк, ВТБ"
@@ -416,8 +417,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 10639,
-          "y": 4115,
+          "x": 7857,
+          "y": 3216,
           "ru": {
             "title": "Копировальный автомат",
             "description": "Копиркин"
@@ -430,8 +431,8 @@
         {
           "type": "ENTRANCE",
           "is_closed": false,
-          "x": 11076,
-          "y": 3731,
+          "x": 8185,
+          "y": 2928,
           "ru": {
             "title": "Студенческий вход",
             "description": null
@@ -444,8 +445,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 10877,
-          "y": 3341,
+          "x": 8036,
+          "y": 2635,
           "ru": {
             "title": "Вендинговые автоматы",
             "description": null
@@ -458,8 +459,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8684,
-          "y": 2907,
+          "x": 6389,
+          "y": 2309,
           "ru": {
             "title": "2",
             "description": null
@@ -472,8 +473,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8684,
-          "y": 4524,
+          "x": 6389,
+          "y": 3524,
           "ru": {
             "title": "4",
             "description": null
@@ -486,8 +487,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 8684,
-          "y": 3735,
+          "x": 6389,
+          "y": 2931,
           "ru": {
             "title": "\"Аквариум\"",
             "description": null
@@ -500,8 +501,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 8342,
-          "y": 3550,
+          "x": 6132,
+          "y": 2792,
           "ru": {
             "title": "Питьевой фонтанчик",
             "description": null
@@ -514,8 +515,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7915,
-          "y": 3735,
+          "x": 5811,
+          "y": 2931,
           "ru": {
             "title": "3",
             "description": null
@@ -528,8 +529,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 9160,
-          "y": 3511,
+          "x": 6746,
+          "y": 2763,
           "ru": {
             "title": null,
             "description": null
@@ -542,8 +543,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 9160,
-          "y": 3945,
+          "x": 6746,
+          "y": 3089,
           "ru": {
             "title": null,
             "description": null
@@ -556,8 +557,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9181,
-          "y": 3607,
+          "x": 6762,
+          "y": 2835,
           "ru": {
             "title": "Зал бокса",
             "description": null
@@ -570,8 +571,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9181,
-          "y": 3853,
+          "x": 6762,
+          "y": 3020,
           "ru": {
             "title": "Зал борьбы",
             "description": null
@@ -584,8 +585,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 9837,
-          "y": 3546,
+          "x": 7255,
+          "y": 2789,
           "ru": {
             "title": "Гардероб",
             "description": null
@@ -598,8 +599,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10502,
-          "y": 3140,
+          "x": 7754,
+          "y": 2484,
           "ru": {
             "title": "1515",
             "description": null
@@ -612,8 +613,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 10502,
-          "y": 2998,
+          "x": 7754,
+          "y": 2377,
           "ru": {
             "title": null,
             "description": null
@@ -626,8 +627,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 10502,
-          "y": 2869,
+          "x": 7754,
+          "y": 2280,
           "ru": {
             "title": null,
             "description": null
@@ -640,8 +641,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10502,
-          "y": 2678,
+          "x": 7754,
+          "y": 2137,
           "ru": {
             "title": "1513",
             "description": null
@@ -654,8 +655,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 2468,
+          "x": 7819,
+          "y": 1979,
           "ru": {
             "title": "1513б",
             "description": null
@@ -668,8 +669,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 2330,
+          "x": 7819,
+          "y": 1876,
           "ru": {
             "title": "1513а",
             "description": null
@@ -682,8 +683,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 2127,
+          "x": 7819,
+          "y": 1723,
           "ru": {
             "title": "1511",
             "description": "Военно-учетный стол"
@@ -696,8 +697,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 1869,
+          "x": 7819,
+          "y": 1529,
           "ru": {
             "title": "1509",
             "description": null
@@ -710,23 +711,23 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 1600,
-          "ru": {
-            "title": "1507",
-            "description": null
-          },
-          "en": {
-            "title": "1507",
-            "description": null
-          }
-        },
-        {
-          "type": "ROOM",
-          "is_closed": false,
-          "x": 10588,
+          "x": 7819,
           "y": 1327,
           "ru": {
+            "title": "1507",
+            "description": null
+          },
+          "en": {
+            "title": "1507",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 7819,
+          "y": 1122,
+          "ru": {
             "title": "1505",
             "description": null
           },
@@ -738,8 +739,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 1143,
+          "x": 7819,
+          "y": 984,
           "ru": {
             "title": "1503",
             "description": null
@@ -752,8 +753,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 1049,
+          "x": 7819,
+          "y": 913,
           "ru": {
             "title": "1503а",
             "description": null
@@ -766,8 +767,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10588,
-          "y": 630,
+          "x": 7819,
+          "y": 599,
           "ru": {
             "title": "1504",
             "description": null
@@ -780,8 +781,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 3190,
+          "x": 8082,
+          "y": 2522,
           "ru": {
             "title": "1522",
             "description": null
@@ -794,8 +795,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 2940,
+          "x": 8082,
+          "y": 2334,
           "ru": {
             "title": "1520",
             "description": null
@@ -808,8 +809,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 2536,
+          "x": 8082,
+          "y": 2030,
           "ru": {
             "title": "1518",
             "description": null
@@ -822,8 +823,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 1956,
+          "x": 8082,
+          "y": 1595,
           "ru": {
             "title": "1516",
             "description": null
@@ -836,8 +837,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 1456,
+          "x": 8082,
+          "y": 1219,
           "ru": {
             "title": "1514",
             "description": null
@@ -850,8 +851,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 1093,
+          "x": 8082,
+          "y": 946,
           "ru": {
             "title": "1512",
             "description": null
@@ -864,8 +865,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 840,
+          "x": 8082,
+          "y": 756,
           "ru": {
             "title": "1510",
             "description": null
@@ -878,8 +879,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10939,
-          "y": 565,
+          "x": 8082,
+          "y": 550,
           "ru": {
             "title": "1508",
             "description": null
@@ -892,8 +893,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10666,
-          "y": 530,
+          "x": 7877,
+          "y": 524,
           "ru": {
             "title": "1506",
             "description": null
@@ -906,8 +907,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10400,
-          "y": 565,
+          "x": 7678,
+          "y": 550,
           "ru": {
             "title": "1502",
             "description": null
@@ -920,8 +921,8 @@
         {
           "type": "OTHER",
           "is_closed": true,
-          "x": 10289,
-          "y": 758,
+          "x": 7594,
+          "y": 695,
           "ru": {
             "title": "Закрытый проход",
             "description": null
@@ -934,8 +935,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10137,
-          "y": 212,
+          "x": 7480,
+          "y": 285,
           "ru": {
             "title": "1387",
             "description": null
@@ -948,8 +949,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9732,
-          "y": 212,
+          "x": 7176,
+          "y": 285,
           "ru": {
             "title": "1386",
             "description": null
@@ -962,8 +963,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9408,
-          "y": 212,
+          "x": 6932,
+          "y": 285,
           "ru": {
             "title": "1385",
             "description": null
@@ -976,8 +977,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9276,
-          "y": 146,
+          "x": 6833,
+          "y": 235,
           "ru": {
             "title": "1385а",
             "description": null
@@ -990,8 +991,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9276,
-          "y": 255,
+          "x": 6833,
+          "y": 317,
           "ru": {
             "title": "1385б",
             "description": null
@@ -1004,8 +1005,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9408,
-          "y": 545,
+          "x": 6932,
+          "y": 535,
           "ru": {
             "title": "1383",
             "description": null
@@ -1018,8 +1019,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9141,
-          "y": 545,
+          "x": 6732,
+          "y": 535,
           "ru": {
             "title": "1382",
             "description": null
@@ -1032,8 +1033,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8823,
-          "y": 911,
+          "x": 6493,
+          "y": 810,
           "ru": {
             "title": "1381",
             "description": "Спортзал"
@@ -1046,8 +1047,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8294,
-          "y": 122,
+          "x": 6096,
+          "y": 217,
           "ru": {
             "title": "1381",
             "description": null
@@ -1060,8 +1061,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 7574,
-          "y": 270,
+          "x": 5555,
+          "y": 328,
           "ru": {
             "title": "Столовая",
             "description": "\"Яма\""
@@ -1074,8 +1075,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6236,
-          "y": 777,
+          "x": 4550,
+          "y": 709,
           "ru": {
             "title": "1345",
             "description": null
@@ -1088,8 +1089,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5700,
-          "y": 860,
+          "x": 4147,
+          "y": 771,
           "ru": {
             "title": "1344",
             "description": null
@@ -1102,8 +1103,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5384,
-          "y": 860,
+          "x": 3910,
+          "y": 771,
           "ru": {
             "title": "1343",
             "description": null
@@ -1116,8 +1117,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 5280,
-          "y": 766,
+          "x": 3832,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -1130,8 +1131,8 @@
         {
           "type": "ENTRANCE",
           "is_closed": false,
-          "x": 4654,
-          "y": 552,
+          "x": 3362,
+          "y": 540,
           "ru": {
             "title": "Главный вход",
             "description": null
@@ -1144,8 +1145,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 4332,
-          "y": 766,
+          "x": 3120,
+          "y": 701,
           "ru": {
             "title": "Вендинговые автоматы",
             "description": null
@@ -1158,8 +1159,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4172,
-          "y": 1361,
+          "x": 3000,
+          "y": 1148,
           "ru": {
             "title": "1404",
             "description": null
@@ -1172,8 +1173,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4221,
-          "y": 1060,
+          "x": 3037,
+          "y": 922,
           "ru": {
             "title": "1402",
             "description": null
@@ -1186,8 +1187,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3548,
-          "y": 863,
+          "x": 2531,
+          "y": 774,
           "ru": {
             "title": "1304",
             "description": null
@@ -1200,8 +1201,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3060,
-          "y": 863,
+          "x": 2165,
+          "y": 774,
           "ru": {
             "title": "1303",
             "description": null
@@ -1214,8 +1215,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2797,
-          "y": 863,
+          "x": 1967,
+          "y": 774,
           "ru": {
             "title": "1302",
             "description": null
@@ -1228,8 +1229,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1811,
-          "y": 926,
+          "x": 1227,
+          "y": 821,
           "ru": {
             "title": "1251",
             "description": null
@@ -1242,8 +1243,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1365,
-          "y": 833,
+          "x": 892,
+          "y": 751,
           "ru": {
             "title": "1241",
             "description": null
@@ -1256,8 +1257,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 922,
-          "y": 1723,
+          "x": 559,
+          "y": 1420,
           "ru": {
             "title": "1222",
             "description": null
@@ -1270,8 +1271,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 1204,
-          "y": 2222,
+          "x": 771,
+          "y": 1794,
           "ru": {
             "title": null,
             "description": null
@@ -1284,8 +1285,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1196,
-          "y": 2316,
+          "x": 765,
+          "y": 1865,
           "ru": {
             "title": "1201",
             "description": null
@@ -1298,8 +1299,8 @@
         {
           "type": "ENTRANCE",
           "is_closed": false,
-          "x": 1122,
-          "y": 3037,
+          "x": 709,
+          "y": 2407,
           "ru": {
             "title": "Астрономический вход",
             "description": null
@@ -1312,8 +1313,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 924,
-          "y": 2700,
+          "x": 560,
+          "y": 2154,
           "ru": {
             "title": "1160",
             "description": null
@@ -1326,8 +1327,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 675,
-          "y": 2700,
+          "x": 373,
+          "y": 2154,
           "ru": {
             "title": "1147",
             "description": null
@@ -1340,8 +1341,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 2760,
+          "x": 122,
+          "y": 2199,
           "ru": {
             "title": "1146",
             "description": null
@@ -1354,8 +1355,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 2966,
+          "x": 122,
+          "y": 2353,
           "ru": {
             "title": "1145",
             "description": null
@@ -1368,8 +1369,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 3097,
+          "x": 122,
+          "y": 2452,
           "ru": {
             "title": "1144",
             "description": null
@@ -1382,8 +1383,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 511,
-          "y": 3303,
+          "x": 250,
+          "y": 2606,
           "ru": {
             "title": "1143",
             "description": null
@@ -1396,8 +1397,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 924,
-          "y": 3343,
+          "x": 560,
+          "y": 2637,
           "ru": {
             "title": "1142",
             "description": null
@@ -1410,8 +1411,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1204,
-          "y": 3564,
+          "x": 771,
+          "y": 2803,
           "ru": {
             "title": "1131",
             "description": null
@@ -1424,8 +1425,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1360,
-          "y": 3564,
+          "x": 888,
+          "y": 2803,
           "ru": {
             "title": "1130",
             "description": null
@@ -1438,8 +1439,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1515,
-          "y": 3564,
+          "x": 1004,
+          "y": 2803,
           "ru": {
             "title": "1129",
             "description": null
@@ -1452,8 +1453,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1761,
-          "y": 3564,
+          "x": 1189,
+          "y": 2803,
           "ru": {
             "title": "1128",
             "description": null
@@ -1466,8 +1467,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1805,
-          "y": 3763,
+          "x": 1222,
+          "y": 2952,
           "ru": {
             "title": "1127",
             "description": null
@@ -1480,8 +1481,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1805,
-          "y": 3906,
+          "x": 1222,
+          "y": 3059,
           "ru": {
             "title": "1126",
             "description": null
@@ -1494,8 +1495,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1761,
-          "y": 4110,
+          "x": 1189,
+          "y": 3213,
           "ru": {
             "title": "1125",
             "description": null
@@ -1508,8 +1509,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1515,
-          "y": 4110,
+          "x": 1004,
+          "y": 3213,
           "ru": {
             "title": "1124",
             "description": null
@@ -1522,8 +1523,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1360,
-          "y": 4110,
+          "x": 888,
+          "y": 3213,
           "ru": {
             "title": "1123",
             "description": null
@@ -1536,8 +1537,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1204,
-          "y": 4110,
+          "x": 771,
+          "y": 3213,
           "ru": {
             "title": "1122",
             "description": null
@@ -1550,8 +1551,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1439,
-          "y": 3837,
+          "x": 947,
+          "y": 3008,
           "ru": {
             "title": "1132",
             "description": null
@@ -1564,8 +1565,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 1204,
-          "y": 3837,
+          "x": 771,
+          "y": 3008,
           "ru": {
             "title": null,
             "description": null
@@ -1578,8 +1579,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 922,
-          "y": 4316,
+          "x": 559,
+          "y": 3367,
           "ru": {
             "title": "1106",
             "description": null
@@ -1592,8 +1593,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 674,
-          "y": 4316,
+          "x": 373,
+          "y": 3367,
           "ru": {
             "title": "1105",
             "description": null
@@ -1606,8 +1607,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 342,
-          "y": 4635,
+          "x": 123,
+          "y": 3607,
           "ru": {
             "title": "1104",
             "description": null
@@ -1620,8 +1621,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 4561,
+          "x": 426,
+          "y": 3551,
           "ru": {
             "title": "1109",
             "description": null
@@ -1634,8 +1635,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 4652,
+          "x": 426,
+          "y": 3620,
           "ru": {
             "title": "1108",
             "description": null
@@ -1648,8 +1649,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 4743,
+          "x": 426,
+          "y": 3688,
           "ru": {
             "title": "1107",
             "description": null
@@ -1662,8 +1663,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 674,
-          "y": 4951,
+          "x": 373,
+          "y": 3844,
           "ru": {
             "title": "1103",
             "description": null
@@ -1676,8 +1677,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 681,
-          "y": 4951,
+          "x": 378,
+          "y": 3844,
           "ru": {
             "title": "1102",
             "description": null
@@ -1695,8 +1696,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 10597,
-          "y": 3179,
+          "x": 7825,
+          "y": 2513,
           "ru": {
             "title": null,
             "description": null
@@ -1709,8 +1710,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5208,
-          "y": 766,
+          "x": 3778,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -1723,8 +1724,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5133,
-          "y": 766,
+          "x": 3722,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -1737,8 +1738,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 4177,
-          "y": 766,
+          "x": 3004,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -1751,8 +1752,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 4102,
-          "y": 766,
+          "x": 2947,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -1765,8 +1766,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": true,
-          "x": 8385,
-          "y": 3069,
+          "x": 6164,
+          "y": 2431,
           "ru": {
             "title": null,
             "description": null
@@ -1779,8 +1780,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 9208,
-          "y": 3731,
+          "x": 6782,
+          "y": 2928,
           "ru": {
             "title": null,
             "description": null
@@ -1793,8 +1794,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 9382,
-          "y": 3381,
+          "x": 6913,
+          "y": 2665,
           "ru": {
             "title": null,
             "description": null
@@ -1807,8 +1808,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 9382,
-          "y": 4079,
+          "x": 6913,
+          "y": 3189,
           "ru": {
             "title": null,
             "description": null
@@ -1821,8 +1822,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": true,
-          "x": 10525,
-          "y": 4220,
+          "x": 7771,
+          "y": 3295,
           "ru": {
             "title": null,
             "description": null
@@ -1835,8 +1836,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 10525,
-          "y": 3260,
+          "x": 7771,
+          "y": 2574,
           "ru": {
             "title": null,
             "description": null
@@ -1849,8 +1850,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 10400,
-          "y": 934,
+          "x": 7678,
+          "y": 827,
           "ru": {
             "title": null,
             "description": null
@@ -1863,8 +1864,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 10035,
-          "y": 604,
+          "x": 7403,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -1877,8 +1878,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 8823,
-          "y": 242,
+          "x": 6493,
+          "y": 307,
           "ru": {
             "title": null,
             "description": null
@@ -1891,8 +1892,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 7584,
-          "y": 604,
+          "x": 5562,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -1905,8 +1906,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": true,
-          "x": 6661,
-          "y": 876,
+          "x": 4869,
+          "y": 783,
           "ru": {
             "title": null,
             "description": null
@@ -1919,8 +1920,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 5122,
-          "y": 907,
+          "x": 3713,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -1933,8 +1934,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 4191,
-          "y": 907,
+          "x": 3014,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -1947,8 +1948,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": true,
-          "x": 4654,
-          "y": 1376,
+          "x": 3362,
+          "y": 1159,
           "ru": {
             "title": null,
             "description": null
@@ -1961,8 +1962,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 2558,
-          "y": 854,
+          "x": 1788,
+          "y": 767,
           "ru": {
             "title": null,
             "description": null
@@ -1975,8 +1976,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 942,
-          "y": 1365,
+          "x": 574,
+          "y": 1151,
           "ru": {
             "title": null,
             "description": null
@@ -1989,8 +1990,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 942,
-          "y": 3035,
+          "x": 574,
+          "y": 2405,
           "ru": {
             "title": null,
             "description": null
@@ -2003,8 +2004,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 942,
-          "y": 4602,
+          "x": 574,
+          "y": 3582,
           "ru": {
             "title": null,
             "description": null
@@ -2017,8 +2018,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9303,
-          "y": 3077,
+          "x": 6854,
+          "y": 2437,
           "ru": {
             "title": "5",
             "description": null
@@ -2031,8 +2032,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8078,
-          "y": 3077,
+          "x": 5934,
+          "y": 2437,
           "ru": {
             "title": "6",
             "description": null
@@ -2045,8 +2046,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8078,
-          "y": 4391,
+          "x": 5934,
+          "y": 3424,
           "ru": {
             "title": "7",
             "description": null
@@ -2059,8 +2060,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9303,
-          "y": 4391,
+          "x": 6854,
+          "y": 3424,
           "ru": {
             "title": "8",
             "description": null
@@ -2073,8 +2074,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9616,
-          "y": 3716,
+          "x": 7089,
+          "y": 2917,
           "ru": {
             "title": "1",
             "description": null
@@ -2087,8 +2088,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 10507,
-          "y": 3716,
+          "x": 7758,
+          "y": 2917,
           "ru": {
             "title": "\"Баобаб\"",
             "description": null
@@ -2101,8 +2102,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10726,
-          "y": 4615,
+          "x": 7922,
+          "y": 3592,
           "ru": {
             "title": "\"Библиотека\"",
             "description": null
@@ -2115,8 +2116,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 3716,
+          "x": 8079,
+          "y": 2917,
           "ru": {
             "title": "2528",
             "description": null
@@ -2129,8 +2130,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 3451,
+          "x": 8079,
+          "y": 2718,
           "ru": {
             "title": "2526",
             "description": null
@@ -2143,8 +2144,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 3190,
+          "x": 8079,
+          "y": 2522,
           "ru": {
             "title": "2524",
             "description": null
@@ -2157,8 +2158,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 2946,
+          "x": 8079,
+          "y": 2338,
           "ru": {
             "title": "2522",
             "description": null
@@ -2171,8 +2172,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 2684,
+          "x": 8079,
+          "y": 2142,
           "ru": {
             "title": "2520",
             "description": null
@@ -2185,8 +2186,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 2417,
+          "x": 8079,
+          "y": 1941,
           "ru": {
             "title": "2518",
             "description": null
@@ -2199,8 +2200,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 2157,
+          "x": 8079,
+          "y": 1746,
           "ru": {
             "title": "2516",
             "description": null
@@ -2213,8 +2214,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 1893,
+          "x": 8079,
+          "y": 1547,
           "ru": {
             "title": "2514",
             "description": null
@@ -2227,8 +2228,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 1632,
+          "x": 8079,
+          "y": 1351,
           "ru": {
             "title": "2512",
             "description": null
@@ -2241,8 +2242,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 1369,
+          "x": 8079,
+          "y": 1154,
           "ru": {
             "title": "2510",
             "description": null
@@ -2255,8 +2256,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 1050,
+          "x": 8079,
+          "y": 914,
           "ru": {
             "title": "2508",
             "description": null
@@ -2269,8 +2270,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10935,
-          "y": 674,
+          "x": 8079,
+          "y": 632,
           "ru": {
             "title": "2506",
             "description": null
@@ -2283,8 +2284,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10503,
-          "y": 3142,
+          "x": 7755,
+          "y": 2486,
           "ru": {
             "title": "2513",
             "description": null
@@ -2297,8 +2298,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 10503,
-          "y": 3002,
+          "x": 7755,
+          "y": 2380,
           "ru": {
             "title": null,
             "description": null
@@ -2311,8 +2312,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 10503,
-          "y": 2869,
+          "x": 7755,
+          "y": 2280,
           "ru": {
             "title": null,
             "description": null
@@ -2325,8 +2326,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10503,
-          "y": 2684,
+          "x": 7755,
+          "y": 2142,
           "ru": {
             "title": "2511",
             "description": null
@@ -2339,8 +2340,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 2417,
+          "x": 7820,
+          "y": 1941,
           "ru": {
             "title": "2515",
             "description": null
@@ -2353,8 +2354,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 2157,
+          "x": 7820,
+          "y": 1746,
           "ru": {
             "title": "2509",
             "description": null
@@ -2367,8 +2368,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1893,
+          "x": 7820,
+          "y": 1547,
           "ru": {
             "title": "2507",
             "description": null
@@ -2381,8 +2382,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1632,
+          "x": 7820,
+          "y": 1351,
           "ru": {
             "title": "2505",
             "description": null
@@ -2395,8 +2396,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1369,
+          "x": 7820,
+          "y": 1154,
           "ru": {
             "title": "2503",
             "description": null
@@ -2409,8 +2410,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1183,
+          "x": 7820,
+          "y": 1014,
           "ru": {
             "title": "2501",
             "description": null
@@ -2423,8 +2424,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10653,
-          "y": 600,
+          "x": 7868,
+          "y": 576,
           "ru": {
             "title": "2504",
             "description": null
@@ -2437,8 +2438,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10407,
-          "y": 600,
+          "x": 7683,
+          "y": 576,
           "ru": {
             "title": "2502",
             "description": null
@@ -2451,8 +2452,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": true,
-          "x": 10131,
-          "y": 900,
+          "x": 7475,
+          "y": 801,
           "ru": {
             "title": null,
             "description": null
@@ -2465,8 +2466,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10146,
-          "y": 225,
+          "x": 7487,
+          "y": 294,
           "ru": {
             "title": "2389",
             "description": null
@@ -2479,8 +2480,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9752,
-          "y": 225,
+          "x": 7191,
+          "y": 294,
           "ru": {
             "title": "2388",
             "description": null
@@ -2493,8 +2494,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9380,
-          "y": 225,
+          "x": 6911,
+          "y": 294,
           "ru": {
             "title": "2387",
             "description": null
@@ -2507,8 +2508,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9110,
-          "y": 225,
+          "x": 6709,
+          "y": 294,
           "ru": {
             "title": "2386",
             "description": null
@@ -2521,8 +2522,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8669,
-          "y": 225,
+          "x": 6377,
+          "y": 294,
           "ru": {
             "title": "2385",
             "description": null
@@ -2535,8 +2536,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8460,
-          "y": 225,
+          "x": 6220,
+          "y": 294,
           "ru": {
             "title": "2384",
             "description": null
@@ -2549,8 +2550,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8254,
-          "y": 225,
+          "x": 6066,
+          "y": 294,
           "ru": {
             "title": "2383",
             "description": null
@@ -2563,8 +2564,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7918,
-          "y": 225,
+          "x": 5813,
+          "y": 294,
           "ru": {
             "title": "2382",
             "description": null
@@ -2577,8 +2578,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7500,
-          "y": 225,
+          "x": 5499,
+          "y": 294,
           "ru": {
             "title": "2381",
             "description": null
@@ -2591,8 +2592,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9388,
-          "y": 507,
+          "x": 6917,
+          "y": 506,
           "ru": {
             "title": "2390",
             "description": "Спортзал (трибуны)"
@@ -2605,8 +2606,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8855,
-          "y": 507,
+          "x": 6517,
+          "y": 506,
           "ru": {
             "title": "2391",
             "description": "Спортзал (трибуны)"
@@ -2619,8 +2620,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8302,
-          "y": 507,
+          "x": 6102,
+          "y": 506,
           "ru": {
             "title": "2392",
             "description": "Спортзал (трибуны)"
@@ -2633,8 +2634,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 7500,
-          "y": 922,
+          "x": 5499,
+          "y": 818,
           "ru": {
             "title": null,
             "description": null
@@ -2647,8 +2648,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7127,
-          "y": 863,
+          "x": 5219,
+          "y": 774,
           "ru": {
             "title": "2359",
             "description": null
@@ -2661,8 +2662,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6800,
-          "y": 863,
+          "x": 4974,
+          "y": 774,
           "ru": {
             "title": "2357",
             "description": null
@@ -2675,8 +2676,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6490,
-          "y": 863,
+          "x": 4741,
+          "y": 774,
           "ru": {
             "title": "2355",
             "description": null
@@ -2689,8 +2690,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6360,
-          "y": 863,
+          "x": 4643,
+          "y": 774,
           "ru": {
             "title": "2353",
             "description": null
@@ -2703,8 +2704,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6230,
-          "y": 863,
+          "x": 4546,
+          "y": 774,
           "ru": {
             "title": "2351",
             "description": null
@@ -2717,8 +2718,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6098,
-          "y": 863,
+          "x": 4446,
+          "y": 774,
           "ru": {
             "title": "2349",
             "description": null
@@ -2731,8 +2732,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5965,
-          "y": 863,
+          "x": 4346,
+          "y": 774,
           "ru": {
             "title": "2347",
             "description": null
@@ -2745,8 +2746,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5835,
-          "y": 863,
+          "x": 4249,
+          "y": 774,
           "ru": {
             "title": "2345",
             "description": null
@@ -2759,8 +2760,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5705,
-          "y": 863,
+          "x": 4151,
+          "y": 774,
           "ru": {
             "title": "2343",
             "description": null
@@ -2773,8 +2774,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5441,
-          "y": 863,
+          "x": 3953,
+          "y": 774,
           "ru": {
             "title": "2339",
             "description": null
@@ -2787,8 +2788,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5376,
-          "y": 776,
+          "x": 3904,
+          "y": 708,
           "ru": {
             "title": "2339а",
             "description": null
@@ -2801,8 +2802,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 5313,
-          "y": 863,
+          "x": 3857,
+          "y": 774,
           "ru": {
             "title": null,
             "description": null
@@ -2815,8 +2816,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 3992,
-          "y": 863,
+          "x": 2865,
+          "y": 774,
           "ru": {
             "title": null,
             "description": null
@@ -2829,8 +2830,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3719,
-          "y": 863,
+          "x": 2660,
+          "y": 774,
           "ru": {
             "title": "2317",
             "description": null
@@ -2843,8 +2844,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3584,
-          "y": 863,
+          "x": 2558,
+          "y": 774,
           "ru": {
             "title": "2315",
             "description": null
@@ -2857,8 +2858,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3352,
-          "y": 863,
+          "x": 2384,
+          "y": 774,
           "ru": {
             "title": "2313",
             "description": null
@@ -2871,8 +2872,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3051,
-          "y": 751,
+          "x": 2158,
+          "y": 690,
           "ru": {
             "title": "2311",
             "description": null
@@ -2885,8 +2886,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2845,
-          "y": 863,
+          "x": 2003,
+          "y": 774,
           "ru": {
             "title": "2309",
             "description": null
@@ -2899,8 +2900,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2715,
-          "y": 863,
+          "x": 1905,
+          "y": 774,
           "ru": {
             "title": "2307",
             "description": null
@@ -2913,8 +2914,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6791,
-          "y": 526,
+          "x": 4967,
+          "y": 521,
           "ru": {
             "title": "2364",
             "description": null
@@ -2927,8 +2928,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6632,
-          "y": 526,
+          "x": 4847,
+          "y": 521,
           "ru": {
             "title": "2362",
             "description": null
@@ -2941,8 +2942,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6490,
-          "y": 526,
+          "x": 4741,
+          "y": 521,
           "ru": {
             "title": "2360",
             "description": null
@@ -2955,8 +2956,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6360,
-          "y": 526,
+          "x": 4643,
+          "y": 521,
           "ru": {
             "title": "2358",
             "description": null
@@ -2969,8 +2970,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6230,
-          "y": 526,
+          "x": 4546,
+          "y": 521,
           "ru": {
             "title": "2356",
             "description": null
@@ -2983,8 +2984,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6098,
-          "y": 526,
+          "x": 4446,
+          "y": 521,
           "ru": {
             "title": "2354",
             "description": null
@@ -2997,8 +2998,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5965,
-          "y": 526,
+          "x": 4346,
+          "y": 521,
           "ru": {
             "title": "2352",
             "description": null
@@ -3011,8 +3012,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5835,
-          "y": 526,
+          "x": 4249,
+          "y": 521,
           "ru": {
             "title": "2350",
             "description": null
@@ -3025,8 +3026,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5705,
-          "y": 526,
+          "x": 4151,
+          "y": 521,
           "ru": {
             "title": "2348",
             "description": null
@@ -3039,8 +3040,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5570,
-          "y": 526,
+          "x": 4050,
+          "y": 521,
           "ru": {
             "title": "2346",
             "description": null
@@ -3053,8 +3054,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5441,
-          "y": 526,
+          "x": 3953,
+          "y": 521,
           "ru": {
             "title": "2344",
             "description": null
@@ -3067,8 +3068,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5313,
-          "y": 526,
+          "x": 3857,
+          "y": 521,
           "ru": {
             "title": "2342",
             "description": null
@@ -3081,8 +3082,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5120,
-          "y": 526,
+          "x": 3712,
+          "y": 521,
           "ru": {
             "title": "2340",
             "description": null
@@ -3095,8 +3096,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4185,
-          "y": 526,
+          "x": 3010,
+          "y": 521,
           "ru": {
             "title": "2320",
             "description": null
@@ -3109,8 +3110,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3992,
-          "y": 526,
+          "x": 2865,
+          "y": 521,
           "ru": {
             "title": "2318",
             "description": null
@@ -3123,8 +3124,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3848,
-          "y": 526,
+          "x": 2756,
+          "y": 521,
           "ru": {
             "title": "2316",
             "description": null
@@ -3137,8 +3138,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3719,
-          "y": 526,
+          "x": 2660,
+          "y": 521,
           "ru": {
             "title": "2314а",
             "description": null
@@ -3151,8 +3152,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3584,
-          "y": 526,
+          "x": 2558,
+          "y": 521,
           "ru": {
             "title": "2314",
             "description": null
@@ -3165,8 +3166,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3426,
-          "y": 526,
+          "x": 2439,
+          "y": 521,
           "ru": {
             "title": "2312а",
             "description": null
@@ -3179,8 +3180,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3276,
-          "y": 526,
+          "x": 2327,
+          "y": 521,
           "ru": {
             "title": "2312",
             "description": null
@@ -3193,8 +3194,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3125,
-          "y": 526,
+          "x": 2213,
+          "y": 521,
           "ru": {
             "title": "2310а",
             "description": null
@@ -3207,8 +3208,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2975,
-          "y": 526,
+          "x": 2101,
+          "y": 521,
           "ru": {
             "title": "2310",
             "description": null
@@ -3221,8 +3222,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2845,
-          "y": 526,
+          "x": 2003,
+          "y": 521,
           "ru": {
             "title": "2308а",
             "description": null
@@ -3235,8 +3236,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2715,
-          "y": 526,
+          "x": 1905,
+          "y": 521,
           "ru": {
             "title": "2308",
             "description": null
@@ -3249,8 +3250,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2527,
-          "y": 526,
+          "x": 1764,
+          "y": 521,
           "ru": {
             "title": "2306",
             "description": null
@@ -3263,8 +3264,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5084,
-          "y": 1061,
+          "x": 3685,
+          "y": 922,
           "ru": {
             "title": "2452",
             "description": null
@@ -3277,8 +3278,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5084,
-          "y": 1179,
+          "x": 3685,
+          "y": 1011,
           "ru": {
             "title": "2450",
             "description": null
@@ -3291,8 +3292,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 1387,
+          "x": 3719,
+          "y": 1167,
           "ru": {
             "title": "2448",
             "description": null
@@ -3305,8 +3306,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 1707,
+          "x": 3719,
+          "y": 1408,
           "ru": {
             "title": "2446",
             "description": null
@@ -3319,8 +3320,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 2087,
+          "x": 3719,
+          "y": 1693,
           "ru": {
             "title": "2444",
             "description": null
@@ -3333,8 +3334,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 2474,
+          "x": 3719,
+          "y": 1984,
           "ru": {
             "title": "2442",
             "description": null
@@ -3347,8 +3348,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 2833,
+          "x": 3719,
+          "y": 2253,
           "ru": {
             "title": "2440",
             "description": null
@@ -3361,8 +3362,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 3303,
+          "x": 3719,
+          "y": 2606,
           "ru": {
             "title": "2436",
             "description": null
@@ -3375,8 +3376,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5130,
-          "y": 3678,
+          "x": 3719,
+          "y": 2888,
           "ru": {
             "title": "2432",
             "description": null
@@ -3389,8 +3390,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4944,
-          "y": 3731,
+          "x": 3580,
+          "y": 2928,
           "ru": {
             "title": "2430",
             "description": null
@@ -3403,8 +3404,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4831,
-          "y": 3731,
+          "x": 3495,
+          "y": 2928,
           "ru": {
             "title": "2428",
             "description": null
@@ -3417,8 +3418,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4736,
-          "y": 3731,
+          "x": 3423,
+          "y": 2928,
           "ru": {
             "title": "2426",
             "description": null
@@ -3431,8 +3432,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4600,
-          "y": 3731,
+          "x": 3321,
+          "y": 2928,
           "ru": {
             "title": "2424",
             "description": null
@@ -3445,8 +3446,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4456,
-          "y": 3731,
+          "x": 3213,
+          "y": 2928,
           "ru": {
             "title": "2422",
             "description": null
@@ -3459,8 +3460,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4353,
-          "y": 3731,
+          "x": 3136,
+          "y": 2928,
           "ru": {
             "title": "2420",
             "description": null
@@ -3473,8 +3474,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 3656,
+          "x": 3003,
+          "y": 2872,
           "ru": {
             "title": "2418",
             "description": null
@@ -3487,8 +3488,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 3282,
+          "x": 3003,
+          "y": 2591,
           "ru": {
             "title": "2416",
             "description": null
@@ -3501,8 +3502,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 2830,
+          "x": 3003,
+          "y": 2251,
           "ru": {
             "title": "2414",
             "description": null
@@ -3515,8 +3516,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 2463,
+          "x": 3003,
+          "y": 1976,
           "ru": {
             "title": "2412",
             "description": null
@@ -3529,8 +3530,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 2081,
+          "x": 3003,
+          "y": 1689,
           "ru": {
             "title": "2410",
             "description": null
@@ -3543,8 +3544,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 1700,
+          "x": 3003,
+          "y": 1402,
           "ru": {
             "title": "2408",
             "description": null
@@ -3557,8 +3558,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4176,
-          "y": 1380,
+          "x": 3003,
+          "y": 1162,
           "ru": {
             "title": "2406",
             "description": null
@@ -3571,8 +3572,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4222,
-          "y": 1179,
+          "x": 3037,
+          "y": 1011,
           "ru": {
             "title": "2404",
             "description": null
@@ -3585,8 +3586,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4655,
-          "y": 3303,
+          "x": 3363,
+          "y": 2606,
           "ru": {
             "title": "2415",
             "description": null
@@ -3599,8 +3600,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 4474,
-          "y": 2950,
+          "x": 3227,
+          "y": 2341,
           "ru": {
             "title": null,
             "description": null
@@ -3613,8 +3614,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 4474,
-          "y": 2840,
+          "x": 3227,
+          "y": 2259,
           "ru": {
             "title": null,
             "description": null
@@ -3627,8 +3628,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4525,
-          "y": 2400,
+          "x": 3265,
+          "y": 1928,
           "ru": {
             "title": "2409",
             "description": null
@@ -3641,8 +3642,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4800,
-          "y": 2400,
+          "x": 3471,
+          "y": 1928,
           "ru": {
             "title": "2417",
             "description": null
@@ -3655,8 +3656,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4655,
-          "y": 1738,
+          "x": 3363,
+          "y": 1431,
           "ru": {
             "title": "2401",
             "description": null
@@ -3669,8 +3670,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2347,
-          "y": 820,
+          "x": 1629,
+          "y": 741,
           "ru": {
             "title": "2303",
             "description": null
@@ -3683,8 +3684,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2160,
-          "y": 820,
+          "x": 1489,
+          "y": 741,
           "ru": {
             "title": "2302",
             "description": null
@@ -3697,8 +3698,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1992,
-          "y": 820,
+          "x": 1362,
+          "y": 741,
           "ru": {
             "title": "2301",
             "description": null
@@ -3711,8 +3712,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1808,
-          "y": 820,
+          "x": 1224,
+          "y": 741,
           "ru": {
             "title": "2251",
             "description": null
@@ -3725,8 +3726,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 1475,
-          "y": 820,
+          "x": 974,
+          "y": 741,
           "ru": {
             "title": null,
             "description": null
@@ -3739,8 +3740,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 920,
-          "y": 1088,
+          "x": 557,
+          "y": 943,
           "ru": {
             "title": "2232",
             "description": null
@@ -3753,8 +3754,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 750,
-          "y": 1088,
+          "x": 430,
+          "y": 943,
           "ru": {
             "title": "2237",
             "description": null
@@ -3767,8 +3768,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 585,
-          "y": 1088,
+          "x": 306,
+          "y": 943,
           "ru": {
             "title": "2230",
             "description": null
@@ -3781,8 +3782,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 1188,
+          "x": 122,
+          "y": 1018,
           "ru": {
             "title": "2229",
             "description": null
@@ -3795,8 +3796,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 1200,
-          "y": 2222,
+          "x": 768,
+          "y": 1794,
           "ru": {
             "title": null,
             "description": null
@@ -3809,8 +3810,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1200,
-          "y": 2497,
+          "x": 768,
+          "y": 2001,
           "ru": {
             "title": "2202",
             "description": null
@@ -3823,8 +3824,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 2700,
+          "x": 560,
+          "y": 2154,
           "ru": {
             "title": "2147",
             "description": null
@@ -3837,8 +3838,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 750,
-          "y": 2700,
+          "x": 430,
+          "y": 2154,
           "ru": {
             "title": "2146",
             "description": null
@@ -3851,8 +3852,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 580,
-          "y": 2700,
+          "x": 302,
+          "y": 2154,
           "ru": {
             "title": "2145",
             "description": null
@@ -3865,8 +3866,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 338,
-          "y": 2766,
+          "x": 120,
+          "y": 2203,
           "ru": {
             "title": "2144",
             "description": null
@@ -3879,8 +3880,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 338,
-          "y": 3150,
+          "x": 120,
+          "y": 2492,
           "ru": {
             "title": "2143",
             "description": null
@@ -3893,8 +3894,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 750,
-          "y": 2945,
+          "x": 430,
+          "y": 2338,
           "ru": {
             "title": "2150",
             "description": null
@@ -3907,8 +3908,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 750,
-          "y": 3038,
+          "x": 430,
+          "y": 2407,
           "ru": {
             "title": "2149",
             "description": null
@@ -3921,8 +3922,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 750,
-          "y": 3131,
+          "x": 430,
+          "y": 2477,
           "ru": {
             "title": "2148",
             "description": null
@@ -3935,8 +3936,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 3339,
+          "x": 560,
+          "y": 2634,
           "ru": {
             "title": "2142",
             "description": null
@@ -3949,8 +3950,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1007,
-          "y": 2871,
+          "x": 623,
+          "y": 2282,
           "ru": {
             "title": "2160",
             "description": null
@@ -3963,8 +3964,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1007,
-          "y": 3184,
+          "x": 623,
+          "y": 2517,
           "ru": {
             "title": "2141",
             "description": null
@@ -3977,8 +3978,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 3563,
+          "x": 769,
+          "y": 2802,
           "ru": {
             "title": "2131",
             "description": null
@@ -3991,8 +3992,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1365,
-          "y": 3563,
+          "x": 892,
+          "y": 2802,
           "ru": {
             "title": "2130",
             "description": null
@@ -4005,8 +4006,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 3563,
+          "x": 1003,
+          "y": 2802,
           "ru": {
             "title": "2129",
             "description": null
@@ -4019,8 +4020,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1760,
-          "y": 3563,
+          "x": 1188,
+          "y": 2802,
           "ru": {
             "title": "2128",
             "description": null
@@ -4033,8 +4034,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1810,
-          "y": 3765,
+          "x": 1226,
+          "y": 2954,
           "ru": {
             "title": "2127",
             "description": null
@@ -4047,8 +4048,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1810,
-          "y": 3902,
+          "x": 1226,
+          "y": 3056,
           "ru": {
             "title": "2126",
             "description": null
@@ -4061,8 +4062,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 4107,
+          "x": 769,
+          "y": 3210,
           "ru": {
             "title": "2122",
             "description": null
@@ -4075,8 +4076,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1365,
-          "y": 4107,
+          "x": 892,
+          "y": 3210,
           "ru": {
             "title": "2123",
             "description": null
@@ -4089,8 +4090,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 4107,
+          "x": 1003,
+          "y": 3210,
           "ru": {
             "title": "2124",
             "description": null
@@ -4103,8 +4104,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1760,
-          "y": 4107,
+          "x": 1188,
+          "y": 3210,
           "ru": {
             "title": "2125",
             "description": null
@@ -4117,8 +4118,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1196,
-          "y": 3739,
+          "x": 765,
+          "y": 2934,
           "ru": {
             "title": "2140",
             "description": null
@@ -4131,8 +4132,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1196,
-          "y": 3927,
+          "x": 765,
+          "y": 3075,
           "ru": {
             "title": "2121",
             "description": null
@@ -4145,8 +4146,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1440,
-          "y": 3835,
+          "x": 948,
+          "y": 3006,
           "ru": {
             "title": "2132",
             "description": null
@@ -4159,8 +4160,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 1202,
-          "y": 3835,
+          "x": 769,
+          "y": 3006,
           "ru": {
             "title": null,
             "description": null
@@ -4173,8 +4174,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 4315,
+          "x": 560,
+          "y": 3367,
           "ru": {
             "title": "2105",
             "description": null
@@ -4187,8 +4188,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 680,
-          "y": 4315,
+          "x": 377,
+          "y": 3367,
           "ru": {
             "title": "2104",
             "description": null
@@ -4201,8 +4202,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 680,
-          "y": 4950,
+          "x": 377,
+          "y": 3844,
           "ru": {
             "title": "2103",
             "description": null
@@ -4215,8 +4216,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 976,
-          "y": 4946,
+          "x": 599,
+          "y": 3841,
           "ru": {
             "title": "2102",
             "description": null
@@ -4229,8 +4230,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1007,
-          "y": 4452,
+          "x": 623,
+          "y": 3470,
           "ru": {
             "title": "2120",
             "description": null
@@ -4243,8 +4244,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1065,
-          "y": 4670,
+          "x": 666,
+          "y": 3633,
           "ru": {
             "title": "2101",
             "description": null
@@ -4262,8 +4263,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 10597,
-          "y": 3179,
+          "x": 7825,
+          "y": 2513,
           "ru": {
             "title": null,
             "description": null
@@ -4276,8 +4277,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5208,
-          "y": 766,
+          "x": 3778,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -4290,8 +4291,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5133,
-          "y": 766,
+          "x": 3722,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -4304,8 +4305,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 4177,
-          "y": 766,
+          "x": 3004,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -4318,8 +4319,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 4102,
-          "y": 766,
+          "x": 2947,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -4332,8 +4333,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": true,
-          "x": 10525,
-          "y": 4220,
+          "x": 7771,
+          "y": 3295,
           "ru": {
             "title": null,
             "description": null
@@ -4346,8 +4347,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 10525,
-          "y": 3260,
+          "x": 7771,
+          "y": 2574,
           "ru": {
             "title": null,
             "description": null
@@ -4360,8 +4361,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 10400,
-          "y": 934,
+          "x": 7678,
+          "y": 827,
           "ru": {
             "title": null,
             "description": null
@@ -4374,8 +4375,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 10035,
-          "y": 604,
+          "x": 7403,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -4388,8 +4389,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 7584,
-          "y": 604,
+          "x": 5562,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -4402,8 +4403,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": true,
-          "x": 6661,
-          "y": 876,
+          "x": 4869,
+          "y": 783,
           "ru": {
             "title": null,
             "description": null
@@ -4416,8 +4417,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 5122,
-          "y": 907,
+          "x": 3713,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -4430,8 +4431,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 4191,
-          "y": 907,
+          "x": 3014,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -4444,8 +4445,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 2558,
-          "y": 854,
+          "x": 1788,
+          "y": 767,
           "ru": {
             "title": null,
             "description": null
@@ -4458,8 +4459,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 942,
-          "y": 1365,
+          "x": 574,
+          "y": 1151,
           "ru": {
             "title": null,
             "description": null
@@ -4472,8 +4473,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 942,
-          "y": 3035,
+          "x": 574,
+          "y": 2405,
           "ru": {
             "title": null,
             "description": null
@@ -4486,8 +4487,8 @@
         {
           "type": "STAIRS_BOTH",
           "is_closed": false,
-          "x": 942,
-          "y": 4602,
+          "x": 574,
+          "y": 3582,
           "ru": {
             "title": null,
             "description": null
@@ -4500,8 +4501,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 4848,
+          "x": 7753,
+          "y": 3767,
           "ru": {
             "title": "3523",
             "description": "Учебный отдел"
@@ -4514,8 +4515,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 4599,
+          "x": 7753,
+          "y": 3580,
           "ru": {
             "title": "3521",
             "description": null
@@ -4528,8 +4529,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 4469,
+          "x": 7753,
+          "y": 3482,
           "ru": {
             "title": "3519",
             "description": null
@@ -4542,8 +4543,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 4317,
+          "x": 7753,
+          "y": 3368,
           "ru": {
             "title": "3517",
             "description": null
@@ -4556,8 +4557,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 4848,
+          "x": 8083,
+          "y": 3767,
           "ru": {
             "title": "3548",
             "description": null
@@ -4570,8 +4571,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 4599,
+          "x": 8083,
+          "y": 3580,
           "ru": {
             "title": "3546",
             "description": null
@@ -4584,8 +4585,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 4469,
+          "x": 8083,
+          "y": 3482,
           "ru": {
             "title": "3544",
             "description": null
@@ -4598,8 +4599,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 4317,
+          "x": 8083,
+          "y": 3368,
           "ru": {
             "title": "3542",
             "description": null
@@ -4612,8 +4613,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 4202,
+          "x": 8083,
+          "y": 3282,
           "ru": {
             "title": "3540",
             "description": null
@@ -4626,8 +4627,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10426,
-          "y": 4006,
+          "x": 7697,
+          "y": 3135,
           "ru": {
             "title": "3503",
             "description": null
@@ -4640,8 +4641,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10426,
-          "y": 3728,
+          "x": 7697,
+          "y": 2926,
           "ru": {
             "title": "3535/26",
             "description": null
@@ -4654,8 +4655,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10426,
-          "y": 3463,
+          "x": 7697,
+          "y": 2727,
           "ru": {
             "title": "3501",
             "description": null
@@ -4668,8 +4669,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 4006,
+          "x": 8083,
+          "y": 3135,
           "ru": {
             "title": "3538",
             "description": null
@@ -4682,8 +4683,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 3793,
+          "x": 8083,
+          "y": 2975,
           "ru": {
             "title": "3536",
             "description": null
@@ -4696,8 +4697,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 3661,
+          "x": 8083,
+          "y": 2875,
           "ru": {
             "title": "3534",
             "description": null
@@ -4710,8 +4711,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 3463,
+          "x": 8083,
+          "y": 2727,
           "ru": {
             "title": "3532",
             "description": null
@@ -4724,8 +4725,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 3253,
+          "x": 8083,
+          "y": 2569,
           "ru": {
             "title": "3530",
             "description": "Учебный отдел (аспирантура)"
@@ -4738,8 +4739,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 3132,
+          "x": 8083,
+          "y": 2478,
           "ru": {
             "title": "3528",
             "description": null
@@ -4752,8 +4753,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 2936,
+          "x": 8083,
+          "y": 2331,
           "ru": {
             "title": "3526",
             "description": null
@@ -4766,8 +4767,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 2664,
+          "x": 8083,
+          "y": 2126,
           "ru": {
             "title": "3524",
             "description": null
@@ -4780,8 +4781,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 2406,
+          "x": 8083,
+          "y": 1933,
           "ru": {
             "title": "3522",
             "description": null
@@ -4794,8 +4795,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 2199,
+          "x": 8083,
+          "y": 1777,
           "ru": {
             "title": "3520",
             "description": null
@@ -4808,8 +4809,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 2066,
+          "x": 8083,
+          "y": 1677,
           "ru": {
             "title": "3518",
             "description": null
@@ -4822,8 +4823,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 1845,
+          "x": 8083,
+          "y": 1511,
           "ru": {
             "title": "3516",
             "description": null
@@ -4836,8 +4837,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 1585,
+          "x": 8083,
+          "y": 1316,
           "ru": {
             "title": "3514",
             "description": null
@@ -4850,8 +4851,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 1383,
+          "x": 8083,
+          "y": 1164,
           "ru": {
             "title": "3512",
             "description": null
@@ -4864,8 +4865,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 1067,
+          "x": 8083,
+          "y": 927,
           "ru": {
             "title": "3510",
             "description": null
@@ -4878,8 +4879,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 836,
+          "x": 8083,
+          "y": 753,
           "ru": {
             "title": "3508",
             "description": null
@@ -4892,8 +4893,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10940,
-          "y": 634,
+          "x": 8083,
+          "y": 602,
           "ru": {
             "title": "3506",
             "description": null
@@ -4906,8 +4907,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 3143,
+          "x": 7753,
+          "y": 2486,
           "ru": {
             "title": "3515",
             "description": null
@@ -4920,8 +4921,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 10500,
-          "y": 3005,
+          "x": 7753,
+          "y": 2383,
           "ru": {
             "title": null,
             "description": null
@@ -4934,8 +4935,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 10500,
-          "y": 2870,
+          "x": 7753,
+          "y": 2281,
           "ru": {
             "title": null,
             "description": null
@@ -4948,8 +4949,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 2729,
+          "x": 7753,
+          "y": 2175,
           "ru": {
             "title": "3513",
             "description": null
@@ -4962,8 +4963,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 2602,
+          "x": 7753,
+          "y": 2080,
           "ru": {
             "title": "3511",
             "description": null
@@ -4976,8 +4977,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 2150,
+          "x": 7820,
+          "y": 1740,
           "ru": {
             "title": "3509",
             "description": null
@@ -4990,8 +4991,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1901,
+          "x": 7820,
+          "y": 1553,
           "ru": {
             "title": "3507",
             "description": null
@@ -5004,8 +5005,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1642,
+          "x": 7820,
+          "y": 1359,
           "ru": {
             "title": "3505",
             "description": null
@@ -5018,8 +5019,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1383,
+          "x": 7820,
+          "y": 1164,
           "ru": {
             "title": "3503",
             "description": null
@@ -5032,8 +5033,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10590,
-          "y": 1189,
+          "x": 7820,
+          "y": 1019,
           "ru": {
             "title": "3501",
             "description": null
@@ -5046,8 +5047,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10564,
-          "y": 1074,
+          "x": 7801,
+          "y": 932,
           "ru": {
             "title": "3500",
             "description": null
@@ -5060,8 +5061,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10650,
-          "y": 597,
+          "x": 7865,
+          "y": 574,
           "ru": {
             "title": "3504",
             "description": null
@@ -5074,8 +5075,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10402,
-          "y": 597,
+          "x": 7679,
+          "y": 574,
           "ru": {
             "title": "3502",
             "description": null
@@ -5088,8 +5089,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 10132,
-          "y": 940,
+          "x": 7476,
+          "y": 831,
           "ru": {
             "title": null,
             "description": null
@@ -5102,8 +5103,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10148,
-          "y": 220,
+          "x": 7488,
+          "y": 291,
           "ru": {
             "title": "3397",
             "description": null
@@ -5116,8 +5117,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9934,
-          "y": 220,
+          "x": 7328,
+          "y": 291,
           "ru": {
             "title": "3396",
             "description": null
@@ -5130,8 +5131,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9793,
-          "y": 220,
+          "x": 7222,
+          "y": 291,
           "ru": {
             "title": "3395",
             "description": null
@@ -5144,8 +5145,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9601,
-          "y": 220,
+          "x": 7077,
+          "y": 291,
           "ru": {
             "title": "3394",
             "description": null
@@ -5158,8 +5159,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9398,
-          "y": 220,
+          "x": 6925,
+          "y": 291,
           "ru": {
             "title": "3393",
             "description": null
@@ -5172,8 +5173,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9266,
-          "y": 220,
+          "x": 6826,
+          "y": 291,
           "ru": {
             "title": "3392",
             "description": null
@@ -5186,8 +5187,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9139,
-          "y": 220,
+          "x": 6730,
+          "y": 291,
           "ru": {
             "title": "3391",
             "description": null
@@ -5200,8 +5201,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9004,
-          "y": 220,
+          "x": 6629,
+          "y": 291,
           "ru": {
             "title": "3390",
             "description": null
@@ -5214,8 +5215,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8812,
-          "y": 220,
+          "x": 6485,
+          "y": 291,
           "ru": {
             "title": "3389",
             "description": null
@@ -5228,8 +5229,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8612,
-          "y": 220,
+          "x": 6335,
+          "y": 291,
           "ru": {
             "title": "3388",
             "description": null
@@ -5242,8 +5243,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8478,
-          "y": 220,
+          "x": 6234,
+          "y": 291,
           "ru": {
             "title": "3387",
             "description": null
@@ -5256,8 +5257,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8284,
-          "y": 317,
+          "x": 6088,
+          "y": 364,
           "ru": {
             "title": "3386",
             "description": null
@@ -5270,8 +5271,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8084,
-          "y": 220,
+          "x": 5938,
+          "y": 291,
           "ru": {
             "title": "3385",
             "description": null
@@ -5284,8 +5285,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7954,
-          "y": 220,
+          "x": 5840,
+          "y": 291,
           "ru": {
             "title": "3384",
             "description": null
@@ -5298,8 +5299,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7823,
-          "y": 220,
+          "x": 5742,
+          "y": 291,
           "ru": {
             "title": "3383",
             "description": null
@@ -5312,8 +5313,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7691,
-          "y": 220,
+          "x": 5643,
+          "y": 291,
           "ru": {
             "title": "3382",
             "description": null
@@ -5326,8 +5327,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7500,
-          "y": 220,
+          "x": 5499,
+          "y": 291,
           "ru": {
             "title": "3381",
             "description": null
@@ -5340,8 +5341,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 7516,
-          "y": 920,
+          "x": 5511,
+          "y": 816,
           "ru": {
             "title": null,
             "description": null
@@ -5354,8 +5355,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7300,
-          "y": 862,
+          "x": 5349,
+          "y": 773,
           "ru": {
             "title": "3359",
             "description": null
@@ -5368,8 +5369,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7065,
-          "y": 862,
+          "x": 5173,
+          "y": 773,
           "ru": {
             "title": "3357",
             "description": null
@@ -5382,8 +5383,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6811,
-          "y": 862,
+          "x": 4982,
+          "y": 773,
           "ru": {
             "title": "3355",
             "description": null
@@ -5396,8 +5397,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6493,
-          "y": 862,
+          "x": 4743,
+          "y": 773,
           "ru": {
             "title": "3353",
             "description": null
@@ -5410,8 +5411,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6360,
-          "y": 862,
+          "x": 4643,
+          "y": 773,
           "ru": {
             "title": "3351",
             "description": null
@@ -5424,8 +5425,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6166,
-          "y": 862,
+          "x": 4497,
+          "y": 773,
           "ru": {
             "title": "3349",
             "description": null
@@ -5438,8 +5439,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5967,
-          "y": 862,
+          "x": 4348,
+          "y": 773,
           "ru": {
             "title": "3347",
             "description": null
@@ -5452,8 +5453,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5836,
-          "y": 862,
+          "x": 4250,
+          "y": 773,
           "ru": {
             "title": "3345",
             "description": null
@@ -5466,8 +5467,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5705,
-          "y": 862,
+          "x": 4151,
+          "y": 773,
           "ru": {
             "title": "3343а",
             "description": null
@@ -5480,8 +5481,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5575,
-          "y": 862,
+          "x": 4054,
+          "y": 773,
           "ru": {
             "title": "3343б",
             "description": null
@@ -5494,8 +5495,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5445,
-          "y": 862,
+          "x": 3956,
+          "y": 773,
           "ru": {
             "title": "3343в",
             "description": null
@@ -5508,8 +5509,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 5314,
-          "y": 862,
+          "x": 3858,
+          "y": 773,
           "ru": {
             "title": null,
             "description": null
@@ -5522,8 +5523,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6792,
-          "y": 555,
+          "x": 4968,
+          "y": 542,
           "ru": {
             "title": "3364",
             "description": null
@@ -5536,8 +5537,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6632,
-          "y": 555,
+          "x": 4847,
+          "y": 542,
           "ru": {
             "title": "3362",
             "description": null
@@ -5550,8 +5551,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6493,
-          "y": 555,
+          "x": 4743,
+          "y": 542,
           "ru": {
             "title": "3360",
             "description": null
@@ -5564,8 +5565,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6360,
-          "y": 555,
+          "x": 4643,
+          "y": 542,
           "ru": {
             "title": "3358",
             "description": null
@@ -5578,8 +5579,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6228,
-          "y": 555,
+          "x": 4544,
+          "y": 542,
           "ru": {
             "title": "3356",
             "description": null
@@ -5592,8 +5593,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6096,
-          "y": 555,
+          "x": 4445,
+          "y": 542,
           "ru": {
             "title": "3354",
             "description": null
@@ -5606,8 +5607,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5967,
-          "y": 555,
+          "x": 4348,
+          "y": 542,
           "ru": {
             "title": "3352",
             "description": null
@@ -5620,8 +5621,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5836,
-          "y": 555,
+          "x": 4250,
+          "y": 542,
           "ru": {
             "title": "3350",
             "description": null
@@ -5634,8 +5635,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5705,
-          "y": 555,
+          "x": 4151,
+          "y": 542,
           "ru": {
             "title": "3348",
             "description": null
@@ -5648,8 +5649,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5575,
-          "y": 555,
+          "x": 4054,
+          "y": 542,
           "ru": {
             "title": "3346",
             "description": null
@@ -5662,8 +5663,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5445,
-          "y": 555,
+          "x": 3956,
+          "y": 542,
           "ru": {
             "title": "3344",
             "description": null
@@ -5676,8 +5677,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5314,
-          "y": 555,
+          "x": 3858,
+          "y": 542,
           "ru": {
             "title": "3342",
             "description": null
@@ -5690,8 +5691,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5180,
-          "y": 555,
+          "x": 3757,
+          "y": 542,
           "ru": {
             "title": "3342а",
             "description": null
@@ -5704,8 +5705,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4822,
-          "y": 862,
+          "x": 3488,
+          "y": 773,
           "ru": {
             "title": "3315",
             "description": null
@@ -5718,8 +5719,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4481,
-          "y": 862,
+          "x": 3232,
+          "y": 773,
           "ru": {
             "title": "Библиотека программиста",
             "description": null
@@ -5732,8 +5733,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 3995,
-          "y": 862,
+          "x": 2867,
+          "y": 773,
           "ru": {
             "title": null,
             "description": null
@@ -5746,8 +5747,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3847,
-          "y": 862,
+          "x": 2756,
+          "y": 773,
           "ru": {
             "title": "3313а",
             "description": null
@@ -5760,8 +5761,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3643,
-          "y": 862,
+          "x": 2602,
+          "y": 773,
           "ru": {
             "title": "3313",
             "description": null
@@ -5774,8 +5775,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3357,
-          "y": 862,
+          "x": 2388,
+          "y": 773,
           "ru": {
             "title": "3311",
             "description": null
@@ -5788,8 +5789,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3129,
-          "y": 862,
+          "x": 2216,
+          "y": 773,
           "ru": {
             "title": "3309а",
             "description": null
@@ -5802,8 +5803,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2972,
-          "y": 862,
+          "x": 2099,
+          "y": 773,
           "ru": {
             "title": "3309б",
             "description": null
@@ -5816,8 +5817,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2843,
-          "y": 862,
+          "x": 2002,
+          "y": 773,
           "ru": {
             "title": "3307а",
             "description": null
@@ -5830,8 +5831,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2713,
-          "y": 862,
+          "x": 1904,
+          "y": 773,
           "ru": {
             "title": "3307б",
             "description": null
@@ -5844,8 +5845,8 @@
         {
           "type": "OTHER",
           "is_closed": false,
-          "x": 4187,
-          "y": 555,
+          "x": 3011,
+          "y": 542,
           "ru": {
             "title": "Буфет",
             "description": null
@@ -5858,8 +5859,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3577,
-          "y": 555,
+          "x": 2553,
+          "y": 542,
           "ru": {
             "title": "3322",
             "description": null
@@ -5872,8 +5873,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3426,
-          "y": 555,
+          "x": 2439,
+          "y": 542,
           "ru": {
             "title": "3320",
             "description": null
@@ -5886,8 +5887,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3275,
-          "y": 555,
+          "x": 2326,
+          "y": 542,
           "ru": {
             "title": "3318",
             "description": null
@@ -5900,8 +5901,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3129,
-          "y": 555,
+          "x": 2216,
+          "y": 542,
           "ru": {
             "title": "3316",
             "description": null
@@ -5914,8 +5915,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2972,
-          "y": 555,
+          "x": 2099,
+          "y": 542,
           "ru": {
             "title": "3314",
             "description": null
@@ -5928,8 +5929,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2843,
-          "y": 555,
+          "x": 2002,
+          "y": 542,
           "ru": {
             "title": "3312",
             "description": null
@@ -5942,8 +5943,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2713,
-          "y": 555,
+          "x": 1904,
+          "y": 542,
           "ru": {
             "title": "3310",
             "description": null
@@ -5956,8 +5957,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2583,
-          "y": 527,
+          "x": 1806,
+          "y": 521,
           "ru": {
             "title": "3308",
             "description": null
@@ -5970,8 +5971,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2474,
-          "y": 527,
+          "x": 1724,
+          "y": 521,
           "ru": {
             "title": "3306",
             "description": null
@@ -5984,8 +5985,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2346,
-          "y": 814,
+          "x": 1628,
+          "y": 737,
           "ru": {
             "title": "3303",
             "description": null
@@ -5998,8 +5999,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2163,
-          "y": 814,
+          "x": 1491,
+          "y": 737,
           "ru": {
             "title": "3302",
             "description": null
@@ -6012,8 +6013,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1992,
-          "y": 814,
+          "x": 1362,
+          "y": 737,
           "ru": {
             "title": "3301",
             "description": null
@@ -6026,8 +6027,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1590,
-          "y": 787,
+          "x": 1061,
+          "y": 717,
           "ru": {
             "title": "3248",
             "description": "Лаборатория языковых инструментов"
@@ -6040,8 +6041,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1362,
-          "y": 787,
+          "x": 889,
+          "y": 717,
           "ru": {
             "title": "3241",
             "description": null
@@ -6054,8 +6055,8 @@
         {
           "type": "WC",
           "is_closed": false,
-          "x": 1475,
-          "y": 867,
+          "x": 974,
+          "y": 777,
           "ru": {
             "title": null,
             "description": null
@@ -6068,8 +6069,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 926,
-          "y": 1222,
+          "x": 562,
+          "y": 1043,
           "ru": {
             "title": "3240",
             "description": null
@@ -6082,8 +6083,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 342,
-          "y": 1345,
+          "x": 123,
+          "y": 1136,
           "ru": {
             "title": "3228",
             "description": null
@@ -6096,8 +6097,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 342,
-          "y": 1464,
+          "x": 123,
+          "y": 1225,
           "ru": {
             "title": "3227",
             "description": null
@@ -6110,8 +6111,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 464,
-          "y": 1587,
+          "x": 215,
+          "y": 1317,
           "ru": {
             "title": "3226",
             "description": null
@@ -6124,8 +6125,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 575,
-          "y": 1725,
+          "x": 298,
+          "y": 1421,
           "ru": {
             "title": "3225",
             "description": null
@@ -6138,8 +6139,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 1725,
+          "x": 426,
+          "y": 1421,
           "ru": {
             "title": "3224",
             "description": null
@@ -6152,8 +6153,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 1318,
+          "x": 426,
+          "y": 1115,
           "ru": {
             "title": "3234",
             "description": null
@@ -6166,8 +6167,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 1410,
+          "x": 426,
+          "y": 1185,
           "ru": {
             "title": "3235",
             "description": null
@@ -6180,8 +6181,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 745,
-          "y": 1509,
+          "x": 426,
+          "y": 1259,
           "ru": {
             "title": "3236",
             "description": null
@@ -6194,8 +6195,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 1944,
+          "x": 769,
+          "y": 1586,
           "ru": {
             "title": "3211",
             "description": null
@@ -6208,8 +6209,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 1944,
+          "x": 891,
+          "y": 1586,
           "ru": {
             "title": "3210",
             "description": null
@@ -6222,8 +6223,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 1944,
+          "x": 1003,
+          "y": 1586,
           "ru": {
             "title": "3209",
             "description": null
@@ -6236,8 +6237,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1764,
-          "y": 1944,
+          "x": 1191,
+          "y": 1586,
           "ru": {
             "title": "3208",
             "description": null
@@ -6250,8 +6251,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1814,
-          "y": 2146,
+          "x": 1229,
+          "y": 1737,
           "ru": {
             "title": "3207",
             "description": null
@@ -6264,8 +6265,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1814,
-          "y": 2296,
+          "x": 1229,
+          "y": 1850,
           "ru": {
             "title": "3206",
             "description": null
@@ -6278,8 +6279,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 2496,
+          "x": 769,
+          "y": 2000,
           "ru": {
             "title": "3202",
             "description": null
@@ -6292,8 +6293,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 2496,
+          "x": 891,
+          "y": 2000,
           "ru": {
             "title": "3203",
             "description": null
@@ -6306,8 +6307,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 2496,
+          "x": 1003,
+          "y": 2000,
           "ru": {
             "title": "3204",
             "description": null
@@ -6320,8 +6321,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1764,
-          "y": 2496,
+          "x": 1191,
+          "y": 2000,
           "ru": {
             "title": "3205",
             "description": null
@@ -6334,8 +6335,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1195,
-          "y": 2315,
+          "x": 764,
+          "y": 1864,
           "ru": {
             "title": "3201",
             "description": null
@@ -6348,8 +6349,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 1195,
-          "y": 2223,
+          "x": 764,
+          "y": 1795,
           "ru": {
             "title": null,
             "description": null
@@ -6362,8 +6363,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 2710,
+          "x": 560,
+          "y": 2161,
           "ru": {
             "title": "3146",
             "description": null
@@ -6376,8 +6377,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 673,
-          "y": 2710,
+          "x": 372,
+          "y": 2161,
           "ru": {
             "title": "3145",
             "description": null
@@ -6390,8 +6391,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 2760,
+          "x": 122,
+          "y": 2199,
           "ru": {
             "title": "3144",
             "description": null
@@ -6404,8 +6405,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 3152,
+          "x": 122,
+          "y": 2493,
           "ru": {
             "title": "3143",
             "description": null
@@ -6418,8 +6419,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 754,
-          "y": 3337,
+          "x": 433,
+          "y": 2632,
           "ru": {
             "title": "3142",
             "description": null
@@ -6432,8 +6433,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 2870,
+          "x": 560,
+          "y": 2281,
           "ru": {
             "title": "3160",
             "description": null
@@ -6446,8 +6447,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 3190,
+          "x": 560,
+          "y": 2522,
           "ru": {
             "title": "3141",
             "description": null
@@ -6460,8 +6461,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 3560,
+          "x": 769,
+          "y": 2800,
           "ru": {
             "title": "3131",
             "description": null
@@ -6474,8 +6475,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 3560,
+          "x": 891,
+          "y": 2800,
           "ru": {
             "title": "3130",
             "description": null
@@ -6488,8 +6489,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 3560,
+          "x": 1003,
+          "y": 2800,
           "ru": {
             "title": "3129",
             "description": null
@@ -6502,8 +6503,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1764,
-          "y": 3560,
+          "x": 1191,
+          "y": 2800,
           "ru": {
             "title": "3128",
             "description": null
@@ -6516,8 +6517,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1814,
-          "y": 3766,
+          "x": 1229,
+          "y": 2954,
           "ru": {
             "title": "3127",
             "description": null
@@ -6530,8 +6531,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1814,
-          "y": 3906,
+          "x": 1229,
+          "y": 3059,
           "ru": {
             "title": "3126",
             "description": null
@@ -6544,8 +6545,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 4110,
+          "x": 769,
+          "y": 3213,
           "ru": {
             "title": "3122",
             "description": null
@@ -6558,8 +6559,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 4110,
+          "x": 891,
+          "y": 3213,
           "ru": {
             "title": "3123",
             "description": null
@@ -6572,8 +6573,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 4110,
+          "x": 1003,
+          "y": 3213,
           "ru": {
             "title": "3124",
             "description": null
@@ -6586,8 +6587,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1764,
-          "y": 4110,
+          "x": 1191,
+          "y": 3213,
           "ru": {
             "title": "3125",
             "description": null
@@ -6600,8 +6601,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 3741,
+          "x": 769,
+          "y": 2935,
           "ru": {
             "title": "3140",
             "description": null
@@ -6614,8 +6615,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 1202,
-          "y": 3833,
+          "x": 769,
+          "y": 3005,
           "ru": {
             "title": null,
             "description": null
@@ -6628,8 +6629,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1202,
-          "y": 3928,
+          "x": 769,
+          "y": 3076,
           "ru": {
             "title": "3121",
             "description": null
@@ -6642,8 +6643,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 923,
-          "y": 4315,
+          "x": 560,
+          "y": 3367,
           "ru": {
             "title": "3108",
             "description": null
@@ -6656,8 +6657,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 671,
-          "y": 4315,
+          "x": 370,
+          "y": 3367,
           "ru": {
             "title": "3107",
             "description": null
@@ -6670,8 +6671,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 342,
-          "y": 4379,
+          "x": 123,
+          "y": 3415,
           "ru": {
             "title": "3106",
             "description": null
@@ -6684,8 +6685,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 342,
-          "y": 4652,
+          "x": 123,
+          "y": 3620,
           "ru": {
             "title": "3105",
             "description": null
@@ -6698,8 +6699,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 342,
-          "y": 4915,
+          "x": 123,
+          "y": 3817,
           "ru": {
             "title": "3104",
             "description": null
@@ -6712,8 +6713,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 590,
-          "y": 4949,
+          "x": 309,
+          "y": 3843,
           "ru": {
             "title": "3103",
             "description": null
@@ -6726,8 +6727,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 763,
-          "y": 4949,
+          "x": 439,
+          "y": 3843,
           "ru": {
             "title": "3102",
             "description": null
@@ -6740,8 +6741,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 974,
-          "y": 4953,
+          "x": 598,
+          "y": 3846,
           "ru": {
             "title": "3101",
             "description": null
@@ -6754,8 +6755,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1065,
-          "y": 4731,
+          "x": 666,
+          "y": 3679,
           "ru": {
             "title": "3110",
             "description": null
@@ -6768,8 +6769,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1005,
-          "y": 4457,
+          "x": 621,
+          "y": 3473,
           "ru": {
             "title": "3120",
             "description": null
@@ -6787,8 +6788,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 10597,
-          "y": 3179,
+          "x": 7825,
+          "y": 2513,
           "ru": {
             "title": null,
             "description": null
@@ -6801,8 +6802,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5208,
-          "y": 766,
+          "x": 3778,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -6815,8 +6816,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 5133,
-          "y": 766,
+          "x": 3722,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -6829,8 +6830,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": false,
-          "x": 4177,
-          "y": 766,
+          "x": 3004,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -6843,8 +6844,8 @@
         {
           "type": "ELEVATOR",
           "is_closed": true,
-          "x": 4102,
-          "y": 766,
+          "x": 2947,
+          "y": 701,
           "ru": {
             "title": null,
             "description": null
@@ -6857,8 +6858,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": true,
-          "x": 10525,
-          "y": 4220,
+          "x": 7771,
+          "y": 3295,
           "ru": {
             "title": null,
             "description": null
@@ -6871,8 +6872,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 10525,
-          "y": 3260,
+          "x": 7771,
+          "y": 2574,
           "ru": {
             "title": null,
             "description": null
@@ -6885,8 +6886,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 10400,
-          "y": 934,
+          "x": 7678,
+          "y": 827,
           "ru": {
             "title": null,
             "description": null
@@ -6899,8 +6900,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 10035,
-          "y": 604,
+          "x": 7403,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -6913,8 +6914,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 7584,
-          "y": 604,
+          "x": 5562,
+          "y": 579,
           "ru": {
             "title": null,
             "description": null
@@ -6927,8 +6928,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": true,
-          "x": 6661,
-          "y": 876,
+          "x": 4869,
+          "y": 783,
           "ru": {
             "title": null,
             "description": null
@@ -6941,8 +6942,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 5122,
-          "y": 907,
+          "x": 3713,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -6955,8 +6956,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 4191,
-          "y": 907,
+          "x": 3014,
+          "y": 807,
           "ru": {
             "title": null,
             "description": null
@@ -6969,8 +6970,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 2558,
-          "y": 854,
+          "x": 1788,
+          "y": 767,
           "ru": {
             "title": null,
             "description": null
@@ -6983,8 +6984,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 942,
-          "y": 1365,
+          "x": 574,
+          "y": 1151,
           "ru": {
             "title": null,
             "description": null
@@ -6997,8 +6998,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 942,
-          "y": 3035,
+          "x": 574,
+          "y": 2405,
           "ru": {
             "title": null,
             "description": null
@@ -7011,8 +7012,8 @@
         {
           "type": "STAIRS_DOWN",
           "is_closed": false,
-          "x": 942,
-          "y": 4602,
+          "x": 574,
+          "y": 3582,
           "ru": {
             "title": null,
             "description": null
@@ -7025,8 +7026,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 4947,
+          "x": 7753,
+          "y": 3841,
           "ru": {
             "title": "4533",
             "description": null
@@ -7039,8 +7040,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 4585,
+          "x": 7753,
+          "y": 3569,
           "ru": {
             "title": "4531",
             "description": null
@@ -7053,8 +7054,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10580,
-          "y": 4328,
+          "x": 7813,
+          "y": 3376,
           "ru": {
             "title": "4529",
             "description": null
@@ -7067,8 +7068,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10427,
-          "y": 3727,
+          "x": 7698,
+          "y": 2925,
           "ru": {
             "title": "4527",
             "description": "Читальный зал"
@@ -7081,8 +7082,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 3137,
+          "x": 7753,
+          "y": 2482,
           "ru": {
             "title": "4523",
             "description": null
@@ -7095,8 +7096,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 10500,
-          "y": 3000,
+          "x": 7753,
+          "y": 2379,
           "ru": {
             "title": null,
             "description": null
@@ -7109,8 +7110,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 10500,
-          "y": 2868,
+          "x": 7753,
+          "y": 2280,
           "ru": {
             "title": null,
             "description": null
@@ -7123,8 +7124,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10500,
-          "y": 2678,
+          "x": 7753,
+          "y": 2137,
           "ru": {
             "title": "4521",
             "description": null
@@ -7137,8 +7138,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 2473,
+          "x": 7818,
+          "y": 1983,
           "ru": {
             "title": "4519а",
             "description": null
@@ -7151,8 +7152,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 2345,
+          "x": 7818,
+          "y": 1887,
           "ru": {
             "title": "4519б",
             "description": null
@@ -7165,8 +7166,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 2150,
+          "x": 7818,
+          "y": 1740,
           "ru": {
             "title": "4519",
             "description": null
@@ -7179,8 +7180,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 1891,
+          "x": 7818,
+          "y": 1546,
           "ru": {
             "title": "4517",
             "description": null
@@ -7193,8 +7194,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 1644,
+          "x": 7818,
+          "y": 1360,
           "ru": {
             "title": "4515",
             "description": null
@@ -7207,8 +7208,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 1382,
+          "x": 7818,
+          "y": 1164,
           "ru": {
             "title": "4513",
             "description": null
@@ -7221,8 +7222,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 1192,
+          "x": 7818,
+          "y": 1021,
           "ru": {
             "title": "4511",
             "description": null
@@ -7235,8 +7236,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 4947,
+          "x": 8078,
+          "y": 3841,
           "ru": {
             "title": "4542",
             "description": null
@@ -7249,8 +7250,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 4757,
+          "x": 8078,
+          "y": 3699,
           "ru": {
             "title": "4540",
             "description": null
@@ -7263,8 +7264,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 4535,
+          "x": 8078,
+          "y": 3532,
           "ru": {
             "title": "4538",
             "description": null
@@ -7277,8 +7278,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 4280,
+          "x": 8078,
+          "y": 3340,
           "ru": {
             "title": "4534",
             "description": null
@@ -7291,8 +7292,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 4007,
+          "x": 8078,
+          "y": 3135,
           "ru": {
             "title": "4532",
             "description": null
@@ -7305,8 +7306,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 3187,
+          "x": 8078,
+          "y": 2519,
           "ru": {
             "title": "4530",
             "description": null
@@ -7319,8 +7320,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 2672,
+          "x": 8078,
+          "y": 2133,
           "ru": {
             "title": "4528",
             "description": null
@@ -7333,8 +7334,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 2407,
+          "x": 8078,
+          "y": 1933,
           "ru": {
             "title": "4526",
             "description": null
@@ -7347,8 +7348,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 2212,
+          "x": 8078,
+          "y": 1787,
           "ru": {
             "title": "4524",
             "description": null
@@ -7361,8 +7362,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 2082,
+          "x": 8078,
+          "y": 1689,
           "ru": {
             "title": "4522",
             "description": null
@@ -7375,8 +7376,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1951,
+          "x": 8078,
+          "y": 1591,
           "ru": {
             "title": "4520",
             "description": null
@@ -7389,8 +7390,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1832,
+          "x": 8078,
+          "y": 1502,
           "ru": {
             "title": "4518",
             "description": null
@@ -7403,8 +7404,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1706,
+          "x": 8078,
+          "y": 1407,
           "ru": {
             "title": "4516",
             "description": null
@@ -7417,8 +7418,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1576,
+          "x": 8078,
+          "y": 1309,
           "ru": {
             "title": "4514",
             "description": null
@@ -7431,8 +7432,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1448,
+          "x": 8078,
+          "y": 1213,
           "ru": {
             "title": "4512",
             "description": null
@@ -7445,8 +7446,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1314,
+          "x": 8078,
+          "y": 1112,
           "ru": {
             "title": "4510",
             "description": null
@@ -7459,8 +7460,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1184,
+          "x": 8078,
+          "y": 1015,
           "ru": {
             "title": "4509",
             "description": null
@@ -7473,8 +7474,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 1070,
+          "x": 8078,
+          "y": 929,
           "ru": {
             "title": "4508",
             "description": null
@@ -7487,8 +7488,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 939,
+          "x": 8078,
+          "y": 831,
           "ru": {
             "title": "4507",
             "description": null
@@ -7501,8 +7502,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10933,
-          "y": 808,
+          "x": 8078,
+          "y": 732,
           "ru": {
             "title": "4506",
             "description": null
@@ -7515,8 +7516,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10730,
-          "y": 597,
+          "x": 7925,
+          "y": 574,
           "ru": {
             "title": "4504а",
             "description": null
@@ -7529,8 +7530,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10587,
-          "y": 597,
+          "x": 7818,
+          "y": 574,
           "ru": {
             "title": "4503",
             "description": null
@@ -7543,8 +7544,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10460,
-          "y": 597,
+          "x": 7723,
+          "y": 574,
           "ru": {
             "title": "4502",
             "description": null
@@ -7557,8 +7558,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10345,
-          "y": 597,
+          "x": 7636,
+          "y": 574,
           "ru": {
             "title": "4501",
             "description": null
@@ -7571,8 +7572,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 10131,
-          "y": 940,
+          "x": 7475,
+          "y": 831,
           "ru": {
             "title": null,
             "description": null
@@ -7585,8 +7586,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 10148,
-          "y": 220,
+          "x": 7488,
+          "y": 291,
           "ru": {
             "title": "4399",
             "description": null
@@ -7599,8 +7600,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9936,
-          "y": 220,
+          "x": 7329,
+          "y": 291,
           "ru": {
             "title": "4398",
             "description": null
@@ -7613,8 +7614,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9791,
-          "y": 220,
+          "x": 7220,
+          "y": 291,
           "ru": {
             "title": "4397",
             "description": null
@@ -7627,8 +7628,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9660,
-          "y": 220,
+          "x": 7122,
+          "y": 291,
           "ru": {
             "title": "4396",
             "description": null
@@ -7641,8 +7642,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9530,
-          "y": 220,
+          "x": 7024,
+          "y": 291,
           "ru": {
             "title": "4395",
             "description": null
@@ -7655,8 +7656,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9333,
-          "y": 220,
+          "x": 6876,
+          "y": 291,
           "ru": {
             "title": "4394",
             "description": null
@@ -7669,8 +7670,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9136,
-          "y": 220,
+          "x": 6728,
+          "y": 291,
           "ru": {
             "title": "4393",
             "description": null
@@ -7683,8 +7684,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 9003,
-          "y": 220,
+          "x": 6628,
+          "y": 291,
           "ru": {
             "title": "4392",
             "description": null
@@ -7697,8 +7698,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8872,
-          "y": 220,
+          "x": 6530,
+          "y": 291,
           "ru": {
             "title": "4391",
             "description": null
@@ -7711,8 +7712,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8742,
-          "y": 220,
+          "x": 6432,
+          "y": 291,
           "ru": {
             "title": "4390",
             "description": null
@@ -7725,8 +7726,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8610,
-          "y": 220,
+          "x": 6333,
+          "y": 291,
           "ru": {
             "title": "4389",
             "description": null
@@ -7739,8 +7740,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8478,
-          "y": 220,
+          "x": 6234,
+          "y": 291,
           "ru": {
             "title": "4388",
             "description": null
@@ -7753,8 +7754,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8346,
-          "y": 220,
+          "x": 6135,
+          "y": 291,
           "ru": {
             "title": "4387",
             "description": null
@@ -7767,8 +7768,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8216,
-          "y": 220,
+          "x": 6037,
+          "y": 291,
           "ru": {
             "title": "4386",
             "description": null
@@ -7781,8 +7782,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 8085,
-          "y": 220,
+          "x": 5939,
+          "y": 291,
           "ru": {
             "title": "4385",
             "description": null
@@ -7795,8 +7796,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7954,
-          "y": 220,
+          "x": 5840,
+          "y": 291,
           "ru": {
             "title": "4384",
             "description": null
@@ -7809,8 +7810,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7822,
-          "y": 220,
+          "x": 5741,
+          "y": 291,
           "ru": {
             "title": "4383",
             "description": null
@@ -7823,8 +7824,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7691,
-          "y": 220,
+          "x": 5643,
+          "y": 291,
           "ru": {
             "title": "4382",
             "description": null
@@ -7837,8 +7838,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7492,
-          "y": 220,
+          "x": 5493,
+          "y": 291,
           "ru": {
             "title": "4381",
             "description": null
@@ -7851,8 +7852,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 7512,
-          "y": 914,
+          "x": 5508,
+          "y": 812,
           "ru": {
             "title": null,
             "description": null
@@ -7865,8 +7866,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7298,
-          "y": 865,
+          "x": 5348,
+          "y": 775,
           "ru": {
             "title": "4339",
             "description": null
@@ -7879,8 +7880,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 7120,
-          "y": 865,
+          "x": 5214,
+          "y": 775,
           "ru": {
             "title": "4337",
             "description": null
@@ -7893,8 +7894,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6951,
-          "y": 865,
+          "x": 5087,
+          "y": 775,
           "ru": {
             "title": "4335",
             "description": null
@@ -7907,8 +7908,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6801,
-          "y": 865,
+          "x": 4974,
+          "y": 775,
           "ru": {
             "title": "4333",
             "description": null
@@ -7921,8 +7922,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6494,
-          "y": 865,
+          "x": 4744,
+          "y": 775,
           "ru": {
             "title": "4331",
             "description": null
@@ -7935,8 +7936,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6360,
-          "y": 865,
+          "x": 4643,
+          "y": 775,
           "ru": {
             "title": "4329",
             "description": null
@@ -7949,8 +7950,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6230,
-          "y": 865,
+          "x": 4546,
+          "y": 775,
           "ru": {
             "title": "4327",
             "description": null
@@ -7963,8 +7964,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6097,
-          "y": 865,
+          "x": 4446,
+          "y": 775,
           "ru": {
             "title": "4325",
             "description": null
@@ -7977,8 +7978,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5966,
-          "y": 865,
+          "x": 4347,
+          "y": 775,
           "ru": {
             "title": "4323",
             "description": null
@@ -7991,8 +7992,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5835,
-          "y": 865,
+          "x": 4249,
+          "y": 775,
           "ru": {
             "title": "4321",
             "description": null
@@ -8005,8 +8006,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5640,
-          "y": 865,
+          "x": 4102,
+          "y": 775,
           "ru": {
             "title": "4319",
             "description": null
@@ -8019,8 +8020,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5444,
-          "y": 865,
+          "x": 3955,
+          "y": 775,
           "ru": {
             "title": "4319а",
             "description": null
@@ -8033,8 +8034,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 5331,
-          "y": 865,
+          "x": 3870,
+          "y": 775,
           "ru": {
             "title": null,
             "description": null
@@ -8047,8 +8048,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6793,
-          "y": 555,
+          "x": 4968,
+          "y": 542,
           "ru": {
             "title": "4352",
             "description": null
@@ -8061,8 +8062,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6632,
-          "y": 555,
+          "x": 4847,
+          "y": 542,
           "ru": {
             "title": "4350",
             "description": null
@@ -8075,8 +8076,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6494,
-          "y": 555,
+          "x": 4744,
+          "y": 542,
           "ru": {
             "title": "4348",
             "description": null
@@ -8089,8 +8090,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6360,
-          "y": 555,
+          "x": 4643,
+          "y": 542,
           "ru": {
             "title": "4346",
             "description": null
@@ -8103,8 +8104,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6230,
-          "y": 555,
+          "x": 4546,
+          "y": 542,
           "ru": {
             "title": "4344",
             "description": null
@@ -8117,8 +8118,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 6097,
-          "y": 555,
+          "x": 4446,
+          "y": 542,
           "ru": {
             "title": "4342",
             "description": null
@@ -8131,8 +8132,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5966,
-          "y": 555,
+          "x": 4347,
+          "y": 542,
           "ru": {
             "title": "4340",
             "description": null
@@ -8145,8 +8146,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5835,
-          "y": 555,
+          "x": 4249,
+          "y": 542,
           "ru": {
             "title": "4338",
             "description": null
@@ -8159,8 +8160,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5702,
-          "y": 555,
+          "x": 4149,
+          "y": 542,
           "ru": {
             "title": "4336",
             "description": null
@@ -8173,8 +8174,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5571,
-          "y": 555,
+          "x": 4051,
+          "y": 542,
           "ru": {
             "title": "4334",
             "description": null
@@ -8187,8 +8188,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5444,
-          "y": 555,
+          "x": 3955,
+          "y": 542,
           "ru": {
             "title": "4332",
             "description": null
@@ -8201,8 +8202,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5331,
-          "y": 555,
+          "x": 3870,
+          "y": 542,
           "ru": {
             "title": "4330",
             "description": null
@@ -8215,8 +8216,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5179,
-          "y": 555,
+          "x": 3756,
+          "y": 542,
           "ru": {
             "title": "4330б",
             "description": null
@@ -8229,8 +8230,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 5056,
-          "y": 555,
+          "x": 3664,
+          "y": 542,
           "ru": {
             "title": "4330а",
             "description": null
@@ -8243,8 +8244,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4653,
-          "y": 865,
+          "x": 3361,
+          "y": 775,
           "ru": {
             "title": "405",
             "description": null
@@ -8257,8 +8258,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 3989,
-          "y": 865,
+          "x": 2862,
+          "y": 775,
           "ru": {
             "title": null,
             "description": null
@@ -8271,8 +8272,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3847,
-          "y": 865,
+          "x": 2756,
+          "y": 775,
           "ru": {
             "title": "4317а",
             "description": null
@@ -8285,8 +8286,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3642,
-          "y": 865,
+          "x": 2602,
+          "y": 775,
           "ru": {
             "title": "4317",
             "description": null
@@ -8299,8 +8300,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3425,
-          "y": 865,
+          "x": 2439,
+          "y": 775,
           "ru": {
             "title": "4315",
             "description": null
@@ -8313,8 +8314,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3275,
-          "y": 865,
+          "x": 2326,
+          "y": 775,
           "ru": {
             "title": "4313",
             "description": null
@@ -8327,8 +8328,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3055,
-          "y": 865,
+          "x": 2161,
+          "y": 775,
           "ru": {
             "title": "4311",
             "description": null
@@ -8341,8 +8342,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2844,
-          "y": 865,
+          "x": 2002,
+          "y": 775,
           "ru": {
             "title": "4309",
             "description": null
@@ -8355,8 +8356,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2714,
-          "y": 865,
+          "x": 1905,
+          "y": 775,
           "ru": {
             "title": "4307",
             "description": null
@@ -8369,8 +8370,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4240,
-          "y": 555,
+          "x": 3051,
+          "y": 542,
           "ru": {
             "title": "4320б",
             "description": null
@@ -8383,8 +8384,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 4121,
-          "y": 555,
+          "x": 2961,
+          "y": 542,
           "ru": {
             "title": "4320а",
             "description": null
@@ -8397,8 +8398,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3989,
-          "y": 555,
+          "x": 2862,
+          "y": 542,
           "ru": {
             "title": "4328",
             "description": null
@@ -8411,8 +8412,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3847,
-          "y": 555,
+          "x": 2756,
+          "y": 542,
           "ru": {
             "title": "4326",
             "description": null
@@ -8425,8 +8426,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3717,
-          "y": 555,
+          "x": 2658,
+          "y": 542,
           "ru": {
             "title": "4324",
             "description": null
@@ -8439,8 +8440,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3575,
-          "y": 555,
+          "x": 2551,
+          "y": 542,
           "ru": {
             "title": "4322",
             "description": null
@@ -8453,8 +8454,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3425,
-          "y": 555,
+          "x": 2439,
+          "y": 542,
           "ru": {
             "title": "4320",
             "description": null
@@ -8467,8 +8468,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3275,
-          "y": 555,
+          "x": 2326,
+          "y": 542,
           "ru": {
             "title": "4318",
             "description": null
@@ -8481,8 +8482,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 3127,
-          "y": 555,
+          "x": 2215,
+          "y": 542,
           "ru": {
             "title": "4316",
             "description": null
@@ -8495,8 +8496,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2976,
-          "y": 555,
+          "x": 2102,
+          "y": 542,
           "ru": {
             "title": "4314",
             "description": null
@@ -8509,8 +8510,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2844,
-          "y": 555,
+          "x": 2002,
+          "y": 542,
           "ru": {
             "title": "4312",
             "description": null
@@ -8523,8 +8524,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2714,
-          "y": 555,
+          "x": 1905,
+          "y": 542,
           "ru": {
             "title": "4310",
             "description": null
@@ -8537,8 +8538,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2583,
-          "y": 524,
+          "x": 1806,
+          "y": 519,
           "ru": {
             "title": "4308",
             "description": null
@@ -8551,8 +8552,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2472,
-          "y": 524,
+          "x": 1723,
+          "y": 519,
           "ru": {
             "title": "4306",
             "description": null
@@ -8565,8 +8566,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2345,
-          "y": 818,
+          "x": 1628,
+          "y": 740,
           "ru": {
             "title": "4303",
             "description": null
@@ -8579,8 +8580,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 2217,
-          "y": 870,
+          "x": 1531,
+          "y": 779,
           "ru": {
             "title": "4302",
             "description": null
@@ -8593,8 +8594,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1992,
-          "y": 818,
+          "x": 1362,
+          "y": 740,
           "ru": {
             "title": "4301",
             "description": null
@@ -8607,8 +8608,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1589,
-          "y": 818,
+          "x": 1060,
+          "y": 740,
           "ru": {
             "title": "4260",
             "description": null
@@ -8621,8 +8622,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1365,
-          "y": 818,
+          "x": 892,
+          "y": 740,
           "ru": {
             "title": "4241-4249",
             "description": null
@@ -8635,8 +8636,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 1476,
-          "y": 870,
+          "x": 975,
+          "y": 779,
           "ru": {
             "title": null,
             "description": null
@@ -8649,8 +8650,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 918,
-          "y": 1229,
+          "x": 556,
+          "y": 1049,
           "ru": {
             "title": "4235",
             "description": null
@@ -8663,8 +8664,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 1945,
+          "x": 770,
+          "y": 1586,
           "ru": {
             "title": "4211",
             "description": null
@@ -8677,8 +8678,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 1945,
+          "x": 891,
+          "y": 1586,
           "ru": {
             "title": "4210",
             "description": null
@@ -8691,8 +8692,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 1945,
+          "x": 1003,
+          "y": 1586,
           "ru": {
             "title": "4209",
             "description": null
@@ -8705,8 +8706,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1761,
-          "y": 1945,
+          "x": 1189,
+          "y": 1586,
           "ru": {
             "title": "4208",
             "description": null
@@ -8719,8 +8720,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1812,
-          "y": 2150,
+          "x": 1227,
+          "y": 1740,
           "ru": {
             "title": "4207",
             "description": null
@@ -8733,8 +8734,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1812,
-          "y": 2298,
+          "x": 1227,
+          "y": 1852,
           "ru": {
             "title": "4206",
             "description": null
@@ -8747,8 +8748,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 2497,
+          "x": 770,
+          "y": 2001,
           "ru": {
             "title": "4202",
             "description": null
@@ -8761,8 +8762,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 2497,
+          "x": 891,
+          "y": 2001,
           "ru": {
             "title": "4203",
             "description": null
@@ -8775,8 +8776,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 2497,
+          "x": 1003,
+          "y": 2001,
           "ru": {
             "title": "4204",
             "description": null
@@ -8789,8 +8790,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1761,
-          "y": 2497,
+          "x": 1189,
+          "y": 2001,
           "ru": {
             "title": "4205",
             "description": null
@@ -8803,8 +8804,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 2316,
+          "x": 770,
+          "y": 1865,
           "ru": {
             "title": "4201",
             "description": null
@@ -8817,8 +8818,8 @@
         {
           "type": "WC_MAN",
           "is_closed": false,
-          "x": 1203,
-          "y": 2220,
+          "x": 770,
+          "y": 1793,
           "ru": {
             "title": null,
             "description": null
@@ -8831,8 +8832,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 921,
-          "y": 2700,
+          "x": 558,
+          "y": 2154,
           "ru": {
             "title": "4151",
             "description": null
@@ -8845,8 +8846,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 744,
-          "y": 2700,
+          "x": 425,
+          "y": 2154,
           "ru": {
             "title": "4150",
             "description": null
@@ -8859,8 +8860,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 573,
-          "y": 2700,
+          "x": 297,
+          "y": 2154,
           "ru": {
             "title": "4149",
             "description": null
@@ -8873,8 +8874,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 2767,
+          "x": 122,
+          "y": 2204,
           "ru": {
             "title": "4148",
             "description": null
@@ -8887,8 +8888,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 2962,
+          "x": 122,
+          "y": 2350,
           "ru": {
             "title": "4147",
             "description": null
@@ -8901,8 +8902,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 3100,
+          "x": 122,
+          "y": 2454,
           "ru": {
             "title": "4146",
             "description": null
@@ -8915,8 +8916,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 340,
-          "y": 3294,
+          "x": 122,
+          "y": 2600,
           "ru": {
             "title": "4145",
             "description": null
@@ -8929,8 +8930,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 921,
-          "y": 3335,
+          "x": 558,
+          "y": 2631,
           "ru": {
             "title": "4142",
             "description": null
@@ -8943,8 +8944,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 744,
-          "y": 3335,
+          "x": 425,
+          "y": 2631,
           "ru": {
             "title": "4143",
             "description": null
@@ -8957,8 +8958,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 573,
-          "y": 3335,
+          "x": 297,
+          "y": 2631,
           "ru": {
             "title": "4144",
             "description": null
@@ -8971,8 +8972,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 921,
-          "y": 3189,
+          "x": 558,
+          "y": 2521,
           "ru": {
             "title": "4141",
             "description": null
@@ -8985,8 +8986,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 921,
-          "y": 2871,
+          "x": 558,
+          "y": 2282,
           "ru": {
             "title": "4160",
             "description": null
@@ -8999,8 +9000,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 3557,
+          "x": 770,
+          "y": 2797,
           "ru": {
             "title": "4130",
             "description": null
@@ -9013,8 +9014,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 3557,
+          "x": 891,
+          "y": 2797,
           "ru": {
             "title": "4129",
             "description": null
@@ -9027,8 +9028,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 3557,
+          "x": 1003,
+          "y": 2797,
           "ru": {
             "title": "4128",
             "description": null
@@ -9041,8 +9042,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1761,
-          "y": 3557,
+          "x": 1189,
+          "y": 2797,
           "ru": {
             "title": "4127",
             "description": null
@@ -9055,8 +9056,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1812,
-          "y": 3836,
+          "x": 1227,
+          "y": 3007,
           "ru": {
             "title": "4126",
             "description": null
@@ -9069,8 +9070,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 4109,
+          "x": 770,
+          "y": 3212,
           "ru": {
             "title": "4122",
             "description": null
@@ -9083,8 +9084,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1364,
-          "y": 4109,
+          "x": 891,
+          "y": 3212,
           "ru": {
             "title": "4123",
             "description": null
@@ -9097,8 +9098,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1513,
-          "y": 4109,
+          "x": 1003,
+          "y": 3212,
           "ru": {
             "title": "4124",
             "description": null
@@ -9111,8 +9112,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1761,
-          "y": 4109,
+          "x": 1189,
+          "y": 3212,
           "ru": {
             "title": "4125",
             "description": null
@@ -9125,8 +9126,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 3741,
+          "x": 770,
+          "y": 2935,
           "ru": {
             "title": "4140",
             "description": null
@@ -9139,8 +9140,8 @@
         {
           "type": "WC_WOMAN",
           "is_closed": false,
-          "x": 1203,
-          "y": 3836,
+          "x": 770,
+          "y": 3007,
           "ru": {
             "title": null,
             "description": null
@@ -9153,8 +9154,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 1203,
-          "y": 3929,
+          "x": 770,
+          "y": 3077,
           "ru": {
             "title": "4121",
             "description": null
@@ -9167,8 +9168,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 925,
-          "y": 4312,
+          "x": 561,
+          "y": 3364,
           "ru": {
             "title": "4109",
             "description": null
@@ -9181,8 +9182,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 743,
-          "y": 4312,
+          "x": 424,
+          "y": 3364,
           "ru": {
             "title": "4108",
             "description": null
@@ -9195,8 +9196,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 575,
-          "y": 4312,
+          "x": 298,
+          "y": 3364,
           "ru": {
             "title": "4107",
             "description": null
@@ -9209,8 +9210,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 343,
-          "y": 4375,
+          "x": 124,
+          "y": 3412,
           "ru": {
             "title": "4106",
             "description": null
@@ -9223,8 +9224,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 343,
-          "y": 4760,
+          "x": 124,
+          "y": 3701,
           "ru": {
             "title": "4105",
             "description": null
@@ -9237,8 +9238,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 679,
-          "y": 4949,
+          "x": 376,
+          "y": 3843,
           "ru": {
             "title": "4104",
             "description": null
@@ -9251,8 +9252,8 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 980,
-          "y": 4949,
+          "x": 602,
+          "y": 3843,
           "ru": {
             "title": "4103",
             "description": null

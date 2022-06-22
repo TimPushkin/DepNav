@@ -69,9 +69,9 @@ class MapScreenState : ViewModel() {
     /**
      * Sets the parameters of the displayed map.
      */
-    fun setParams(width: Int, height: Int, tileSize: Int = 1024) {
+    fun setParams(levelsNum: Int, width: Int, height: Int, tileSize: Int) {
         state.shutdown()
-        state = MapState(1, width, height, tileSize) { scale(0f) }.apply {
+        state = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
             onTap { _, _ ->
                 if (!highlightMarker) showUI = !showUI
