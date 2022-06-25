@@ -14,7 +14,10 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.graphics.toArgb
 import androidx.core.view.WindowInsetsControllerCompat
 import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.*
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.runBlocking
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.model.MarkerText
@@ -29,6 +32,9 @@ private const val TAG = "MainActivity"
 private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 
+/**
+ * Activity which displays the map screen.
+ */
 class MainActivity : LanguageAwareActivity() {
     private val mMapScreenState: MapScreenState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
@@ -57,7 +63,7 @@ class MainActivity : LanguageAwareActivity() {
         }
     }
 
-    class SearchForMarker : ActivityResultContract<Unit, Int?>() {
+    private class SearchForMarker : ActivityResultContract<Unit, Int?>() {
         override fun createIntent(context: Context, input: Unit) =
             Intent(context, SearchActivity::class.java)
 

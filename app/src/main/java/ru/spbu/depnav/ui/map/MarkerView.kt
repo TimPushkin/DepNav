@@ -17,11 +17,15 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
+import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.Marker.MarkerType
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private const val LARGE_SCALE_FACTOR = 1.5f
 
+/**
+ * Visual representation of a [Marker].
+ */
 @Composable
 fun MarkerView(
     title: String,
@@ -122,8 +126,7 @@ private fun MarkerIcon(
             .then(modifier),
         alpha = if (faded) 0.5f else 1f,
         colorFilter =
-        if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
-        else null
+        if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }) else null
     )
 }
 
@@ -144,8 +147,7 @@ private fun RoomIcon(name: String, faded: Boolean, large: Boolean, modifier: Mod
             modifier = Modifier.padding(if (large) textPadding * LARGE_SCALE_FACTOR else textPadding),
             maxLines = 1,
             style = MaterialTheme.typography.body1.let { style ->
-                if (large) style.copy(fontSize = style.fontSize * LARGE_SCALE_FACTOR)
-                else style
+                if (large) style.copy(fontSize = style.fontSize * LARGE_SCALE_FACTOR) else style
             }
         )
     }

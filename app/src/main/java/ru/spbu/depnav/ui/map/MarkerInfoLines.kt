@@ -1,6 +1,11 @@
 package ru.spbu.depnav.ui.map
 
-import androidx.compose.foundation.layout.*
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
@@ -13,6 +18,9 @@ import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
+/**
+ * Lines with text information about a marker.
+ */
 @Composable
 fun MarkerInfoLines(title: String, description: String, isClosed: Boolean) {
     Row(
