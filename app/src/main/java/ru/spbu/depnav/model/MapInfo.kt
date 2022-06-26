@@ -19,6 +19,8 @@ data class MapInfo(
     @ColumnInfo(name = "floor_height") val floorHeight: Int,
     /** Size of the sides of square tiles used in this map in pixels. */
     @ColumnInfo(name = "tile_size") val tileSize: Int,
+    /** Number of levels of detail this map has. */
+    @ColumnInfo(name = "levels_num") val levelsNum: Int,
     /** Number of floors on this map. */
     @ColumnInfo(name = "floors_num") val floorsNum: Int
 )

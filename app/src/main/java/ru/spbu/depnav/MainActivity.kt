@@ -90,11 +90,17 @@ class MainActivity : LanguageAwareActivity() {
         initFloors(mapInfo.floorsNum)
 
         when {
-            mMapScreenState.usesDarkThemeTiles == null -> {
-                mMapScreenState.setParams(mapInfo.floorWidth, mapInfo.floorHeight, mapInfo.tileSize)
+            mMapScreenState.usesDarkThemeTiles == null -> { // Map screen state is not initialized
+                mMapScreenState.setParams(
+                    mapInfo.levelsNum,
+                    mapInfo.floorWidth,
+                    mapInfo.floorHeight,
+                    mapInfo.tileSize
+                )
                 setFloor(mFloors.keys.first())
             }
-            mMapScreenState.usesDarkThemeTiles != isInDarkTheme -> setFloor(mMapScreenState.currentFloor)
+            mMapScreenState.usesDarkThemeTiles != isInDarkTheme -> // Tiles update required
+                setFloor(mMapScreenState.currentFloor)
         }
 
         setContent {
