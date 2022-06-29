@@ -26,7 +26,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-v2
+          key: avd-v3
 
       - name: Create AVD and generate a snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
