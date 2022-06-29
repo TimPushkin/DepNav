@@ -66,7 +66,7 @@
         },
         {
           "type": "ELEVATOR",
-          "is_closed": true,
+          "is_closed": false,
           "x": 2947,
           "y": 701,
           "ru": {
@@ -1677,7 +1677,7 @@
         {
           "type": "ROOM",
           "is_closed": false,
-          "x": 378,
+          "x": 602,
           "y": 3844,
           "ru": {
             "title": "1102",
@@ -1751,7 +1751,7 @@
         },
         {
           "type": "ELEVATOR",
-          "is_closed": true,
+          "is_closed": false,
           "x": 2947,
           "y": 701,
           "ru": {
@@ -2105,11 +2105,11 @@
           "x": 7922,
           "y": 3592,
           "ru": {
-            "title": "\"Библиотека\"",
+            "title": "Библиотека",
             "description": null
           },
           "en": {
-            "title": "\"Library\"",
+            "title": "Library",
             "description": null
           }
         },
@@ -4318,7 +4318,7 @@
         },
         {
           "type": "ELEVATOR",
-          "is_closed": true,
+          "is_closed": false,
           "x": 2947,
           "y": 701,
           "ru": {
@@ -5880,7 +5880,7 @@
             "description": null
           },
           "en": {
-            "title": "33220",
+            "title": "3320",
             "description": null
           }
         },
@@ -6437,11 +6437,11 @@
           "y": 2281,
           "ru": {
             "title": "3160",
-            "description": null
+            "description": "Библиотека астронома"
           },
           "en": {
             "title": "3160",
-            "description": null
+            "description": "Astronomer's library"
           }
         },
         {
@@ -6843,7 +6843,7 @@
         },
         {
           "type": "ELEVATOR",
-          "is_closed": true,
+          "is_closed": false,
           "x": 2947,
           "y": 701,
           "ru": {
