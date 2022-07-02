@@ -26,7 +26,7 @@ jobs:
           path: |
             ~/.android/avd/*
             ~/.android/adb*
-          key: avd-v3
+          key: avd-v4
 
       - name: Create AVD and generate a snapshot for caching
         if: steps.avd-cache.outputs.cache-hit != 'true'
@@ -35,6 +35,8 @@ jobs:
           api-level: ${{env.API_LEVEL}}
           arch: ${{env.ARCH}}
           force-avd-creation: false
+          # https://developer.android.com/studio/run/emulator-commandline
+          emulator-options: -no-audio -no-window -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect
           script: echo "Generated AVD snapshot for caching"
 
       - name: Grant execute permission for gradlew
@@ -46,5 +48,5 @@ jobs:
           api-level: ${{env.API_LEVEL}}
           arch: ${{env.ARCH}}
           force-avd-creation: false
-          emulator-options: -no-snapshot-save
+          emulator-options: -no-audio -no-window -no-snapshot-save -no-boot-anim -camera-back none -camera-front none -gpu swiftshader_indirect
           script: ./gradlew connectedDebugAndroidTest
