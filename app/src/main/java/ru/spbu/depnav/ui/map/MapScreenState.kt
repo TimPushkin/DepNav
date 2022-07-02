@@ -1,11 +1,9 @@
 package ru.spbu.depnav.ui.map
 
 import android.util.Log
-import androidx.compose.foundation.clickable
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -13,6 +11,7 @@ import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.centerOnMarker
+import ovh.plrapps.mapcompose.api.onMarkerClick
 import ovh.plrapps.mapcompose.api.onTap
 import ovh.plrapps.mapcompose.api.removeAllLayers
 import ovh.plrapps.mapcompose.api.removeAllMarkers
@@ -66,6 +65,8 @@ class MapScreenState : ViewModel() {
     var highlightedMarker by mutableStateOf<Pair<Marker, MarkerText>?>(null)
         private set
 
+    private var clickableMarkers = emptyMap<String, Pair<Marker, MarkerText>>()
+
     /**
      * Sets the parameters of the displayed map.
      */
@@ -78,6 +79,12 @@ class MapScreenState : ViewModel() {
                 highlightMarker = false
                 highlightedMarker?.let { (marker, _) -> state.removeMarker(marker.idStr) }
             }
+            onMarkerClick { id, _, _ ->
+                clickableMarkers[id]?.let { (marker, markerText) ->
+                    Log.d(TAG, "Received a click on a clickable marker $id")
+                    highlightMarker(marker, markerText)
+                } ?: Log.d(TAG, "Received a click on a non-clickable marker $id")
+            }
         }
     }
 
@@ -88,20 +95,13 @@ class MapScreenState : ViewModel() {
             y = marker.y,
             zIndex = if (isHighlighted) 1f else 0f,
             relativeOffset = Offset(-0.5f, -0.5f),
-            clickable = false,
             clipShape = null
         ) {
             MarkerView(
                 title = markerText.title ?: "",
                 type = marker.type,
                 isClosed = marker.isClosed,
-                isHighlighted = isHighlighted,
-                modifier =
-                if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank()) {
-                    Modifier.clickable { highlightMarker(marker, markerText) }
-                } else {
-                    Modifier
-                }
+                isHighlighted = isHighlighted
             )
         }
     }
@@ -138,9 +138,20 @@ class MapScreenState : ViewModel() {
 
         state.removeAllMarkers()
 
+        val newClickableMarkers = mutableMapOf<String, Pair<Marker, MarkerText>>()
+
         for ((marker, markerText) in markersWithText) {
             placeMarker(marker, markerText, isHighlighted = false)
+
+            if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank()) {
+                if (newClickableMarkers.containsKey(marker.idStr)) {
+                    Log.e(TAG, "Adding a clickable marker ${marker.idStr} which is already added")
+                }
+                newClickableMarkers[marker.idStr] = marker to markerText
+            }
         }
+
+        clickableMarkers = newClickableMarkers
     }
 
     /**
