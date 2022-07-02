@@ -5,10 +5,13 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addLayer
+import ovh.plrapps.mapcompose.api.addLazyLoader
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.centerOnMarker
 import ovh.plrapps.mapcompose.api.onMarkerClick
@@ -19,14 +22,18 @@ import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
+import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
 
 private const val TAG = "MapViewModel"
 
+private const val LAZY_LOADER_ID = "main"
+
 /**
  * State of the [MapScreen].
  */
+@OptIn(ExperimentalClusteringApi::class)
 class MapScreenState : ViewModel() {
     /**
      * State of the map currently displayed.
@@ -74,6 +81,7 @@ class MapScreenState : ViewModel() {
         state.shutdown()
         state = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
+            addLazyLoader(LAZY_LOADER_ID, padding = 20.dp)
 
             onTap { _, _ ->
                 if (!highlightMarker) showUI = !showUI
@@ -112,7 +120,8 @@ class MapScreenState : ViewModel() {
             zIndex = if (isHighlighted) 1f else 0f,
             clickable = isClickable,
             relativeOffset = Offset(-0.5f, -0.5f),
-            clipShape = null
+            clipShape = null,
+            renderingStrategy = RenderingStrategy.LazyLoading(LAZY_LOADER_ID)
         ) {
             MarkerView(
                 title = markerText.title ?: "",
