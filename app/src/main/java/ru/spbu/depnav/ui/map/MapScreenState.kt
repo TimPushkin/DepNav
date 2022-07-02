@@ -65,7 +65,7 @@ class MapScreenState : ViewModel() {
     var highlightedMarker by mutableStateOf<Pair<Marker, MarkerText>?>(null)
         private set
 
-    private var clickableMarkers = emptyMap<String, Pair<Marker, MarkerText>>()
+    private val clickableMarkers = mutableMapOf<String, Pair<Marker, MarkerText>>()
 
     /**
      * Sets the parameters of the displayed map.
@@ -74,26 +74,43 @@ class MapScreenState : ViewModel() {
         state.shutdown()
         state = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
+
             onTap { _, _ ->
                 if (!highlightMarker) showUI = !showUI
                 highlightMarker = false
-                highlightedMarker?.let { (marker, _) -> state.removeMarker(marker.idStr) }
+                highlightedMarker?.let { (marker, _) ->
+                    clickableMarkers.remove(marker.idStr)
+                    state.removeMarker(marker.idStr)
+                }
             }
+
             onMarkerClick { id, _, _ ->
+                Log.d(TAG, "Received a click on marker $id")
                 clickableMarkers[id]?.let { (marker, markerText) ->
-                    Log.d(TAG, "Received a click on a clickable marker $id")
-                    highlightMarker(marker, markerText)
-                } ?: Log.d(TAG, "Received a click on a non-clickable marker $id")
+                    if (highlightedMarker?.first?.idStr != id) highlightMarker(marker, markerText)
+                    else Log.d(TAG, "Marker $id (${markerText.title}) is already highlighted")
+                } ?: Log.e(TAG, "Marker $id is not clickable")
             }
         }
     }
 
     private fun placeMarker(marker: Marker, markerText: MarkerText, isHighlighted: Boolean) {
+        val isClickable =
+            !markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank()
+
+        if (isClickable) {
+            if (clickableMarkers.containsKey(marker.idStr)) {
+                Log.e(TAG, "Adding a clickable marker ${marker.idStr} which is already added")
+            }
+            clickableMarkers[marker.idStr] = marker to markerText
+        }
+
         state.addMarker(
             id = marker.idStr,
             x = marker.x,
             y = marker.y,
             zIndex = if (isHighlighted) 1f else 0f,
+            clickable = isClickable,
             relativeOffset = Offset(-0.5f, -0.5f),
             clipShape = null
         ) {
@@ -110,7 +127,10 @@ class MapScreenState : ViewModel() {
         val newMarker = marker.copy(id = Int.MIN_VALUE) // Real IDs start from 1
         val newMarkerText = markerText.copy(markerId = newMarker.id)
 
-        highlightedMarker?.let { (oldMarker, _) -> state.removeMarker(oldMarker.idStr) }
+        highlightedMarker?.let { (oldMarker, _) ->
+            clickableMarkers.remove(oldMarker.idStr) // Not to trigger "double adding" logs
+            state.removeMarker(oldMarker.idStr)
+        }
 
         showUI = true
         highlightedMarker = newMarker to newMarkerText
@@ -136,22 +156,12 @@ class MapScreenState : ViewModel() {
     fun replaceMarkersWith(markersWithText: Map<Marker, MarkerText>) {
         Log.d(TAG, "Replacing markers...")
 
+        clickableMarkers.clear()
         state.removeAllMarkers()
-
-        val newClickableMarkers = mutableMapOf<String, Pair<Marker, MarkerText>>()
 
         for ((marker, markerText) in markersWithText) {
             placeMarker(marker, markerText, isHighlighted = false)
-
-            if (!markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank()) {
-                if (newClickableMarkers.containsKey(marker.idStr)) {
-                    Log.e(TAG, "Adding a clickable marker ${marker.idStr} which is already added")
-                }
-                newClickableMarkers[marker.idStr] = marker to markerText
-            }
         }
-
-        clickableMarkers = newClickableMarkers
     }
 
     /**
