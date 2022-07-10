@@ -80,7 +80,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     ksp "androidx.room:room-compiler:$room_version"
 
-    implementation 'ovh.plrapps:mapcompose:2.1.0'
+    implementation 'ovh.plrapps:mapcompose:2.1.2'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.3'

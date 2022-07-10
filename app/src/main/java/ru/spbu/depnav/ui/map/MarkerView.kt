@@ -122,8 +122,8 @@ private fun MarkerIcon(
         contentDescription = contentDescription,
         modifier = Modifier
             .size(if (large) size * LARGE_SCALE_FACTOR else size)
-            .shadow(if (large) shadow * LARGE_SCALE_FACTOR else shadow)
-            .then(modifier),
+            .then(modifier) // Should be set before setting the shadow
+            .shadow(if (large) shadow * LARGE_SCALE_FACTOR else shadow),
         alpha = if (faded) 0.5f else 1f,
         colorFilter =
         if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }) else null
