@@ -113,6 +113,7 @@ class MapScreenState : ViewModel() {
             }
 
             onMarkerClick { id, _, _ ->
+                if (markerAlpha <= 0) return@onMarkerClick
                 Log.d(TAG, "Received a click on marker $id")
                 clickableMarkers[id]?.let { (marker, markerText) ->
                     if (highlightedMarker?.first?.idStr != id) highlightMarker(marker, markerText)
