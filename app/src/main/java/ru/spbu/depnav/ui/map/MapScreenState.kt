@@ -38,7 +38,6 @@ import ru.spbu.depnav.model.MarkerText
 private const val TAG = "MapViewModel"
 
 private const val LAZY_LOADER_ID = "main"
-private const val HIGHLIGHTED_MARKER_ID = -1 // Real IDs start from 1
 private const val MIN_MARKER_VISIBILITY_SCALE = 0.2f
 private const val MAX_MARKER_VISIBILITY_SCALE = 0.5f
 
@@ -116,8 +115,7 @@ class MapScreenState : ViewModel() {
                 if (markerAlpha <= 0) return@onMarkerClick
                 Log.d(TAG, "Received a click on marker $id")
                 clickableMarkers[id]?.let { (marker, markerText) ->
-                    if (highlightedMarker?.first?.idStr != id) highlightMarker(marker, markerText)
-                    else Log.d(TAG, "Marker $id (${markerText.title}) is already highlighted")
+                    highlightMarker(marker, markerText)
                 } ?: Log.e(TAG, "Marker $id is not clickable")
             }
         }
@@ -164,7 +162,16 @@ class MapScreenState : ViewModel() {
     }
 
     private fun highlightMarker(marker: Marker, markerText: MarkerText) {
-        val newMarker = marker.copy(id = HIGHLIGHTED_MARKER_ID)
+        if (marker.id <= 0) { // Highlighting twice will result in occupying an ID twice
+            if (highlightedMarker?.first?.id == marker.id) {
+                Log.d(TAG, "Marker ${marker.id} (${markerText.title}) is already highlighted")
+            } else {
+                Log.e(TAG, "Unhighlighted marker IDs must start from 1, but got ${marker.id}")
+            }
+            return
+        }
+
+        val newMarker = marker.copy(id = -marker.id) // TODO: replace with fixed ID
         val newMarkerText = markerText.copy(markerId = newMarker.id)
 
         highlightedMarker?.let { (oldMarker, _) ->
