@@ -148,6 +148,8 @@ class MapScreenState : ViewModel() {
             clipShape = null,
             renderingStrategy = RenderingStrategy.LazyLoading(LAZY_LOADER_ID)
         ) {
+            if (!isHighlighted && markerAlpha <= 0) return@addMarker // Not to consume clicks
+
             MarkerView(
                 title = markerText.title ?: "",
                 type = marker.type,
