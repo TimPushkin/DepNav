@@ -29,6 +29,7 @@ import ovh.plrapps.mapcompose.api.removeAllMarkers
 import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
+import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
@@ -101,6 +102,7 @@ class MapScreenState : ViewModel() {
         state = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
             addLazyLoader(LAZY_LOADER_ID, padding = 20.dp)
+            shouldLoopScale = true
 
             onTap { _, _ ->
                 if (!highlightMarker) showUI = !showUI
