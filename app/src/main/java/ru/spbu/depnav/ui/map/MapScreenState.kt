@@ -41,6 +41,7 @@ private const val TAG = "MapViewModel"
 private const val LAZY_LOADER_ID = "main"
 private const val MIN_MARKER_VISIBILITY_SCALE = 0.2f
 private const val MAX_MARKER_VISIBILITY_SCALE = 0.5f
+private const val PIN_ID = "Pin" // Real ID are integers
 
 /**
  * State of the [MapScreen].
@@ -71,17 +72,17 @@ class MapScreenState : ViewModel() {
         private set
 
     /**
-     * Whether a marker is highlighted.
+     * Whether a marker is pinned.
      *
-     * It is separate from [highlightedMarker] because text needs to stay visible while hiding
-     * animation is playing.
+     * It is separate from [pinnedMarker] because text needs to stay visible while hiding animation
+     * is playing.
      */
-    var highlightMarker by mutableStateOf(false)
+    var isMarkerPinned by mutableStateOf(false)
 
     /**
-     * The marker currently highlighted.
+     * The marker currently pinned.
      */
-    var highlightedMarker by mutableStateOf<Pair<Marker, MarkerText>?>(null)
+    var pinnedMarker by mutableStateOf<Pair<Marker, MarkerText>?>(null)
         private set
 
     private val clickableMarkers = mutableMapOf<String, Pair<Marker, MarkerText>>()
@@ -105,20 +106,15 @@ class MapScreenState : ViewModel() {
             shouldLoopScale = true
 
             onTap { _, _ ->
-                if (!highlightMarker) showUI = !showUI
-                highlightMarker = false
-                highlightedMarker?.let { (marker, _) ->
-                    clickableMarkers.remove(marker.idStr)
-                    state.removeMarker(marker.idStr)
-                }
+                if (isMarkerPinned) state.removeMarker(PIN_ID)
+                else showUI = !showUI
+                isMarkerPinned = false
             }
 
             onMarkerClick { id, _, _ ->
-                if (markerAlpha <= 0) return@onMarkerClick
                 Log.d(TAG, "Received a click on marker $id")
-                clickableMarkers[id]?.let { (marker, markerText) ->
-                    highlightMarker(marker, markerText)
-                } ?: Log.e(TAG, "Marker $id is not clickable")
+                clickableMarkers[id]?.let { (marker, markerText) -> pinMarker(marker, markerText) }
+                    ?: Log.e(TAG, "Marker $id is not clickable")
             }
         }
 
@@ -127,7 +123,7 @@ class MapScreenState : ViewModel() {
             .launchIn(viewModelScope)
     }
 
-    private fun placeMarker(marker: Marker, markerText: MarkerText, isHighlighted: Boolean) {
+    private fun placeMarker(marker: Marker, markerText: MarkerText) {
         val isClickable =
             !markerText.title.isNullOrBlank() || !markerText.description.isNullOrBlank()
 
@@ -142,52 +138,37 @@ class MapScreenState : ViewModel() {
             id = marker.idStr,
             x = marker.x,
             y = marker.y,
-            zIndex = if (isHighlighted) 1f else 0f,
             clickable = isClickable,
             relativeOffset = Offset(-0.5f, -0.5f),
             clipShape = null,
             renderingStrategy = RenderingStrategy.LazyLoading(LAZY_LOADER_ID)
         ) {
-            if (!isHighlighted && markerAlpha <= 0) return@addMarker // Not to consume clicks
+            if (markerAlpha <= 0) return@addMarker // Not to consume clicks
 
             MarkerView(
                 title = markerText.title ?: "",
                 type = marker.type,
                 isClosed = marker.isClosed,
-                isHighlighted = isHighlighted,
-                modifier =
-                if (!isHighlighted) {
-                    Modifier.graphicsLayer(alpha = markerAlpha)
-                } else {
-                    Modifier
-                }
+                modifier = Modifier.graphicsLayer(alpha = markerAlpha)
             )
         }
     }
 
-    private fun highlightMarker(marker: Marker, markerText: MarkerText) {
-        if (marker.id <= 0) { // Highlighting twice will result in occupying an ID twice
-            if (highlightedMarker?.first?.id == marker.id) {
-                Log.d(TAG, "Marker ${marker.id} (${markerText.title}) is already highlighted")
-            } else {
-                Log.e(TAG, "Unhighlighted marker IDs must start from 1, but got ${marker.id}")
-            }
-            return
-        }
-
-        val newMarker = marker.copy(id = -marker.id) // TODO: replace with fixed ID
-        val newMarkerText = markerText.copy(markerId = newMarker.id)
-
-        highlightedMarker?.let { (oldMarker, _) ->
-            clickableMarkers.remove(oldMarker.idStr) // Not to trigger "double adding" logs
-            state.removeMarker(oldMarker.idStr)
-        }
-
-        highlightedMarker = newMarker to newMarkerText
+    private fun pinMarker(marker: Marker, markerText: MarkerText) {
+        pinnedMarker = marker to markerText
         showUI = true
-        highlightMarker = true
+        isMarkerPinned = true
 
-        placeMarker(newMarker, newMarkerText, isHighlighted = true)
+        state.removeMarker(PIN_ID)
+        state.addMarker(
+            id = PIN_ID,
+            x = marker.x,
+            y = marker.y,
+            zIndex = 1f,
+            clickable = false,
+            relativeOffset = Offset(-0.5f, -0.5f),
+            clipShape = null
+        ) { Pin() }
     }
 
     /**
@@ -210,9 +191,7 @@ class MapScreenState : ViewModel() {
         clickableMarkers.clear()
         state.removeAllMarkers()
 
-        for ((marker, markerText) in markersWithText) {
-            placeMarker(marker, markerText, isHighlighted = false)
-        }
+        for ((marker, markerText) in markersWithText) placeMarker(marker, markerText)
     }
 
     /**
@@ -221,7 +200,7 @@ class MapScreenState : ViewModel() {
     fun focusOnMarker(marker: Marker, markerText: MarkerText) {
         Log.d(TAG, "Centering on marker $marker")
 
-        highlightMarker(marker, markerText)
+        pinMarker(marker, markerText)
         viewModelScope.launch { state.centerOnMarker(marker.idStr, 1f) }
     }
 }

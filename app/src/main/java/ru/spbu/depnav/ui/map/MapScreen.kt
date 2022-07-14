@@ -42,7 +42,7 @@ fun MapScreen(
 
     BottomSheetScaffold(
         sheetContent = {
-            mapScreenState.highlightedMarker?.let { (marker, markerText) ->
+            mapScreenState.pinnedMarker?.let { (marker, markerText) ->
                 MarkerInfoLines(
                     title = markerText.title ?: stringResource(R.string.no_title),
                     isClosed = marker.isClosed,
@@ -107,10 +107,10 @@ fun MapScreen(
         }
     }
 
-    LaunchedEffect(mapScreenState.showUI, mapScreenState.highlightMarker) {
-        if (mapScreenState.showUI && mapScreenState.highlightMarker) {
+    LaunchedEffect(mapScreenState.showUI, mapScreenState.isMarkerPinned) {
+        if (mapScreenState.showUI && mapScreenState.isMarkerPinned) {
             scaffoldState.bottomSheetState.expand()
-        } else if (mapScreenState.highlightedMarker != null) {
+        } else if (mapScreenState.pinnedMarker != null) {
             scaffoldState.bottomSheetState.collapse()
         }
     }

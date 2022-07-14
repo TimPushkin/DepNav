@@ -156,7 +156,7 @@ class MainActivity : LanguageAwareActivity() {
         val shouldReplaceMarkers = floorIndex != mMapScreenState.currentFloor
 
         mMapScreenState.currentFloor = floorIndex
-        mMapScreenState.highlightMarker = false
+        mMapScreenState.isMarkerPinned = false
 
         lifecycleScope.launch {
             mMapScreenState.replaceLayersWith(floor.layers, isInDarkTheme)
