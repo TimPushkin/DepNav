@@ -45,8 +45,8 @@ fun MapScreen(
             mapScreenState.pinnedMarker?.let { (marker, markerText) ->
                 MarkerInfoLines(
                     title = markerText.title ?: stringResource(R.string.no_title),
-                    isClosed = marker.isClosed,
-                    description = markerText.description ?: stringResource(R.string.no_description)
+                    description = markerText.description,
+                    isClosed = marker.isClosed
                 )
             }
         },
