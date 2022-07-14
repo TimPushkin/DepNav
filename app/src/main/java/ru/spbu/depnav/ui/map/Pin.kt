@@ -11,6 +11,9 @@ import ru.spbu.depnav.R
 
 private val SIZE = 30.dp
 
+/**
+ * Pin for highlighting map markers.
+ */
 @Composable
 fun Pin(modifier: Modifier = Modifier) {
     Image(

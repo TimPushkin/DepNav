@@ -106,8 +106,7 @@ class MapScreenState : ViewModel() {
             shouldLoopScale = true
 
             onTap { _, _ ->
-                if (isMarkerPinned) state.removeMarker(PIN_ID)
-                else showUI = !showUI
+                if (isMarkerPinned) state.removeMarker(PIN_ID) else showUI = !showUI
                 isMarkerPinned = false
             }
 
