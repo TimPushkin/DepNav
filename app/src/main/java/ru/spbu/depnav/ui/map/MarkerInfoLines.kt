@@ -22,7 +22,7 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
  * Lines with text information about a marker.
  */
 @Composable
-fun MarkerInfoLines(title: String, description: String, isClosed: Boolean) {
+fun MarkerInfoLines(title: String, description: String?, isClosed: Boolean) {
     Row(
         modifier = Modifier.padding(10.dp),
         verticalAlignment = Alignment.Bottom
@@ -53,7 +53,7 @@ fun MarkerInfoLines(title: String, description: String, isClosed: Boolean) {
         }
     }
 
-    if (description.isNotBlank()) {
+    if (description != null && description.isNotBlank()) {
         Text(
             text = description,
             modifier = Modifier.padding(start = 10.dp, end = 10.dp)
