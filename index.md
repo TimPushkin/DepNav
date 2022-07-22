@@ -6,4 +6,8 @@ No personal information is collected, processed, transmitted, or stored by DepNa
 
 ### Contact details
 
-- Timofey Pushkin, pushkin.td@gmail.com
+If you encounter any privacy issues with DepNav, please send an email to pushkin.td@gmail.com, Timofey Pushkin.
+
+---
+
+22.07.2022
