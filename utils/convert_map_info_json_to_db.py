@@ -69,10 +69,10 @@ PRIMARY KEY(`id`)
 cur.execute('''
 CREATE VIRTUAL TABLE IF NOT EXISTS `marker_texts` USING FTS4(
 `marker_id` INTEGER NOT NULL,
+`language_id` INTEGER NOT NULL,
 `title` TEXT,
 `description` TEXT,
 tokenize=unicode61,
-languageid=`lid`,
 notindexed=`marker_id`
 )
 ''')
@@ -87,23 +87,23 @@ tile_size = jf["tileSize"]
 levels_num = jf["levelsNum"]
 
 floors_num = 0
-rowid = 1
+row_id = 1
 for floor_obj in jf["floors"]:
     floors_num += 1
     floor = floor_obj["floor"]
     for marker_obj in sorted(floor_obj["markers"], key=lambda marker: marker["type"]):
         marker_type, is_closed, x, y, ru, en = marker_obj.values()
         cur.execute("INSERT INTO markers VALUES (?, ?, ?, ?, ?, ?)",
-                    (rowid, marker_type, is_closed, floor, x / floor_width, y / floor_height))
+                    (row_id, marker_type, is_closed, floor, x / floor_width, y / floor_height))
         cur.execute(
             "INSERT INTO marker_texts"
-            "(`marker_id`,`lid`,`title`,`description`) VALUES (:id, :lid, :title, :description)",
-            {"id": rowid, "lid": LID.EN.value, **en})
+            "(`marker_id`,`language_id`,`title`,`description`) VALUES (:id, :language_id, :title, :description)",
+            {"id": row_id, "language_id": LID.EN.value, **en})
         cur.execute(
             "INSERT INTO marker_texts"
-            "(`marker_id`,`lid`,`title`,`description`) VALUES (:id, :lid, :title, :description)",
-            {"id": rowid, "lid": LID.RU.value, **ru})
-        rowid += 1
+            "(`marker_id`,`language_id`,`title`,`description`) VALUES (:id, :language_id, :title, :description)",
+            {"id": row_id, "language_id": LID.RU.value, **ru})
+        row_id += 1
 
 cur.execute("INSERT INTO 'map_infos' VALUES (?, ?, ?, ?, ?, ?)",
             (jf["mapName"], floor_width, floor_height, tile_size, levels_num, floors_num))
