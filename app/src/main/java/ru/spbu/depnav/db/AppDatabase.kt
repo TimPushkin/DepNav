@@ -30,7 +30,7 @@ import ru.spbu.depnav.model.MarkerText
 /**
  * Room database containing information about maps and their markers.
  */
-@Database(entities = [MapInfo::class, Marker::class, MarkerText::class], version = 2)
+@Database(entities = [MapInfo::class, Marker::class, MarkerText::class], version = 3)
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     /**
