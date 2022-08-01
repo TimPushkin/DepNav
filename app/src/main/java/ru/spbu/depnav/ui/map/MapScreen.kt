@@ -126,10 +126,8 @@ fun MapScreen(
     }
 
     LaunchedEffect(mapScreenState.showUI, mapScreenState.isMarkerPinned) {
-        if (mapScreenState.showUI && mapScreenState.isMarkerPinned) {
-            scaffoldState.bottomSheetState.expand()
-        } else {
-            scaffoldState.bottomSheetState.collapse()
+        scaffoldState.bottomSheetState.apply {
+            if (mapScreenState.showUI && mapScreenState.isMarkerPinned) expand() else collapse()
         }
     }
 }

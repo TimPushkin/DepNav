@@ -58,12 +58,11 @@ abstract class AppDatabase : RoomDatabase() {
         fun getInstance(context: Context): AppDatabase {
             synchronized(AppDatabase::class.java) {
                 if (!this::instance.isInitialized) {
-                    instance = Room
-                        .databaseBuilder(
-                            context.applicationContext,
-                            AppDatabase::class.java,
-                            DB_ASSET
-                        )
+                    instance = Room.databaseBuilder(
+                        context.applicationContext,
+                        AppDatabase::class.java,
+                        DB_ASSET
+                    )
                         .createFromAsset(DB_ASSET)
                         .fallbackToDestructiveMigration()
                         .build()
