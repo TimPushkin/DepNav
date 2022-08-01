@@ -66,7 +66,7 @@ fun MapScreen(
                     description = markerText.description,
                     isClosed = marker.isClosed
                 )
-            }
+            } ?: Box(modifier = Modifier.padding(1.dp)) {} // Stub to always have sheet expandable
         },
         modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
@@ -128,7 +128,7 @@ fun MapScreen(
     LaunchedEffect(mapScreenState.showUI, mapScreenState.isMarkerPinned) {
         if (mapScreenState.showUI && mapScreenState.isMarkerPinned) {
             scaffoldState.bottomSheetState.expand()
-        } else if (mapScreenState.pinnedMarker != null) {
+        } else {
             scaffoldState.bottomSheetState.collapse()
         }
     }
