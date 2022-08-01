@@ -85,11 +85,8 @@ class MainActivity : LanguageAwareActivity() {
         override fun createIntent(context: Context, input: Unit) =
             Intent(context, SearchActivity::class.java)
 
-        override fun parseResult(resultCode: Int, intent: Intent?): Int? {
-            if (resultCode != Activity.RESULT_OK) return null
-            // getInt() is not used as it requires a default value
-            return intent?.extras?.get(EXTRA_MARKER_ID)?.run { toString().toInt() }
-        }
+        override fun parseResult(resultCode: Int, intent: Intent?) =
+            if (resultCode == Activity.RESULT_OK) intent?.extras?.getInt(EXTRA_MARKER_ID) else null
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -142,22 +139,19 @@ class MainActivity : LanguageAwareActivity() {
 
         runBlocking {
             mFloors = List(floorsNum) {
-                val floor = it + 1
-                floor to Floor(
-                    layers = listOf(factory.makeTileProviderForFloor(floor, isInDarkTheme)),
-                    markers = async(Dispatchers.IO) {
-                        markerDao.loadWithTextByFloor(
-                            floor,
-                            systemLanguage
-                        ).entries.associate { (marker, markerTexts) ->
-                            val markerText = markerTexts.firstOrNull() ?: run {
-                                Log.w(TAG, "Marker $marker has no text on $systemLanguage")
-                                MarkerText(marker.id, systemLanguage, null, null)
-                            }
-                            marker to markerText
+                val floorNum = it + 1
+                val layers = listOf(factory.makeTileProviderForFloor(floorNum, isInDarkTheme))
+                val markers = async(Dispatchers.IO) {
+                    val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
+                    markersWithTexts.entries.associate { (marker, markerTexts) ->
+                        val markerText = markerTexts.firstOrNull() ?: run {
+                            Log.w(TAG, "Marker $marker has no text on $systemLanguage")
+                            MarkerText(marker.id, systemLanguage, null, null)
                         }
+                        marker to markerText
                     }
-                )
+                }
+                floorNum to Floor(layers, markers)
             }.toMap()
         }
     }
