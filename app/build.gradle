@@ -26,13 +26,13 @@ android {
         applicationId 'ru.spbu.depnav'
         minSdk 21
         targetSdk 32
-        versionCode 3
-        versionName '1.0.3'
+        versionCode 4
+        versionName '1.0.4'
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
         ksp {
-            arg('room.schemaLocation', "$projectDir/schemas")
+            arg 'room.schemaLocation', "$projectDir/schemas"
         }
     }
 
