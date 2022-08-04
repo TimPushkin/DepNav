@@ -12,6 +12,8 @@ The following maps are available:
 
 - Mathematics and Mechanics Faculty, St. Petersburg State University
 
+[<img src="https://i.imgur.com/Hh95pHe.png" alt="AppGallery" height="50" />](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000)
+
 ## Features
 
 With **DepNav** you can do the following:
@@ -24,9 +26,12 @@ With **DepNav** you can do the following:
 | ![Map](https://i.imgur.com/SsslKgp.jpg) | ![Search](https://i.imgur.com/jpYNy09.jpg) | ![Info](https://i.imgur.com/x5rhlOm.jpg) |
 |:---------------------------------------:|:------------------------------------------:|:----------------------------------------:|
 
-## Download and install
+## Get it!
 
-Go to [Releases](https://github.com/TimPushkin/DepNav/releases) section, download the latest
-available APK, and install it on your device. Android 5.0 or newer is supported.
+The following download sources are available:
 
-Google Play release is planned in the future.
+- [AppGallery](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000)
+  (**recommended**) – install DepNav from AppGallery and receive its updates automatically
+- [APK](https://github.com/TimPushkin/DepNav/releases) – download, install, and update DepNav manually
+
+Android 5.0 or newer required.
