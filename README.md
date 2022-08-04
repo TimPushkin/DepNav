@@ -32,6 +32,7 @@ The following download sources are available:
 
 - [AppGallery](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000)
   (**recommended**) – install DepNav from AppGallery and receive its updates automatically
+
 - [APK](https://github.com/TimPushkin/DepNav/releases) – download, install, and update DepNav manually
 
 Android 5.0 or newer required.
