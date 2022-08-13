@@ -53,15 +53,15 @@ const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
  * Activity which displays the search screen.
  */
 class SearchActivity : LanguageAwareActivity() {
-    private val mMarkerSearchState: MarkerSearchState by viewModels()
-    private lateinit var mAppDatabase: AppDatabase
+    private val markerSearchState: MarkerSearchState by viewModels()
+    private lateinit var appDatabase: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        mAppDatabase = AppDatabase.getInstance(this)
+        appDatabase = AppDatabase.getInstance(this)
 
         setContent {
             DepNavTheme {
@@ -72,7 +72,7 @@ class SearchActivity : LanguageAwareActivity() {
                     val insetsNoBottom =
                         WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
                     val searchMatches by
-                    mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
+                    markerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
                     MarkerSearch(
                         matches = searchMatches,
                         onSearch = this::onSearch,
@@ -86,11 +86,11 @@ class SearchActivity : LanguageAwareActivity() {
     }
 
     private fun onSearch(text: String) {
-        mMarkerSearchState.search(text, mAppDatabase.markerTextDao(), systemLanguage)
+        markerSearchState.search(text, appDatabase.markerTextDao(), systemLanguage)
     }
 
     private fun onClear() {
-        mMarkerSearchState.clear()
+        markerSearchState.clear()
     }
 
     private fun onMarkerSelected(id: Int) {

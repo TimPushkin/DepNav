@@ -54,9 +54,9 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
  * Activity which displays the map screen.
  */
 class MainActivity : LanguageAwareActivity() {
-    private val mMapScreenState: MapScreenState by viewModels()
-    private lateinit var mAppDatabase: AppDatabase
-    private lateinit var mFloors: Map<Int, Floor>
+    private val mapScreenState: MapScreenState by viewModels()
+    private lateinit var appDatabase: AppDatabase
+    private lateinit var floors: Map<Int, Floor>
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
@@ -64,7 +64,7 @@ class MainActivity : LanguageAwareActivity() {
         val markerId = result ?: return@registerForActivityResult
         lifecycleScope.launch {
             val (marker, markerTexts) =
-                mAppDatabase.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
+                appDatabase.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
 
             Log.d(TAG, "Loaded searched marker: $marker")
 
@@ -73,7 +73,7 @@ class MainActivity : LanguageAwareActivity() {
                 MarkerText(marker.id, systemLanguage, null, null)
             }
 
-            setFloor(marker.floor) { mMapScreenState.focusOnMarker(marker, markerText) }
+            setFloor(marker.floor) { mapScreenState.focusOnMarker(marker, markerText) }
         }
     }
 
@@ -90,28 +90,28 @@ class MainActivity : LanguageAwareActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        mAppDatabase = AppDatabase.getInstance(this)
-        val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
+        appDatabase = AppDatabase.getInstance(this)
+        val mapInfo = runBlocking { appDatabase.mapInfoDao().loadByName(MAP_NAME) }
 
         initFloors(mapInfo.floorsNum)
 
-        if (mMapScreenState.state.fullSize == IntSize.Zero) { // State is not initialized
-            mMapScreenState.setParams(
+        if (mapScreenState.state.fullSize == IntSize.Zero) { // State is not initialized
+            mapScreenState.setParams(
                 mapInfo.levelsNum,
                 mapInfo.floorWidth,
                 mapInfo.floorHeight,
                 mapInfo.tileSize
             )
-            mMapScreenState.currentFloor = mFloors.keys.first()
-            setFloor(mMapScreenState.currentFloor)
+            mapScreenState.currentFloor = floors.keys.first()
+            setFloor(mapScreenState.currentFloor)
         }
 
         setContent {
             DepNavTheme {
-                mMapScreenState.tileColor = MaterialTheme.colors.onBackground
+                mapScreenState.tileColor = MaterialTheme.colors.onBackground
 
                 MapScreen(
-                    mapScreenState = mMapScreenState,
+                    mapScreenState = mapScreenState,
                     floorsNum = mapInfo.floorsNum,
                     onStartSearch = startSearch::launch,
                     onFloorSwitch = this::setFloor
@@ -122,10 +122,10 @@ class MainActivity : LanguageAwareActivity() {
 
     private fun initFloors(floorsNum: Int) {
         val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
-        val markerDao = mAppDatabase.markerDao()
+        val markerDao = appDatabase.markerDao()
 
         runBlocking {
-            mFloors = List(floorsNum) {
+            floors = List(floorsNum) {
                 val floorNum = it + 1
                 val layers = listOf(factory.makeTileProviderForFloor(floorNum))
                 val markers = async(Dispatchers.IO) {
@@ -144,7 +144,7 @@ class MainActivity : LanguageAwareActivity() {
     }
 
     private fun setFloor(floorIndex: Int, onFinished: () -> Unit = {}) {
-        val floor = mFloors[floorIndex]
+        val floor = floors[floorIndex]
         if (floor == null) {
             Log.e(TAG, "Cannot switch to floor $floorIndex which does not exist")
             return
@@ -152,12 +152,12 @@ class MainActivity : LanguageAwareActivity() {
 
         Log.i(TAG, "Switching to floor $floorIndex")
 
-        mMapScreenState.currentFloor = floorIndex
-        mMapScreenState.isMarkerPinned = false
+        mapScreenState.currentFloor = floorIndex
+        mapScreenState.isMarkerPinned = false
 
         lifecycleScope.launch {
-            mMapScreenState.replaceLayersWith(floor.layers)
-            mMapScreenState.replaceMarkersWith(floor.markers.await())
+            mapScreenState.replaceLayersWith(floor.layers)
+            mapScreenState.replaceMarkersWith(floor.markers.await())
             Log.d(TAG, "Switched to floor $floorIndex")
             onFinished()
         }
