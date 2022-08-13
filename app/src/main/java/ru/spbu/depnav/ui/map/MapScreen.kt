@@ -25,9 +25,15 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
@@ -56,6 +62,8 @@ fun MapScreen(
     onStartSearch: () -> Unit,
     onFloorSwitch: (Int) -> Unit,
 ) {
+    val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
+    val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
     val scaffoldState = rememberBottomSheetScaffoldState()
 
     BottomSheetScaffold(
@@ -64,11 +72,11 @@ fun MapScreen(
                 MarkerInfoLines(
                     title = markerText.title ?: stringResource(R.string.no_title),
                     description = markerText.description,
-                    isClosed = marker.isClosed
+                    isClosed = marker.isClosed,
+                    modifier = Modifier.windowInsetsPadding(insetsNoTop)
                 )
             } ?: Box(modifier = Modifier.padding(1.dp)) {} // Stub to always have sheet expandable
         },
-        modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
         sheetShape = MaterialTheme.shapes.large.copy(
             bottomStart = CornerSize(0),
@@ -83,7 +91,9 @@ fun MapScreen(
             )
 
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(insetsNoBottom),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AnimatedVisibility(

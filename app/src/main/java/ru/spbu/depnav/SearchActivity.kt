@@ -24,15 +24,19 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.core.view.WindowCompat
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.ui.search.MarkerSearch
 import ru.spbu.depnav.ui.search.MarkerSearchState
@@ -55,31 +59,26 @@ class SearchActivity : LanguageAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
         mAppDatabase = AppDatabase.getInstance(this)
 
         setContent {
-            val searchMatches by mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
-
-            if (!isSystemInDarkTheme()) {
-                WindowInsetsControllerCompat(window, window.decorView).apply {
-                    isAppearanceLightStatusBars = true
-                    isAppearanceLightNavigationBars = true
-                }
-            }
-
             DepNavTheme {
-                window.statusBarColor = MaterialTheme.colors.background.toArgb()
-                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
-
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    val insetsNoBottom =
+                        WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
+                    val searchMatches by
+                    mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
                     MarkerSearch(
                         matches = searchMatches,
                         onSearch = this::onSearch,
                         onClear = this::onClear,
-                        onResultClick = this::onMarkerSelected
+                        onResultClick = this::onMarkerSelected,
+                        modifier = Modifier.windowInsetsPadding(insetsNoBottom)
                     )
                 }
             }

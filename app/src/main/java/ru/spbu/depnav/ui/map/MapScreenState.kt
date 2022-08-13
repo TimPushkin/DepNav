@@ -24,6 +24,8 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
@@ -46,6 +48,7 @@ import ovh.plrapps.mapcompose.api.removeAllLayers
 import ovh.plrapps.mapcompose.api.removeAllMarkers
 import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.scale
+import ovh.plrapps.mapcompose.api.setColorFilterProvider
 import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
 import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.core.TileStreamProvider
@@ -73,15 +76,18 @@ class MapScreenState : ViewModel() {
         private set
 
     /**
-     * Whether the map currently displayed is in dark theme.
-     */
-    var usesDarkThemeTiles: Boolean? = null
-        private set
-
-    /**
      * The floor currently displayed. Equals [Int.MIN_VALUE] by default.
      */
     var currentFloor by mutableStateOf(Int.MIN_VALUE)
+
+    /**
+     * Controls the color of map tiles.
+     */
+    var tileColor: Color = Color.Black
+        set(value) {
+            state.setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
+            field = value
+        }
 
     /**
      * Whether any UI is displayed on top of the map.
@@ -120,6 +126,7 @@ class MapScreenState : ViewModel() {
 
         state = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
+            setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
             addLazyLoader(LAZY_LOADER_ID, padding = 20.dp)
             shouldLoopScale = true
 
@@ -191,12 +198,11 @@ class MapScreenState : ViewModel() {
     /**
      * Replaces the currently displayed layers.
      */
-    fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>, isDark: Boolean) {
+    fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
         Log.d(TAG, "Replacing layers...")
 
         state.removeAllLayers()
         for (tileProvider in tileProviders) state.addLayer(tileProvider)
-        usesDarkThemeTiles = isDark
     }
 
     /**

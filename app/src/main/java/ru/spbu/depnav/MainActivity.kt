@@ -21,7 +21,6 @@ package ru.spbu.depnav
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
@@ -29,13 +28,14 @@ import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
 import androidx.compose.material.MaterialTheme
-import androidx.compose.ui.graphics.toArgb
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.compose.ui.unit.IntSize
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.runBlocking
+import ovh.plrapps.mapcompose.api.fullSize
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.model.MarkerText
@@ -57,10 +57,6 @@ class MainActivity : LanguageAwareActivity() {
     private val mMapScreenState: MapScreenState by viewModels()
     private lateinit var mAppDatabase: AppDatabase
     private lateinit var mFloors: Map<Int, Floor>
-
-    private val isInDarkTheme: Boolean
-        get() = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
-                Configuration.UI_MODE_NIGHT_YES
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
@@ -92,36 +88,27 @@ class MainActivity : LanguageAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!isInDarkTheme) {
-            WindowInsetsControllerCompat(window, window.decorView).apply {
-                isAppearanceLightStatusBars = true
-                isAppearanceLightNavigationBars = true
-            }
-        }
+        WindowCompat.setDecorFitsSystemWindows(window, false)
 
         mAppDatabase = AppDatabase.getInstance(this)
         val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
 
         initFloors(mapInfo.floorsNum)
 
-        when {
-            mMapScreenState.usesDarkThemeTiles == null -> { // Map screen state is not initialized
-                mMapScreenState.setParams(
-                    mapInfo.levelsNum,
-                    mapInfo.floorWidth,
-                    mapInfo.floorHeight,
-                    mapInfo.tileSize
-                )
-                setFloor(mFloors.keys.first())
-            }
-            mMapScreenState.usesDarkThemeTiles != isInDarkTheme -> // Tiles update required
-                setFloor(mMapScreenState.currentFloor)
+        if (mMapScreenState.state.fullSize == IntSize.Zero) { // State is not initialized
+            mMapScreenState.setParams(
+                mapInfo.levelsNum,
+                mapInfo.floorWidth,
+                mapInfo.floorHeight,
+                mapInfo.tileSize
+            )
+            mMapScreenState.currentFloor = mFloors.keys.first()
+            setFloor(mMapScreenState.currentFloor)
         }
 
         setContent {
             DepNavTheme {
-                window.statusBarColor = MaterialTheme.colors.background.toArgb()
-                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
+                mMapScreenState.tileColor = MaterialTheme.colors.onBackground
 
                 MapScreen(
                     mapScreenState = mMapScreenState,
@@ -140,7 +127,7 @@ class MainActivity : LanguageAwareActivity() {
         runBlocking {
             mFloors = List(floorsNum) {
                 val floorNum = it + 1
-                val layers = listOf(factory.makeTileProviderForFloor(floorNum, isInDarkTheme))
+                val layers = listOf(factory.makeTileProviderForFloor(floorNum))
                 val markers = async(Dispatchers.IO) {
                     val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
                     markersWithTexts.entries.associate { (marker, markerTexts) ->
@@ -165,14 +152,12 @@ class MainActivity : LanguageAwareActivity() {
 
         Log.i(TAG, "Switching to floor $floorIndex")
 
-        val shouldReplaceMarkers = floorIndex != mMapScreenState.currentFloor
-
         mMapScreenState.currentFloor = floorIndex
         mMapScreenState.isMarkerPinned = false
 
         lifecycleScope.launch {
-            mMapScreenState.replaceLayersWith(floor.layers, isInDarkTheme)
-            if (shouldReplaceMarkers) mMapScreenState.replaceMarkersWith(floor.markers.await())
+            mMapScreenState.replaceLayersWith(floor.layers)
+            mMapScreenState.replaceMarkersWith(floor.markers.await())
             Log.d(TAG, "Switched to floor $floorIndex")
             onFinished()
         }

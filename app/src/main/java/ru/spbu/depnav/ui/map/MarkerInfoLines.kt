@@ -21,7 +21,6 @@ package ru.spbu.depnav.ui.map
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.width
 import androidx.compose.material.MaterialTheme
@@ -40,45 +39,50 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
  * Lines with text information about a marker.
  */
 @Composable
-fun MarkerInfoLines(title: String, description: String?, isClosed: Boolean) {
-    Row(
-        modifier = Modifier.padding(10.dp),
-        verticalAlignment = Alignment.Bottom
-    ) {
-        if (title.isNotBlank()) {
-            Text(
-                text = title,
-                style = MaterialTheme.typography.h6
-            )
+fun MarkerInfoLines(
+    title: String,
+    description: String?,
+    isClosed: Boolean,
+    modifier: Modifier = Modifier
+) {
+    Column(modifier = modifier) {
+        Row(
+            modifier = Modifier.padding(10.dp),
+            verticalAlignment = Alignment.Bottom
+        ) {
+            if (title.isNotBlank()) {
+                Text(
+                    text = title,
+                    style = MaterialTheme.typography.h6
+                )
+            }
+
+            if (isClosed) {
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text(
+                    text = "•",
+                    modifier = Modifier.alpha(0.6f),
+                    fontSize = MaterialTheme.typography.h6.fontSize
+                )
+
+                Spacer(modifier = Modifier.width(10.dp))
+
+                Text(
+                    text = stringResource(R.string.closed),
+                    modifier = Modifier.alpha(0.6f),
+                    fontSize = MaterialTheme.typography.h6.fontSize
+                )
+            }
         }
 
-        if (isClosed) {
-            Spacer(modifier = Modifier.width(10.dp))
-
+        if (description != null && description.isNotBlank()) {
             Text(
-                text = "•",
-                modifier = Modifier.alpha(0.6f),
-                fontSize = MaterialTheme.typography.h6.fontSize
-            )
-
-            Spacer(modifier = Modifier.width(10.dp))
-
-            Text(
-                text = stringResource(R.string.closed),
-                modifier = Modifier.alpha(0.6f),
-                fontSize = MaterialTheme.typography.h6.fontSize
+                text = description,
+                modifier = Modifier.padding(start = 10.dp, end = 10.dp)
             )
         }
     }
-
-    if (description != null && description.isNotBlank()) {
-        Text(
-            text = description,
-            modifier = Modifier.padding(start = 10.dp, end = 10.dp)
-        )
-    }
-
-    Spacer(modifier = Modifier.height(10.dp))
 }
 
 @Preview
