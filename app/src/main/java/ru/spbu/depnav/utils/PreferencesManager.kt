@@ -1,7 +1,6 @@
 package ru.spbu.depnav.utils
 
 import android.content.Context
-import android.content.SharedPreferences
 import androidx.annotation.StringRes
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf

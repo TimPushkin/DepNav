@@ -99,14 +99,8 @@ class MainActivity : LanguageAwareActivity() {
         initFloors(mapInfo.floorsNum)
 
         if (mapScreenViewModel.mapState.fullSize == IntSize.Zero) { // State is not initialized
-            mapScreenViewModel.setParams(
-                mapInfo.levelsNum,
-                mapInfo.floorWidth,
-                mapInfo.floorHeight,
-                mapInfo.tileSize
-            )
-            mapScreenViewModel.currentFloor = floors.keys.first()
-            setFloor(mapScreenViewModel.currentFloor)
+            mapScreenViewModel.setParams(mapInfo)
+            setFloor(floors.keys.first())
         }
 
         setContent {
@@ -121,7 +115,6 @@ class MainActivity : LanguageAwareActivity() {
 
                 MapScreen(
                     vm = mapScreenViewModel,
-                    floorsNum = mapInfo.floorsNum, // TODO: move into screen state
                     onStartSearch = startSearch::launch,
                     onFloorSwitch = this::setFloor
                 )

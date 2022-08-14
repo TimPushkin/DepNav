@@ -60,12 +60,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MapScreen(
-    vm: MapScreenViewModel,
-    floorsNum: Int,
-    onStartSearch: () -> Unit,
-    onFloorSwitch: (Int) -> Unit,
-) {
+fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit, onFloorSwitch: (Int) -> Unit) {
     val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
     val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
 
@@ -140,7 +135,7 @@ fun MapScreen(
                     FloorSwitch(
                         floor = vm.currentFloor,
                         minFloor = 1,
-                        maxFloor = floorsNum,
+                        maxFloor = vm.floorsNum,
                         modifier = Modifier.padding(DEFAULT_PADDING),
                         onClick = onFloorSwitch
                     )
