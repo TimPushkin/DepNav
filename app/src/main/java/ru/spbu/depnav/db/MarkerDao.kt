@@ -41,8 +41,8 @@ interface MarkerDao {
      */
     @Query(
         "SELECT *, marker_texts.language_id FROM markers " +
-                "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
-                "WHERE markers.id = :id AND marker_texts.language_id = :language"
+            "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
+            "WHERE markers.id = :id AND marker_texts.language_id = :language"
     )
     suspend fun loadWithTextById(
         id: Int,
@@ -55,8 +55,8 @@ interface MarkerDao {
      */
     @Query(
         "SELECT *, marker_texts.language_id FROM markers " +
-                "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
-                "WHERE markers.floor = :floor AND marker_texts.language_id = :language"
+            "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
+            "WHERE markers.floor = :floor AND marker_texts.language_id = :language"
     )
     suspend fun loadWithTextByFloor(
         floor: Int,

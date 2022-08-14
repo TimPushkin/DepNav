@@ -49,7 +49,6 @@ import ru.spbu.depnav.utils.TileProviderFactory
 
 private const val TAG = "MainActivity"
 
-// TODO: retrieve from saved state
 private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 

@@ -19,22 +19,28 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.utils.PreferencesManager
+
+private val HORIZONTAL_PADDING = 15.dp
+private val VERTICAL_PADDING = 5.dp
 
 @Composable
 fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
     AlertDialog(
         onDismissRequest = onDismiss,
         buttons = {
-            Column(modifier = Modifier.padding(horizontal = 15.dp, vertical = 5.dp)) {
+            Column(
+                modifier =
+                Modifier.padding(horizontal = HORIZONTAL_PADDING, vertical = VERTICAL_PADDING)
+            ) {
                 RadioOption(
                     title = stringResource(R.string.theme),
                     options = listOf(
                         R.string.light_theme,
                         R.string.dark_theme,
                         R.string.system_theme
-                    )
-                        .map { StringWithId(stringResource(it), it) },
+                    ).map { StringWithId(stringResource(it), it) },
                     selected = prefs.themeMode.titleId.let { StringWithId(stringResource(it), it) },
                     onSelected = { (_, id) ->
                         val selectedMode = PreferencesManager.ThemeMode.fromTitleId(id)
@@ -58,10 +64,10 @@ private fun RadioOption(
     selected: StringWithId,
     onSelected: (StringWithId) -> Unit
 ) {
-    Column(modifier = Modifier.padding(10.dp)) {
+    Column(modifier = Modifier.padding(DEFAULT_PADDING)) {
         Text(
             text = title,
-            modifier = Modifier.padding(bottom = 10.dp),
+            modifier = Modifier.padding(bottom = DEFAULT_PADDING),
             style = MaterialTheme.typography.caption,
         )
 
@@ -85,7 +91,7 @@ private fun RadioOption(
 
                     Text(
                         text = option.string,
-                        modifier = Modifier.padding(start = 10.dp),
+                        modifier = Modifier.padding(start = DEFAULT_PADDING),
                         style = MaterialTheme.typography.body1
                     )
                 }

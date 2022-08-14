@@ -57,6 +57,7 @@ import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.utils.PreferencesManager
 import javax.inject.Inject
 
@@ -131,7 +132,7 @@ class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : Vi
         mapState = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
             setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
-            addLazyLoader(LAZY_LOADER_ID, padding = 20.dp)
+            addLazyLoader(LAZY_LOADER_ID, padding = (DEFAULT_PADDING * 2))
             shouldLoopScale = true
 
             onTap { _, _ ->

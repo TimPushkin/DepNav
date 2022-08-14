@@ -32,7 +32,7 @@ private const val TAG = "MarkerSearchViewModel"
 /**
  * State of the [MarkerSearch].
  */
-class MarkerSearchState : ViewModel() {
+class MarkerSearchViewModel : ViewModel() {
     private val _matchedMarkers = MutableStateFlow(emptyList<MarkerText>())
 
     /**

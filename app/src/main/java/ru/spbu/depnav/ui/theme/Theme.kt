@@ -26,6 +26,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.SideEffect
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.unit.dp
 import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightColorPalette = lightColors(
@@ -39,6 +40,9 @@ private val DarkColorPalette = darkColors(
     primaryVariant = BlueGrey200,
     secondary = BlueGrey200Light
 )
+
+val DEFAULT_PADDING = 10.dp
+val DEFAULT_ELEVATION = 5.dp
 
 /**
  * Theme of the application.

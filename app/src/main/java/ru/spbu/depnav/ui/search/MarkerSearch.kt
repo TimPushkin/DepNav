@@ -33,6 +33,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 /**
  * Screen containing a marker search and the results found.
@@ -72,13 +73,11 @@ private fun SearchResults(markerTexts: List<MarkerText>, onResultClick: (Int) ->
         items(markerTexts) { markerText ->
             if (markerText.title == null) return@items
 
-            // TODO: make a row with MarkerView to the left and description button to the right
-
             Column(
                 modifier = Modifier
                     .clickable { onResultClick(markerText.markerId) }
                     .fillMaxWidth()
-                    .padding(12.dp)
+                    .padding(DEFAULT_PADDING)
             ) {
                 Text(markerText.title)
                 markerText.description?.let {

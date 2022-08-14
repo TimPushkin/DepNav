@@ -53,6 +53,7 @@ import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 /**
  * Screen containing a navigable map.
@@ -119,7 +120,7 @@ fun MapScreen(
                         onSurfaceClick = onStartSearch,
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
-                            .padding(top = 10.dp, bottom = 10.dp)
+                            .padding(vertical = DEFAULT_PADDING)
                     )
                 }
 
@@ -140,7 +141,7 @@ fun MapScreen(
                         floor = vm.currentFloor,
                         minFloor = 1,
                         maxFloor = floorsNum,
-                        modifier = Modifier.padding(10.dp),
+                        modifier = Modifier.padding(DEFAULT_PADDING),
                         onClick = onFloorSwitch
                     )
                 }

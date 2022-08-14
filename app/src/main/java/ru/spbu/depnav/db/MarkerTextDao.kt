@@ -40,7 +40,7 @@ interface MarkerTextDao {
      */
     @Query(
         "SELECT *, language_id FROM marker_texts " +
-                "WHERE marker_texts MATCH :tokens AND language_id = :language"
+            "WHERE marker_texts MATCH :tokens AND language_id = :language"
     )
     suspend fun loadByTokens(tokens: String, language: MarkerText.LanguageId): List<MarkerText>
 }

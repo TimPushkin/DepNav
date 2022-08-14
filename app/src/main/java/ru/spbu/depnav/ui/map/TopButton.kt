@@ -34,6 +34,10 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
+import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+
+private val HEIGHT = 68.dp
 
 /**
  * Button with a search icon and text.
@@ -48,15 +52,17 @@ fun TopButton(
 ) {
     Card(
         onClick = onSurfaceClick,
-        modifier = Modifier.height(68.dp).then(modifier),
+        modifier = Modifier
+            .height(HEIGHT)
+            .then(modifier),
         shape = CircleShape,
-        elevation = 5.dp
+        elevation = DEFAULT_ELEVATION
     ) {
         Row(
-            modifier = Modifier.padding(10.dp),
+            modifier = Modifier.padding(DEFAULT_PADDING),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            IconButton(onClick = onMenuClick, modifier = Modifier.padding(0.dp)) {
+            IconButton(onClick = onMenuClick) {
                 Icon(Icons.Default.Menu, contentDescription = "Open menu")
             }
 

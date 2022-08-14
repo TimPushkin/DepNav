@@ -37,11 +37,12 @@ import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.Marker.MarkerType
+import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private val SIZE = 20.dp
-private val ELEVATION = 2.dp
-private val TEXT_PADDING = 5.dp
+private val TEXT_PADDING = DEFAULT_PADDING / 2
 
 /**
  * Visual representation of a [Marker].
@@ -123,7 +124,7 @@ private fun MarkerIcon(
         modifier = Modifier
             .size(SIZE)
             .then(modifier) // Should be set before setting the shadow
-            .shadow(ELEVATION),
+            .shadow(DEFAULT_ELEVATION / 2),
         alpha = if (faded) 0.5f else 1f,
         colorFilter =
         if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }) else null
@@ -137,7 +138,7 @@ private fun RoomIcon(name: String, faded: Boolean, modifier: Modifier = Modifier
             .alpha(if (faded) 0.3f else 1f)
             .then(modifier),
         shape = MaterialTheme.shapes.small,
-        elevation = ELEVATION
+        elevation = DEFAULT_ELEVATION / 2
     ) {
         Text(
             text = name,

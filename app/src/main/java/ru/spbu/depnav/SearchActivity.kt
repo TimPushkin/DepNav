@@ -39,7 +39,7 @@ import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.ui.search.MarkerSearch
-import ru.spbu.depnav.ui.search.MarkerSearchState
+import ru.spbu.depnav.ui.search.MarkerSearchViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private const val TAG = "SearchActivity"
@@ -53,7 +53,7 @@ const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
  * Activity which displays the search screen.
  */
 class SearchActivity : LanguageAwareActivity() {
-    private val markerSearchState: MarkerSearchState by viewModels()
+    private val markerSearchViewModel: MarkerSearchViewModel by viewModels()
     private lateinit var appDatabase: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -72,7 +72,7 @@ class SearchActivity : LanguageAwareActivity() {
                     val insetsNoBottom =
                         WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
                     val searchMatches by
-                    markerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
+                    markerSearchViewModel.matchedMarkers.collectAsState(emptyList())
                     MarkerSearch(
                         matches = searchMatches,
                         onSearch = this::onSearch,
@@ -86,11 +86,11 @@ class SearchActivity : LanguageAwareActivity() {
     }
 
     private fun onSearch(text: String) {
-        markerSearchState.search(text, appDatabase.markerTextDao(), systemLanguage)
+        markerSearchViewModel.search(text, appDatabase.markerTextDao(), systemLanguage)
     }
 
     private fun onClear() {
-        markerSearchState.clear()
+        markerSearchViewModel.clear()
     }
 
     private fun onMarkerSelected(id: Int) {

@@ -39,7 +39,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.tooling.preview.Preview
-import androidx.compose.ui.unit.dp
+import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 /**
@@ -57,7 +57,7 @@ fun FloorSwitch(
     Card(
         modifier = modifier,
         shape = CircleShape,
-        elevation = 5.dp
+        elevation = DEFAULT_ELEVATION
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             IconButton(
@@ -72,14 +72,14 @@ fun FloorSwitch(
                 transitionSpec = {
                     if (targetState > initialState) {
                         slideInVertically { height -> -height } + fadeIn() with
-                                slideOutVertically { height -> height } + fadeOut()
+                            slideOutVertically { height -> height } + fadeOut()
                     } else {
                         slideInVertically { height -> height } + fadeIn() with
-                                slideOutVertically { height -> -height } + fadeOut()
+                            slideOutVertically { height -> -height } + fadeOut()
                     } using SizeTransform(clip = false)
                 }
             ) { targetFloor ->
-                Text(targetFloor.toString(10))
+                Text(targetFloor.toString())
             }
 
             IconButton(

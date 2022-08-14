@@ -45,7 +45,7 @@ data class Marker(
      * ID of this marker as a string.
      */
     @Ignore
-    val idStr = id.toString(10)
+    val idStr = id.toString()
 
     /**
      * Type of an object represented by a [Marker].
