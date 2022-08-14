@@ -51,6 +51,8 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
@@ -60,7 +62,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit, onFloorSwitch: (Int) -> Unit) {
+fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {
     val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
     val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
 
@@ -135,9 +137,9 @@ fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit, onFloorSwitch: 
                     FloorSwitch(
                         floor = vm.currentFloor,
                         minFloor = 1,
-                        maxFloor = vm.floorsNum,
+                        maxFloor = vm.floors.size,
                         modifier = Modifier.padding(DEFAULT_PADDING),
-                        onClick = onFloorSwitch
+                        onClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
                     )
                 }
             }

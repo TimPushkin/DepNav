@@ -27,16 +27,24 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.IntSize
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
 import ovh.plrapps.mapcompose.api.fullSize
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
@@ -59,24 +67,24 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 class MainActivity : LanguageAwareActivity() {
     private val mapScreenViewModel: MapScreenViewModel by viewModels()
     private lateinit var appDatabase: AppDatabase
-    private lateinit var floors: Map<Int, Floor>
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
 
         val markerId = result ?: return@registerForActivityResult
-        lifecycleScope.launch {
+        mapScreenViewModel.viewModelScope.launch {
             val (marker, markerTexts) =
                 appDatabase.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
 
             Log.d(TAG, "Loaded searched marker: $marker")
 
+            mapScreenViewModel.setFloor(marker.floor)
+
             val markerText = markerTexts.firstOrNull() ?: run {
                 Log.w(TAG, "Marker $marker has no text on $systemLanguage")
                 MarkerText(marker.id, systemLanguage, null, null)
             }
-
-            setFloor(marker.floor) { mapScreenViewModel.focusOnMarker(marker, markerText) }
+            mapScreenViewModel.focusOnMarker(marker, markerText)
         }
     }
 
@@ -94,13 +102,17 @@ class MainActivity : LanguageAwareActivity() {
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
         appDatabase = AppDatabase.getInstance(this)
-        val mapInfo = runBlocking { appDatabase.mapInfoDao().loadByName(MAP_NAME) }
 
-        initFloors(mapInfo.floorsNum)
-
-        if (mapScreenViewModel.mapState.fullSize == IntSize.Zero) { // State is not initialized
-            mapScreenViewModel.setParams(mapInfo)
-            setFloor(floors.keys.first())
+        var isMapInitialized by mutableStateOf(mapScreenViewModel.mapState.fullSize != IntSize.Zero)
+        if (!isMapInitialized) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val mapInfo = appDatabase.mapInfoDao().loadByName(MAP_NAME)
+                mapScreenViewModel.viewModelScope.launch {
+                    initFloors(mapInfo.floorsNum)
+                    mapScreenViewModel.setParams(mapInfo)
+                    lifecycleScope.launch { isMapInitialized = true }
+                }
+            }
         }
 
         setContent {
@@ -113,55 +125,40 @@ class MainActivity : LanguageAwareActivity() {
             ) {
                 mapScreenViewModel.tileColor = MaterialTheme.colors.onBackground
 
-                MapScreen(
-                    vm = mapScreenViewModel,
-                    onStartSearch = startSearch::launch,
-                    onFloorSwitch = this::setFloor
-                )
+                if (isMapInitialized) {
+                    MapScreen(
+                        vm = mapScreenViewModel,
+                        onStartSearch = startSearch::launch
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colors.background)
+                    )
+                }
             }
         }
     }
 
-    private fun initFloors(floorsNum: Int) {
+    private fun CoroutineScope.initFloors(floorsNum: Int) {
         val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
         val markerDao = appDatabase.markerDao()
 
-        runBlocking {
-            floors = List(floorsNum) {
-                val floorNum = it + 1
-                val layers = listOf(factory.makeTileProviderForFloor(floorNum))
-                val markers = async(Dispatchers.IO) {
-                    val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
-                    markersWithTexts.entries.associate { (marker, markerTexts) ->
-                        val markerText = markerTexts.firstOrNull() ?: run {
-                            Log.w(TAG, "Marker $marker has no text on $systemLanguage")
-                            MarkerText(marker.id, systemLanguage, null, null)
-                        }
-                        marker to markerText
+        mapScreenViewModel.floors = List(floorsNum) {
+            val floorNum = it + 1
+            val layers = listOf(factory.makeTileProviderForFloor(floorNum))
+            val markers = async(Dispatchers.IO) {
+                val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
+                markersWithTexts.entries.associate { (marker, markerTexts) ->
+                    val markerText = markerTexts.firstOrNull() ?: run {
+                        Log.w(TAG, "Marker $marker has no text on $systemLanguage")
+                        MarkerText(marker.id, systemLanguage, null, null)
                     }
+                    marker to markerText
                 }
-                floorNum to Floor(layers, markers)
-            }.toMap()
-        }
-    }
-
-    private fun setFloor(floorIndex: Int, onFinished: () -> Unit = {}) {
-        val floor = floors[floorIndex]
-        if (floor == null) {
-            Log.e(TAG, "Cannot switch to floor $floorIndex which does not exist")
-            return
-        }
-
-        Log.i(TAG, "Switching to floor $floorIndex")
-
-        mapScreenViewModel.currentFloor = floorIndex
-        mapScreenViewModel.isMarkerPinned = false
-
-        lifecycleScope.launch {
-            mapScreenViewModel.replaceLayersWith(floor.layers)
-            mapScreenViewModel.replaceMarkersWith(floor.markers.await())
-            Log.d(TAG, "Switched to floor $floorIndex")
-            onFinished()
-        }
+            }
+            floorNum to Floor(layers, markers)
+        }.toMap()
     }
 }

@@ -54,6 +54,7 @@ import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
+import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.model.MapInfo
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
@@ -63,9 +64,13 @@ import javax.inject.Inject
 
 private const val TAG = "MapScreenViewModel"
 
+private const val DEFAULT_FLOOR_NUM = 1
+
 private const val LAZY_LOADER_ID = "main"
+
 private const val MIN_MARKER_VISIBILITY_SCALE = 0.2f
 private const val MAX_MARKER_VISIBILITY_SCALE = 0.5f
+
 private const val PIN_ID = "Pin" // Real IDs are integers
 
 /** ViewModel for the [MapScreen]. */
@@ -76,12 +81,11 @@ class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : Vi
     var mapState by mutableStateOf(MapState(0, 0, 0))
         private set
 
-    /** Number of floors on the current map. */
-    var floorsNum by mutableStateOf(0)
-        private set
+    /** Floors of the current map. */
+    var floors by mutableStateOf(emptyMap<Int, Floor>())
 
     /** The floor currently displayed. */
-    var currentFloor by mutableStateOf(0)
+    var currentFloor by mutableStateOf(DEFAULT_FLOOR_NUM)
 
     /** Controls the color of map tiles. */
     var tileColor: Color = Color.Black
@@ -94,12 +98,8 @@ class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : Vi
     var showUI by mutableStateOf(true)
         private set
 
-    /**
-     * Whether a marker is pinned.
-     *
-     * It is separate from [pinnedMarker] because text needs to stay visible while hiding animation
-     * is playing.
-     */
+    /** Whether a marker is pinned. */
+    // It is separate from pinnedMarker so that marker info stays visible during hiding animation
     var isMarkerPinned by mutableStateOf(false)
 
     /** The marker currently pinned. */
@@ -116,6 +116,8 @@ class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : Vi
 
     /** Sets the parameters of the displayed map. */
     fun setParams(mapInfo: MapInfo) {
+        Log.i(TAG, "Setting new map parameters: $mapInfo")
+
         minScaleCollectionJob?.cancel("State changed")
         mapState.shutdown()
 
@@ -146,7 +148,64 @@ class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : Vi
             .onEach { minMarkerVisScale = it.coerceAtLeast(MIN_MARKER_VISIBILITY_SCALE) }
             .launchIn(viewModelScope)
 
-        floorsNum = mapInfo.floorsNum
+        val firstFloorNum = floors.keys.firstOrNull()
+        if (firstFloorNum != null) {
+            viewModelScope.launch { setFloor(firstFloorNum) }
+        } else {
+            Log.e(TAG, "Cannot set first floor as floors are empty, assuming $DEFAULT_FLOOR_NUM")
+            viewModelScope.launch { setFloor(DEFAULT_FLOOR_NUM) }
+        }
+    }
+
+    private fun pinMarker(marker: Marker, markerText: MarkerText) {
+        pinnedMarker = marker to markerText
+        showUI = true
+        isMarkerPinned = true
+
+        mapState.removeMarker(PIN_ID)
+        mapState.addMarker(
+            id = PIN_ID,
+            x = marker.x,
+            y = marker.y,
+            zIndex = 1f,
+            clickable = false,
+            relativeOffset = Offset(-0.5f, -0.5f),
+            clipShape = null
+        ) { Pin() }
+    }
+
+    /** Changes the current map floor. */
+    suspend fun setFloor(floorNum: Int) {
+        val floor = floors[floorNum]
+        if (floor == null) {
+            Log.e(TAG, "Cannot switch to floor $floorNum which does not exist")
+            return
+        }
+
+        Log.i(TAG, "Switching to floor $floorNum")
+
+        currentFloor = floorNum
+        isMarkerPinned = false
+
+        replaceLayersWith(floor.layers)
+        replaceMarkersWith(floor.markers.await())
+        Log.d(TAG, "Switched to floor $floorNum")
+    }
+
+    private fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
+        Log.d(TAG, "Replacing layers...")
+
+        mapState.removeAllLayers()
+        for (tileProvider in tileProviders) mapState.addLayer(tileProvider)
+    }
+
+    private fun replaceMarkersWith(markersWithText: Map<Marker, MarkerText>) {
+        Log.d(TAG, "Replacing markers...")
+
+        clickableMarkers.clear()
+        mapState.removeAllMarkers()
+
+        for ((marker, markerText) in markersWithText) placeMarker(marker, markerText)
     }
 
     private fun placeMarker(marker: Marker, markerText: MarkerText) {
@@ -178,41 +237,6 @@ class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : Vi
                 modifier = Modifier.graphicsLayer(alpha = markerAlpha)
             )
         }
-    }
-
-    private fun pinMarker(marker: Marker, markerText: MarkerText) {
-        pinnedMarker = marker to markerText
-        showUI = true
-        isMarkerPinned = true
-
-        mapState.removeMarker(PIN_ID)
-        mapState.addMarker(
-            id = PIN_ID,
-            x = marker.x,
-            y = marker.y,
-            zIndex = 1f,
-            clickable = false,
-            relativeOffset = Offset(-0.5f, -0.5f),
-            clipShape = null
-        ) { Pin() }
-    }
-
-    /** Replaces the currently displayed layers. */
-    fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
-        Log.d(TAG, "Replacing layers...")
-
-        mapState.removeAllLayers()
-        for (tileProvider in tileProviders) mapState.addLayer(tileProvider)
-    }
-
-    /** Replaces the currently displayed markers. */
-    fun replaceMarkersWith(markersWithText: Map<Marker, MarkerText>) {
-        Log.d(TAG, "Replacing markers...")
-
-        clickableMarkers.clear()
-        mapState.removeAllMarkers()
-
-        for ((marker, markerText) in markersWithText) placeMarker(marker, markerText)
     }
 
     /** Centers on the specified marker and highlights it. */
