@@ -16,19 +16,19 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.ui.search
+package ru.spbu.depnav.ui.map
 
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.Card
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.Icon
+import androidx.compose.material.IconButton
 import androidx.compose.material.Text
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.filled.Menu
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -40,10 +40,15 @@ import androidx.compose.ui.unit.dp
  */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun SearchButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifier) {
+fun TopButton(
+    text: String,
+    onMenuClick: () -> Unit,
+    onSurfaceClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
     Card(
-        onClick = onClick,
-        modifier = modifier,
+        onClick = onSurfaceClick,
+        modifier = Modifier.height(68.dp).then(modifier),
         shape = CircleShape,
         elevation = 5.dp
     ) {
@@ -51,8 +56,10 @@ fun SearchButton(text: String, onClick: () -> Unit, modifier: Modifier = Modifie
             modifier = Modifier.padding(10.dp),
             verticalAlignment = Alignment.CenterVertically
         ) {
-            Icon(Icons.Default.Search, contentDescription = "Search")
-            Spacer(modifier = Modifier.size(10.dp))
+            IconButton(onClick = onMenuClick, modifier = Modifier.padding(0.dp)) {
+                Icon(Icons.Default.Menu, contentDescription = "Open menu")
+            }
+
             Text(
                 text = text,
                 modifier = Modifier.alpha(0.6f),

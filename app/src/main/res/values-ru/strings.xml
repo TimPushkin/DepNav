@@ -3,4 +3,9 @@
     <string name="no_title">Без названия</string>
     <string name="search_markers">Поиск меток</string>
     <string name="closed">Закрыто</string>
+    <string name="settings">Настройки</string>
+    <string name="theme">Тема</string>
+    <string name="dark_theme">Тёмная</string>
+    <string name="light_theme">Светлая</string>
+    <string name="system_theme">Как в системе</string>
 </resources>

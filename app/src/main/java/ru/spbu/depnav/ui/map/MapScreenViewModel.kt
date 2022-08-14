@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.graphicsLayer
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.launchIn
@@ -56,6 +57,8 @@ import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
 import ru.spbu.depnav.model.Marker
 import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.utils.PreferencesManager
+import javax.inject.Inject
 
 private const val TAG = "MapViewModel"
 
@@ -68,11 +71,12 @@ private const val PIN_ID = "Pin" // Real ID are integers
  * State of the [MapScreen].
  */
 @OptIn(ExperimentalClusteringApi::class)
-class MapScreenState : ViewModel() {
+@HiltViewModel
+class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : ViewModel() {
     /**
      * State of the map currently displayed.
      */
-    var state by mutableStateOf(MapState(0, 0, 0))
+    var mapState by mutableStateOf(MapState(0, 0, 0))
         private set
 
     /**
@@ -85,7 +89,7 @@ class MapScreenState : ViewModel() {
      */
     var tileColor: Color = Color.Black
         set(value) {
-            state.setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
+            mapState.setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
             field = value
         }
 
@@ -113,25 +117,25 @@ class MapScreenState : ViewModel() {
 
     private var minScaleCollectionJob: Job? = null
     private var minMarkerVisScale = 0f
-    private val maxMarkerVisScale = state.maxScale.coerceAtMost(MAX_MARKER_VISIBILITY_SCALE)
+    private val maxMarkerVisScale = mapState.maxScale.coerceAtMost(MAX_MARKER_VISIBILITY_SCALE)
     private val markerAlpha
-        get() = (state.scale - minMarkerVisScale) / (maxMarkerVisScale - minMarkerVisScale)
+        get() = (mapState.scale - minMarkerVisScale) / (maxMarkerVisScale - minMarkerVisScale)
 
     /**
      * Sets the parameters of the displayed map.
      */
     fun setParams(levelsNum: Int, width: Int, height: Int, tileSize: Int) {
         minScaleCollectionJob?.cancel("State changed")
-        state.shutdown()
+        mapState.shutdown()
 
-        state = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
+        mapState = MapState(levelsNum, width, height, tileSize) { scale(0f) }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
             setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
             addLazyLoader(LAZY_LOADER_ID, padding = 20.dp)
             shouldLoopScale = true
 
             onTap { _, _ ->
-                if (isMarkerPinned) state.removeMarker(PIN_ID) else showUI = !showUI
+                if (isMarkerPinned) mapState.removeMarker(PIN_ID) else showUI = !showUI
                 isMarkerPinned = false
             }
 
@@ -142,7 +146,7 @@ class MapScreenState : ViewModel() {
             }
         }
 
-        minScaleCollectionJob = state.minScaleSnapshotFlow()
+        minScaleCollectionJob = mapState.minScaleSnapshotFlow()
             .onEach { minMarkerVisScale = it.coerceAtLeast(MIN_MARKER_VISIBILITY_SCALE) }
             .launchIn(viewModelScope)
     }
@@ -158,7 +162,7 @@ class MapScreenState : ViewModel() {
             clickableMarkers[marker.idStr] = marker to markerText
         }
 
-        state.addMarker(
+        mapState.addMarker(
             id = marker.idStr,
             x = marker.x,
             y = marker.y,
@@ -183,8 +187,8 @@ class MapScreenState : ViewModel() {
         showUI = true
         isMarkerPinned = true
 
-        state.removeMarker(PIN_ID)
-        state.addMarker(
+        mapState.removeMarker(PIN_ID)
+        mapState.addMarker(
             id = PIN_ID,
             x = marker.x,
             y = marker.y,
@@ -201,8 +205,8 @@ class MapScreenState : ViewModel() {
     fun replaceLayersWith(tileProviders: Iterable<TileStreamProvider>) {
         Log.d(TAG, "Replacing layers...")
 
-        state.removeAllLayers()
-        for (tileProvider in tileProviders) state.addLayer(tileProvider)
+        mapState.removeAllLayers()
+        for (tileProvider in tileProviders) mapState.addLayer(tileProvider)
     }
 
     /**
@@ -212,7 +216,7 @@ class MapScreenState : ViewModel() {
         Log.d(TAG, "Replacing markers...")
 
         clickableMarkers.clear()
-        state.removeAllMarkers()
+        mapState.removeAllMarkers()
 
         for ((marker, markerText) in markersWithText) placeMarker(marker, markerText)
     }
@@ -224,6 +228,6 @@ class MapScreenState : ViewModel() {
         Log.d(TAG, "Centering on marker $marker")
 
         pinMarker(marker, markerText)
-        viewModelScope.launch { state.centerOnMarker(marker.idStr, 1f) }
+        viewModelScope.launch { mapState.centerOnMarker(marker.idStr, 1f) }
     }
 }

@@ -27,10 +27,12 @@ import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.material.MaterialTheme
 import androidx.compose.ui.unit.IntSize
 import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
@@ -39,10 +41,11 @@ import ovh.plrapps.mapcompose.api.fullSize
 import ru.spbu.depnav.db.AppDatabase
 import ru.spbu.depnav.model.Floor
 import ru.spbu.depnav.model.MarkerText
-import ru.spbu.depnav.provider.TileProviderFactory
 import ru.spbu.depnav.ui.map.MapScreen
-import ru.spbu.depnav.ui.map.MapScreenState
+import ru.spbu.depnav.ui.map.MapScreenViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
+import ru.spbu.depnav.utils.PreferencesManager
+import ru.spbu.depnav.utils.TileProviderFactory
 
 private const val TAG = "MainActivity"
 
@@ -53,8 +56,9 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 /**
  * Activity which displays the map screen.
  */
+@AndroidEntryPoint
 class MainActivity : LanguageAwareActivity() {
-    private val mapScreenState: MapScreenState by viewModels()
+    private val mapScreenViewModel: MapScreenViewModel by viewModels()
     private lateinit var appDatabase: AppDatabase
     private lateinit var floors: Map<Int, Floor>
 
@@ -73,7 +77,7 @@ class MainActivity : LanguageAwareActivity() {
                 MarkerText(marker.id, systemLanguage, null, null)
             }
 
-            setFloor(marker.floor) { mapScreenState.focusOnMarker(marker, markerText) }
+            setFloor(marker.floor) { mapScreenViewModel.focusOnMarker(marker, markerText) }
         }
     }
 
@@ -95,24 +99,30 @@ class MainActivity : LanguageAwareActivity() {
 
         initFloors(mapInfo.floorsNum)
 
-        if (mapScreenState.state.fullSize == IntSize.Zero) { // State is not initialized
-            mapScreenState.setParams(
+        if (mapScreenViewModel.mapState.fullSize == IntSize.Zero) { // State is not initialized
+            mapScreenViewModel.setParams(
                 mapInfo.levelsNum,
                 mapInfo.floorWidth,
                 mapInfo.floorHeight,
                 mapInfo.tileSize
             )
-            mapScreenState.currentFloor = floors.keys.first()
-            setFloor(mapScreenState.currentFloor)
+            mapScreenViewModel.currentFloor = floors.keys.first()
+            setFloor(mapScreenViewModel.currentFloor)
         }
 
         setContent {
-            DepNavTheme {
-                mapScreenState.tileColor = MaterialTheme.colors.onBackground
+            DepNavTheme(
+                darkTheme = when (mapScreenViewModel.prefs.themeMode) {
+                    PreferencesManager.ThemeMode.LIGHT -> false
+                    PreferencesManager.ThemeMode.DARK -> true
+                    PreferencesManager.ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                }
+            ) {
+                mapScreenViewModel.tileColor = MaterialTheme.colors.onBackground
 
                 MapScreen(
-                    mapScreenState = mapScreenState,
-                    floorsNum = mapInfo.floorsNum,
+                    vm = mapScreenViewModel,
+                    floorsNum = mapInfo.floorsNum, // TODO: move into screen state
                     onStartSearch = startSearch::launch,
                     onFloorSwitch = this::setFloor
                 )
@@ -152,12 +162,12 @@ class MainActivity : LanguageAwareActivity() {
 
         Log.i(TAG, "Switching to floor $floorIndex")
 
-        mapScreenState.currentFloor = floorIndex
-        mapScreenState.isMarkerPinned = false
+        mapScreenViewModel.currentFloor = floorIndex
+        mapScreenViewModel.isMarkerPinned = false
 
         lifecycleScope.launch {
-            mapScreenState.replaceLayersWith(floor.layers)
-            mapScreenState.replaceMarkersWith(floor.markers.await())
+            mapScreenViewModel.replaceLayersWith(floor.layers)
+            mapScreenViewModel.replaceMarkersWith(floor.markers.await())
             Log.d(TAG, "Switched to floor $floorIndex")
             onFinished()
         }
