@@ -29,7 +29,7 @@ import androidx.compose.material.TextField
 import androidx.compose.material.TextFieldDefaults
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Close
-import androidx.compose.material.icons.filled.Search
+import androidx.compose.material.icons.rounded.Search
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -67,7 +67,7 @@ fun SearchField(
             .focusRequester(focusRequester)
             .then(modifier),
         placeholder = { Text(placeholder) },
-        leadingIcon = { Icon(Icons.Default.Search, contentDescription = "Search") },
+        leadingIcon = { Icon(Icons.Rounded.Search, contentDescription = "Search") },
         trailingIcon = {
             AnimatedVisibility(visible = text.isNotEmpty()) {
                 IconButton(
