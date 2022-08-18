@@ -21,63 +21,68 @@ package ru.spbu.depnav
 import android.app.Activity
 import android.content.Context
 import android.content.Intent
-import android.content.res.Configuration
 import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material.MaterialTheme
-import androidx.compose.ui.graphics.toArgb
-import androidx.core.view.WindowInsetsControllerCompat
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.setValue
+import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.IntSize
+import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
+import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.runBlocking
-import ru.spbu.depnav.db.AppDatabase
-import ru.spbu.depnav.model.Floor
-import ru.spbu.depnav.model.MarkerText
-import ru.spbu.depnav.provider.TileProviderFactory
+import ovh.plrapps.mapcompose.api.fullSize
+import ru.spbu.depnav.data.db.AppDatabase
+import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.map.MapScreen
-import ru.spbu.depnav.ui.map.MapScreenState
+import ru.spbu.depnav.ui.map.MapScreenViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
+import ru.spbu.depnav.utils.preferences.PreferencesManager
+import ru.spbu.depnav.utils.tiles.Floor
+import ru.spbu.depnav.utils.tiles.TileProviderFactory
 
 private const val TAG = "MainActivity"
 
-// TODO: retrieve from saved state
 private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 
-/**
- * Activity which displays the map screen.
- */
+/** Activity which displays the map screen. */
+@AndroidEntryPoint
 class MainActivity : LanguageAwareActivity() {
-    private val mMapScreenState: MapScreenState by viewModels()
-    private lateinit var mAppDatabase: AppDatabase
-    private lateinit var mFloors: Map<Int, Floor>
-
-    private val isInDarkTheme: Boolean
-        get() = resources.configuration.uiMode and Configuration.UI_MODE_NIGHT_MASK ==
-                Configuration.UI_MODE_NIGHT_YES
+    private val mapScreenViewModel: MapScreenViewModel by viewModels()
+    private lateinit var db: AppDatabase
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
 
         val markerId = result ?: return@registerForActivityResult
-        lifecycleScope.launch {
+        mapScreenViewModel.viewModelScope.launch {
             val (marker, markerTexts) =
-                mAppDatabase.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
+                db.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
 
             Log.d(TAG, "Loaded searched marker: $marker")
+
+            mapScreenViewModel.setFloor(marker.floor)
 
             val markerText = markerTexts.firstOrNull() ?: run {
                 Log.w(TAG, "Marker $marker has no text on $systemLanguage")
                 MarkerText(marker.id, systemLanguage, null, null)
             }
-
-            setFloor(marker.floor) { mMapScreenState.focusOnMarker(marker, markerText) }
+            mapScreenViewModel.focusOnMarker(marker, markerText)
         }
     }
 
@@ -92,89 +97,66 @@ class MainActivity : LanguageAwareActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        if (!isInDarkTheme) {
-            WindowInsetsControllerCompat(window, window.decorView).apply {
-                isAppearanceLightStatusBars = true
-                isAppearanceLightNavigationBars = true
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        db = AppDatabase.getInstance(this)
+
+        var isMapInitialized by mutableStateOf(mapScreenViewModel.mapState.fullSize != IntSize.Zero)
+        if (!isMapInitialized) {
+            lifecycleScope.launch(Dispatchers.IO) {
+                val mapInfo = db.mapInfoDao().loadByName(MAP_NAME)
+                mapScreenViewModel.viewModelScope.launch {
+                    initFloors(mapInfo.floorsNum)
+                    mapScreenViewModel.setParams(mapInfo)
+                    lifecycleScope.launch { isMapInitialized = true }
+                }
             }
-        }
-
-        mAppDatabase = AppDatabase.getInstance(this)
-        val mapInfo = runBlocking { mAppDatabase.mapInfoDao().loadByName(MAP_NAME) }
-
-        initFloors(mapInfo.floorsNum)
-
-        when {
-            mMapScreenState.usesDarkThemeTiles == null -> { // Map screen state is not initialized
-                mMapScreenState.setParams(
-                    mapInfo.levelsNum,
-                    mapInfo.floorWidth,
-                    mapInfo.floorHeight,
-                    mapInfo.tileSize
-                )
-                setFloor(mFloors.keys.first())
-            }
-            mMapScreenState.usesDarkThemeTiles != isInDarkTheme -> // Tiles update required
-                setFloor(mMapScreenState.currentFloor)
         }
 
         setContent {
-            DepNavTheme {
-                window.statusBarColor = MaterialTheme.colors.background.toArgb()
-                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
+            DepNavTheme(
+                darkTheme = when (mapScreenViewModel.prefs.themeMode) {
+                    PreferencesManager.ThemeMode.LIGHT -> false
+                    PreferencesManager.ThemeMode.DARK -> true
+                    PreferencesManager.ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                }
+            ) {
+                mapScreenViewModel.tileColor = MaterialTheme.colors.onBackground
 
-                MapScreen(
-                    mapScreenState = mMapScreenState,
-                    floorsNum = mapInfo.floorsNum,
-                    onStartSearch = startSearch::launch,
-                    onFloorSwitch = this::setFloor
-                )
+                if (isMapInitialized) {
+                    MapScreen(
+                        vm = mapScreenViewModel,
+                        onStartSearch = startSearch::launch
+                    )
+                } else {
+                    Box(
+                        modifier = Modifier
+                            .fillMaxSize()
+                            .background(MaterialTheme.colors.background)
+                    )
+                }
             }
         }
     }
 
-    private fun initFloors(floorsNum: Int) {
+    private fun CoroutineScope.initFloors(floorsNum: Int) {
         val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
-        val markerDao = mAppDatabase.markerDao()
+        val markerDao = db.markerDao()
 
-        runBlocking {
-            mFloors = List(floorsNum) {
-                val floorNum = it + 1
-                val layers = listOf(factory.makeTileProviderForFloor(floorNum, isInDarkTheme))
-                val markers = async(Dispatchers.IO) {
-                    val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
-                    markersWithTexts.entries.associate { (marker, markerTexts) ->
-                        val markerText = markerTexts.firstOrNull() ?: run {
-                            Log.w(TAG, "Marker $marker has no text on $systemLanguage")
-                            MarkerText(marker.id, systemLanguage, null, null)
-                        }
-                        marker to markerText
+        mapScreenViewModel.floors = List(floorsNum) {
+            val floorNum = it + 1
+            val layers = listOf(factory.makeTileProviderForFloor(floorNum))
+            val markers = async(Dispatchers.IO) {
+                val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
+                markersWithTexts.entries.associate { (marker, markerTexts) ->
+                    val markerText = markerTexts.firstOrNull() ?: run {
+                        Log.w(TAG, "Marker $marker has no text on $systemLanguage")
+                        MarkerText(marker.id, systemLanguage, null, null)
                     }
+                    marker to markerText
                 }
-                floorNum to Floor(layers, markers)
-            }.toMap()
-        }
-    }
-
-    private fun setFloor(floorIndex: Int, onFinished: () -> Unit = {}) {
-        val floor = mFloors[floorIndex]
-        if (floor == null) {
-            Log.e(TAG, "Cannot switch to floor $floorIndex which does not exist")
-            return
-        }
-
-        Log.i(TAG, "Switching to floor $floorIndex")
-
-        val shouldReplaceMarkers = floorIndex != mMapScreenState.currentFloor
-
-        mMapScreenState.currentFloor = floorIndex
-        mMapScreenState.isMarkerPinned = false
-
-        lifecycleScope.launch {
-            mMapScreenState.replaceLayersWith(floor.layers, isInDarkTheme)
-            if (shouldReplaceMarkers) mMapScreenState.replaceMarkersWith(floor.markers.await())
-            Log.d(TAG, "Switched to floor $floorIndex")
-            onFinished()
-        }
+            }
+            floorNum to Floor(layers, markers)
+        }.toMap()
     }
 }

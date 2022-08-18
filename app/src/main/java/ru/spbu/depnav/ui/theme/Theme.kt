@@ -23,6 +23,11 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.darkColors
 import androidx.compose.material.lightColors
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.luminance
+import androidx.compose.ui.unit.dp
+import com.google.accompanist.systemuicontroller.rememberSystemUiController
 
 private val LightColorPalette = lightColors(
     primary = BlueGrey200,
@@ -36,16 +41,27 @@ private val DarkColorPalette = darkColors(
     secondary = BlueGrey200Light
 )
 
-/**
- * Theme of the application.
- */
+/** Padding applied where elements need to be spaced out by default. */
+val DEFAULT_PADDING = 10.dp
+
+/** Elevation applied to elements that need one by default. */
+val DEFAULT_ELEVATION = 5.dp
+
+/** Theme of the application. */
 @Composable
 fun DepNavTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) DarkColorPalette else LightColorPalette
+    val systemUiController = rememberSystemUiController()
+
+    SideEffect {
+        systemUiController.setSystemBarsColor(
+            color = Color.Transparent,
+            darkIcons = colors.background.luminance() > 0.5f
+        )
+    }
 
     MaterialTheme(
         colors = colors,
-        typography = Typography,
         shapes = Shapes,
         content = content
     )

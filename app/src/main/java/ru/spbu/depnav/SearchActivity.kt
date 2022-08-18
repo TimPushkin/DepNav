@@ -24,62 +24,57 @@ import android.os.Bundle
 import android.util.Log
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.only
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.toArgb
-import androidx.core.view.WindowInsetsControllerCompat
-import ru.spbu.depnav.db.AppDatabase
+import androidx.core.view.WindowCompat
+import ru.spbu.depnav.data.db.AppDatabase
 import ru.spbu.depnav.ui.search.MarkerSearch
-import ru.spbu.depnav.ui.search.MarkerSearchState
+import ru.spbu.depnav.ui.search.MarkerSearchViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private const val TAG = "SearchActivity"
 
-/**
- * ID of an extra containing the marker ID selected by a user after a search.
- */
+/** ID of an extra containing the marker ID selected by a user after a search. */
 const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
-/**
- * Activity which displays the search screen.
- */
+/** Activity which displays the search screen. */
 class SearchActivity : LanguageAwareActivity() {
-    private val mMarkerSearchState: MarkerSearchState by viewModels()
-    private lateinit var mAppDatabase: AppDatabase
+    private val markerSearchViewModel: MarkerSearchViewModel by viewModels()
+    private lateinit var appDatabase: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        mAppDatabase = AppDatabase.getInstance(this)
+        WindowCompat.setDecorFitsSystemWindows(window, false)
+
+        appDatabase = AppDatabase.getInstance(this)
 
         setContent {
-            val searchMatches by mMarkerSearchState.matchedMarkers.collectAsState(emptyList()) // TODO: make safer
-
-            if (!isSystemInDarkTheme()) {
-                WindowInsetsControllerCompat(window, window.decorView).apply {
-                    isAppearanceLightStatusBars = true
-                    isAppearanceLightNavigationBars = true
-                }
-            }
-
             DepNavTheme {
-                window.statusBarColor = MaterialTheme.colors.background.toArgb()
-                window.navigationBarColor = MaterialTheme.colors.surface.toArgb()
-
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colors.background
                 ) {
+                    val insetsNoBottom =
+                        WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
+                    val searchMatches by
+                    markerSearchViewModel.matchedMarkers.collectAsState(emptyList())
                     MarkerSearch(
                         matches = searchMatches,
                         onSearch = this::onSearch,
                         onClear = this::onClear,
-                        onResultClick = this::onMarkerSelected
+                        onResultClick = this::onMarkerSelected,
+                        modifier = Modifier.windowInsetsPadding(insetsNoBottom)
                     )
                 }
             }
@@ -87,11 +82,11 @@ class SearchActivity : LanguageAwareActivity() {
     }
 
     private fun onSearch(text: String) {
-        mMarkerSearchState.search(text, mAppDatabase.markerTextDao(), systemLanguage)
+        markerSearchViewModel.search(text, appDatabase.markerTextDao(), systemLanguage)
     }
 
     private fun onClear() {
-        mMarkerSearchState.clear()
+        markerSearchViewModel.clear()
     }
 
     private fun onMarkerSelected(id: Int) {

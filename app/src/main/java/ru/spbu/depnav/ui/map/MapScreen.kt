@@ -25,9 +25,15 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.BottomSheetScaffold
 import androidx.compose.material.ExperimentalMaterialApi
@@ -35,40 +41,50 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.viewModelScope
+import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
-import ru.spbu.depnav.ui.search.SearchButton
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
-/**
- * Screen containing a navigable map.
- */
+/** Screen containing a navigable map. */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MapScreen(
-    mapScreenState: MapScreenState,
-    floorsNum: Int,
-    onStartSearch: () -> Unit,
-    onFloorSwitch: (Int) -> Unit,
-) {
+fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {
+    val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
+    val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
+
     val scaffoldState = rememberBottomSheetScaffoldState()
+
+    var openMenu by rememberSaveable { mutableStateOf(false) }
+    if (openMenu) {
+        SettingsDialog(
+            prefs = vm.prefs,
+            onDismiss = { openMenu = false }
+        )
+    }
 
     BottomSheetScaffold(
         sheetContent = {
-            mapScreenState.pinnedMarker?.let { (marker, markerText) ->
+            vm.pinnedMarker?.let { (marker, markerText) ->
                 MarkerInfoLines(
                     title = markerText.title ?: stringResource(R.string.no_title),
                     description = markerText.description,
-                    isClosed = marker.isClosed
+                    isClosed = marker.isClosed,
+                    modifier = Modifier.windowInsetsPadding(insetsNoTop)
                 )
             } ?: Box(modifier = Modifier.padding(1.dp)) {} // Stub to always have sheet expandable
         },
-        modifier = Modifier.fillMaxSize(),
         scaffoldState = scaffoldState,
         sheetShape = MaterialTheme.shapes.large.copy(
             bottomStart = CornerSize(0),
@@ -79,24 +95,27 @@ fun MapScreen(
         Box(modifier = Modifier.padding(contentPadding)) {
             MapUI(
                 modifier = Modifier.fillMaxSize(),
-                state = mapScreenState.state
+                state = vm.mapState
             )
 
             Column(
-                modifier = Modifier.fillMaxWidth(),
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .windowInsetsPadding(insetsNoBottom),
                 horizontalAlignment = Alignment.CenterHorizontally
             ) {
                 AnimatedVisibility(
-                    visible = mapScreenState.showUI,
+                    visible = vm.showUI,
                     enter = slideInVertically(initialOffsetY = { -it }),
                     exit = slideOutVertically(targetOffsetY = { -it })
                 ) {
-                    SearchButton(
+                    TopButton(
                         text = stringResource(R.string.search_markers),
-                        onClick = onStartSearch,
+                        onMenuClick = { openMenu = true },
+                        onSurfaceClick = onStartSearch,
                         modifier = Modifier
                             .fillMaxWidth(0.8f)
-                            .padding(top = 10.dp, bottom = 10.dp)
+                            .padding(vertical = DEFAULT_PADDING)
                     )
                 }
 
@@ -108,26 +127,26 @@ fun MapScreen(
                     }
 
                 AnimatedVisibility(
-                    visible = mapScreenState.showUI,
+                    visible = vm.showUI,
                     modifier = Modifier.align(Alignment.End),
                     enter = slideInHorizontally(initialOffsetX = horizontalOffset),
                     exit = slideOutHorizontally(targetOffsetX = horizontalOffset)
                 ) {
                     FloorSwitch(
-                        floor = mapScreenState.currentFloor,
+                        floor = vm.currentFloor,
                         minFloor = 1,
-                        maxFloor = floorsNum,
-                        modifier = Modifier.padding(10.dp),
-                        onClick = onFloorSwitch
+                        maxFloor = vm.floors.size,
+                        modifier = Modifier.padding(DEFAULT_PADDING),
+                        onClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
                     )
                 }
             }
         }
     }
 
-    LaunchedEffect(mapScreenState.showUI, mapScreenState.isMarkerPinned) {
+    LaunchedEffect(vm.showUI, vm.isMarkerPinned) {
         scaffoldState.bottomSheetState.apply {
-            if (mapScreenState.showUI && mapScreenState.isMarkerPinned) expand() else collapse()
+            if (vm.showUI && vm.isMarkerPinned) expand() else collapse()
         }
     }
 }

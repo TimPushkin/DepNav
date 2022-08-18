@@ -16,15 +16,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.ui.theme
+package ru.spbu.depnav.data.db
 
-import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.Shapes
-import androidx.compose.ui.unit.dp
+import androidx.room.TypeConverter
+import ru.spbu.depnav.data.model.MarkerText
 
-/** Shapes used in the application. */
-val Shapes = Shapes(
-    small = RoundedCornerShape(4.dp),
-    medium = RoundedCornerShape(4.dp),
-    large = RoundedCornerShape(8.dp)
-)
+/** Type converters for Room databases. */
+class Converters {
+    /**
+     * Converts a long to a language IDs with the corresponding ordinal. If no such language ID
+     * exists [MarkerText.LanguageId.EN] is returned.
+     */
+    @TypeConverter
+    fun longToLanguageId(value: Long) =
+        MarkerText.LanguageId.values().getOrElse(value.toInt()) { MarkerText.LanguageId.EN }
+
+    /** Converts a language ID to a long by taking its ordinal. */
+    @TypeConverter
+    fun languageIdToLong(languageId: MarkerText.LanguageId) = languageId.ordinal.toLong()
+}

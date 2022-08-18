@@ -16,21 +16,27 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav
+package ru.spbu.depnav.data.db
 
-import androidx.activity.ComponentActivity
-import androidx.compose.ui.text.intl.Locale
+import androidx.room.Dao
+import androidx.room.Insert
+import androidx.room.Query
 import ru.spbu.depnav.data.model.MarkerText
 
-/**
- * Activity which can convert the language currently set in the application to
- * [MarkerText.LanguageId].
- */
-abstract class LanguageAwareActivity : ComponentActivity() {
-    protected val systemLanguage: MarkerText.LanguageId
-        get() = when (Locale.current.language) {
-            "en" -> MarkerText.LanguageId.EN
-            "ru" -> MarkerText.LanguageId.RU
-            else -> MarkerText.LanguageId.EN
-        }
+/** DAO for the table containing the available [MarkerText] entries. */
+@Dao
+interface MarkerTextDao {
+    /** Inserts the provided [MarkerText] entries into the database. */
+    @Insert
+    suspend fun insertAll(vararg markerTexts: MarkerText)
+
+    /**
+     * Returns [MarkerText] entries containing the specified tokens as a substring on the specified
+     * language.
+     */
+    @Query(
+        "SELECT *, language_id FROM marker_texts " +
+            "WHERE marker_texts MATCH :tokens AND language_id = :language"
+    )
+    suspend fun loadByTokens(tokens: String, language: MarkerText.LanguageId): List<MarkerText>
 }
