@@ -23,9 +23,7 @@ import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 
-/**
- * Displayable floor of a map.
- */
+/** Displayable floor of a map. */
 data class Floor(
     /** Layers of tiles that this floor consist of. */
     val layers: Iterable<TileStreamProvider>,

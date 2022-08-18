@@ -23,14 +23,10 @@ import androidx.room.Insert
 import androidx.room.Query
 import ru.spbu.depnav.data.model.MarkerText
 
-/**
- * DAO for the table containing the available [MarkerText] entries.
- */
+/** DAO for the table containing the available [MarkerText] entries. */
 @Dao
 interface MarkerTextDao {
-    /**
-     * Inserts the provided [MarkerText] entries into the database.
-     */
+    /** Inserts the provided [MarkerText] entries into the database. */
     @Insert
     suspend fun insertAll(vararg markerTexts: MarkerText)
 

@@ -25,6 +25,7 @@ import ru.spbu.depnav.utils.preferences.PreferencesManager
 private val HORIZONTAL_PADDING = 15.dp
 private val VERTICAL_PADDING = 5.dp
 
+/** Dialog with app settings. */
 @Composable
 fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
     AlertDialog(

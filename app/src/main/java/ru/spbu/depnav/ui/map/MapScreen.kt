@@ -57,9 +57,7 @@ import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
-/**
- * Screen containing a navigable map.
- */
+/** Screen containing a navigable map. */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {

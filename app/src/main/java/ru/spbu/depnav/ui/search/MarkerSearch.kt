@@ -34,9 +34,7 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
-/**
- * Screen containing a marker search and the results found.
- */
+/** Screen containing a marker search and the results found. */
 @Composable
 fun MarkerSearch(
     matches: List<MarkerText>,

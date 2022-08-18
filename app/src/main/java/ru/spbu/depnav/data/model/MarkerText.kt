@@ -23,9 +23,7 @@ import androidx.room.Entity
 import androidx.room.Fts4
 import androidx.room.FtsOptions
 
-/**
- * Text information related to a [Marker].
- */
+/** Text information related to a [Marker]. */
 // using FTS4 built-in `languageid` column leads to crash when querying it on Huawei devices
 @Fts4(notIndexed = ["marker_id"], tokenizer = FtsOptions.TOKENIZER_UNICODE61)
 @Entity(tableName = "marker_texts")
@@ -39,8 +37,6 @@ data class MarkerText(
     /** Description of the [Marker] to which this text relates. */
     val description: String?
 ) {
-    /**
-     * IDs of the supported languages.
-     */
+    /** IDs of the supported languages. */
     enum class LanguageId { EN, RU }
 }

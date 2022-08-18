@@ -45,9 +45,7 @@ import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.text.input.ImeAction
 
-/**
- * Text field with a search icon.
- */
+/** Text field with a search icon. */
 @Composable
 fun SearchField(
     modifier: Modifier = Modifier,

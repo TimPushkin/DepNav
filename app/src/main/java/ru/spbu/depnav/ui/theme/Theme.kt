@@ -44,9 +44,7 @@ private val DarkColorPalette = darkColors(
 val DEFAULT_PADDING = 10.dp
 val DEFAULT_ELEVATION = 5.dp
 
-/**
- * Theme of the application.
- */
+/** Theme of the application. */
 @Composable
 fun DepNavTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {
     val colors = if (darkTheme) DarkColorPalette else LightColorPalette

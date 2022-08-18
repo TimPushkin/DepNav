@@ -29,15 +29,11 @@ import ru.spbu.depnav.data.model.MarkerText
 
 private const val TAG = "MarkerSearchViewModel"
 
-/**
- * State of the [MarkerSearch].
- */
+/** State of the [MarkerSearch]. */
 class MarkerSearchViewModel : ViewModel() {
     private val _matchedMarkers = MutableStateFlow(emptyList<MarkerText>())
 
-    /**
-     * Markers that were found by the search.
-     */
+    /** Markers that were found by the search. */
     val matchedMarkers: StateFlow<List<MarkerText>>
         get() = _matchedMarkers
 
@@ -60,9 +56,7 @@ class MarkerSearchViewModel : ViewModel() {
         }
     }
 
-    /**
-     * Clear the search results.
-     */
+    /** Clear the search results. */
     fun clear() {
         _matchedMarkers.value = emptyList()
     }

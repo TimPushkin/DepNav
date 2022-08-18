@@ -44,9 +44,7 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 private val SIZE = 20.dp
 private val TEXT_PADDING = DEFAULT_PADDING / 2
 
-/**
- * Visual representation of a [Marker].
- */
+/** Visual representation of a [Marker]. */
 @Composable
 fun MarkerView(title: String, type: MarkerType, isClosed: Boolean, modifier: Modifier = Modifier) =
     when (type) {

@@ -23,9 +23,7 @@ import androidx.room.Entity
 import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
-/**
- * A displayable marker.
- */
+/** Displayable marker. */
 @Entity(tableName = "markers")
 data class Marker(
     /** ID of this marker. */
@@ -41,15 +39,11 @@ data class Marker(
     /** Y coordinate of this marker. */
     val y: Double
 ) {
-    /**
-     * ID of this marker as a string.
-     */
+    /** ID of this marker as a string. */
     @Ignore
     val idStr = id.toString()
 
-    /**
-     * Type of an object represented by a [Marker].
-     */
+    /** Type of an object represented by a [Marker]. */
     enum class MarkerType {
         /** Building entrance. */
         ENTRANCE,

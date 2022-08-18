@@ -17,12 +17,15 @@ private const val THEME_MODE_KEY = "theme_mode"
 private val THEME_MODE_DEFAULT = PreferencesManager.ThemeMode.SYSTEM.name
 
 @Singleton
+/** Helper class to load ans save user settings. */
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
     private val prefs = context.getSharedPreferences(PREFERENCES_FILE_NAME, Context.MODE_PRIVATE)
 
     private var _themeMode by mutableStateOf(
         prefs.getString(THEME_MODE_KEY, THEME_MODE_DEFAULT) ?: THEME_MODE_DEFAULT
     )
+
+    /** Defines what theme the app uses. */
     var themeMode: ThemeMode
         get() = ThemeMode.valueOf(_themeMode)
         set(value) {
@@ -30,12 +33,17 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
             _themeMode = value.name
         }
 
-    enum class ThemeMode(@StringRes val titleId: Int) {
+    /** Possible app theme mode. */
+    enum class ThemeMode(
+        /** ID of the string resource corresponding to the user-visible title of the mode. */
+        @StringRes val titleId: Int
+    ) {
         LIGHT(R.string.light_theme),
         DARK(R.string.dark_theme),
         SYSTEM(R.string.system_theme);
 
         companion object {
+            /** Returns [ThemeMode] having the title referenced by this string resource ID. */
             fun fromTitleId(@StringRes id: Int) = when (id) {
                 LIGHT.titleId -> LIGHT
                 DARK.titleId -> DARK

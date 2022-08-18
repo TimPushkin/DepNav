@@ -60,9 +60,7 @@ private const val TAG = "MainActivity"
 private const val MAP_NAME = "spbu-mm"
 private const val TILES_PATH = "$MAP_NAME/tiles"
 
-/**
- * Activity which displays the map screen.
- */
+/** Activity which displays the map screen. */
 @AndroidEntryPoint
 class MainActivity : LanguageAwareActivity() {
     private val mapScreenViewModel: MapScreenViewModel by viewModels()

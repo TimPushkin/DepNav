@@ -42,9 +42,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
-/**
- * Two buttons to switch the current map one floor up or down.
- */
+/** Two buttons to switch the current map one floor up or down. */
 @OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FloorSwitch(

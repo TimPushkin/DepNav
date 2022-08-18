@@ -24,21 +24,15 @@ import ovh.plrapps.mapcompose.core.TileStreamProvider
 
 private const val TAG = "TileProviderFactory"
 
-/**
- * Factory for creating [TileStreamProviders][TileStreamProvider] of tiles from a certain path.
- */
+/** Factory for creating [TileStreamProviders][TileStreamProvider] of tiles from a certain path. */
 class TileProviderFactory(
     private val assets: AssetManager,
-    /**
-     * Root directory of the tiles from which [TileStreamProviders][TileStreamProvider] are created.
-     */
+    /** Root directory of the tiles in the assets folder. */
     var rootPath: String,
     /** Floor subdirectories prefix. */
     var floorPrefix: String = "floor"
 ) {
-    /**
-     * Returns a [TileStreamProvider] for the specified floor and theme.
-     */
+    /** Returns a [TileStreamProvider] for the specified floor and theme. */
     fun makeTileProviderForFloor(floor: Int): TileStreamProvider {
         return TileStreamProvider { row, col, lvl ->
             val path = "$rootPath/$floorPrefix$floor/$lvl/${row}_$col.png"

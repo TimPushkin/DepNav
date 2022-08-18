@@ -39,9 +39,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 private val HEIGHT = 68.dp
 
-/**
- * Button with a search icon and text.
- */
+/** Button with a search icon and text. */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun TopButton(

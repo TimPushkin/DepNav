@@ -35,9 +35,7 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 
 private const val CLOSED_TEXT_ALPHA = 0.6f
 
-/**
- * Lines with text information about a marker.
- */
+/** Lines with text information about a marker. */
 @Composable
 fun MarkerInfoLines(
     title: String,
