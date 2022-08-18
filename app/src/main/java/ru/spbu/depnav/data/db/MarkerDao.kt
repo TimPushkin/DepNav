@@ -16,13 +16,13 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.db
+package ru.spbu.depnav.data.db
 
 import androidx.room.Dao
 import androidx.room.Insert
 import androidx.room.Query
-import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.MarkerText
 
 /**
  * DAO for the table containing the available [Marker] entries.

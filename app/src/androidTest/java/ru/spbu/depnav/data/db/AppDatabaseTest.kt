@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.db
+package ru.spbu.depnav.data.db
 
 import android.content.Context
 import androidx.room.Room
@@ -28,9 +28,9 @@ import org.junit.Assert.assertEquals
 import org.junit.Before
 import org.junit.Test
 import org.junit.runner.RunWith
-import ru.spbu.depnav.model.MapInfo
-import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.MarkerText
 
 /**
  * Instrumentation texts for [AppDatabase].
@@ -95,7 +95,7 @@ class AppDatabaseTest {
         val expected = mutableListOf<Pair<Marker, MarkerText>>()
         for (id in listOf(1, 2, 5)) {
             expected += Marker(id, Marker.MarkerType.OTHER, false, 1, 0.0, 0.0) to
-                    MarkerText(id, MarkerText.LanguageId.EN, null, null)
+                MarkerText(id, MarkerText.LanguageId.EN, null, null)
         }
         runBlocking {
             markerDao.insertAll(*expected.map { it.first }.toTypedArray())

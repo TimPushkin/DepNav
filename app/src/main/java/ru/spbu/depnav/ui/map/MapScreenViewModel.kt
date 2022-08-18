@@ -54,12 +54,12 @@ import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
-import ru.spbu.depnav.model.Floor
-import ru.spbu.depnav.model.MapInfo
-import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-import ru.spbu.depnav.utils.PreferencesManager
+import ru.spbu.depnav.utils.preferences.PreferencesManager
+import ru.spbu.depnav.utils.tiles.Floor
 import javax.inject.Inject
 
 private const val TAG = "MapScreenViewModel"

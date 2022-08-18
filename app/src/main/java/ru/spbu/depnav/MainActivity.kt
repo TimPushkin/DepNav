@@ -46,14 +46,14 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.fullSize
-import ru.spbu.depnav.db.AppDatabase
-import ru.spbu.depnav.model.Floor
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.db.AppDatabase
+import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.map.MapScreen
 import ru.spbu.depnav.ui.map.MapScreenViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.utils.PreferencesManager
-import ru.spbu.depnav.utils.TileProviderFactory
+import ru.spbu.depnav.utils.preferences.PreferencesManager
+import ru.spbu.depnav.utils.tiles.Floor
+import ru.spbu.depnav.utils.tiles.TileProviderFactory
 
 private const val TAG = "MainActivity"
 
@@ -66,7 +66,7 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 @AndroidEntryPoint
 class MainActivity : LanguageAwareActivity() {
     private val mapScreenViewModel: MapScreenViewModel by viewModels()
-    private lateinit var appDatabase: AppDatabase
+    private lateinit var db: AppDatabase
 
     private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
@@ -74,7 +74,7 @@ class MainActivity : LanguageAwareActivity() {
         val markerId = result ?: return@registerForActivityResult
         mapScreenViewModel.viewModelScope.launch {
             val (marker, markerTexts) =
-                appDatabase.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
+                db.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
 
             Log.d(TAG, "Loaded searched marker: $marker")
 
@@ -101,12 +101,12 @@ class MainActivity : LanguageAwareActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        appDatabase = AppDatabase.getInstance(this)
+        db = AppDatabase.getInstance(this)
 
         var isMapInitialized by mutableStateOf(mapScreenViewModel.mapState.fullSize != IntSize.Zero)
         if (!isMapInitialized) {
             lifecycleScope.launch(Dispatchers.IO) {
-                val mapInfo = appDatabase.mapInfoDao().loadByName(MAP_NAME)
+                val mapInfo = db.mapInfoDao().loadByName(MAP_NAME)
                 mapScreenViewModel.viewModelScope.launch {
                     initFloors(mapInfo.floorsNum)
                     mapScreenViewModel.setParams(mapInfo)
@@ -143,7 +143,7 @@ class MainActivity : LanguageAwareActivity() {
 
     private fun CoroutineScope.initFloors(floorsNum: Int) {
         val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
-        val markerDao = appDatabase.markerDao()
+        val markerDao = db.markerDao()
 
         mapScreenViewModel.floors = List(floorsNum) {
             val floorNum = it + 1

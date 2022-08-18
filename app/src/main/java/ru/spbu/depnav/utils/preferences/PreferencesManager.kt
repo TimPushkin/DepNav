@@ -1,4 +1,4 @@
-package ru.spbu.depnav.utils
+package ru.spbu.depnav.utils.preferences
 
 import android.content.Context
 import androidx.annotation.StringRes

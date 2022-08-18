@@ -20,7 +20,7 @@ import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-import ru.spbu.depnav.utils.PreferencesManager
+import ru.spbu.depnav.utils.preferences.PreferencesManager
 
 private val HORIZONTAL_PADDING = 15.dp
 private val VERTICAL_PADDING = 5.dp

@@ -16,10 +16,10 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.db
+package ru.spbu.depnav.data.db
 
 import androidx.room.TypeConverter
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.model.MarkerText
 
 /**
  * Type converters for Room databases.

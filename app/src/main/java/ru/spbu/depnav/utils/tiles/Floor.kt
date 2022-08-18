@@ -16,10 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.model
+package ru.spbu.depnav.utils.tiles
 
 import kotlinx.coroutines.Deferred
 import ovh.plrapps.mapcompose.core.TileStreamProvider
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.MarkerText
 
 /**
  * Displayable floor of a map.

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.model
+package ru.spbu.depnav.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity

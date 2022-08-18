@@ -16,16 +16,16 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.db
+package ru.spbu.depnav.data.db
 
 import android.content.Context
 import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
 import androidx.room.TypeConverters
-import ru.spbu.depnav.model.MapInfo
-import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.MarkerText
 
 /**
  * Room database containing information about maps and their markers.

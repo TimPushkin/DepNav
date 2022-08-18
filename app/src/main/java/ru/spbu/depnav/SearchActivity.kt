@@ -37,7 +37,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import ru.spbu.depnav.db.AppDatabase
+import ru.spbu.depnav.data.db.AppDatabase
 import ru.spbu.depnav.ui.search.MarkerSearch
 import ru.spbu.depnav.ui.search.MarkerSearchViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme

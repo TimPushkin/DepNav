@@ -24,8 +24,8 @@ import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.spbu.depnav.db.MarkerTextDao
-import ru.spbu.depnav.model.MarkerText
+import ru.spbu.depnav.data.db.MarkerTextDao
+import ru.spbu.depnav.data.model.MarkerText
 
 private const val TAG = "MarkerSearchViewModel"
 

@@ -35,8 +35,8 @@ import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
-import ru.spbu.depnav.model.Marker
-import ru.spbu.depnav.model.Marker.MarkerType
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.Marker.MarkerType
 import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme

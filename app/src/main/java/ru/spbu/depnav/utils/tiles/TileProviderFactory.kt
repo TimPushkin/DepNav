@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.utils
+package ru.spbu.depnav.utils.tiles
 
 import android.content.res.AssetManager
 import android.util.Log
