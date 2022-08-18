@@ -41,7 +41,10 @@ private val DarkColorPalette = darkColors(
     secondary = BlueGrey200Light
 )
 
+/** Padding applied where elements need to be spaced out by default. */
 val DEFAULT_PADDING = 10.dp
+
+/** Elevation applied to elements that need one by default. */
 val DEFAULT_ELEVATION = 5.dp
 
 /** Theme of the application. */

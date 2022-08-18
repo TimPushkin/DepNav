@@ -76,7 +76,10 @@ private const val PIN_ID = "Pin" // Real IDs are integers
 /** ViewModel for the [MapScreen]. */
 @OptIn(ExperimentalClusteringApi::class)
 @HiltViewModel
-class MapScreenViewModel @Inject constructor(val prefs: PreferencesManager) : ViewModel() {
+class MapScreenViewModel @Inject constructor(
+    /** User preferences. */
+    val prefs: PreferencesManager
+) : ViewModel() {
     /** State of the map currently displayed. */
     var mapState by mutableStateOf(MapState(0, 0, 0))
         private set

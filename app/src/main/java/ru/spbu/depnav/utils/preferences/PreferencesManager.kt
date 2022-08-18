@@ -16,8 +16,8 @@ private const val PREFERENCES_FILE_NAME = "preferences"
 private const val THEME_MODE_KEY = "theme_mode"
 private val THEME_MODE_DEFAULT = PreferencesManager.ThemeMode.SYSTEM.name
 
-@Singleton
 /** Helper class to load ans save user settings. */
+@Singleton
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
     private val prefs = context.getSharedPreferences(PREFERENCES_FILE_NAME, Context.MODE_PRIVATE)
 
