@@ -18,13 +18,14 @@
 
 package ru.spbu.depnav.data.model
 
+import androidx.compose.ui.text.intl.Locale
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.Fts4
 import androidx.room.FtsOptions
 
 /** Text information related to a [Marker]. */
-// using FTS4 built-in `languageid` column leads to crash when querying it on Huawei devices
+// Using FTS4 built-in `languageid` column leads to crash when querying it on Huawei devices
 @Fts4(notIndexed = ["marker_id"], tokenizer = FtsOptions.TOKENIZER_UNICODE61)
 @Entity(tableName = "marker_texts")
 data class MarkerText(
@@ -38,5 +39,16 @@ data class MarkerText(
     val description: String?
 ) {
     /** IDs of the supported languages. */
-    enum class LanguageId { EN, RU }
+    enum class LanguageId {
+        EN, RU;
+
+        companion object {
+            /** Returns the current locale's language, if it is supported, or [EN] otherwise. */
+            @Suppress("UseIfInsteadOfWhen") // Planning to add more languages later
+            fun getCurrent() = when (Locale.current.language) {
+                "ru" -> RU
+                else -> EN
+            }
+        }
+    }
 }

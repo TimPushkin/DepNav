@@ -24,38 +24,53 @@ import androidx.room.Query
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 
-/** DAO for the table containing the available [Marker] entries. */
+/** DAO for the tables containing the available [Marker] and [MarkerText] entries. */
 @Dao
-interface MarkerDao {
+interface MarkerWithTextDao {
     /** Inserts the provided [Marker] entries into the database. */
     @Insert
-    suspend fun insertAll(vararg markers: Marker)
+    suspend fun insertMarkers(markers: Collection<Marker>)
+
+    /** Inserts the provided [MarkerText] entries into the database. */
+    @Insert
+    suspend fun insertMarkerTexts(markerTexts: Collection<MarkerText>)
 
     /**
      * Returns [Marker] entries with the provided ID and the corresponding [MarkerText] entries on
      * the specified language.
      */
     @Query(
-        "SELECT *, marker_texts.language_id FROM markers " +
+        "SELECT * FROM markers " +
             "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
             "WHERE markers.id = :id AND marker_texts.language_id = :language"
     )
-    suspend fun loadWithTextById(
-        id: Int,
-        language: MarkerText.LanguageId
-    ): Map<Marker, List<MarkerText>>
+    suspend fun loadById(id: Int, language: MarkerText.LanguageId): Map<Marker, List<MarkerText>>
 
     /**
      * Returns [Marker] entries from the specified floor and the corresponding [MarkerText] entries
      * on the requested language.
      */
     @Query(
-        "SELECT *, marker_texts.language_id FROM markers " +
+        "SELECT * FROM markers " +
             "JOIN marker_texts ON markers.id = marker_texts.marker_id " +
             "WHERE markers.floor = :floor AND marker_texts.language_id = :language"
     )
-    suspend fun loadWithTextByFloor(
+    suspend fun loadByFloor(
         floor: Int,
         language: MarkerText.LanguageId
     ): Map<Marker, List<MarkerText>>
+
+    /**
+     * Returns [MarkerText] entries containing the specified tokens as a substring on the specified
+     * language with the corresponding [Marker] entry.
+     */
+    @Query(
+        "SELECT * FROM marker_texts " +
+            "JOIN markers ON marker_texts.marker_id = markers.id " +
+            "WHERE marker_texts MATCH :tokens AND marker_texts.language_id = :language"
+    )
+    suspend fun loadByTokens(
+        tokens: String,
+        language: MarkerText.LanguageId
+    ): Map<MarkerText, List<Marker>>
 }

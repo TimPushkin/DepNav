@@ -16,21 +16,17 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav
+package ru.spbu.depnav.data.repository
 
-import androidx.activity.ComponentActivity
-import androidx.compose.ui.text.intl.Locale
-import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.db.MapInfoDao
+import ru.spbu.depnav.data.model.MapInfo
+import javax.inject.Inject
 
-/**
- * Activity which can convert the language currently set in the application to
- * [MarkerText.LanguageId].
- */
-abstract class LanguageAwareActivity : ComponentActivity() {
-    protected val systemLanguage: MarkerText.LanguageId
-        get() = when (Locale.current.language) {
-            "en" -> MarkerText.LanguageId.EN
-            "ru" -> MarkerText.LanguageId.RU
-            else -> MarkerText.LanguageId.EN
-        }
+/** Repository for loading and saving [MapInfo] objects. */
+class MapInfoRepo @Inject constructor(private val dao: MapInfoDao) {
+    /** Saves the provided objects. */
+    suspend fun insertAll(mapInfos: Collection<MapInfo>) = dao.insertAll(mapInfos)
+
+    /** Loads a [MapInfo] by its name. */
+    suspend fun loadByName(name: String) = dao.loadByName(name)
 }
