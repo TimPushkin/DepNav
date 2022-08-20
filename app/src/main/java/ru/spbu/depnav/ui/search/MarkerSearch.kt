@@ -37,9 +37,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 /** Screen containing a marker search and the results found. */
 @Composable
 fun MarkerSearch(
-    matches: Iterable<MarkerText>,
-    onSearch: (String) -> Unit,
-    onClear: () -> Unit,
+    vm: MarkerSearchViewModel,
     onResultClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -51,14 +49,14 @@ fun MarkerSearch(
         SearchField(
             modifier = Modifier.fillMaxWidth(),
             placeholder = stringResource(R.string.search_markers),
-            onTextChange = onSearch,
-            onClear = onClear
+            onTextChange = vm::search,
+            onClear = vm::clearResults
         )
 
         Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
         SearchResults(
-            markerTexts = matches,
+            markerTexts = vm.matchedMarkers,
             onResultClick = onResultClick
         )
     }

@@ -22,6 +22,7 @@ import android.app.Activity
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
 import androidx.compose.foundation.layout.WindowInsets
@@ -33,8 +34,6 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
-import androidx.compose.runtime.collectAsState
-import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
 import dagger.hilt.android.AndroidEntryPoint
@@ -49,7 +48,7 @@ const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
 /** Activity which displays the search screen. */
 @AndroidEntryPoint
-class SearchActivity : LanguageAwareActivity() {
+class SearchActivity : ComponentActivity() {
     private val markerSearchViewModel: MarkerSearchViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -65,26 +64,14 @@ class SearchActivity : LanguageAwareActivity() {
                 ) {
                     val insetsNoBottom =
                         WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
-                    val searchMatches by
-                    markerSearchViewModel.matchedMarkers.collectAsState(emptyList())
                     MarkerSearch(
-                        matches = searchMatches,
-                        onSearch = this::onSearch,
-                        onClear = this::onClear,
+                        vm = markerSearchViewModel,
                         onResultClick = this::onMarkerSelected,
                         modifier = Modifier.windowInsetsPadding(insetsNoBottom)
                     )
                 }
             }
         }
-    }
-
-    private fun onSearch(text: String) {
-        markerSearchViewModel.search(text, systemLanguage)
-    }
-
-    private fun onClear() {
-        markerSearchViewModel.clear()
     }
 
     private fun onMarkerSelected(id: Int) {

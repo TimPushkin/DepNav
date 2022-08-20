@@ -15,7 +15,8 @@ class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao)
         dao.insertMarkerTexts(markersWithText.values)
     }
 
-    suspend fun loadById(id: Int, language: MarkerText.LanguageId): Pair<Marker, MarkerText> {
+    suspend fun loadById(id: Int): Pair<Marker, MarkerText> {
+        val language = MarkerText.LanguageId.getCurrent()
         val (marker, markerTexts) = dao.loadById(id, language).entries.firstOrNull()
             ?: throw IllegalArgumentException("No markers with ID $id")
         val markerText = markerTexts.squeezedFor(marker, language)

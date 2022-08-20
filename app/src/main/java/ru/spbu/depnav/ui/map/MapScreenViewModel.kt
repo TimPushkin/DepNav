@@ -134,9 +134,10 @@ class MapScreenViewModel @Inject constructor(
      *
      * @param mapName name of the map as it is specified in [MapInfo] database table.
      * @param tilesPath path to the map's tiles subdirectory in assets.
-     * @param language language that will be used for [MarkerTexts][MarkerText] on the map.
      */
-    suspend fun initMap(mapName: String, tilesPath: String, language: MarkerText.LanguageId) {
+    suspend fun initMap(mapName: String, tilesPath: String) {
+        val language = MarkerText.LanguageId.getCurrent()
+
         Log.i(TAG, "Initializing map $mapName on $language language")
 
         minScaleCollectionJob?.cancel("State changed")

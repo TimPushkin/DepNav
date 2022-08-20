@@ -23,6 +23,7 @@ import android.content.Context
 import android.content.Intent
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.result.contract.ActivityResultContract
 import androidx.activity.result.launch
@@ -58,7 +59,7 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 
 /** Activity which displays the map screen. */
 @AndroidEntryPoint
-class MainActivity : LanguageAwareActivity() {
+class MainActivity : ComponentActivity() {
     private val mapScreenViewModel: MapScreenViewModel by viewModels()
 
     @Inject // Has to be a public lateinit var for Hilt to be able to inject
@@ -70,7 +71,7 @@ class MainActivity : LanguageAwareActivity() {
         val markerId = result ?: return@registerForActivityResult
 
         mapScreenViewModel.viewModelScope.launch(Dispatchers.IO) {
-            val (marker, markerText) = markerWithTextRepo.loadById(markerId, systemLanguage)
+            val (marker, markerText) = markerWithTextRepo.loadById(markerId)
             launch(Dispatchers.Main) {
                 mapScreenViewModel.setFloor(marker.floor)
                 mapScreenViewModel.focusOnMarker(marker, markerText)
@@ -94,7 +95,7 @@ class MainActivity : LanguageAwareActivity() {
         var isMapInitialized by mutableStateOf(mapScreenViewModel.mapState.fullSize != IntSize.Zero)
         if (!isMapInitialized) {
             lifecycleScope.launch {
-                mapScreenViewModel.initMap(MAP_NAME, TILES_PATH, systemLanguage)
+                mapScreenViewModel.initMap(MAP_NAME, TILES_PATH)
                 isMapInitialized = true
             }
         }
