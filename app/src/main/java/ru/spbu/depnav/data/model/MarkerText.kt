@@ -43,6 +43,8 @@ data class MarkerText(
         EN, RU;
 
         companion object {
+            /** Returns the current locale's language, if it is supported, or [EN] otherwise. */
+            @Suppress("UseIfInsteadOfWhen") // Planning to add more languages later
             fun getCurrent() = when (Locale.current.language) {
                 "ru" -> RU
                 else -> EN

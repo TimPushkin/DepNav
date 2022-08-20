@@ -139,9 +139,7 @@ class MapScreenViewModel @Inject constructor(
     }
 
     private suspend fun initMap(mapName: String, tilesSubdir: String) {
-        val language = MarkerText.LanguageId.getCurrent()
-
-        Log.i(TAG, "Initializing map $mapName on $language language")
+        Log.i(TAG, "Initializing map $mapName")
 
         minScaleCollectionJob?.cancel("State changed")
         mapState.shutdown()
@@ -155,7 +153,7 @@ class MapScreenViewModel @Inject constructor(
                     val floorNum = it + 1
                     val layers = listOf(makeTileProviderForFloor(floorNum))
                     val markers = withContext(Dispatchers.IO) {
-                        async { markerWithTextRepo.loadByFloor(floorNum, language) }
+                        async { markerWithTextRepo.loadByFloor(floorNum) }
                     }
                     floorNum to Floor(layers, markers)
                 }.toMap()

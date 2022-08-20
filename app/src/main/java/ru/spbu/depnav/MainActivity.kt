@@ -20,6 +20,7 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.utils.preferences.PreferencesManager
 
 @AndroidEntryPoint
+@Suppress("UndocumentedPublicClass") // Class name is self-explanatory
 class MainActivity : ComponentActivity() {
     private val mapScreenVm: MapScreenViewModel by viewModels()
 

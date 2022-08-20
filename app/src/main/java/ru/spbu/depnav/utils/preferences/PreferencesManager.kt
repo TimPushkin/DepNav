@@ -8,6 +8,7 @@ import androidx.compose.runtime.setValue
 import androidx.core.content.edit
 import dagger.hilt.android.qualifiers.ApplicationContext
 import ru.spbu.depnav.R
+import ru.spbu.depnav.data.model.MapInfo
 import javax.inject.Inject
 import javax.inject.Singleton
 
@@ -60,6 +61,7 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
         prefs.getString(MAP_STORED_NAME_KEY, MAP_STORED_NAME_DEFAULT) ?: MAP_STORED_NAME_DEFAULT
     )
 
+    /** Defines what map the app shows. */
     var mapStoredName: MapStoredName
         get() = MapStoredName.valueOf(_mapStoredName)
         set(value) {
@@ -67,9 +69,14 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
             _mapStoredName = value.name
         }
 
-    enum class MapStoredName(val storedName: String) {
+    /** Maps available in the app. */
+    enum class MapStoredName(
+        /** Map's name as it is stored in the corresponding [MapInfo] in the database. */
+        val storedName: String
+    ) {
         SPBU_MM("spbu-mm");
 
+        /** Subdirectory with map's tiles in assets. */
         val tilesSubdir = "$storedName/tiles"
     }
 }

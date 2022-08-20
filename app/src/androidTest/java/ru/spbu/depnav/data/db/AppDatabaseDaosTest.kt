@@ -182,7 +182,6 @@ class AppDatabaseDaosTest {
                         insertMarkerTexts(listOf(MarkerText(id, languageId, null, null)))
                     }
                 }
-
             }
             id++
         }

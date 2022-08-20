@@ -1,3 +1,5 @@
+@file:Suppress("UndocumentedPublicFunction") // Method names are self-explanatory
+
 package ru.spbu.depnav.data.db
 
 import android.content.Context
@@ -11,6 +13,7 @@ import javax.inject.Singleton
 
 private const val DB_ASSET = "markers.db"
 
+/** Database-related providers for Hilt. */
 @Module
 @InstallIn(SingletonComponent::class)
 object DatabaseModule {

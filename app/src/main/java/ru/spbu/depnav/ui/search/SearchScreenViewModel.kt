@@ -56,7 +56,7 @@ class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: 
         val query = text.split(' ').joinToString(" ") { "$it*" }
 
         viewModelScope.launch(Dispatchers.IO) {
-            val matches = markerWithTextRepo.loadByTokens(query, language)
+            val matches = markerWithTextRepo.loadByTokens(query)
             Log.v(TAG, "Found ${matches.size} matches")
             launch(Dispatchers.Main) { matchedMarkers = matches.values }
         }

@@ -10,11 +10,13 @@ private const val TAG = "MarkerWithTextRepo"
 
 /** Repository for loading and saving [Marker] objects with associated [MarkerText] objects. */
 class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao) {
+    /** Saves the provided objects. */
     suspend fun insertAll(markersWithText: Map<Marker, MarkerText>) {
         dao.insertMarkers(markersWithText.keys)
         dao.insertMarkerTexts(markersWithText.values)
     }
 
+    /** Loads a [Marker] by its ID and its corresponding [MarkerText] on the current language. */
     suspend fun loadById(id: Int): Pair<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
         val (marker, markerTexts) = dao.loadById(id, language).entries.firstOrNull()
@@ -23,7 +25,12 @@ class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao)
         return marker to markerText
     }
 
-    suspend fun loadByFloor(floor: Int, language: MarkerText.LanguageId): Map<Marker, MarkerText> {
+    /**
+     * Loads all [Markers][Marker] on the specified floor with their corresponding [MarkerText] on
+     * the current language.
+     */
+    suspend fun loadByFloor(floor: Int): Map<Marker, MarkerText> {
+        val language = MarkerText.LanguageId.getCurrent()
         val markersWithTexts = dao.loadByFloor(floor, language)
         return markersWithTexts.entries.associate { (marker, markerTexts) ->
             val markerText = markerTexts.squeezedFor(marker, language)
@@ -37,10 +44,12 @@ class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao)
             MarkerText(marker.id, language, null, null)
         }
 
-    suspend fun loadByTokens(
-        tokens: String,
-        language: MarkerText.LanguageId
-    ): Map<Marker, MarkerText> {
+    /**
+     * Loads a [Marker] and its corresponding [MarkerText] on the current language so that the text
+     * has the specified tokens in it.
+     */
+    suspend fun loadByTokens(tokens: String): Map<Marker, MarkerText> {
+        val language = MarkerText.LanguageId.getCurrent()
         val textsWithMarkers = dao.loadByTokens(tokens, language)
         return textsWithMarkers.entries.associate { (markerText, markers) ->
             val marker = markers.firstOrNull()
