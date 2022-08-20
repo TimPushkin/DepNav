@@ -33,9 +33,9 @@ import javax.inject.Inject
 
 private const val TAG = "MarkerSearchViewModel"
 
-/** State of the [MarkerSearch]. */
+/** View model for [SearchScreen]. */
 @HiltViewModel
-class MarkerSearchViewModel @Inject constructor(private val markerWithTextRepo: MarkerWithTextRepo) :
+class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: MarkerWithTextRepo) :
     ViewModel() {
     /** Markers that were found by the search. */
     var matchedMarkers by mutableStateOf<Collection<MarkerText>>(emptyList())

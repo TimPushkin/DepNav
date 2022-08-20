@@ -20,45 +20,60 @@ package ru.spbu.depnav.ui.search
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.WindowInsetsSides
+import androidx.compose.foundation.layout.exclude
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.hilt.navigation.compose.hiltViewModel
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 /** Screen containing a marker search and the results found. */
 @Composable
-fun MarkerSearch(
-    vm: MarkerSearchViewModel,
-    onResultClick: (Int) -> Unit,
-    modifier: Modifier = Modifier
+fun SearchScreen(
+    vm: SearchScreenViewModel = hiltViewModel(),
+    onResultClick: (Int) -> Unit
 ) {
-    Column(
-        modifier = Modifier
-            .fillMaxWidth()
-            .then(modifier)
+    val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
+
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
     ) {
-        SearchField(
-            modifier = Modifier.fillMaxWidth(),
-            placeholder = stringResource(R.string.search_markers),
-            onTextChange = vm::search,
-            onClear = vm::clearResults
-        )
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(insetsNoBottom)
+        ) {
+            SearchField(
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = stringResource(R.string.search_markers),
+                onTextChange = vm::search,
+                onClear = vm::clearResults
+            )
 
-        Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
+            Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
-        SearchResults(
-            markerTexts = vm.matchedMarkers,
-            onResultClick = onResultClick
-        )
+            SearchResults(
+                markerTexts = vm.matchedMarkers,
+                onResultClick = onResultClick
+            )
+        }
     }
 }
 

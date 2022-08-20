@@ -16,6 +16,9 @@ private const val PREFERENCES_FILE_NAME = "preferences"
 private const val THEME_MODE_KEY = "theme_mode"
 private val THEME_MODE_DEFAULT = PreferencesManager.ThemeMode.SYSTEM.name
 
+private const val MAP_STORED_NAME_KEY = "map"
+private val MAP_STORED_NAME_DEFAULT = PreferencesManager.MapStoredName.SPBU_MM.name
+
 /** Helper class to load ans save user settings. */
 @Singleton
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
@@ -51,5 +54,22 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
                 else -> null
             }
         }
+    }
+
+    private var _mapStoredName by mutableStateOf(
+        prefs.getString(MAP_STORED_NAME_KEY, MAP_STORED_NAME_DEFAULT) ?: MAP_STORED_NAME_DEFAULT
+    )
+
+    var mapStoredName: MapStoredName
+        get() = MapStoredName.valueOf(_mapStoredName)
+        set(value) {
+            prefs.edit { putString(MAP_STORED_NAME_KEY, value.name) }
+            _mapStoredName = value.name
+        }
+
+    enum class MapStoredName(val storedName: String) {
+        SPBU_MM("spbu-mm");
+
+        val tilesSubdir = "$storedName/tiles"
     }
 }

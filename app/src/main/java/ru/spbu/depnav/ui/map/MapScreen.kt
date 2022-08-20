@@ -23,6 +23,7 @@ import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
@@ -49,10 +50,13 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
+import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
+import ovh.plrapps.mapcompose.api.fullSize
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
@@ -62,7 +66,12 @@ private const val MIN_FLOOR = 1
 /** Screen containing a navigable map. */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {
+fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Unit) {
+    if (vm.mapState.fullSize == IntSize.Zero) { // Compose crashes when trying to display empty map
+        StubScreen()
+        return
+    }
+
     val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
     val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
 
@@ -135,7 +144,7 @@ fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {
                     exit = slideOutHorizontally(targetOffsetX = horizontalOffset)
                 ) {
                     FloorSwitch(
-                        floor = vm.currentFloor,
+                        floor = vm.currentFloor.coerceAtLeast(MIN_FLOOR),
                         minFloor = MIN_FLOOR,
                         maxFloor = vm.floorsNum,
                         modifier = Modifier.padding(DEFAULT_PADDING),
@@ -148,7 +157,17 @@ fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {
 
     LaunchedEffect(vm.showUI, vm.isMarkerPinned) {
         scaffoldState.bottomSheetState.apply {
-            if (vm.showUI && vm.isMarkerPinned) expand() else collapse()
+            // Expanding twice leads to collapse sometimes
+            if (!vm.showUI || !vm.isMarkerPinned) collapse() else if (!isExpanded) expand()
         }
     }
+}
+
+@Composable
+private fun StubScreen() {
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+    )
 }

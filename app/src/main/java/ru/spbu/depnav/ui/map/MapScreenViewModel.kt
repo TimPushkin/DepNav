@@ -23,6 +23,7 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
@@ -35,6 +36,7 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -79,7 +81,7 @@ private const val MAX_MARKER_VISIBILITY_SCALE = 0.5f
 
 private const val PIN_ID = "Pin" // Real IDs are integers
 
-/** ViewModel for the [MapScreen]. */
+/** ViewModel for [MapScreen]. */
 @OptIn(ExperimentalClusteringApi::class)
 @HiltViewModel
 class MapScreenViewModel @Inject constructor(
@@ -129,13 +131,14 @@ class MapScreenViewModel @Inject constructor(
     private val markerAlpha
         get() = (mapState.scale - minMarkerVisScale) / (maxMarkerVisScale - minMarkerVisScale)
 
-    /**
-     * Setup a new map from the database.
-     *
-     * @param mapName name of the map as it is specified in [MapInfo] database table.
-     * @param tilesPath path to the map's tiles subdirectory in assets.
-     */
-    suspend fun initMap(mapName: String, tilesPath: String) {
+    init {
+        snapshotFlow { prefs.mapStoredName }
+            .distinctUntilChanged()
+            .onEach { initMap(it.storedName, it.tilesSubdir) }
+            .launchIn(viewModelScope)
+    }
+
+    private suspend fun initMap(mapName: String, tilesSubdir: String) {
         val language = MarkerText.LanguageId.getCurrent()
 
         Log.i(TAG, "Initializing map $mapName on $language language")
@@ -146,16 +149,17 @@ class MapScreenViewModel @Inject constructor(
         val mapInfo = withContext(Dispatchers.IO) { mapInfoRepo.loadByName(mapName) }
         setMapParamsFrom(mapInfo)
 
-        floors = with(TileProviderFactory(getApplication<DepNavApplication>().assets, tilesPath)) {
-            List(mapInfo.floorsNum) {
-                val floorNum = it + 1
-                val layers = listOf(makeTileProviderForFloor(floorNum))
-                val markers = withContext(Dispatchers.IO) {
-                    async { markerWithTextRepo.loadByFloor(floorNum, language) }
-                }
-                floorNum to Floor(layers, markers)
-            }.toMap()
-        }
+        floors =
+            with(TileProviderFactory(getApplication<DepNavApplication>().assets, tilesSubdir)) {
+                List(mapInfo.floorsNum) {
+                    val floorNum = it + 1
+                    val layers = listOf(makeTileProviderForFloor(floorNum))
+                    val markers = withContext(Dispatchers.IO) {
+                        async { markerWithTextRepo.loadByFloor(floorNum, language) }
+                    }
+                    floorNum to Floor(layers, markers)
+                }.toMap()
+            }
         floorsNum = floors.size
         val firstFloor = floors.keys.firstOrNull() ?: 0.also { Log.e(TAG, "No floors provided") }
         setFloor(firstFloor)
@@ -273,9 +277,13 @@ class MapScreenViewModel @Inject constructor(
     }
 
     /** Centers on the specified marker and highlights it. */
-    fun focusOnMarker(marker: Marker, markerText: MarkerText) {
-        Log.d(TAG, "Centering on marker $marker")
+    suspend fun focusOnMarker(markerId: Int) {
+        Log.d(TAG, "Focusing on marker with ID $markerId")
 
+        val (marker, markerText) = markerWithTextRepo.loadById(markerId)
+        Log.d(TAG, "Focusing on marker $marker")
+
+        setFloor(marker.floor)
         pinMarker(marker, markerText)
         viewModelScope.launch { mapState.centerOnMarker(marker.idStr, 1f) }
     }
