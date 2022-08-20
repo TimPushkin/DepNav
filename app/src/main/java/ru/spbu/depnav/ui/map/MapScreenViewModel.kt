@@ -18,6 +18,7 @@
 
 package ru.spbu.depnav.ui.map
 
+import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -27,14 +28,17 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.lifecycle.ViewModel
+import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
+import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addLazyLoader
@@ -54,17 +58,19 @@ import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
+import ru.spbu.depnav.DepNavApplication
 import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.repository.MapInfoRepo
+import ru.spbu.depnav.data.repository.MarkerWithTextRepo
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.utils.preferences.PreferencesManager
 import ru.spbu.depnav.utils.tiles.Floor
+import ru.spbu.depnav.utils.tiles.TileProviderFactory
 import javax.inject.Inject
 
 private const val TAG = "MapScreenViewModel"
-
-private const val DEFAULT_FLOOR_NUM = 1
 
 private const val LAZY_LOADER_ID = "main"
 
@@ -77,18 +83,24 @@ private const val PIN_ID = "Pin" // Real IDs are integers
 @OptIn(ExperimentalClusteringApi::class)
 @HiltViewModel
 class MapScreenViewModel @Inject constructor(
+    application: Application,
+    private val mapInfoRepo: MapInfoRepo,
+    private val markerWithTextRepo: MarkerWithTextRepo,
     /** User preferences. */
     val prefs: PreferencesManager
-) : ViewModel() {
+) : AndroidViewModel(application) {
     /** State of the map currently displayed. */
     var mapState by mutableStateOf(MapState(0, 0, 0))
         private set
 
-    /** Floors of the current map. */
-    var floors by mutableStateOf(emptyMap<Int, Floor>())
+    private var floors = emptyMap<Int, Floor>()
+
+    /** Number of floors the current map has. */
+    var floorsNum by mutableStateOf(floors.size)
+        private set
 
     /** The floor currently displayed. */
-    var currentFloor by mutableStateOf(DEFAULT_FLOOR_NUM)
+    var currentFloor by mutableStateOf(0)
 
     /** Controls the color of map tiles. */
     var tileColor: Color = Color.Black
@@ -117,13 +129,38 @@ class MapScreenViewModel @Inject constructor(
     private val markerAlpha
         get() = (mapState.scale - minMarkerVisScale) / (maxMarkerVisScale - minMarkerVisScale)
 
-    /** Sets the parameters of the displayed map. */
-    fun setParams(mapInfo: MapInfo) {
-        Log.i(TAG, "Setting new map parameters: $mapInfo")
+    /**
+     * Setup a new map from the database.
+     *
+     * @param mapName name of the map as it is specified in [MapInfo] database table.
+     * @param tilesPath path to the map's tiles subdirectory in assets.
+     * @param language language that will be used for [MarkerTexts][MarkerText] on the map.
+     */
+    suspend fun initMap(mapName: String, tilesPath: String, language: MarkerText.LanguageId) {
+        Log.i(TAG, "Initializing map $mapName on $language language")
 
         minScaleCollectionJob?.cancel("State changed")
         mapState.shutdown()
 
+        val mapInfo = withContext(Dispatchers.IO) { mapInfoRepo.loadByName(mapName) }
+        setMapParamsFrom(mapInfo)
+
+        floors = with(TileProviderFactory(getApplication<DepNavApplication>().assets, tilesPath)) {
+            List(mapInfo.floorsNum) {
+                val floorNum = it + 1
+                val layers = listOf(makeTileProviderForFloor(floorNum))
+                val markers = withContext(Dispatchers.IO) {
+                    async { markerWithTextRepo.loadByFloor(floorNum, language) }
+                }
+                floorNum to Floor(layers, markers)
+            }.toMap()
+        }
+        floorsNum = floors.size
+        val firstFloor = floors.keys.firstOrNull() ?: 0.also { Log.e(TAG, "No floors provided") }
+        setFloor(firstFloor)
+    }
+
+    private fun setMapParamsFrom(mapInfo: MapInfo) {
         mapState = MapState(
             mapInfo.levelsNum,
             mapInfo.floorWidth,
@@ -150,14 +187,6 @@ class MapScreenViewModel @Inject constructor(
         minScaleCollectionJob = mapState.minScaleSnapshotFlow()
             .onEach { minMarkerVisScale = it.coerceAtLeast(MIN_MARKER_VISIBILITY_SCALE) }
             .launchIn(viewModelScope)
-
-        val firstFloorNum = floors.keys.firstOrNull()
-        if (firstFloorNum != null) {
-            viewModelScope.launch { setFloor(firstFloorNum) }
-        } else {
-            Log.e(TAG, "Cannot set first floor as floors are empty, assuming $DEFAULT_FLOOR_NUM")
-            viewModelScope.launch { setFloor(DEFAULT_FLOOR_NUM) }
-        }
     }
 
     private fun pinMarker(marker: Marker, markerText: MarkerText) {

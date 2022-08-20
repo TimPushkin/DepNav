@@ -57,6 +57,8 @@ import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
+private const val MIN_FLOOR = 1
+
 /** Screen containing a navigable map. */
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
@@ -134,8 +136,8 @@ fun MapScreen(vm: MapScreenViewModel, onStartSearch: () -> Unit) {
                 ) {
                     FloorSwitch(
                         floor = vm.currentFloor,
-                        minFloor = 1,
-                        maxFloor = vm.floors.size,
+                        minFloor = MIN_FLOOR,
+                        maxFloor = vm.floorsNum,
                         modifier = Modifier.padding(DEFAULT_PADDING),
                         onClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
                     )

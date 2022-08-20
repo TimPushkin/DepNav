@@ -21,38 +21,44 @@ package ru.spbu.depnav.ui.search
 import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
-import ru.spbu.depnav.data.db.MarkerTextDao
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.repository.MarkerWithTextRepo
+import javax.inject.Inject
 
 private const val TAG = "MarkerSearchViewModel"
 
 /** State of the [MarkerSearch]. */
-class MarkerSearchViewModel : ViewModel() {
-    private val _matchedMarkers = MutableStateFlow(emptyList<MarkerText>())
+@HiltViewModel
+class MarkerSearchViewModel @Inject constructor(private val markerWithTextRepo: MarkerWithTextRepo) :
+    ViewModel() {
+    private val _matchedMarkers = MutableStateFlow<Collection<MarkerText>>(emptyList())
 
     /** Markers that were found by the search. */
-    val matchedMarkers: StateFlow<List<MarkerText>>
+    val matchedMarkers: StateFlow<Collection<MarkerText>>
         get() = _matchedMarkers
 
     /**
      * Initiate a marker search with the provided text on the specified language. The provided DAO
      * will be used for the search.
      */
-    fun search(text: String, markerTextDao: MarkerTextDao, language: MarkerText.LanguageId) {
+    fun search(text: String, language: MarkerText.LanguageId) {
         if (text.isBlank()) {
             _matchedMarkers.value = emptyList()
             return
         }
 
-        viewModelScope.launch {
-            Log.v(TAG, "Processing query $text with language $language")
-            val query = text.split(' ').joinToString(" ") { "$it*" }
-            val matches = markerTextDao.loadByTokens(query, language)
+        Log.v(TAG, "Processing query $text with language $language")
+        val query = text.split(' ').joinToString(" ") { "$it*" }
+
+        viewModelScope.launch(Dispatchers.IO) {
+            val matches = markerWithTextRepo.loadByTokens(query, language)
             Log.v(TAG, "Found ${matches.size} matches")
-            _matchedMarkers.value = matches
+            launch(Dispatchers.Main) { _matchedMarkers.value = matches.values }
         }
     }
 

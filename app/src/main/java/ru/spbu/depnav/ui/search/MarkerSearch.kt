@@ -37,7 +37,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 /** Screen containing a marker search and the results found. */
 @Composable
 fun MarkerSearch(
-    matches: List<MarkerText>,
+    matches: Iterable<MarkerText>,
     onSearch: (String) -> Unit,
     onClear: () -> Unit,
     onResultClick: (Int) -> Unit,
@@ -65,9 +65,9 @@ fun MarkerSearch(
 }
 
 @Composable
-private fun SearchResults(markerTexts: List<MarkerText>, onResultClick: (Int) -> Unit) {
+private fun SearchResults(markerTexts: Iterable<MarkerText>, onResultClick: (Int) -> Unit) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        items(markerTexts) { markerText ->
+        items(markerTexts.toList()) { markerText ->
             if (markerText.title == null) return@items
 
             Column(

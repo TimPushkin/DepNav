@@ -37,7 +37,7 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.core.view.WindowCompat
-import ru.spbu.depnav.data.db.AppDatabase
+import dagger.hilt.android.AndroidEntryPoint
 import ru.spbu.depnav.ui.search.MarkerSearch
 import ru.spbu.depnav.ui.search.MarkerSearchViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
@@ -48,16 +48,14 @@ private const val TAG = "SearchActivity"
 const val EXTRA_MARKER_ID = "ru.spbu.depnav.MARKER_ID"
 
 /** Activity which displays the search screen. */
+@AndroidEntryPoint
 class SearchActivity : LanguageAwareActivity() {
     private val markerSearchViewModel: MarkerSearchViewModel by viewModels()
-    private lateinit var appDatabase: AppDatabase
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
-
-        appDatabase = AppDatabase.getInstance(this)
 
         setContent {
             DepNavTheme {
@@ -82,7 +80,7 @@ class SearchActivity : LanguageAwareActivity() {
     }
 
     private fun onSearch(text: String) {
-        markerSearchViewModel.search(text, appDatabase.markerTextDao(), systemLanguage)
+        markerSearchViewModel.search(text, systemLanguage)
     }
 
     private fun onClear() {

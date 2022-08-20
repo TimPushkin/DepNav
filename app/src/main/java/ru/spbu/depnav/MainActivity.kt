@@ -41,19 +41,15 @@ import androidx.core.view.WindowCompat
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.async
 import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.fullSize
-import ru.spbu.depnav.data.db.AppDatabase
-import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.repository.MarkerWithTextRepo
 import ru.spbu.depnav.ui.map.MapScreen
 import ru.spbu.depnav.ui.map.MapScreenViewModel
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.utils.preferences.PreferencesManager
-import ru.spbu.depnav.utils.tiles.Floor
-import ru.spbu.depnav.utils.tiles.TileProviderFactory
+import javax.inject.Inject
 
 private const val TAG = "MainActivity"
 
@@ -64,25 +60,21 @@ private const val TILES_PATH = "$MAP_NAME/tiles"
 @AndroidEntryPoint
 class MainActivity : LanguageAwareActivity() {
     private val mapScreenViewModel: MapScreenViewModel by viewModels()
-    private lateinit var db: AppDatabase
 
-    private val startSearch = registerForActivityResult(SearchForMarker()) { result ->
+    @Inject // Has to be a public lateinit var for Hilt to be able to inject
+    lateinit var markerWithTextRepo: MarkerWithTextRepo
+
+    private val searchLauncher = registerForActivityResult(SearchForMarker()) { result ->
         Log.i(TAG, "Received $result as a search result")
 
         val markerId = result ?: return@registerForActivityResult
-        mapScreenViewModel.viewModelScope.launch {
-            val (marker, markerTexts) =
-                db.markerDao().loadWithTextById(markerId, systemLanguage).entries.first()
 
-            Log.d(TAG, "Loaded searched marker: $marker")
-
-            mapScreenViewModel.setFloor(marker.floor)
-
-            val markerText = markerTexts.firstOrNull() ?: run {
-                Log.w(TAG, "Marker $marker has no text on $systemLanguage")
-                MarkerText(marker.id, systemLanguage, null, null)
+        mapScreenViewModel.viewModelScope.launch(Dispatchers.IO) {
+            val (marker, markerText) = markerWithTextRepo.loadById(markerId, systemLanguage)
+            launch(Dispatchers.Main) {
+                mapScreenViewModel.setFloor(marker.floor)
+                mapScreenViewModel.focusOnMarker(marker, markerText)
             }
-            mapScreenViewModel.focusOnMarker(marker, markerText)
         }
     }
 
@@ -99,17 +91,11 @@ class MainActivity : LanguageAwareActivity() {
 
         WindowCompat.setDecorFitsSystemWindows(window, false)
 
-        db = AppDatabase.getInstance(this)
-
         var isMapInitialized by mutableStateOf(mapScreenViewModel.mapState.fullSize != IntSize.Zero)
         if (!isMapInitialized) {
-            lifecycleScope.launch(Dispatchers.IO) {
-                val mapInfo = db.mapInfoDao().loadByName(MAP_NAME)
-                mapScreenViewModel.viewModelScope.launch {
-                    initFloors(mapInfo.floorsNum)
-                    mapScreenViewModel.setParams(mapInfo)
-                    lifecycleScope.launch { isMapInitialized = true }
-                }
+            lifecycleScope.launch {
+                mapScreenViewModel.initMap(MAP_NAME, TILES_PATH, systemLanguage)
+                isMapInitialized = true
             }
         }
 
@@ -126,7 +112,7 @@ class MainActivity : LanguageAwareActivity() {
                 if (isMapInitialized) {
                     MapScreen(
                         vm = mapScreenViewModel,
-                        onStartSearch = startSearch::launch
+                        onStartSearch = searchLauncher::launch
                     )
                 } else {
                     Box(
@@ -137,26 +123,5 @@ class MainActivity : LanguageAwareActivity() {
                 }
             }
         }
-    }
-
-    private fun CoroutineScope.initFloors(floorsNum: Int) {
-        val factory = TileProviderFactory(applicationContext.assets, TILES_PATH)
-        val markerDao = db.markerDao()
-
-        mapScreenViewModel.floors = List(floorsNum) {
-            val floorNum = it + 1
-            val layers = listOf(factory.makeTileProviderForFloor(floorNum))
-            val markers = async(Dispatchers.IO) {
-                val markersWithTexts = markerDao.loadWithTextByFloor(floorNum, systemLanguage)
-                markersWithTexts.entries.associate { (marker, markerTexts) ->
-                    val markerText = markerTexts.firstOrNull() ?: run {
-                        Log.w(TAG, "Marker $marker has no text on $systemLanguage")
-                        MarkerText(marker.id, systemLanguage, null, null)
-                    }
-                    marker to markerText
-                }
-            }
-            floorNum to Floor(layers, markers)
-        }.toMap()
     }
 }
