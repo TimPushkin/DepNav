@@ -67,6 +67,9 @@ private const val MIN_FLOOR = 1
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Unit) {
+    val onBackgroundColor = MaterialTheme.colors.onBackground
+    LaunchedEffect(onBackgroundColor) { vm.tileColor = onBackgroundColor }
+
     if (vm.mapState.fullSize == IntSize.Zero) { // Compose crashes when trying to display empty map
         StubScreen()
         return
