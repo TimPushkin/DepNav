@@ -28,7 +28,7 @@ import ru.spbu.depnav.data.model.MapInfo
 interface MapInfoDao {
     /** Inserts the provided [MapInfo] entries into the database. */
     @Insert
-    suspend fun insertAll(vararg mapInfos: MapInfo)
+    suspend fun insertAll(mapInfos: Collection<MapInfo>)
 
     /** Returns a [MapInfo] with the provided map name. */
     @Query("SELECT * FROM map_infos WHERE map_name = :name")

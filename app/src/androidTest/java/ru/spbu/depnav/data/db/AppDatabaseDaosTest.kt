@@ -66,7 +66,7 @@ class AppDatabaseDaosTest {
             MapInfo("abc", 100, 100, 1024, 1, 5),
             MapInfo("cba", 100, 200, 512, 2, 100)
         )
-        runBlocking { mapInfoDao.insertAll(*expected.toTypedArray()) }
+        runBlocking { mapInfoDao.insertAll(expected) }
 
         val actual = runBlocking {
             listOf(

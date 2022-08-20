@@ -25,7 +25,7 @@ import javax.inject.Inject
 /** Repository for loading and saving [MapInfo] objects. */
 class MapInfoRepo @Inject constructor(private val dao: MapInfoDao) {
     /** Saves the provided objects. */
-    suspend fun insertAll(vararg mapInfos: MapInfo) = dao.insertAll(*mapInfos)
+    suspend fun insertAll(mapInfos: Collection<MapInfo>) = dao.insertAll(mapInfos)
 
     /** Loads a [MapInfo] by its name. */
     suspend fun loadByName(name: String) = dao.loadByName(name)
