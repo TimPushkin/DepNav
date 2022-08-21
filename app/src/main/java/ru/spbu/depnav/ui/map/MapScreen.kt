@@ -85,10 +85,9 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
         )
     }
 
-    Box(
-        modifier = Modifier
-            .fillMaxSize()
-            .background(MaterialTheme.colors.background)
+    Surface(
+        modifier = Modifier.fillMaxSize(),
+        color = MaterialTheme.colors.background
     ) {
         MapUI(state = vm.mapState)
 
@@ -136,35 +135,49 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
             }
         }
 
-        AnimatedVisibility(
-            visible = vm.showUI && vm.isMarkerPinned,
-            modifier = Modifier.align(Alignment.BottomCenter),
-            enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
-            exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
+        Box(
+            modifier = Modifier
+                .fillMaxSize()
+                .windowInsetsPadding(insetsNoTop)
         ) {
-            Surface(
-                modifier = Modifier.fillMaxWidth(),
-                shape = MaterialTheme.shapes.large.copy(
-                    bottomStart = CornerSize(0),
-                    bottomEnd = CornerSize(0)
-                ),
-                elevation = DEFAULT_ELEVATION
+            AnimatedVisibility(
+                visible = vm.showUI && vm.isMarkerPinned,
+                modifier = Modifier.align(Alignment.BottomCenter),
+                enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+                exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
             ) {
-                vm.pinnedMarker?.let { (marker, markerText) ->
-                    MarkerInfoLines(
-                        title = markerText.title ?: stringResource(R.string.no_title),
-                        description = markerText.description,
-                        isClosed = marker.isClosed,
-                        modifier = Modifier.windowInsetsPadding(insetsNoTop)
-                    ) {
-                        MarkerView(
+                Surface(
+                    modifier = Modifier.fillMaxWidth(),
+                    shape = MaterialTheme.shapes.large.copy(
+                        bottomStart = CornerSize(0),
+                        bottomEnd = CornerSize(0)
+                    ),
+                    elevation = DEFAULT_ELEVATION
+                ) {
+                    vm.pinnedMarker?.let { (marker, markerText) ->
+                        MarkerInfoLines(
                             title = markerText.title ?: stringResource(R.string.no_title),
-                            type = marker.type,
-                            isClosed = marker.isClosed,
-                            simplified = true
-                        )
+                            description = markerText.description,
+                            isClosed = marker.isClosed
+                        ) {
+                            MarkerView(
+                                title = markerText.title ?: stringResource(R.string.no_title),
+                                type = marker.type,
+                                isClosed = marker.isClosed,
+                                simplified = true
+                            )
+                        }
                     }
                 }
+            }
+
+            AnimatedVisibility(
+                visible = vm.showUI && !vm.areMarkersVisible && !vm.isMarkerPinned,
+                modifier = Modifier.align(Alignment.BottomCenter),
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
+                ZoomInHint()
             }
         }
     }

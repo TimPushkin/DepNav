@@ -125,10 +125,14 @@ class MapScreenViewModel @Inject constructor(
 
     private val clickableMarkers = mutableMapOf<String, Pair<Marker, MarkerText>>()
 
+    /** Whether markers are visible. */
+    val areMarkersVisible // Acts like MutableState because backed by markerAlpha
+        get() = markerAlpha > 0
+
     private var minScaleCollectionJob: Job? = null
     private var minMarkerVisScale = 0f
     private val maxMarkerVisScale = mapState.maxScale.coerceAtMost(MAX_MARKER_VISIBILITY_SCALE)
-    private val markerAlpha
+    private val markerAlpha // Acts like MutableState because backed by mapState.scale
         get() = (mapState.scale - minMarkerVisScale) / (maxMarkerVisScale - minMarkerVisScale)
 
     init {
@@ -263,7 +267,7 @@ class MapScreenViewModel @Inject constructor(
             clipShape = null,
             renderingStrategy = RenderingStrategy.LazyLoading(LAZY_LOADER_ID)
         ) {
-            if (markerAlpha <= 0) return@addMarker // Not to consume clicks
+            if (!areMarkersVisible) return@addMarker // Not to consume clicks
 
             MarkerView(
                 title = markerText.title ?: "",

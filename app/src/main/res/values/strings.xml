@@ -8,4 +8,5 @@
     <string name="dark_theme">Dark</string>
     <string name="light_theme">Light</string>
     <string name="system_theme">Match system</string>
+    <string name="zoom_in_to_see_markers">Zoom in to see markers</string>
 </resources>
