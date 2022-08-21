@@ -37,6 +37,7 @@ import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
 import androidx.compose.material.BottomSheetScaffold
+import androidx.compose.material.BottomSheetValue
 import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.rememberBottomSheetScaffoldState
@@ -167,8 +168,8 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
 
     LaunchedEffect(vm.showUI, vm.isMarkerPinned) {
         scaffoldState.bottomSheetState.apply {
-            // Expanding twice leads to collapse sometimes
-            if (!vm.showUI || !vm.isMarkerPinned) collapse() else if (!isExpanded) expand()
+            // Unsafe hack: not using expand() as it does nothing when another screen is on top
+            if (vm.showUI && vm.isMarkerPinned) animateTo(BottomSheetValue.Expanded) else collapse()
         }
     }
 }
