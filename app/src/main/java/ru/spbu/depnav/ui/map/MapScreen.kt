@@ -96,7 +96,14 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
                     description = markerText.description,
                     isClosed = marker.isClosed,
                     modifier = Modifier.windowInsetsPadding(insetsNoTop)
-                )
+                ) {
+                    MarkerView(
+                        title = markerText.title ?: stringResource(R.string.no_title),
+                        type = marker.type,
+                        isClosed = marker.isClosed,
+                        simplified = true
+                    )
+                }
             } ?: Box(modifier = Modifier.padding(1.dp)) {} // Stub to always have sheet expandable
         },
         scaffoldState = scaffoldState,

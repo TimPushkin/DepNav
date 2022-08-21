@@ -30,6 +30,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
+import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
@@ -41,42 +42,49 @@ fun MarkerInfoLines(
     title: String,
     description: String?,
     isClosed: Boolean,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    icon: @Composable () -> Unit
 ) {
-    Column(modifier = modifier) {
-        Row(
-            modifier = Modifier.padding(DEFAULT_PADDING),
-            verticalAlignment = Alignment.Bottom
-        ) {
-            if (title.isNotBlank()) {
-                Text(
-                    text = title,
-                    style = MaterialTheme.typography.h6
-                )
+    Row(
+        modifier = Modifier
+            .padding(horizontal = DEFAULT_PADDING * 2, vertical = DEFAULT_PADDING)
+            .then(modifier),
+        verticalAlignment = Alignment.CenterVertically
+    ) {
+        icon()
+
+        Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
+            Row(verticalAlignment = Alignment.Bottom) {
+                if (title.isNotBlank()) {
+                    Text(
+                        text = title,
+                        style = MaterialTheme.typography.h6
+                    )
+                }
+
+                if (isClosed) {
+                    Text(
+                        text = "•",
+                        modifier = Modifier
+                            .alpha(CLOSED_TEXT_ALPHA)
+                            .padding(horizontal = DEFAULT_PADDING),
+                        fontSize = MaterialTheme.typography.h6.fontSize
+                    )
+
+                    Text(
+                        text = stringResource(R.string.closed),
+                        modifier = Modifier.alpha(CLOSED_TEXT_ALPHA),
+                        fontSize = MaterialTheme.typography.h6.fontSize
+                    )
+                }
             }
 
-            if (isClosed) {
+            if (description != null && description.isNotBlank()) {
                 Text(
-                    text = "•",
-                    modifier = Modifier
-                        .alpha(CLOSED_TEXT_ALPHA)
-                        .padding(horizontal = DEFAULT_PADDING),
-                    fontSize = MaterialTheme.typography.h6.fontSize
-                )
-
-                Text(
-                    text = stringResource(R.string.closed),
-                    modifier = Modifier.alpha(CLOSED_TEXT_ALPHA),
-                    fontSize = MaterialTheme.typography.h6.fontSize
+                    text = description,
+                    modifier = Modifier.padding(top = DEFAULT_PADDING)
                 )
             }
-        }
-
-        if (description != null && description.isNotBlank()) {
-            Text(
-                text = description,
-                modifier = Modifier.padding(horizontal = DEFAULT_PADDING)
-            )
         }
     }
 }
@@ -90,7 +98,14 @@ private fun MarkerInfoPreview() {
                 title = "Some title",
                 isClosed = true,
                 description = "Some description"
-            )
+            ) {
+                MarkerView(
+                    title = "Some title",
+                    type = Marker.MarkerType.ROOM,
+                    isClosed = false,
+                    simplified = true
+                )
+            }
         }
     }
 }
