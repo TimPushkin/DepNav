@@ -27,6 +27,7 @@ import androidx.compose.animation.slideOutHorizontally
 import androidx.compose.animation.slideOutVertically
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.BoxScope
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -58,6 +59,8 @@ import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.fullSize
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
+import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
@@ -74,9 +77,6 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
         return
     }
 
-    val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
-    val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
-
     var openMenu by rememberSaveable { mutableStateOf(false) }
     if (openMenu) {
         SettingsDialog(
@@ -91,94 +91,21 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
     ) {
         MapUI(state = vm.mapState)
 
-        Column(
-            modifier = Modifier
-                .fillMaxWidth()
-                .windowInsetsPadding(insetsNoBottom),
-            horizontalAlignment = Alignment.CenterHorizontally
-        ) {
-            AnimatedVisibility(
+        Box(modifier = Modifier.fillMaxSize()) {
+            TopUi(
                 visible = vm.showUI,
-                enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
-                exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
-            ) {
-                TopButton(
-                    text = stringResource(R.string.search_markers),
-                    onMenuClick = { openMenu = true },
-                    onSurfaceClick = onStartSearch,
-                    modifier = Modifier
-                        .fillMaxWidth(0.8f)
-                        .padding(vertical = DEFAULT_PADDING)
-                )
-            }
+                currentFloor = vm.currentFloor,
+                maxFloor = vm.floorsNum,
+                onOpenMenuClick = { openMenu = true },
+                onStartSearchClick = onStartSearch,
+                onSwitchFloorClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
+            )
 
-            val horizontalOffset: (Int) -> Int =
-                if (LocalLayoutDirection.current == LayoutDirection.Ltr) {
-                    { it }
-                } else {
-                    { -it }
-                }
-
-            AnimatedVisibility(
-                visible = vm.showUI,
-                modifier = Modifier.align(Alignment.End),
-                enter = slideInHorizontally(initialOffsetX = horizontalOffset) + fadeIn(),
-                exit = slideOutHorizontally(targetOffsetX = horizontalOffset) + fadeOut()
-            ) {
-                FloorSwitch(
-                    floor = vm.currentFloor.coerceAtLeast(MIN_FLOOR),
-                    minFloor = MIN_FLOOR,
-                    maxFloor = vm.floorsNum,
-                    modifier = Modifier.padding(DEFAULT_PADDING),
-                    onClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
-                )
-            }
-        }
-
-        Box(
-            modifier = Modifier
-                .fillMaxSize()
-                .windowInsetsPadding(insetsNoTop)
-        ) {
-            AnimatedVisibility(
-                visible = vm.showUI && vm.isMarkerPinned,
-                modifier = Modifier.align(Alignment.BottomCenter),
-                enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
-                exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
-            ) {
-                Surface(
-                    modifier = Modifier.fillMaxWidth(),
-                    shape = MaterialTheme.shapes.large.copy(
-                        bottomStart = CornerSize(0),
-                        bottomEnd = CornerSize(0)
-                    ),
-                    elevation = DEFAULT_ELEVATION
-                ) {
-                    vm.pinnedMarker?.let { (marker, markerText) ->
-                        MarkerInfoLines(
-                            title = markerText.title ?: stringResource(R.string.no_title),
-                            description = markerText.description,
-                            isClosed = marker.isClosed
-                        ) {
-                            MarkerView(
-                                title = markerText.title ?: stringResource(R.string.no_title),
-                                type = marker.type,
-                                isClosed = marker.isClosed,
-                                simplified = true
-                            )
-                        }
-                    }
-                }
-            }
-
-            AnimatedVisibility(
-                visible = vm.showUI && !vm.areMarkersVisible && !vm.isMarkerPinned,
-                modifier = Modifier.align(Alignment.BottomCenter),
-                enter = fadeIn(),
-                exit = fadeOut()
-            ) {
-                ZoomInHint()
-            }
+            BottomUi(
+                markerInfoVisible = vm.showUI && vm.isMarkerPinned,
+                zoomInHintVisible = vm.showUI && !vm.areMarkersVisible && !vm.isMarkerPinned,
+                pinnedMarkerWithText = vm.pinnedMarkerWithText
+            )
         }
     }
 }
@@ -190,4 +117,116 @@ private fun StubScreen() {
             .fillMaxSize()
             .background(MaterialTheme.colors.background)
     )
+}
+
+@Composable
+@Suppress("LongParameterList") // Considered ok for composables
+private fun BoxScope.TopUi(
+    visible: Boolean,
+    currentFloor: Int,
+    maxFloor: Int,
+    onOpenMenuClick: () -> Unit,
+    onStartSearchClick: () -> Unit,
+    onSwitchFloorClick: (Int) -> Unit
+) {
+    val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
+
+    Column(
+        modifier = Modifier
+            .fillMaxWidth()
+            .align(Alignment.TopCenter)
+            .windowInsetsPadding(insetsNoBottom),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        AnimatedVisibility(
+            visible = visible,
+            enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
+            exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
+        ) {
+            TopButton(
+                text = stringResource(R.string.search_markers),
+                onMenuClick = onOpenMenuClick,
+                onSurfaceClick = onStartSearchClick,
+                modifier = Modifier
+                    .fillMaxWidth(0.8f)
+                    .padding(vertical = DEFAULT_PADDING)
+            )
+        }
+
+        val horizontalOffset: (Int) -> Int =
+            if (LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                { it }
+            } else {
+                { -it }
+            }
+
+        AnimatedVisibility(
+            visible = visible,
+            modifier = Modifier.align(Alignment.End),
+            enter = slideInHorizontally(initialOffsetX = horizontalOffset) + fadeIn(),
+            exit = slideOutHorizontally(targetOffsetX = horizontalOffset) + fadeOut()
+        ) {
+            FloorSwitch(
+                floor = currentFloor,
+                minFloor = MIN_FLOOR,
+                maxFloor = maxFloor,
+                modifier = Modifier.padding(DEFAULT_PADDING),
+                onClick = onSwitchFloorClick
+            )
+        }
+    }
+}
+
+@Composable
+private fun BoxScope.BottomUi(
+    markerInfoVisible: Boolean,
+    zoomInHintVisible: Boolean,
+    pinnedMarkerWithText: Pair<Marker, MarkerText>?
+) {
+    val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
+
+    Box(
+        modifier = Modifier
+            .windowInsetsPadding(insetsNoTop)
+            .align(Alignment.BottomCenter),
+        contentAlignment = Alignment.BottomCenter
+    ) {
+        AnimatedVisibility(
+            visible = markerInfoVisible,
+            enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+            exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.large.copy(
+                    bottomStart = CornerSize(0),
+                    bottomEnd = CornerSize(0)
+                ),
+                elevation = DEFAULT_ELEVATION
+            ) {
+                pinnedMarkerWithText?.let { (marker, markerText) ->
+                    MarkerInfoLines(
+                        title = markerText.title ?: stringResource(R.string.no_title),
+                        description = markerText.description,
+                        isClosed = marker.isClosed
+                    ) {
+                        MarkerView(
+                            title = markerText.title ?: stringResource(R.string.no_title),
+                            type = marker.type,
+                            isClosed = marker.isClosed,
+                            simplified = true
+                        )
+                    }
+                }
+            }
+        }
+
+        AnimatedVisibility(
+            visible = zoomInHintVisible,
+            enter = fadeIn(),
+            exit = fadeOut()
+        ) {
+            ZoomInHint()
+        }
+    }
 }

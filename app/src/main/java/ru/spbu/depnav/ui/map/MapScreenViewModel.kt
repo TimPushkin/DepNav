@@ -120,7 +120,7 @@ class MapScreenViewModel @Inject constructor(
     var isMarkerPinned by mutableStateOf(false)
 
     /** The marker currently pinned. */
-    var pinnedMarker by mutableStateOf<Pair<Marker, MarkerText>?>(null)
+    var pinnedMarkerWithText by mutableStateOf<Pair<Marker, MarkerText>?>(null)
         private set
 
     private val clickableMarkers = mutableMapOf<String, Pair<Marker, MarkerText>>()
@@ -197,7 +197,7 @@ class MapScreenViewModel @Inject constructor(
     }
 
     private fun pinMarker(marker: Marker, markerText: MarkerText) {
-        pinnedMarker = marker to markerText
+        pinnedMarkerWithText = marker to markerText
         showUI = true
         isMarkerPinned = true
 
