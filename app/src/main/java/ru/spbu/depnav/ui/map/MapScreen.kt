@@ -19,6 +19,8 @@
 package ru.spbu.depnav.ui.map
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutHorizontally
@@ -36,11 +38,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
-import androidx.compose.material.BottomSheetScaffold
-import androidx.compose.material.BottomSheetValue
-import androidx.compose.material.ExperimentalMaterialApi
 import androidx.compose.material.MaterialTheme
-import androidx.compose.material.rememberBottomSheetScaffoldState
+import androidx.compose.material.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
@@ -53,19 +52,18 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.IntSize
 import androidx.compose.ui.unit.LayoutDirection
-import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.viewModelScope
 import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.api.fullSize
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
+import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 private const val MIN_FLOOR = 1
 
 /** Screen containing a navigable map. */
-@OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Unit) {
     val onBackgroundColor = MaterialTheme.colors.onBackground
@@ -79,8 +77,6 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
     val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
     val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
 
-    val scaffoldState = rememberBottomSheetScaffoldState()
-
     var openMenu by rememberSaveable { mutableStateOf(false) }
     if (openMenu) {
         SettingsDialog(
@@ -89,87 +85,87 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
         )
     }
 
-    BottomSheetScaffold(
-        sheetContent = {
-            vm.pinnedMarker?.let { (marker, markerText) ->
-                MarkerInfoLines(
-                    title = markerText.title ?: stringResource(R.string.no_title),
-                    description = markerText.description,
-                    isClosed = marker.isClosed,
-                    modifier = Modifier.windowInsetsPadding(insetsNoTop)
-                ) {
-                    MarkerView(
-                        title = markerText.title ?: stringResource(R.string.no_title),
-                        type = marker.type,
-                        isClosed = marker.isClosed,
-                        simplified = true
-                    )
-                }
-            } ?: Box(modifier = Modifier.padding(1.dp)) {} // Stub to always have sheet expandable
-        },
-        scaffoldState = scaffoldState,
-        sheetShape = MaterialTheme.shapes.large.copy(
-            bottomStart = CornerSize(0),
-            bottomEnd = CornerSize(0)
-        ),
-        sheetPeekHeight = 0.dp
-    ) { contentPadding ->
-        Box(modifier = Modifier.padding(contentPadding)) {
-            MapUI(
-                modifier = Modifier.fillMaxSize(),
-                state = vm.mapState
-            )
+    Box(
+        modifier = Modifier
+            .fillMaxSize()
+            .background(MaterialTheme.colors.background)
+    ) {
+        MapUI(state = vm.mapState)
 
-            Column(
-                modifier = Modifier
-                    .fillMaxWidth()
-                    .windowInsetsPadding(insetsNoBottom),
-                horizontalAlignment = Alignment.CenterHorizontally
+        Column(
+            modifier = Modifier
+                .fillMaxWidth()
+                .windowInsetsPadding(insetsNoBottom),
+            horizontalAlignment = Alignment.CenterHorizontally
+        ) {
+            AnimatedVisibility(
+                visible = vm.showUI,
+                enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
+                exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
             ) {
-                AnimatedVisibility(
-                    visible = vm.showUI,
-                    enter = slideInVertically(initialOffsetY = { -it }),
-                    exit = slideOutVertically(targetOffsetY = { -it })
-                ) {
-                    TopButton(
-                        text = stringResource(R.string.search_markers),
-                        onMenuClick = { openMenu = true },
-                        onSurfaceClick = onStartSearch,
-                        modifier = Modifier
-                            .fillMaxWidth(0.8f)
-                            .padding(vertical = DEFAULT_PADDING)
-                    )
+                TopButton(
+                    text = stringResource(R.string.search_markers),
+                    onMenuClick = { openMenu = true },
+                    onSurfaceClick = onStartSearch,
+                    modifier = Modifier
+                        .fillMaxWidth(0.8f)
+                        .padding(vertical = DEFAULT_PADDING)
+                )
+            }
+
+            val horizontalOffset: (Int) -> Int =
+                if (LocalLayoutDirection.current == LayoutDirection.Ltr) {
+                    { it }
+                } else {
+                    { -it }
                 }
 
-                val horizontalOffset: (Int) -> Int =
-                    if (LocalLayoutDirection.current == LayoutDirection.Ltr) {
-                        { it }
-                    } else {
-                        { -it }
-                    }
-
-                AnimatedVisibility(
-                    visible = vm.showUI,
-                    modifier = Modifier.align(Alignment.End),
-                    enter = slideInHorizontally(initialOffsetX = horizontalOffset),
-                    exit = slideOutHorizontally(targetOffsetX = horizontalOffset)
-                ) {
-                    FloorSwitch(
-                        floor = vm.currentFloor.coerceAtLeast(MIN_FLOOR),
-                        minFloor = MIN_FLOOR,
-                        maxFloor = vm.floorsNum,
-                        modifier = Modifier.padding(DEFAULT_PADDING),
-                        onClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
-                    )
-                }
+            AnimatedVisibility(
+                visible = vm.showUI,
+                modifier = Modifier.align(Alignment.End),
+                enter = slideInHorizontally(initialOffsetX = horizontalOffset) + fadeIn(),
+                exit = slideOutHorizontally(targetOffsetX = horizontalOffset) + fadeOut()
+            ) {
+                FloorSwitch(
+                    floor = vm.currentFloor.coerceAtLeast(MIN_FLOOR),
+                    minFloor = MIN_FLOOR,
+                    maxFloor = vm.floorsNum,
+                    modifier = Modifier.padding(DEFAULT_PADDING),
+                    onClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
+                )
             }
         }
-    }
 
-    LaunchedEffect(vm.showUI, vm.isMarkerPinned) {
-        scaffoldState.bottomSheetState.apply {
-            // Unsafe hack: not using expand() as it does nothing when another screen is on top
-            if (vm.showUI && vm.isMarkerPinned) animateTo(BottomSheetValue.Expanded) else collapse()
+        AnimatedVisibility(
+            visible = vm.showUI && vm.isMarkerPinned,
+            modifier = Modifier.align(Alignment.BottomCenter),
+            enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
+            exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
+        ) {
+            Surface(
+                modifier = Modifier.fillMaxWidth(),
+                shape = MaterialTheme.shapes.large.copy(
+                    bottomStart = CornerSize(0),
+                    bottomEnd = CornerSize(0)
+                ),
+                elevation = DEFAULT_ELEVATION
+            ) {
+                vm.pinnedMarker?.let { (marker, markerText) ->
+                    MarkerInfoLines(
+                        title = markerText.title ?: stringResource(R.string.no_title),
+                        description = markerText.description,
+                        isClosed = marker.isClosed,
+                        modifier = Modifier.windowInsetsPadding(insetsNoTop)
+                    ) {
+                        MarkerView(
+                            title = markerText.title ?: stringResource(R.string.no_title),
+                            type = marker.type,
+                            isClosed = marker.isClosed,
+                            simplified = true
+                        )
+                    }
+                }
+            }
         }
     }
 }
