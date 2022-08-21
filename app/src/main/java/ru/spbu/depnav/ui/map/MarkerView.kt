@@ -21,8 +21,8 @@ package ru.spbu.depnav.ui.map
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -139,7 +139,7 @@ private fun MarkerIcon(
         modifier = Modifier
             .size(SIZE)
             .then(modifier) // Should be set before setting the shadow
-            .shadow(if (!simplified) DEFAULT_ELEVATION / 2 else 0.dp),
+            .shadow(if (!simplified && !faded) DEFAULT_ELEVATION / 2 else 0.dp),
         alpha = if (!faded) 1f else 0.5f,
         colorFilter =
         if (!faded) null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
@@ -154,7 +154,7 @@ private fun RoomIcon(
     modifier: Modifier = Modifier
 ) {
     if (!simplified) {
-        Card(
+        Surface(
             modifier = Modifier
                 .alpha(if (!faded) 1f else 0.3f)
                 .then(modifier),
