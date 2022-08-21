@@ -21,8 +21,8 @@ package ru.spbu.depnav.ui.map
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.Card
 import androidx.compose.material.MaterialTheme
+import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
@@ -46,66 +46,82 @@ private val TEXT_PADDING = DEFAULT_PADDING / 2
 
 /** Visual representation of a [Marker]. */
 @Composable
-fun MarkerView(title: String, type: MarkerType, isClosed: Boolean, modifier: Modifier = Modifier) =
+fun MarkerView(
+    title: String,
+    type: MarkerType,
+    isClosed: Boolean,
+    modifier: Modifier = Modifier,
+    simplified: Boolean = false
+) =
     when (type) {
         MarkerType.ENTRANCE -> MarkerIcon(
             painter = painterResource(R.drawable.door_emoji),
             faded = isClosed,
             contentDescription = "Entrance",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.ROOM -> RoomIcon(
             name = title,
             faded = isClosed,
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.STAIRS_UP -> MarkerIcon(
             painter = painterResource(R.drawable.up_arrow_emoji),
             faded = isClosed,
             contentDescription = "Stairs up",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.STAIRS_DOWN -> MarkerIcon(
             painter = painterResource(R.drawable.down_arrow_emoji),
             faded = isClosed,
             contentDescription = "Stairs down",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.STAIRS_BOTH -> MarkerIcon(
             painter = painterResource(R.drawable.up_down_arrow_emoji),
             faded = isClosed,
             contentDescription = "Stairs up and down",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.ELEVATOR -> MarkerIcon(
             painter = painterResource(R.drawable.elevator_emoji),
             faded = isClosed,
             contentDescription = "Elevator",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.WC_MAN -> MarkerIcon(
             painter = painterResource(R.drawable.mens_room_emoji),
             faded = isClosed,
             contentDescription = "Men's room",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.WC_WOMAN -> MarkerIcon(
             painter = painterResource(R.drawable.womens_room_emoji),
             faded = isClosed,
             contentDescription = "Women's room",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.WC -> MarkerIcon(
             painter = painterResource(R.drawable.restroom_emoji),
             faded = isClosed,
             contentDescription = "Restroom",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
         MarkerType.OTHER -> MarkerIcon(
             painter = painterResource(R.drawable.keycap_asterisk_emoji),
             faded = isClosed,
             contentDescription = "Other marker",
-            modifier = modifier
+            modifier = modifier,
+            simplified = simplified
         )
     }
 
@@ -114,6 +130,7 @@ private fun MarkerIcon(
     painter: Painter,
     faded: Boolean,
     contentDescription: String?,
+    simplified: Boolean,
     modifier: Modifier = Modifier
 ) {
     Image(
@@ -122,26 +139,41 @@ private fun MarkerIcon(
         modifier = Modifier
             .size(SIZE)
             .then(modifier) // Should be set before setting the shadow
-            .shadow(DEFAULT_ELEVATION / 2),
-        alpha = if (faded) 0.5f else 1f,
+            .shadow(if (!simplified && !faded) DEFAULT_ELEVATION / 2 else 0.dp),
+        alpha = if (!faded) 1f else 0.5f,
         colorFilter =
-        if (faded) ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) }) else null
+        if (!faded) null else ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
     )
 }
 
 @Composable
-private fun RoomIcon(name: String, faded: Boolean, modifier: Modifier = Modifier) {
-    Card(
-        modifier = Modifier
-            .alpha(if (faded) 0.3f else 1f)
-            .then(modifier),
-        shape = MaterialTheme.shapes.small,
-        elevation = DEFAULT_ELEVATION / 2
-    ) {
-        Text(
-            text = name,
-            modifier = Modifier.padding(TEXT_PADDING),
-            maxLines = 1
+private fun RoomIcon(
+    name: String,
+    faded: Boolean,
+    simplified: Boolean,
+    modifier: Modifier = Modifier
+) {
+    if (!simplified) {
+        Surface(
+            modifier = Modifier
+                .alpha(if (!faded) 1f else 0.3f)
+                .then(modifier),
+            shape = MaterialTheme.shapes.small,
+            elevation = DEFAULT_ELEVATION / 2
+        ) {
+            Text(
+                text = name,
+                modifier = Modifier.padding(TEXT_PADDING),
+                maxLines = 1
+            )
+        }
+    } else {
+        MarkerIcon(
+            painter = painterResource(R.drawable.key_emoji),
+            faded = faded,
+            contentDescription = "Room",
+            simplified = true,
+            modifier = modifier
         )
     }
 }
@@ -153,7 +185,8 @@ private fun MarkerIconPreview() {
         MarkerIcon(
             painter = painterResource(R.drawable.keycap_asterisk_emoji),
             faded = false,
-            contentDescription = null
+            contentDescription = null,
+            simplified = false
         )
     }
 }
@@ -165,7 +198,8 @@ private fun MarkerIconFadedPreview() {
         MarkerIcon(
             painter = painterResource(R.drawable.keycap_asterisk_emoji),
             faded = true,
-            contentDescription = null
+            contentDescription = null,
+            simplified = false
         )
     }
 }
@@ -177,6 +211,7 @@ private fun RoomIconPreview() {
         RoomIcon(
             name = "1337",
             faded = false,
+            simplified = false
         )
     }
 }
@@ -187,7 +222,8 @@ private fun RoomIconFadedPreview() {
     DepNavTheme {
         RoomIcon(
             name = "1337",
-            faded = true
+            faded = true,
+            simplified = false
         )
     }
 }

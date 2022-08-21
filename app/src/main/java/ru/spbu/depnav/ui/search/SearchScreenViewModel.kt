@@ -27,6 +27,7 @@ import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.data.repository.MarkerWithTextRepo
 import javax.inject.Inject
@@ -37,8 +38,8 @@ private const val TAG = "MarkerSearchViewModel"
 @HiltViewModel
 class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: MarkerWithTextRepo) :
     ViewModel() {
-    /** Markers that were found by the search. */
-    var matchedMarkers by mutableStateOf<Collection<MarkerText>>(emptyList())
+    /** Markers with their texts that were found by the search. */
+    var matches by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
         private set
 
     /**
@@ -47,7 +48,7 @@ class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: 
      */
     fun search(text: String) {
         if (text.isBlank()) {
-            matchedMarkers = emptyList()
+            matches = emptyMap()
             return
         }
 
@@ -58,12 +59,12 @@ class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: 
         viewModelScope.launch(Dispatchers.IO) {
             val matches = markerWithTextRepo.loadByTokens(query)
             Log.v(TAG, "Found ${matches.size} matches")
-            launch(Dispatchers.Main) { matchedMarkers = matches.values }
+            launch(Dispatchers.Main) { this@SearchScreenViewModel.matches = matches }
         }
     }
 
     /** Clear the search results. */
     fun clearResults() {
-        matchedMarkers = emptyList()
+        matches = emptyMap()
     }
 }
