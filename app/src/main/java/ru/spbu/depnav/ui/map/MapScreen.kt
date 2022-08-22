@@ -183,14 +183,13 @@ private fun BoxScope.BottomUi(
     zoomInHintVisible: Boolean,
     pinnedMarkerWithText: Pair<Marker, MarkerText>?
 ) {
-    val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
-
+    // Not using insets here to let the Surface reside under bottom bar
     Box(
-        modifier = Modifier
-            .windowInsetsPadding(insetsNoTop)
-            .align(Alignment.BottomCenter),
+        modifier = Modifier.align(Alignment.BottomCenter),
         contentAlignment = Alignment.BottomCenter
     ) {
+        val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
+
         AnimatedVisibility(
             visible = markerInfoVisible,
             enter = slideInVertically(initialOffsetY = { it }) + fadeIn(),
@@ -208,7 +207,8 @@ private fun BoxScope.BottomUi(
                     MarkerInfoLines(
                         title = markerText.title ?: stringResource(R.string.no_title),
                         description = markerText.description,
-                        isClosed = marker.isClosed
+                        isClosed = marker.isClosed,
+                        modifier = Modifier.windowInsetsPadding(insetsNoTop)
                     ) {
                         MarkerView(
                             title = markerText.title ?: stringResource(R.string.no_title),
@@ -223,6 +223,7 @@ private fun BoxScope.BottomUi(
 
         AnimatedVisibility(
             visible = zoomInHintVisible,
+            modifier = Modifier.windowInsetsPadding(insetsNoTop),
             enter = fadeIn(),
             exit = fadeOut()
         ) {
