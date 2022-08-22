@@ -19,6 +19,8 @@
 package ru.spbu.depnav.ui.search
 
 import androidx.compose.animation.AnimatedVisibility
+import androidx.compose.animation.fadeIn
+import androidx.compose.animation.fadeOut
 import androidx.compose.foundation.text.KeyboardActions
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material.Icon
@@ -69,7 +71,11 @@ fun SearchField(
         placeholder = { Text(placeholder) },
         leadingIcon = { Icon(Icons.Rounded.Search, contentDescription = "Search") },
         trailingIcon = {
-            AnimatedVisibility(visible = text.isNotEmpty()) {
+            AnimatedVisibility(
+                visible = text.isNotEmpty(),
+                enter = fadeIn(),
+                exit = fadeOut()
+            ) {
                 IconButton(
                     onClick = {
                         text = ""
