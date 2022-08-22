@@ -56,7 +56,8 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 @Composable
 fun SearchScreen(
     vm: SearchScreenViewModel = hiltViewModel(),
-    onResultClick: (Int) -> Unit
+    onResultClick: (Int) -> Unit,
+    onNavigateBack: () -> Unit
 ) {
     val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
 
@@ -67,10 +68,11 @@ fun SearchScreen(
                 .windowInsetsPadding(insetsNoBottom)
         ) {
             SearchField(
-                modifier = Modifier.fillMaxWidth(),
-                placeholder = stringResource(R.string.search_markers),
                 onTextChange = vm::search,
-                onClear = vm::clearResults
+                onClear = vm::clearResults,
+                onBackClick = onNavigateBack,
+                modifier = Modifier.fillMaxWidth(),
+                placeholder = stringResource(R.string.search_markers)
             )
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))

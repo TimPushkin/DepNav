@@ -2,13 +2,24 @@ plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
     id 'dagger.hilt.android.plugin'
-    id 'kotlin-kapt'
     id 'com.google.devtools.ksp' version "$kotlin_version-1.0.6"
+    id 'kotlin-kapt'
 }
 
 def keystorePropertiesFile = rootProject.file('keystore.properties')
 def keystoreProperties = new Properties()
 if (keystorePropertiesFile.exists()) keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
+
+static def versionToCode(major, minor, patch) {
+    assert 0 <= major && major <= 99
+    assert 0 <= minor && minor <= 99
+    assert 0 <= patch && patch <= 99
+    return major * 10000 + minor * 100 + patch
+}
+
+static def versionToName(major, minor, patch) {
+    return "$major.$minor.$patch"
+}
 
 android {
     compileSdk 32
@@ -28,8 +39,8 @@ android {
         applicationId 'ru.spbu.depnav'
         minSdk 21
         targetSdk 32
-        versionCode 4
-        versionName '1.0.4'
+        versionCode versionToCode(1, 1, 0)
+        versionName versionToName(1, 1, 0)
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 

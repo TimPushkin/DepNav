@@ -64,13 +64,20 @@ class MainActivity : ComponentActivity() {
                         }
                     }
                     composable(NavDestination.SEARCH.name) {
-                        SearchScreen {
-                            mapScreenVm.run { viewModelScope.launch { focusOnMarker(it) } }
+                        fun navigateToMap() {
                             navController.popBackStack(
                                 route = NavDestination.MAP.name,
                                 inclusive = false
                             )
                         }
+
+                        SearchScreen(
+                            onResultClick = {
+                                mapScreenVm.run { viewModelScope.launch { focusOnMarker(it) } }
+                                navigateToMap()
+                            },
+                            onNavigateBack = ::navigateToMap
+                        )
                     }
                 }
             }
