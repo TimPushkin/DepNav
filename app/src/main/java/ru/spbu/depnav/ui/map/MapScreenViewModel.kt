@@ -46,6 +46,7 @@ import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addLazyLoader
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.centerOnMarker
+import ovh.plrapps.mapcompose.api.disableFlingZoom
 import ovh.plrapps.mapcompose.api.maxScale
 import ovh.plrapps.mapcompose.api.minScaleSnapshotFlow
 import ovh.plrapps.mapcompose.api.onMarkerClick
@@ -177,6 +178,7 @@ class MapScreenViewModel @Inject constructor(
             setScrollOffsetRatio(0.5f, 0.5f)
             setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
             addLazyLoader(LAZY_LOADER_ID, padding = (DEFAULT_PADDING * 2))
+            disableFlingZoom() // Works strange when a lot of markers are loaded simultaneously
             shouldLoopScale = true
 
             onTap { _, _ ->
