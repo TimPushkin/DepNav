@@ -23,7 +23,7 @@ With **DepNav** you can do the following:
 - Enjoy the graphic interface in light and dark themes
 - Two languages available: English and Russian
 
-| ![Map](https://i.imgur.com/SsslKgp.jpg) | ![Search](https://i.imgur.com/jpYNy09.jpg) | ![Info](https://i.imgur.com/x5rhlOm.jpg) |
+| ![Map](https://i.imgur.com/l8d5aWm.jpg) | ![Search](https://i.imgur.com/G1Rk8q6.jpg) | ![Info](https://i.imgur.com/I4dJd7e.jpg) |
 |:---------------------------------------:|:------------------------------------------:|:----------------------------------------:|
 
 ## Get it!
