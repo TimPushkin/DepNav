@@ -22,6 +22,7 @@ import android.content.Context
 import androidx.room.Room
 import androidx.test.core.app.ApplicationProvider
 import androidx.test.ext.junit.runners.AndroidJUnit4
+import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.After
 import org.junit.Assert.assertEquals
@@ -32,6 +33,7 @@ import org.junit.runner.RunWith
 import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.model.SearchHistoryEntry
 
 /** Instrumentation tests for [AppDatabase]'s DAOs. */
 @RunWith(AndroidJUnit4::class)
@@ -39,6 +41,7 @@ class AppDatabaseDaosTest {
     private lateinit var db: AppDatabase
     private lateinit var mapInfoDao: MapInfoDao
     private lateinit var markerWithTextDao: MarkerWithTextDao
+    private lateinit var searchHistoryDao: SearchHistoryDao
 
     /** Initializes an instance of a database and related DAOs. */
     @Before
@@ -47,6 +50,7 @@ class AppDatabaseDaosTest {
         db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
         mapInfoDao = db.mapInfoDao()
         markerWithTextDao = db.markerWithTextDao()
+        searchHistoryDao = db.searchHistoryDao()
     }
 
     /**
@@ -57,7 +61,7 @@ class AppDatabaseDaosTest {
         db.close()
     }
 
-    /* MapInfo tests */
+    // MapInfo tests
 
     /** Checks that [MapInfoDao.loadByName] returns a [MapInfo] with the queried name. */
     @Test
@@ -78,7 +82,7 @@ class AppDatabaseDaosTest {
         for (i in 0..1) assertEquals(expected[i], actual[i])
     }
 
-    /* Marker tests */
+    // Marker tests
 
     /** Checks that [MarkerWithTextDao.loadById] returns the queried [Marker]. */
     @Test
@@ -198,7 +202,7 @@ class AppDatabaseDaosTest {
         }
     }
 
-    /* MarkerText tests */
+    // MarkerText tests
 
     /**
      * Checks that [MarkerWithTextDao.loadByTokens] returns all inserted [MarkerTexts][MarkerText]
@@ -289,8 +293,73 @@ class AppDatabaseDaosTest {
         val actual = runBlocking { markerWithTextDao.loadByTokens(title, language) }
 
         for ((markerText, markers) in actual) {
-            assertTrue(markers.size == 1)
+            assertTrue(
+                "Expected markers to be of size 1, but was ${markers.size}",
+                markers.size == 1
+            )
             assertEquals(markerText.markerId, markers.first().id)
         }
+    }
+
+    // Search history tests
+
+    private fun testInsertNotExceeding(maxEntriesNum: Int, insertEntriesNum: Int) {
+        val expected = mutableListOf<SearchHistoryEntry>()
+        runBlocking {
+            repeat(insertEntriesNum) { index ->
+                val entry = SearchHistoryEntry(index, index.toLong())
+                searchHistoryDao.insertNotExceeding(entry, maxEntriesNum)
+                expected += entry
+            }
+        }
+        expected.sortBy { it.timestamp }
+        while (expected.size > maxEntriesNum) expected.removeFirst()
+
+        val actual = runBlocking { searchHistoryDao.loadAll().first() }
+
+        assertEquals(expected.size, actual.size)
+        for (entry in actual) {
+            assertTrue("Entry $entry is not among expected entries", expected.contains(entry))
+        }
+    }
+
+    /**
+     * Checks that [SearchHistoryDao.insertNotExceeding] inserts all passed entries when their total
+     * amount is less than maxEntriesNum.
+     */
+    @Test
+    fun insertNotExceedingLessThanMax_loadAllReturnsAllInserted() {
+        val maxEntriesNum = 2
+        testInsertNotExceeding(maxEntriesNum, maxEntriesNum - 1)
+    }
+
+    /**
+     * Checks that [SearchHistoryDao.insertNotExceeding] inserts all passed entries when their total
+     * amount equals maxEntriesNum.
+     */
+    @Test
+    fun insertNotExceedingExactlyMax_loadAllReturnsAllInserted() {
+        val maxEntriesNum = 3
+        testInsertNotExceeding(maxEntriesNum, maxEntriesNum)
+    }
+
+    /**
+     * Checks that [SearchHistoryDao.insertNotExceeding] inserts all passed entries and removes the
+     * oldest one of them when their total amount is maxEntriesNum + 1.
+     */
+    @Test
+    fun insertNotExceedingOneMoreThanMax_loadAllReturnsAllInsertedExceptOldest() {
+        val maxEntriesNum = 5
+        testInsertNotExceeding(maxEntriesNum, maxEntriesNum + 1)
+    }
+
+    /**
+     * Checks that [SearchHistoryDao.insertNotExceeding] inserts all passed entries and removes the
+     * oldest of them when their total amount greatly exceeds maxEntriesNum.
+     */
+    @Test
+    fun insertNotExceedingManyMoreThanMax_loadAllReturnsAllInsertedExceptOldest() {
+        val maxEntriesNum = 5
+        testInsertNotExceeding(maxEntriesNum, maxEntriesNum + 5)
     }
 }

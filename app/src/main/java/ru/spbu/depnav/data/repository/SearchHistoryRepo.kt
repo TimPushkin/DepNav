@@ -18,15 +18,22 @@
 
 package ru.spbu.depnav.data.repository
 
-import ru.spbu.depnav.data.db.MapInfoDao
-import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.db.SearchHistoryDao
+import ru.spbu.depnav.data.model.SearchHistoryEntry
 import javax.inject.Inject
 
-/** Repository for [MapInfo] objects. */
-class MapInfoRepo @Inject constructor(private val dao: MapInfoDao) {
-    /** Saves the provided objects. */
-    suspend fun insertAll(mapInfos: Collection<MapInfo>) = dao.insertAll(mapInfos)
+/** Repository for [SearchHistoryEntry] objects. */
+class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
+    /**
+     * Saves the provided entry and deletes the oldest ones if needed so that [maxEntriesNum] is not
+     * exceeded. If an entry with the same marker ID is already saved it is replaced.
+     *
+     * Note that the provided entry will not be saved if maxEntriesNum is exceeded and the provided
+     * entry is among the ones that are deleted.
+     */
+    suspend fun insertNotExceeding(entry: SearchHistoryEntry, maxEntriesNum: Int) =
+        dao.insertNotExceeding(entry, maxEntriesNum)
 
-    /** Loads a [MapInfo] by its name. */
-    suspend fun loadByName(name: String) = dao.loadByName(name)
+    /** Loads all the current entries. */
+    fun loadAll() = dao.loadAll()
 }

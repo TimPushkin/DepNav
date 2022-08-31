@@ -26,21 +26,42 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.model.SearchHistoryEntry
 import ru.spbu.depnav.data.repository.MarkerWithTextRepo
+import ru.spbu.depnav.data.repository.SearchHistoryRepo
 import javax.inject.Inject
 
 private const val TAG = "MarkerSearchViewModel"
 
+private const val SEARCH_HISTORY_SIZE = 10
+
 /** View model for [SearchScreen]. */
 @HiltViewModel
-class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: MarkerWithTextRepo) :
-    ViewModel() {
+class SearchScreenViewModel @Inject constructor(
+    private val markerWithTextRepo: MarkerWithTextRepo,
+    private val searchHistoryRepo: SearchHistoryRepo
+) : ViewModel() {
     /** Markers with their texts that were found by the search. */
-    var matches by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
+    var searchMatches by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
         private set
+
+    /** Markers with their texts to suggest to a user. */
+    var searchHistory by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
+        private set
+
+    init {
+        searchHistoryRepo.loadAll()
+            .onEach { entries ->
+                val history = entries.associate { markerWithTextRepo.loadById(it.markerId) }
+                searchHistory = history
+            }
+            .launchIn(viewModelScope)
+    }
 
     /**
      * Initiate a marker search with the provided text on the specified language. The provided DAO
@@ -48,7 +69,7 @@ class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: 
      */
     fun search(text: String) {
         if (text.isBlank()) {
-            matches = emptyMap()
+            searchMatches = emptyMap()
             return
         }
 
@@ -59,12 +80,19 @@ class SearchScreenViewModel @Inject constructor(private val markerWithTextRepo: 
         viewModelScope.launch(Dispatchers.IO) {
             val matches = markerWithTextRepo.loadByTokens(query)
             Log.v(TAG, "Found ${matches.size} matches")
-            launch(Dispatchers.Main) { this@SearchScreenViewModel.matches = matches }
+            launch(Dispatchers.Main) { this@SearchScreenViewModel.searchMatches = matches }
         }
     }
 
     /** Clear the search results. */
-    fun clearResults() {
-        matches = emptyMap()
+    fun clearMatches() {
+        searchMatches = emptyMap()
+    }
+
+    /** Add the provided marker ID to the search history. */
+    fun addToSearchHistory(markerId: Int) {
+        viewModelScope.launch(Dispatchers.IO) {
+            searchHistoryRepo.insertNotExceeding(SearchHistoryEntry(markerId), SEARCH_HISTORY_SIZE)
+        }
     }
 }

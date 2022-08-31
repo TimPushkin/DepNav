@@ -69,7 +69,7 @@ fun SearchScreen(
         ) {
             SearchField(
                 onTextChange = vm::search,
-                onClear = vm::clearResults,
+                onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = stringResource(R.string.search_markers)
@@ -78,8 +78,11 @@ fun SearchScreen(
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
             SearchResults(
-                markersWithTexts = vm.matches,
-                onResultClick = onResultClick
+                markersWithTexts = vm.searchMatches.ifEmpty { vm.searchHistory },
+                onResultClick = { markerId ->
+                    vm.addToSearchHistory(markerId)
+                    onResultClick(markerId)
+                }
             )
         }
     }
