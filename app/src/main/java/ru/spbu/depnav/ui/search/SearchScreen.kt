@@ -19,6 +19,7 @@
 package ru.spbu.depnav.ui.search
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -34,12 +35,15 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -79,6 +83,7 @@ fun SearchScreen(
 
             SearchResults(
                 markersWithTexts = vm.searchMatches.ifEmpty { vm.searchHistory },
+                isHistory = vm.searchMatches.isEmpty(),
                 onResultClick = { markerId ->
                     vm.addToSearchHistory(markerId)
                     onResultClick(markerId)
@@ -89,12 +94,16 @@ fun SearchScreen(
 }
 
 @Composable
-private fun SearchResults(markersWithTexts: Map<Marker, MarkerText>, onResultClick: (Int) -> Unit) {
+private fun SearchResults(
+    markersWithTexts: Map<Marker, MarkerText>,
+    isHistory: Boolean,
+    onResultClick: (Int) -> Unit
+) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(markersWithTexts.toList()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
-            SearchResult(marker, markerText, onResultClick)
+            SearchResult(marker, markerText, isHistory, onResultClick)
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
         }
@@ -102,7 +111,12 @@ private fun SearchResults(markersWithTexts: Map<Marker, MarkerText>, onResultCli
 }
 
 @Composable
-private fun SearchResult(marker: Marker, markerText: MarkerText, onClick: (Int) -> Unit) {
+private fun SearchResult(
+    marker: Marker,
+    markerText: MarkerText,
+    isHistory: Boolean,
+    onClick: (Int) -> Unit
+) {
     checkNotNull(markerText.title) { "MarkerText title cannot be null in SearchResult" }
 
     Row(
@@ -111,36 +125,69 @@ private fun SearchResult(marker: Marker, markerText: MarkerText, onClick: (Int) 
             .fillMaxWidth()
             .padding(horizontal = DEFAULT_PADDING * 2)
             .height(56.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MarkerView(
-            title = markerText.title,
-            type = marker.type,
-            isClosed = marker.isClosed,
-            simplified = true
-        )
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            MarkerView(
+                title = markerText.title,
+                type = marker.type,
+                isClosed = marker.isClosed,
+                simplified = true
+            )
 
-        Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
-            Text(markerText.title)
-
-            markerText.description?.let {
+            Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
                 Text(
-                    text = it,
-                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.45f),
-                    overflow = TextOverflow.Ellipsis
+                    text = markerText.title,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
                 )
+
+                markerText.description?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colors.onSurface.copy(alpha = 0.45f),
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
+        }
+
+        if (isHistory) {
+            Icon(
+                painter = painterResource(R.drawable.ic_history),
+                contentDescription = "Search history",
+                modifier = Modifier.scale(0.6f),
+                tint = MaterialTheme.colors.onSurface.copy(alpha = 0.45f)
+            )
         }
     }
 }
 
 @Composable
 @Preview
-private fun SearchResultPreview() {
+private fun SearchResultUsualPreview() {
     DepNavTheme {
         SearchResult(
             marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
             markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
+            isHistory = false,
+            onClick = {}
+        )
+    }
+}
+
+@Composable
+@Preview
+private fun SearchResultHistoryPreview() {
+    DepNavTheme {
+        SearchResult(
+            marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
+            markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
+            isHistory = true,
             onClick = {}
         )
     }
