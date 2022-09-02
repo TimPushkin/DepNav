@@ -40,8 +40,13 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
@@ -69,10 +74,16 @@ fun SearchScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .windowInsetsPadding(insetsNoBottom)
+                .windowInsetsPadding(insetsNoBottom),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            var isQueryEmpty by rememberSaveable { mutableStateOf(true) }
+
             SearchField(
-                onTextChange = vm::search,
+                onTextChange = { query ->
+                    isQueryEmpty = query.isEmpty()
+                    vm.search(query)
+                },
                 onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),
@@ -81,14 +92,23 @@ fun SearchScreen(
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
-            SearchResults(
-                markersWithTexts = vm.searchMatches.ifEmpty { vm.searchHistory },
-                isHistory = vm.searchMatches.isEmpty(),
-                onResultClick = { markerId ->
-                    vm.addToSearchHistory(markerId)
-                    onResultClick(markerId)
-                }
-            )
+            if (isQueryEmpty || vm.searchMatches.isNotEmpty()) {
+                SearchResults(
+                    markersWithTexts = vm.searchMatches.ifEmpty { vm.searchHistory },
+                    isHistory = vm.searchMatches.isEmpty(),
+                    onResultClick = { markerId ->
+                        vm.addToSearchHistory(markerId)
+                        onResultClick(markerId)
+                    }
+                )
+            } else {
+                Text(
+                    text = stringResource(R.string.nothing_found),
+                    modifier = Modifier
+                        .padding(DEFAULT_PADDING * 2)
+                        .alpha(0.6f)
+                )
+            }
         }
     }
 }
@@ -103,7 +123,19 @@ private fun SearchResults(
         items(markersWithTexts.toList()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
-            SearchResult(marker, markerText, isHistory, onResultClick)
+            SearchResult(
+                marker = marker,
+                markerText = markerText,
+                onClick = onResultClick,
+                trailingIcon = (@Composable {
+                    Icon(
+                        painter = painterResource(R.drawable.ic_history),
+                        contentDescription = "Search history",
+                        modifier = Modifier.scale(0.6f),
+                        tint = MaterialTheme.colors.onSurface.copy(alpha = 0.45f)
+                    )
+                }).takeIf { isHistory }
+            )
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
         }
@@ -114,8 +146,8 @@ private fun SearchResults(
 private fun SearchResult(
     marker: Marker,
     markerText: MarkerText,
-    isHistory: Boolean,
-    onClick: (Int) -> Unit
+    onClick: (Int) -> Unit,
+    trailingIcon: (@Composable () -> Unit)?
 ) {
     checkNotNull(markerText.title) { "MarkerText title cannot be null in SearchResult" }
 
@@ -156,14 +188,7 @@ private fun SearchResult(
             }
         }
 
-        if (isHistory) {
-            Icon(
-                painter = painterResource(R.drawable.ic_history),
-                contentDescription = "Search history",
-                modifier = Modifier.scale(0.6f),
-                tint = MaterialTheme.colors.onSurface.copy(alpha = 0.45f)
-            )
-        }
+        trailingIcon?.invoke()
     }
 }
 
@@ -174,9 +199,8 @@ private fun SearchResultUsualPreview() {
         SearchResult(
             marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
             markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
-            isHistory = false,
             onClick = {}
-        )
+        ) {}
     }
 }
 
@@ -187,8 +211,14 @@ private fun SearchResultHistoryPreview() {
         SearchResult(
             marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
             markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
-            isHistory = true,
             onClick = {}
-        )
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_history),
+                contentDescription = "Search history",
+                modifier = Modifier.scale(0.6f),
+                tint = MaterialTheme.colors.onSurface.copy(alpha = 0.45f)
+            )
+        }
     }
 }
