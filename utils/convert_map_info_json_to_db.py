@@ -44,6 +44,8 @@ args = parser.parse_args()
 db = sqlite3.connect(args.db_file)
 cur = db.cursor()
 
+cur.execute("PRAGMA user_version = 4")
+
 cur.execute('''
 CREATE TABLE IF NOT EXISTS `map_infos` (
 `map_name` TEXT NOT NULL,
@@ -74,6 +76,13 @@ CREATE VIRTUAL TABLE IF NOT EXISTS `marker_texts` USING FTS4(
 `description` TEXT,
 tokenize=unicode61,
 notindexed=`marker_id`
+)
+''')
+cur.execute('''
+CREATE TABLE IF NOT EXISTS `search_history` (
+`marker_id` INTEGER NOT NULL,
+`timestamp` INTEGER NOT NULL,
+PRIMARY KEY(`marker_id`)
 )
 ''')
 
