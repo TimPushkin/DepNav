@@ -50,15 +50,14 @@ class SearchScreenViewModel @Inject constructor(
     var searchMatches by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
         private set
 
-    /** Markers with their texts to suggest to a user. */
+    /** Markers with their texts that were searched in the past. */
     var searchHistory by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
         private set
 
     init {
         searchHistoryRepo.loadAll()
             .onEach { entries ->
-                val history = entries.associate { markerWithTextRepo.loadById(it.markerId) }
-                searchHistory = history
+                searchHistory = entries.associate { markerWithTextRepo.loadById(it.markerId) }
             }
             .launchIn(viewModelScope)
     }
@@ -69,7 +68,7 @@ class SearchScreenViewModel @Inject constructor(
      */
     fun search(text: String) {
         if (text.isBlank()) {
-            searchMatches = emptyMap()
+            clearMatches()
             return
         }
 
