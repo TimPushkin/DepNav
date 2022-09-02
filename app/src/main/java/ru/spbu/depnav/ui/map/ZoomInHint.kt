@@ -36,8 +36,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-
-private const val HINT_ALPHA = 0.6f
+import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Hint that tells a user to zoom in to see map markers. */
 @Composable
@@ -54,14 +53,14 @@ fun ZoomInHint() {
             contentDescription = "Pinch to zoom in",
             modifier = Modifier
                 .size(textSize * 2)
-                .alpha(HINT_ALPHA)
+                .alpha(FADED_ALPHA)
         )
 
         Spacer(modifier = Modifier.width(DEFAULT_PADDING))
 
         Text(
             text = stringResource(R.string.zoom_in_to_see_markers),
-            modifier = Modifier.alpha(HINT_ALPHA),
+            modifier = Modifier.alpha(FADED_ALPHA),
             textAlign = TextAlign.Center,
             style = MaterialTheme.typography.caption
         )

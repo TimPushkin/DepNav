@@ -47,6 +47,9 @@ val DEFAULT_PADDING = 10.dp
 /** Elevation applied to elements that need one by default. */
 val DEFAULT_ELEVATION = 5.dp
 
+/** Alpha value for faded elements. */
+const val FADED_ALPHA = 0.6f
+
 /** Theme of the application. */
 @Composable
 fun DepNavTheme(darkTheme: Boolean = isSystemInDarkTheme(), content: @Composable () -> Unit) {

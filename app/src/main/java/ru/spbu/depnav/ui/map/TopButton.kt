@@ -36,6 +36,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.ui.theme.DEFAULT_ELEVATION
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 private val HEIGHT = 68.dp
 
@@ -66,7 +67,7 @@ fun TopButton(
 
             Text(
                 text = text,
-                modifier = Modifier.alpha(0.6f),
+                modifier = Modifier.alpha(FADED_ALPHA),
                 maxLines = 1
             )
         }

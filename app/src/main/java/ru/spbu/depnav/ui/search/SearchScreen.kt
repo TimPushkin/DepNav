@@ -60,6 +60,7 @@ import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.map.MarkerView
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
+import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Screen containing a marker search and the results found. */
 @Composable
@@ -106,12 +107,14 @@ fun SearchScreen(
                     text = stringResource(R.string.nothing_found),
                     modifier = Modifier
                         .padding(DEFAULT_PADDING * 2)
-                        .alpha(0.6f)
+                        .alpha(FADED_ALPHA)
                 )
             }
         }
     }
 }
+
+private const val HIGHLY_FADED_ALPHA = 0.45f
 
 @Composable
 private fun SearchResults(
@@ -132,7 +135,7 @@ private fun SearchResults(
                         painter = painterResource(R.drawable.ic_history),
                         contentDescription = "Search history",
                         modifier = Modifier.scale(0.6f),
-                        tint = MaterialTheme.colors.onSurface.copy(alpha = 0.45f)
+                        tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
                     )
                 }).takeIf { isHistory }
             )
@@ -181,7 +184,7 @@ private fun SearchResult(
                 markerText.description?.let {
                     Text(
                         text = it,
-                        color = MaterialTheme.colors.onSurface.copy(alpha = 0.45f),
+                        color = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA),
                         overflow = TextOverflow.Ellipsis
                     )
                 }
@@ -217,7 +220,7 @@ private fun SearchResultHistoryPreview() {
                 painter = painterResource(R.drawable.ic_history),
                 contentDescription = "Search history",
                 modifier = Modifier.scale(0.6f),
-                tint = MaterialTheme.colors.onSurface.copy(alpha = 0.45f)
+                tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
             )
         }
     }
