@@ -18,67 +18,22 @@
 
 package ru.spbu.depnav.data.db
 
-import android.content.Context
-import androidx.room.Room
-import androidx.test.core.app.ApplicationProvider
-import androidx.test.ext.junit.runners.AndroidJUnit4
 import kotlinx.coroutines.runBlocking
-import org.junit.After
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
-import org.junit.runner.RunWith
-import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 
-/** Instrumentation tests for [AppDatabase]'s DAOs. */
-@RunWith(AndroidJUnit4::class)
-class AppDatabaseDaosTest {
-    private lateinit var db: AppDatabase
-    private lateinit var mapInfoDao: MapInfoDao
+/** Instrumentation tests for [MarkerWithTextDao]. */
+class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     private lateinit var markerWithTextDao: MarkerWithTextDao
 
-    /** Initializes an instance of a database and related DAOs. */
     @Before
-    fun setUp() {
-        val context = ApplicationProvider.getApplicationContext<Context>()
-        db = Room.inMemoryDatabaseBuilder(context, AppDatabase::class.java).build()
-        mapInfoDao = db.mapInfoDao()
+    override fun setUpDao() {
         markerWithTextDao = db.markerWithTextDao()
     }
-
-    /**
-     * Closes the database instance.
-     */
-    @After
-    fun tearDown() {
-        db.close()
-    }
-
-    /* MapInfo tests */
-
-    /** Checks that [MapInfoDao.loadByName] returns a [MapInfo] with the queried name. */
-    @Test
-    fun loadByName_returnsMapInfoWithQueriedName() {
-        val expected = listOf(
-            MapInfo("abc", 100, 100, 1024, 1, 5),
-            MapInfo("cba", 100, 200, 512, 2, 100)
-        )
-        runBlocking { mapInfoDao.insertAll(expected) }
-
-        val actual = runBlocking {
-            listOf(
-                mapInfoDao.loadByName(expected[0].mapName),
-                mapInfoDao.loadByName(expected[1].mapName)
-            )
-        }
-
-        for (i in 0..1) assertEquals(expected[i], actual[i])
-    }
-
-    /* Marker tests */
 
     /** Checks that [MarkerWithTextDao.loadById] returns the queried [Marker]. */
     @Test
@@ -159,7 +114,7 @@ class AppDatabaseDaosTest {
             val actualMarkers =
                 runBlocking { markerWithTextDao.loadByFloor(floor, languageId).keys }
 
-            assert(actualMarkers.isNotEmpty())
+            assertTrue("Loaded markers are empty", actualMarkers.isNotEmpty())
             for (marker in actualMarkers) assertEquals(floor, marker.floor)
         }
     }
@@ -192,13 +147,11 @@ class AppDatabaseDaosTest {
                     markerWithTextDao.loadByFloor(floor, languageId).values.flatten()
                 }
 
-                assert(actual.isNotEmpty())
+                assertTrue("Loaded markers are empty", actual.isNotEmpty())
                 actual.forEach { assertEquals(languageId, it.languageId) }
             }
         }
     }
-
-    /* MarkerText tests */
 
     /**
      * Checks that [MarkerWithTextDao.loadByTokens] returns all inserted [MarkerTexts][MarkerText]
@@ -289,7 +242,10 @@ class AppDatabaseDaosTest {
         val actual = runBlocking { markerWithTextDao.loadByTokens(title, language) }
 
         for ((markerText, markers) in actual) {
-            assertTrue(markers.size == 1)
+            assertTrue(
+                "Expected markers to be of size 1, but was ${markers.size}",
+                markers.size == 1
+            )
             assertEquals(markerText.markerId, markers.first().id)
         }
     }

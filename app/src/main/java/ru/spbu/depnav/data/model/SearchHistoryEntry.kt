@@ -16,17 +16,22 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.data.repository
+package ru.spbu.depnav.data.model
 
-import ru.spbu.depnav.data.db.MapInfoDao
-import ru.spbu.depnav.data.model.MapInfo
-import javax.inject.Inject
+import androidx.room.ColumnInfo
+import androidx.room.Entity
+import androidx.room.PrimaryKey
 
-/** Repository for [MapInfo] objects. */
-class MapInfoRepo @Inject constructor(private val dao: MapInfoDao) {
-    /** Saves the provided objects. */
-    suspend fun insertAll(mapInfos: Collection<MapInfo>) = dao.insertAll(mapInfos)
-
-    /** Loads a [MapInfo] by its name. */
-    suspend fun loadByName(name: String) = dao.loadByName(name)
-}
+/** Information about a marker that was searched. */
+@Entity(tableName = "search_history")
+data class SearchHistoryEntry(
+    /** ID of the searched marker. */
+    @PrimaryKey
+    @ColumnInfo(name = "marker_id")
+    val markerId: Int,
+    /**
+     * The "wall clock" timestamp of the moment when the search for the marker was performed in
+     * milliseconds.
+     */
+    val timestamp: Long = System.currentTimeMillis()
+)

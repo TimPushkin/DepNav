@@ -51,4 +51,7 @@ object DatabaseModule {
 
     @Provides
     fun provideMarkerWithTextDao(appDatabase: AppDatabase) = appDatabase.markerWithTextDao()
+
+    @Provides
+    fun provideSearchHistoryDao(appDatabase: AppDatabase) = appDatabase.searchHistoryDao()
 }

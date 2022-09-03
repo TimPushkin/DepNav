@@ -19,6 +19,7 @@
 package ru.spbu.depnav.ui.search
 
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
@@ -34,12 +35,20 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Divider
+import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.saveable.rememberSaveable
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
+import androidx.compose.ui.draw.scale
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,6 +60,7 @@ import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.map.MarkerView
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
+import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Screen containing a marker search and the results found. */
 @Composable
@@ -65,11 +75,17 @@ fun SearchScreen(
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .windowInsetsPadding(insetsNoBottom)
+                .windowInsetsPadding(insetsNoBottom),
+            horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            var isQueryEmpty by rememberSaveable { mutableStateOf(true) }
+
             SearchField(
-                onTextChange = vm::search,
-                onClear = vm::clearResults,
+                onTextChange = { query ->
+                    isQueryEmpty = query.isEmpty()
+                    vm.search(query)
+                },
+                onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),
                 placeholder = stringResource(R.string.search_markers)
@@ -77,21 +93,54 @@ fun SearchScreen(
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
-            SearchResults(
-                markersWithTexts = vm.matches,
-                onResultClick = onResultClick
-            )
+            if (isQueryEmpty || vm.searchMatches.isNotEmpty()) {
+                SearchResults(
+                    markersWithTexts = vm.searchMatches.ifEmpty { vm.searchHistory },
+                    isHistory = vm.searchMatches.isEmpty(),
+                    onResultClick = { markerId ->
+                        vm.addToSearchHistory(markerId)
+                        onResultClick(markerId)
+                    }
+                )
+            } else {
+                Text(
+                    text = stringResource(R.string.nothing_found),
+                    modifier = Modifier
+                        .padding(DEFAULT_PADDING * 2)
+                        .alpha(FADED_ALPHA)
+                )
+            }
         }
     }
 }
 
+private const val HIGHLY_FADED_ALPHA = 0.45f
+
 @Composable
-private fun SearchResults(markersWithTexts: Map<Marker, MarkerText>, onResultClick: (Int) -> Unit) {
+private fun SearchResults(
+    markersWithTexts: Map<Marker, MarkerText>,
+    isHistory: Boolean,
+    onResultClick: (Int) -> Unit
+) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
         items(markersWithTexts.toList()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
-            SearchResult(marker, markerText, onResultClick)
+            SearchResult(
+                marker = marker,
+                markerText = markerText,
+                onClick = onResultClick,
+                trailingIcon = (
+                    @Composable {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_history),
+                            contentDescription = "Search history",
+                            modifier = Modifier.scale(0.6f),
+                            tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
+                        )
+                    }
+                    ).takeIf { isHistory }
+            )
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
         }
@@ -99,7 +148,12 @@ private fun SearchResults(markersWithTexts: Map<Marker, MarkerText>, onResultCli
 }
 
 @Composable
-private fun SearchResult(marker: Marker, markerText: MarkerText, onClick: (Int) -> Unit) {
+private fun SearchResult(
+    marker: Marker,
+    markerText: MarkerText,
+    onClick: (Int) -> Unit,
+    trailingIcon: (@Composable () -> Unit)?
+) {
     checkNotNull(markerText.title) { "MarkerText title cannot be null in SearchResult" }
 
     Row(
@@ -108,37 +162,70 @@ private fun SearchResult(marker: Marker, markerText: MarkerText, onClick: (Int) 
             .fillMaxWidth()
             .padding(horizontal = DEFAULT_PADDING * 2)
             .height(56.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        MarkerView(
-            title = markerText.title,
-            type = marker.type,
-            isClosed = marker.isClosed,
-            simplified = true
-        )
+        Row(
+            modifier = Modifier.weight(1f),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            MarkerView(
+                title = markerText.title,
+                type = marker.type,
+                isClosed = marker.isClosed,
+                simplified = true
+            )
 
-        Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
-            Text(markerText.title)
-
-            markerText.description?.let {
+            Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
                 Text(
-                    text = it,
-                    color = MaterialTheme.colors.onSurface.copy(alpha = 0.45f),
-                    overflow = TextOverflow.Ellipsis
+                    text = markerText.title,
+                    overflow = TextOverflow.Ellipsis,
+                    maxLines = 1
                 )
+
+                markerText.description?.let {
+                    Text(
+                        text = it,
+                        color = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA),
+                        overflow = TextOverflow.Ellipsis
+                    )
+                }
             }
         }
+
+        trailingIcon?.invoke()
     }
 }
 
 @Composable
 @Preview
-private fun SearchResultPreview() {
+@Suppress("UnusedPrivateMember")
+private fun SearchResultUsualPreview() {
     DepNavTheme {
         SearchResult(
             marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
             markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
             onClick = {}
-        )
+        ) {}
+    }
+}
+
+@Composable
+@Preview
+@Suppress("UnusedPrivateMember")
+private fun SearchResultHistoryPreview() {
+    DepNavTheme {
+        SearchResult(
+            marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
+            markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
+            onClick = {}
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_history),
+                contentDescription = null,
+                modifier = Modifier.scale(0.6f),
+                tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
+            )
+        }
     }
 }

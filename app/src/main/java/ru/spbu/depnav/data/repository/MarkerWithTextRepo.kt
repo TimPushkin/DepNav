@@ -26,7 +26,7 @@ import javax.inject.Inject
 
 private const val TAG = "MarkerWithTextRepo"
 
-/** Repository for loading and saving [Marker] objects with associated [MarkerText] objects. */
+/** Repository for [Marker] objects with associated [MarkerText] objects. */
 class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao) {
     /** Saves the provided objects. */
     suspend fun insertAll(markersWithText: Map<Marker, MarkerText>) {

@@ -33,8 +33,7 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
-
-private const val CLOSED_TEXT_ALPHA = 0.6f
+import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Lines with text information about a marker. */
 @Composable
@@ -66,14 +65,14 @@ fun MarkerInfoLines(
                     Text(
                         text = "•",
                         modifier = Modifier
-                            .alpha(CLOSED_TEXT_ALPHA)
+                            .alpha(FADED_ALPHA)
                             .padding(horizontal = DEFAULT_PADDING),
                         fontSize = MaterialTheme.typography.h6.fontSize
                     )
 
                     Text(
                         text = stringResource(R.string.closed),
-                        modifier = Modifier.alpha(CLOSED_TEXT_ALPHA),
+                        modifier = Modifier.alpha(FADED_ALPHA),
                         fontSize = MaterialTheme.typography.h6.fontSize
                     )
                 }
@@ -91,6 +90,7 @@ fun MarkerInfoLines(
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun MarkerInfoPreview() {
     DepNavTheme {
         Column {
