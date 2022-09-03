@@ -90,6 +90,7 @@ fun MarkerInfoLines(
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun MarkerInfoPreview() {
     DepNavTheme {
         Column {

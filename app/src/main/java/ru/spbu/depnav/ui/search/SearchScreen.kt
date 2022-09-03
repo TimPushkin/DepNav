@@ -130,14 +130,16 @@ private fun SearchResults(
                 marker = marker,
                 markerText = markerText,
                 onClick = onResultClick,
-                trailingIcon = (@Composable {
-                    Icon(
-                        painter = painterResource(R.drawable.ic_history),
-                        contentDescription = "Search history",
-                        modifier = Modifier.scale(0.6f),
-                        tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
-                    )
-                }).takeIf { isHistory }
+                trailingIcon = (
+                    @Composable {
+                        Icon(
+                            painter = painterResource(R.drawable.ic_history),
+                            contentDescription = "Search history",
+                            modifier = Modifier.scale(0.6f),
+                            tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
+                        )
+                    }
+                    ).takeIf { isHistory }
             )
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
@@ -197,6 +199,7 @@ private fun SearchResult(
 
 @Composable
 @Preview
+@Suppress("UnusedPrivateMember")
 private fun SearchResultUsualPreview() {
     DepNavTheme {
         SearchResult(
@@ -209,6 +212,7 @@ private fun SearchResultUsualPreview() {
 
 @Composable
 @Preview
+@Suppress("UnusedPrivateMember")
 private fun SearchResultHistoryPreview() {
     DepNavTheme {
         SearchResult(
@@ -218,7 +222,7 @@ private fun SearchResultHistoryPreview() {
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_history),
-                contentDescription = "Search history",
+                contentDescription = null,
                 modifier = Modifier.scale(0.6f),
                 tint = MaterialTheme.colors.onSurface.copy(alpha = HIGHLY_FADED_ALPHA)
             )
