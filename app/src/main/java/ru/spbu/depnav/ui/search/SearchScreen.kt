@@ -40,10 +40,6 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
@@ -78,13 +74,8 @@ fun SearchScreen(
                 .windowInsetsPadding(insetsNoBottom),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var isQueryEmpty by rememberSaveable { mutableStateOf(true) }
-
             SearchField(
-                onTextChange = { query ->
-                    isQueryEmpty = query.isEmpty()
-                    vm.search(query)
-                },
+                onTextChange = vm::queryText::set,
                 onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),
@@ -93,10 +84,10 @@ fun SearchScreen(
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
-            if (isQueryEmpty || vm.searchMatches.isNotEmpty()) {
+            if (vm.searchMatches.let { it == null || it.isNotEmpty() }) {
                 SearchResults(
-                    markersWithTexts = vm.searchMatches.ifEmpty { vm.searchHistory },
-                    isHistory = vm.searchMatches.isEmpty(),
+                    markersWithTexts = vm.searchMatches ?: vm.searchHistory,
+                    isHistory = vm.searchMatches == null,
                     onResultClick = { markerId ->
                         vm.addToSearchHistory(markerId)
                         onResultClick(markerId)
