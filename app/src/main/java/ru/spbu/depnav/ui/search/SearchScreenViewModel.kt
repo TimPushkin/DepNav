@@ -22,13 +22,19 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
+import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.ExperimentalCoroutinesApi
+import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.flow.debounce
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.data.model.SearchHistoryEntry
@@ -38,16 +44,24 @@ import javax.inject.Inject
 
 private const val TAG = "MarkerSearchViewModel"
 
+private const val MIN_QUERY_PERIOD_MS = 300L
 private const val SEARCH_HISTORY_SIZE = 10
 
 /** View model for [SearchScreen]. */
 @HiltViewModel
+@OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SearchScreenViewModel @Inject constructor(
     private val markerWithTextRepo: MarkerWithTextRepo,
     private val searchHistoryRepo: SearchHistoryRepo
 ) : ViewModel() {
-    /** Markers with their texts that were found by the search. */
-    var searchMatches by mutableStateOf<Map<Marker, MarkerText>>(emptyMap())
+    /** Current search query. */
+    var queryText by mutableStateOf("")
+
+    /**
+     * Markers with their texts that were found by the search sorted by relevance. Null if no
+     * search was attempted.
+     */
+    var searchMatches by mutableStateOf<Map<Marker, MarkerText>?>(null)
         private set
 
     /** Markers with their texts that were searched in the past. */
@@ -55,37 +69,29 @@ class SearchScreenViewModel @Inject constructor(
         private set
 
     init {
+        snapshotFlow { queryText }
+            .debounce(MIN_QUERY_PERIOD_MS) // Filter out queries that change too frequently
+            .distinctUntilChanged() // Filter out identical queries
+            .mapLatest { if (it.isNotBlank()) search(it) else clearMatches() } // Cancel unfinished
+            .launchIn(viewModelScope)
+
         searchHistoryRepo.loadAll()
-            .onEach { entries ->
+            .distinctUntilChanged() // Filter out identical search entity lists
+            .mapLatest { entries -> // Cancel previous if unfinished
                 searchHistory = entries.associate { markerWithTextRepo.loadById(it.markerId) }
             }
             .launchIn(viewModelScope)
     }
 
-    /**
-     * Initiate a marker search with the provided text on the specified language. The provided DAO
-     * will be used for the search.
-     */
-    fun search(text: String) {
-        if (text.isBlank()) {
-            clearMatches()
-            return
-        }
-
-        val language = MarkerText.LanguageId.getCurrent()
-        Log.d(TAG, "Processing query $text with language $language")
-        val query = text.split(' ').joinToString(" ") { "$it*" }
-
-        viewModelScope.launch(Dispatchers.IO) {
-            val matches = markerWithTextRepo.loadByTokens(query)
-            Log.v(TAG, "Found ${matches.size} matches")
-            launch(Dispatchers.Main) { this@SearchScreenViewModel.searchMatches = matches }
-        }
+    private suspend fun search(query: String) {
+        val matches = withContext(Dispatchers.IO) { markerWithTextRepo.loadByQuery(query) }
+        Log.v(TAG, "Query '$query' has ${matches.size} matches")
+        searchMatches = matches
     }
 
-    /** Clear the search results. */
+    /** Clear the search results by setting them to null. */
     fun clearMatches() {
-        searchMatches = emptyMap()
+        searchMatches = null
     }
 
     /** Add the provided marker ID to the search history. */

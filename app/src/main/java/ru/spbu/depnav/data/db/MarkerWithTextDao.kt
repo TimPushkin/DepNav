@@ -23,6 +23,7 @@ import androidx.room.Insert
 import androidx.room.Query
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.model.MarkerTextWithMatchInfo
 
 /** DAO for the tables containing the available [Marker] and [MarkerText] entries. */
 @Dao
@@ -65,12 +66,13 @@ interface MarkerWithTextDao {
      * language with the corresponding [Marker] entry.
      */
     @Query(
-        "SELECT * FROM marker_texts " +
+        "SELECT *, matchinfo(marker_texts, '${MarkerTextWithMatchInfo.formatString}') as match_info " +
+            "FROM marker_texts " +
             "JOIN markers ON marker_texts.marker_id = markers.id " +
             "WHERE marker_texts MATCH :tokens AND marker_texts.language_id = :language"
     )
     suspend fun loadByTokens(
         tokens: String,
         language: MarkerText.LanguageId
-    ): Map<MarkerText, List<Marker>>
+    ): Map<MarkerTextWithMatchInfo, List<Marker>>
 }

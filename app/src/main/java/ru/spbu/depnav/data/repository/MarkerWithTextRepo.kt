@@ -22,12 +22,25 @@ import android.util.Log
 import ru.spbu.depnav.data.db.MarkerWithTextDao
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.model.rankWith
+import ru.spbu.depnav.utils.ranking.Bm25
+import ru.spbu.depnav.utils.ranking.Ranker
 import javax.inject.Inject
 
 private const val TAG = "MarkerWithTextRepo"
 
 /** Repository for [Marker] objects with associated [MarkerText] objects. */
-class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao) {
+class MarkerWithTextRepo(
+    private val dao: MarkerWithTextDao,
+    /** Ranking algorithm used to sort queried entries. */
+    var ranker: Ranker
+) {
+    /**
+     * Repository for [Marker] objects with associated [MarkerText] objects with BM25 as a ranker.
+     */
+    @Inject
+    constructor(dao: MarkerWithTextDao) : this(dao, Bm25())
+
     /** Saves the provided objects. */
     suspend fun insertAll(markersWithText: Map<Marker, MarkerText>) {
         dao.insertMarkers(markersWithText.keys)
@@ -64,15 +77,40 @@ class MarkerWithTextRepo @Inject constructor(private val dao: MarkerWithTextDao)
 
     /**
      * Loads a [Marker] and its corresponding [MarkerText] on the current language so that the text
-     * has the specified tokens in it.
+     * has the specified tokens in it as prefixes. The results are sorted by relevance and text.
      */
-    suspend fun loadByTokens(tokens: String): Map<Marker, MarkerText> {
+    suspend fun loadByQuery(query: String): Map<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
-        val textsWithMarkers = dao.loadByTokens(tokens, language)
-        return textsWithMarkers.entries.associate { (markerText, markers) ->
-            val marker = markers.firstOrNull()
-            checkNotNull(marker) { "MarkerText $markerText has no associated marker" }
-            marker to markerText
+        val tokenized = query.tokenized()
+
+        Log.d(TAG, "Loading query '$query' tokenized as '$tokenized'")
+        val rankedTextsWithMarkers = dao.loadByTokens(tokenized, language).map {
+            val rank = it.key.run {
+                when (query) {
+                    markerText.title -> Double.POSITIVE_INFINITY
+                    markerText.description -> Double.MAX_VALUE
+                    else -> rankWith(ranker)
+                }
+            }
+            Log.v(TAG, "${it.key.markerText} ranked $rank")
+            Triple(it.key.markerText, it.value, rank)
         }
+
+        return rankedTextsWithMarkers
+            .sortedWith(
+                compareBy<Triple<MarkerText, List<Marker>, Double>> { it.third }
+                    .thenByDescending { it.first.title }
+                    .thenByDescending { it.first.description }
+            )
+            .associate { (markerText, markers, _) ->
+                val marker = markers.firstOrNull()
+                checkNotNull(marker) { "$markerText has no associated marker" }
+                marker to markerText
+            }
     }
+
+    private fun String.tokenized() = Regex("\\W+")
+        .split(this)
+        .filter { it.isNotBlank() }
+        .joinToString(" ") { "$it*" }
 }

@@ -34,6 +34,6 @@ class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
     suspend fun insertNotExceeding(entry: SearchHistoryEntry, maxEntriesNum: Int) =
         dao.insertNotExceeding(entry, maxEntriesNum)
 
-    /** Loads all the current entries. */
+    /** Loads all the current entries sorted by timestamps (more recent last). */
     fun loadAll() = dao.loadAll()
 }

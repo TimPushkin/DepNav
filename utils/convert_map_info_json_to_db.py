@@ -75,7 +75,7 @@ CREATE VIRTUAL TABLE IF NOT EXISTS `marker_texts` USING FTS4(
 `title` TEXT,
 `description` TEXT,
 tokenize=unicode61,
-notindexed=`marker_id`
+notindexed=`marker_id`, notindexed=`language_id`
 )
 ''')
 cur.execute('''
