@@ -183,7 +183,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
 
         val actual = runBlocking { markerWithTextDao.loadByTokens("Lorem ipsum", language).keys }
 
-        actual.forEach { assertEquals(expectedTitle, it.title) }
+        actual.forEach { assertEquals(expectedTitle, it.markerText.title) }
         assertEquals(markerTexts.count { it.title == expectedTitle }, actual.size)
     }
 
@@ -217,7 +217,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
 
         val actual = runBlocking { markerWithTextDao.loadByTokens("Лорем ипсум", language).keys }
 
-        actual.forEach { assertEquals(expectedTitle, it.title) }
+        actual.forEach { assertEquals(expectedTitle, it.markerText.title) }
         assertEquals(markerTexts.count { it.title == expectedTitle }, actual.size)
     }
 
@@ -241,12 +241,12 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
 
         val actual = runBlocking { markerWithTextDao.loadByTokens(title, language) }
 
-        for ((markerText, markers) in actual) {
+        for ((markerTextWithMatchInfo, markers) in actual) {
             assertTrue(
                 "Expected markers to be of size 1, but was ${markers.size}",
                 markers.size == 1
             )
-            assertEquals(markerText.markerId, markers.first().id)
+            assertEquals(markerTextWithMatchInfo.markerText.markerId, markers.first().id)
         }
     }
 }
