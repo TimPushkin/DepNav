@@ -114,7 +114,7 @@ private fun SearchResults(
     onResultClick: (Int) -> Unit
 ) {
     LazyColumn(modifier = Modifier.fillMaxWidth()) {
-        items(markersWithTexts.toList()) { (marker, markerText) ->
+        items(markersWithTexts.toList().asReversed()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
             SearchResult(

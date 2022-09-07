@@ -57,7 +57,10 @@ class SearchScreenViewModel @Inject constructor(
     /** Current search query. */
     var queryText by mutableStateOf("")
 
-    /** Markers with their texts that were found by the search. Null if no search was attempted. */
+    /**
+     * Markers with their texts that were found by the search sorted by relevance. Null if no
+     * search was attempted.
+     */
     var searchMatches by mutableStateOf<Map<Marker, MarkerText>?>(null)
         private set
 
@@ -80,14 +83,9 @@ class SearchScreenViewModel @Inject constructor(
             .launchIn(viewModelScope)
     }
 
-    private suspend fun search(text: String) {
-        val language = MarkerText.LanguageId.getCurrent()
-        Log.d(TAG, "Processing query $text with language $language")
-
-        val query = text.split(' ').joinToString(" ") { "$it*" }
-        val matches = withContext(Dispatchers.IO) { markerWithTextRepo.loadByTokens(query) }
-        Log.v(TAG, "Found ${matches.size} matches")
-
+    private suspend fun search(query: String) {
+        val matches = withContext(Dispatchers.IO) { markerWithTextRepo.loadByQuery(query) }
+        Log.v(TAG, "Query '$query' has ${matches.size} matches")
         searchMatches = matches
     }
 
