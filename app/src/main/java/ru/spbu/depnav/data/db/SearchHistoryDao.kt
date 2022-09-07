@@ -54,7 +54,10 @@ abstract class SearchHistoryDao {
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract suspend fun insert(entry: SearchHistoryEntry)
 
-    /** Returns all [marker search history entries][SearchHistoryEntry]. */
-    @Query("SELECT * FROM search_history ORDER BY timestamp DESC")
+    /**
+     * Returns all [marker search history entries][SearchHistoryEntry] sorted by timestamps (more
+     * recent last).
+     */
+    @Query("SELECT * FROM search_history ORDER BY timestamp ASC")
     abstract fun loadAll(): Flow<List<SearchHistoryEntry>>
 }
