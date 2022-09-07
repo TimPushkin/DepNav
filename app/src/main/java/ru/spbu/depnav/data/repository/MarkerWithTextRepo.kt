@@ -80,8 +80,8 @@ class MarkerWithTextRepo(
      */
     suspend fun loadByQuery(query: String): Map<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
+        val tokenized = query.tokenized()
 
-        val tokenized = query.split(' ').joinToString(" ") { "$it*" }
         Log.d(TAG, "Loading query '$query' tokenized as '$tokenized'")
         val rankedTextsWithMarkers = dao.loadByTokens(tokenized, language).map {
             val rank = it.key.run {
@@ -91,7 +91,7 @@ class MarkerWithTextRepo(
                     else -> rankWith(ranker)
                 }
             }
-            Log.d(TAG, "${it.key.markerText} -- $rank")
+            Log.v(TAG, "${it.key.markerText} ranked $rank")
             Triple(it.key.markerText, it.value, rank)
         }
 
@@ -107,4 +107,9 @@ class MarkerWithTextRepo(
                 marker to markerText
             }
     }
+
+    private fun String.tokenized() = Regex("\\W+")
+        .split(this)
+        .filter { it.isNotBlank() }
+        .joinToString(" ") { "$it*" }
 }
