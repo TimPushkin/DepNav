@@ -22,6 +22,7 @@ import android.util.Log
 import ru.spbu.depnav.data.db.MarkerWithTextDao
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.model.rankWith
 import ru.spbu.depnav.utils.ranking.Bm25
 import ru.spbu.depnav.utils.ranking.Ranker
 import javax.inject.Inject

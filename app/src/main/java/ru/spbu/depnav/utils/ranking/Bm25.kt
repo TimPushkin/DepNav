@@ -46,7 +46,7 @@ class Bm25(
     ): Double {
         val numeratorCoefficient = k1 + 1
         val denominatorAddend = when {
-            docWordNum == 0 -> k1 * (1 - b)   // make (docWordNum / avgWordNum) equal 0
+            docWordNum == 0 -> k1 * (1 - b) // make (docWordNum / avgWordNum) equal 0
             avgWordNum == 0.0 -> k1 * (1 + b) // make (docWordNum / avgWordNum) equal 2
             else -> k1 * (1 - b + b * docWordNum / avgWordNum)
         }
