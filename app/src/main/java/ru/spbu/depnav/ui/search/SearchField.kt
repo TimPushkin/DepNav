@@ -56,13 +56,14 @@ fun SearchField(
     onClear: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "",
+    shouldRequestFocus: Boolean = true,
+    placeholder: String = ""
 ) {
     val focusRequester = remember { FocusRequester() }
+    val focusManager = LocalFocusManager.current
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         var text by rememberSaveable { mutableStateOf("") }
-        val focusManager = LocalFocusManager.current
 
         IconButton(onClick = onBackClick) {
             Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "Navigate back")
@@ -106,5 +107,7 @@ fun SearchField(
         )
     }
 
-    LaunchedEffect(Unit) { focusRequester.requestFocus() }
+    LaunchedEffect(shouldRequestFocus) {
+        if (shouldRequestFocus) focusRequester.requestFocus() else focusManager.clearFocus()
+    }
 }
