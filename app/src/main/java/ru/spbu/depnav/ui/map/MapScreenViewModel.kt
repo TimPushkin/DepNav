@@ -36,7 +36,6 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.Job
 import kotlinx.coroutines.async
 import kotlinx.coroutines.cancel
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import kotlinx.coroutines.launch
@@ -138,7 +137,6 @@ class MapScreenViewModel @Inject constructor(
 
     init {
         snapshotFlow { prefs.mapStoredName }
-            .distinctUntilChanged()
             .onEach { initMap(it.storedName, it.tilesSubdir) }
             .launchIn(viewModelScope)
     }
