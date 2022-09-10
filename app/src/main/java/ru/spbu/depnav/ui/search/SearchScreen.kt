@@ -78,7 +78,7 @@ fun SearchScreen(
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SearchField(
-                onTextChange = vm::queryText::set,
+                onTextChange = vm.queryTextFlow::tryEmit,
                 onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),

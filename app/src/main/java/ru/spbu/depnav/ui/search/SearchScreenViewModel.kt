@@ -22,15 +22,17 @@ import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
-import androidx.compose.runtime.snapshotFlow
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.channels.BufferOverflow
+import kotlinx.coroutines.flow.MutableSharedFlow
 import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.mapLatest
 import kotlinx.coroutines.launch
@@ -54,8 +56,11 @@ class SearchScreenViewModel @Inject constructor(
     private val markerWithTextRepo: MarkerWithTextRepo,
     private val searchHistoryRepo: SearchHistoryRepo
 ) : ViewModel() {
-    /** Current search query. */
-    var queryText by mutableStateOf("")
+    /** Current search query flow. Values emitted into it will be used in search. */
+    val queryTextFlow = MutableSharedFlow<String?>(
+        extraBufferCapacity = 1,
+        onBufferOverflow = BufferOverflow.DROP_OLDEST
+    )
 
     /**
      * Markers with their texts that were found by the search sorted by relevance. Null if no
@@ -69,10 +74,11 @@ class SearchScreenViewModel @Inject constructor(
         private set
 
     init {
-        snapshotFlow { queryText }
+        queryTextFlow
             .debounce(MIN_QUERY_PERIOD_MS) // Filter out queries that change too frequently
             .distinctUntilChanged() // Filter out identical queries
-            .mapLatest { if (it.isNotBlank()) search(it) else clearMatches() } // Cancel unfinished
+            .filterNotNull()
+            .mapLatest { if (it.isNotEmpty()) search(it) else clearMatches() } // Cancel unfinished
             .launchIn(viewModelScope)
 
         searchHistoryRepo.loadAll()
@@ -91,6 +97,7 @@ class SearchScreenViewModel @Inject constructor(
 
     /** Clear the search results by setting them to null. */
     fun clearMatches() {
+        queryTextFlow.tryEmit(null) // Update distinctUntilChanged state
         searchMatches = null
     }
 
