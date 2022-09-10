@@ -41,23 +41,20 @@ import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.getValue
-import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.rememberCoroutineScope
-import androidx.compose.runtime.saveable.rememberSaveable
-import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.spbu.depnav.R
@@ -70,6 +67,7 @@ import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Screen containing a marker search and the results found. */
 @Composable
+@OptIn(ExperimentalComposeUiApi::class)
 fun SearchScreen(
     vm: SearchScreenViewModel = hiltViewModel(),
     onResultClick: (Int) -> Unit,
@@ -84,28 +82,23 @@ fun SearchScreen(
                 .windowInsetsPadding(insetsNoBottom),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            var shouldRequestFocusOnSearch by rememberSaveable { mutableStateOf(false) }
-
             SearchField(
                 onTextChange = vm::queryText::set,
                 onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),
-                shouldRequestFocus = shouldRequestFocusOnSearch,
                 placeholder = stringResource(R.string.search_markers)
             )
 
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
             if (vm.searchMatches.let { it == null || it.isNotEmpty() }) {
+                val keyboard = LocalSoftwareKeyboardController.current
+
                 SearchResults(
                     markersWithTexts = vm.searchMatches ?: vm.searchHistory,
                     isHistory = vm.searchMatches == null,
-                    onFocusStatusChange = { shouldRequestFocus ->
-                        if (shouldRequestFocusOnSearch != shouldRequestFocus) {
-                            shouldRequestFocusOnSearch = shouldRequestFocus
-                        }
-                    },
+                    onStateChange = { onTop -> keyboard?.apply { if (onTop) show() else hide() } },
                     onResultClick = { markerId ->
                         vm.addToSearchHistory(markerId)
                         onResultClick(markerId)
@@ -129,10 +122,11 @@ private const val HIGHLY_FADED_ALPHA = 0.45f
 private fun SearchResults(
     markersWithTexts: Map<Marker, MarkerText>,
     isHistory: Boolean,
-    onFocusStatusChange: (shouldRequestFocus: Boolean) -> Unit,
+    onStateChange: (onTop: Boolean) -> Unit,
     onResultClick: (Int) -> Unit
 ) {
     val state = rememberLazyListState()
+    val scope = rememberCoroutineScope()
 
     LazyColumn(
         modifier = Modifier.fillMaxWidth(),
@@ -161,10 +155,8 @@ private fun SearchResults(
         }
     }
 
-    val scope = rememberCoroutineScope()
     snapshotFlow { state.run { firstVisibleItemIndex == 0 && firstVisibleItemScrollOffset == 0 } }
-        .distinctUntilChanged()
-        .onEach { onFocusStatusChange(it) }
+        .onEach { onStateChange(it) }
         .launchIn(scope)
 }
 
