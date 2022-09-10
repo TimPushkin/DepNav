@@ -41,28 +41,30 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
-import androidx.compose.ui.platform.LocalFocusManager
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.input.ImeAction
 
 /** Text field with a search icon. */
 @Composable
+@OptIn(ExperimentalComposeUiApi::class)
 fun SearchField(
     onTextChange: (String) -> Unit,
     onClear: () -> Unit,
     onBackClick: () -> Unit,
     modifier: Modifier = Modifier,
-    placeholder: String = "",
+    placeholder: String = ""
 ) {
     val focusRequester = remember { FocusRequester() }
 
     Row(verticalAlignment = Alignment.CenterVertically) {
         var text by rememberSaveable { mutableStateOf("") }
-        val focusManager = LocalFocusManager.current
+        val keyboard = LocalSoftwareKeyboardController.current
 
         IconButton(onClick = onBackClick) {
             Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "Navigate back")
@@ -96,7 +98,7 @@ fun SearchField(
             },
             singleLine = true,
             keyboardOptions = KeyboardOptions(imeAction = ImeAction.Done),
-            keyboardActions = KeyboardActions { focusManager.clearFocus() },
+            keyboardActions = KeyboardActions { keyboard?.hide() },
             shape = RectangleShape,
             colors = TextFieldDefaults.textFieldColors(
                 backgroundColor = MaterialTheme.colors.background,

@@ -23,33 +23,37 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
-import androidx.compose.foundation.layout.WindowInsetsSides
-import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.systemBars
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material.Divider
 import androidx.compose.material.Icon
 import androidx.compose.material.MaterialTheme
 import androidx.compose.material.Surface
 import androidx.compose.material.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
+import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.draw.scale
+import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
+import kotlinx.coroutines.flow.launchIn
+import kotlinx.coroutines.flow.onEach
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
@@ -60,22 +64,21 @@ import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Screen containing a marker search and the results found. */
 @Composable
+@OptIn(ExperimentalComposeUiApi::class)
 fun SearchScreen(
     vm: SearchScreenViewModel = hiltViewModel(),
     onResultClick: (Int) -> Unit,
     onNavigateBack: () -> Unit
 ) {
-    val insetsNoBottom = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Bottom)) }
-
     Surface(modifier = Modifier.fillMaxSize()) {
         Column(
             modifier = Modifier
                 .fillMaxWidth()
-                .windowInsetsPadding(insetsNoBottom),
+                .windowInsetsPadding(WindowInsets.systemBars),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
             SearchField(
-                onTextChange = vm::queryText::set,
+                onTextChange = vm.queryTextFlow::tryEmit,
                 onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
                 modifier = Modifier.fillMaxWidth(),
@@ -85,9 +88,12 @@ fun SearchScreen(
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.2f))
 
             if (vm.searchMatches.let { it == null || it.isNotEmpty() }) {
+                val keyboard = LocalSoftwareKeyboardController.current
+
                 SearchResults(
                     markersWithTexts = vm.searchMatches ?: vm.searchHistory,
                     isHistory = vm.searchMatches == null,
+                    onStateChange = { onTop -> keyboard?.apply { if (onTop) show() else hide() } },
                     onResultClick = { markerId ->
                         vm.addToSearchHistory(markerId)
                         onResultClick(markerId)
@@ -111,9 +117,16 @@ private const val HIGHLY_FADED_ALPHA = 0.45f
 private fun SearchResults(
     markersWithTexts: Map<Marker, MarkerText>,
     isHistory: Boolean,
+    onStateChange: (onTop: Boolean) -> Unit,
     onResultClick: (Int) -> Unit
 ) {
-    LazyColumn(modifier = Modifier.fillMaxWidth()) {
+    val state = rememberLazyListState()
+    val scope = rememberCoroutineScope()
+
+    LazyColumn(
+        modifier = Modifier.fillMaxWidth(),
+        state = state
+    ) {
         items(markersWithTexts.toList().asReversed()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
@@ -136,6 +149,10 @@ private fun SearchResults(
             Divider(color = MaterialTheme.colors.onSurface.copy(alpha = 0.1f))
         }
     }
+
+    snapshotFlow { state.run { firstVisibleItemIndex == 0 && firstVisibleItemScrollOffset == 0 } }
+        .onEach { onStateChange(it) }
+        .launchIn(scope)
 }
 
 @Composable
