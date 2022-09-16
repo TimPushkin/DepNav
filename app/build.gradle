@@ -22,7 +22,7 @@ static def versionToName(major, minor, patch) {
 }
 
 android {
-    compileSdk 32
+    compileSdk 33
 
     signingConfigs {
         release {
@@ -38,7 +38,7 @@ android {
     defaultConfig {
         applicationId 'ru.spbu.depnav'
         minSdk 21
-        targetSdk 32
+        targetSdk 33
         versionCode versionToCode(1, 1, 0)
         versionName versionToName(1, 1, 0)
 
@@ -102,11 +102,11 @@ dependencies {
     implementation "com.google.dagger:hilt-android:$hilt_version"
     kapt "com.google.dagger:hilt-compiler:$hilt_version"
 
-    implementation 'androidx.core:core-ktx:1.8.0'
+    implementation 'androidx.core:core-ktx:1.9.0'
     implementation 'androidx.activity:activity-compose:1.5.1'
-    implementation 'androidx.navigation:navigation-compose:2.5.1'
+    implementation 'androidx.navigation:navigation-compose:2.5.2'
     implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
-    implementation 'ovh.plrapps:mapcompose:2.2.2'
+    implementation 'ovh.plrapps:mapcompose:2.2.5'
     implementation 'com.google.accompanist:accompanist-systemuicontroller:0.25.1'
 
     testImplementation 'junit:junit:4.13.2'
