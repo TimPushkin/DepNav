@@ -10,4 +10,6 @@
     <string name="system_theme">Match system</string>
     <string name="zoom_in_to_see_markers">Zoom in to see markers</string>
     <string name="nothing_found">Nothing was found</string>
+    <string name="allow_rotation">Allow rotation</string>
+    <string name="map">Map</string>
 </resources>

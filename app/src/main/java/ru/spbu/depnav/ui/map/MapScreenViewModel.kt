@@ -45,6 +45,8 @@ import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addLazyLoader
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.centerOnMarker
+import ovh.plrapps.mapcompose.api.disableRotation
+import ovh.plrapps.mapcompose.api.enableRotation
 import ovh.plrapps.mapcompose.api.maxScale
 import ovh.plrapps.mapcompose.api.minScaleSnapshotFlow
 import ovh.plrapps.mapcompose.api.onMarkerClick
@@ -52,6 +54,7 @@ import ovh.plrapps.mapcompose.api.onTap
 import ovh.plrapps.mapcompose.api.removeAllLayers
 import ovh.plrapps.mapcompose.api.removeAllMarkers
 import ovh.plrapps.mapcompose.api.removeMarker
+import ovh.plrapps.mapcompose.api.rotateTo
 import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.setColorFilterProvider
 import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
@@ -135,6 +138,18 @@ class MapScreenViewModel @Inject constructor(
         get() = (mapState.scale - minMarkerVisScale) / (maxMarkerVisScale - minMarkerVisScale)
 
     init {
+        snapshotFlow { prefs.enableRotation }
+            .onEach { shouldEnable ->
+                mapState.apply {
+                    if (shouldEnable) {
+                        enableRotation()
+                    } else {
+                        disableRotation()
+                        rotateTo(0f)
+                    }
+                }
+            }
+            .launchIn(viewModelScope)
         snapshotFlow { prefs.mapStoredName }
             .onEach { initMap(it.storedName, it.tilesSubdir) }
             .launchIn(viewModelScope)
@@ -176,6 +191,8 @@ class MapScreenViewModel @Inject constructor(
             setColorFilterProvider { _, _, _ -> ColorFilter.tint(tileColor) }
             addLazyLoader(LAZY_LOADER_ID, padding = (DEFAULT_PADDING * 2))
             shouldLoopScale = true
+
+            if (prefs.enableRotation) enableRotation()
 
             onTap { _, _ ->
                 if (isMarkerPinned) mapState.removeMarker(PIN_ID) else showUI = !showUI

@@ -32,13 +32,15 @@ import com.google.accompanist.systemuicontroller.rememberSystemUiController
 private val LightColorPalette = lightColors(
     primary = BlueGrey200,
     primaryVariant = BlueGrey200Dark,
-    secondary = BlueGrey200
+    secondary = BlueGrey200,
+    secondaryVariant = BlueGrey200Dark
 )
 
 private val DarkColorPalette = darkColors(
     primary = BlueGrey200Light,
     primaryVariant = BlueGrey200,
-    secondary = BlueGrey200Light
+    secondary = BlueGrey200Light,
+    secondaryVariant = BlueGrey200
 )
 
 /** Padding applied where elements need to be spaced out by default. */
