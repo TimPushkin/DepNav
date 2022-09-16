@@ -82,7 +82,7 @@ fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
 
                 item {
                     SwitchOption(
-                        title = stringResource(R.string.allow_rotation),
+                        title = stringResource(R.string.rotation_gesture),
                         checked = prefs.enableRotation,
                         onChecked = prefs::enableRotation::set
                     )

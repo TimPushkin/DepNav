@@ -10,6 +10,6 @@
     <string name="system_theme">Как в системе</string>
     <string name="zoom_in_to_see_markers">Приблизьте, чтобы увидеть маркеры</string>
     <string name="nothing_found">Ничего не найдено</string>
-    <string name="allow_rotation">Позволять поворот</string>
+    <string name="rotation_gesture">Жест поворота</string>
     <string name="map">Карта</string>
 </resources>
