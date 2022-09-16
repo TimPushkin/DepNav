@@ -35,6 +35,9 @@ private const val PREFERENCES_FILE_NAME = "preferences"
 private const val THEME_MODE_KEY = "theme_mode"
 private val THEME_MODE_DEFAULT = PreferencesManager.ThemeMode.SYSTEM.name
 
+private const val ENABLE_ROTATION_KEY = "rotation"
+private const val ENABLE_ROTATION_DEFAULT = false
+
 private const val MAP_STORED_NAME_KEY = "map"
 private val MAP_STORED_NAME_DEFAULT = PreferencesManager.MapStoredName.SPBU_MM.name
 
@@ -74,6 +77,18 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
             }
         }
     }
+
+    private var _enableRotation by mutableStateOf(
+        prefs.getBoolean(ENABLE_ROTATION_KEY, ENABLE_ROTATION_DEFAULT)
+    )
+
+    /** Whether map rotation is enabled. */
+    var enableRotation: Boolean
+        get() = _enableRotation
+        set(value) {
+            prefs.edit { putBoolean(ENABLE_ROTATION_KEY, value) }
+            _enableRotation = value
+        }
 
     private var _mapStoredName by mutableStateOf(
         prefs.getString(MAP_STORED_NAME_KEY, MAP_STORED_NAME_DEFAULT) ?: MAP_STORED_NAME_DEFAULT
