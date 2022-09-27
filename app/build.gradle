@@ -22,6 +22,8 @@ static def versionToName(major, minor, patch) {
 }
 
 android {
+    namespace 'ru.spbu.depnav'
+
     compileSdk 33
 
     signingConfigs {
