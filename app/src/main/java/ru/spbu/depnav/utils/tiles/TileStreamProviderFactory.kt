@@ -18,30 +18,34 @@
 
 package ru.spbu.depnav.utils.tiles
 
+import android.content.Context
 import android.content.res.AssetManager
 import android.util.Log
+import dagger.hilt.android.qualifiers.ApplicationContext
+import dagger.hilt.android.scopes.ViewModelScoped
 import ovh.plrapps.mapcompose.core.TileStreamProvider
+import javax.inject.Inject
 
 private const val TAG = "TileProviderFactory"
 
-/** Factory for creating [TileStreamProviders][TileStreamProvider] of tiles from a certain path. */
-class TileProviderFactory(
+/** Factory for creating [TileStreamProviders][TileStreamProvider] for tiles from a certain path. */
+@ViewModelScoped
+class TileStreamProviderFactory(
     private val assets: AssetManager,
-    /** Root directory of the tiles in the assets folder. */
-    var rootPath: String,
-    /** Floor subdirectories prefix. */
-    var floorPrefix: String = "floor"
+    private val tilesPath: String = "tiles",
+    private val floorPrefix: String = "floor"
 ) {
-    /** Returns a [TileStreamProvider] for the specified floor and theme. */
-    fun makeTileProviderForFloor(floor: Int): TileStreamProvider {
-        return TileStreamProvider { row, col, lvl ->
-            val path = "$rootPath/$floorPrefix$floor/$lvl/${row}_$col.png"
+    @Inject
+    constructor(@ApplicationContext context: Context) : this(context.assets)
 
-            runCatching {
-                assets.open(path)
-            }.onFailure {
-                Log.e(TAG, "Failed to load a tile from $path", it)
-            }.getOrNull()
-        }
+    /** Returns a [TileStreamProvider] for the specified floor and theme. */
+    fun makeTileStreamProvider(mapName: String, floor: Int) = TileStreamProvider { row, col, lvl ->
+        val path = "$tilesPath/$mapName/$floorPrefix$floor/$lvl/${row}_$col.png"
+
+        runCatching {
+            assets.open(path)
+        }.onFailure {
+            Log.e(TAG, "Failed to load a tile from $path", it)
+        }.getOrNull()
     }
 }

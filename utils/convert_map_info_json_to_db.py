@@ -21,8 +21,8 @@ from enum import Enum
 
 
 # This script adds the contents of the specified map info json file corresponding to
-# 'map-info-schema.json' into the specified SQLite database, creating the database file and the
-# needed tables if necessary.
+# 'map-info-schema.json' into the specified SQLite database, assuming that the database either
+# doesn't exist or is empty.
 # Json is expected to have absolute coordinates, while the database will have them normalized.
 # Coordinates start from top left corner of an image.
 #
@@ -37,85 +37,141 @@ class LID(Enum):
 
 parser = ArgumentParser()
 parser.add_argument("json_file", type=str, help="path to the json file")
-parser.add_argument("-d", "--db_file", type=str, default="markers.db",
-                    help="path to the database file")
+parser.add_argument(
+    "-d", "--db_file", type=str, default="maps.db", help="path to the database file"
+)
 args = parser.parse_args()
 
 db = sqlite3.connect(args.db_file)
 cur = db.cursor()
 
-cur.execute("PRAGMA user_version = 4")
+cur.execute("PRAGMA user_version = 5")
 
-cur.execute('''
-CREATE TABLE IF NOT EXISTS `map_infos` (
-`map_name` TEXT NOT NULL,
-`floor_width` INTEGER NOT NULL,
-`floor_height` INTEGER NOT NULL,
-`tile_size` INTEGER NOT NULL,
-`levels_num` INTEGER NOT NULL,
-`floors_num` INTEGER NOT NULL,
-PRIMARY KEY(`map_name`)
+cur.executescript(
+    """
+    CREATE TABLE map_info
+    (
+        "name"       TEXT    NOT NULL PRIMARY KEY,
+        floor_width  INTEGER NOT NULL,
+        floor_height INTEGER NOT NULL,
+        tile_size    INTEGER NOT NULL,
+        levels_num   INTEGER NOT NULL,
+        floors_num   INTEGER NOT NULL
+    );
+    CREATE TABLE marker
+    (
+        id        INTEGER NOT NULL PRIMARY KEY,
+        map_name  TEXT    NOT NULL,
+        "type"    TEXT    NOT NULL,
+        is_closed INTEGER NOT NULL,
+        floor     INTEGER NOT NULL,
+        x         REAL    NOT NULL,
+        y         REAL    NOT NULL,
+        FOREIGN KEY (map_name) REFERENCES map_info ("name") ON DELETE RESTRICT
+    );
+    CREATE TABLE marker_text
+    (
+        marker_id   INTEGER NOT NULL,
+        language_id INTEGER NOT NULL,
+        title       TEXT,
+        description TEXT,
+        PRIMARY KEY (marker_id, language_id),
+        FOREIGN KEY (marker_id) REFERENCES marker(id) ON DELETE RESTRICT
+    );
+    CREATE VIRTUAL TABLE marker_text_fts USING FTS4
+    (
+        title       TEXT,
+        description TEXT,
+        tokenize=unicode61,
+        content=`marker_text`
+    );
+    CREATE TABLE search_history_entry
+    (
+        marker_id   INTEGER NOT NULL PRIMARY KEY,
+        "timestamp" INTEGER NOT NULL,
+        FOREIGN KEY (marker_id) REFERENCES marker(id) ON DELETE RESTRICT
+    );
+    
+    CREATE INDEX index_marker_map_name ON marker (map_name);
+    
+    CREATE TRIGGER room_fts_content_sync_marker_text_fts_BEFORE_UPDATE
+        BEFORE UPDATE
+        ON marker_text
+    BEGIN
+        DELETE FROM marker_text_fts WHERE docid = old.rowid;
+    END;
+    CREATE TRIGGER room_fts_content_sync_marker_text_fts_BEFORE_DELETE
+        BEFORE DELETE
+        ON marker_text
+    BEGIN
+        DELETE FROM marker_text_fts WHERE docid = old.rowid;
+    END;
+    CREATE TRIGGER room_fts_content_sync_marker_text_fts_AFTER_UPDATE
+        AFTER UPDATE
+        ON marker_text
+    BEGIN
+        INSERT INTO marker_text_fts(docid, title, description) VALUES (new.rowid, new.title, new.description);
+    END;
+    CREATE TRIGGER room_fts_content_sync_marker_text_fts_AFTER_INSERT
+        AFTER INSERT
+        ON marker_text
+    BEGIN
+        INSERT INTO marker_text_fts(docid, title, description) VALUES (new.rowid, new.title, new.description);
+    END;
+    """
 )
-''')
-cur.execute('''
-CREATE TABLE IF NOT EXISTS `markers` (
-`id` INTEGER NOT NULL,
-`type` TEXT NOT NULL,
-`is_closed` INTEGER NOT NULL,
-`floor` INTEGER NOT NULL,
-`x` REAL NOT NULL,
-`y` REAL NOT NULL,
-PRIMARY KEY(`id`)
-)
-''')
-cur.execute('''
-CREATE VIRTUAL TABLE IF NOT EXISTS `marker_texts` USING FTS4(
-`marker_id` INTEGER NOT NULL,
-`language_id` INTEGER NOT NULL,
-`title` TEXT,
-`description` TEXT,
-tokenize=unicode61,
-notindexed=`marker_id`, notindexed=`language_id`
-)
-''')
-cur.execute('''
-CREATE TABLE IF NOT EXISTS `search_history` (
-`marker_id` INTEGER NOT NULL,
-`timestamp` INTEGER NOT NULL,
-PRIMARY KEY(`marker_id`)
-)
-''')
 
-db.commit()
+maps = json.load(open(args.json_file, encoding="utf8"))
 
-jf = json.load(open(args.json_file, encoding="utf8"))
+for m in maps:
+    map_name = m["mapName"]
+    floor_width = m["floorWidth"]
+    floor_height = m["floorHeight"]
 
-floor_width = jf["floorWidth"]
-floor_height = jf["floorHeight"]
-tile_size = jf["tileSize"]
-levels_num = jf["levelsNum"]
+    cur.execute(
+        "INSERT INTO map_info "
+        "VALUES (:name, :floor_width, :floor_height, :tile_size, :levels_num, :floors_num)",
+        {
+            "name": map_name,
+            "floor_width": floor_width,
+            "floor_height": floor_height,
+            "tile_size": m["tileSize"],
+            "levels_num": m["zoomLevelsNum"],
+            "floors_num": len(m["floors"]),
+        },
+    )
 
-floors_num = 0
-row_id = 1
-for floor_obj in jf["floors"]:
-    floors_num += 1
-    floor = floor_obj["floor"]
-    for marker_obj in sorted(floor_obj["markers"], key=lambda marker: marker["type"]):
-        marker_type, is_closed, x, y, ru, en = marker_obj.values()
-        cur.execute("INSERT INTO markers VALUES (?, ?, ?, ?, ?, ?)",
-                    (row_id, marker_type, is_closed, floor, x / floor_width, y / floor_height))
-        cur.execute(
-            "INSERT INTO marker_texts"
-            "(`marker_id`,`language_id`,`title`,`description`) VALUES (:id, :language_id, :title, :description)",
-            {"id": row_id, "language_id": LID.EN.value, **en})
-        cur.execute(
-            "INSERT INTO marker_texts"
-            "(`marker_id`,`language_id`,`title`,`description`) VALUES (:id, :language_id, :title, :description)",
-            {"id": row_id, "language_id": LID.RU.value, **ru})
-        row_id += 1
+    row_id = 0
+    for floor in m["floors"]:
+        for marker in sorted(floor["markers"], key=lambda it: it["type"]):
+            row_id += 1
 
-cur.execute("INSERT INTO 'map_infos' VALUES (?, ?, ?, ?, ?, ?)",
-            (jf["mapName"], floor_width, floor_height, tile_size, levels_num, floors_num))
+            marker_type, is_closed, x, y, *_ = marker.values()
+
+            cur.execute(
+                "INSERT INTO marker "
+                "VALUES (:id, :map_name, :type, :is_closed, :floor, :x, :y)",
+                {
+                    "id": row_id,
+                    "map_name": map_name,
+                    "type": marker_type,
+                    "is_closed": is_closed,
+                    "floor": floor["floor"],
+                    "x": x / floor_width,
+                    "y": y / floor_height,
+                },
+            )
+
+            for lid_name, lid in LID.__members__.items():
+                cur.execute(
+                    "INSERT INTO marker_text "
+                    "VALUES (:marker_id, :language_id, :title, :description)",
+                    {
+                        "marker_id": row_id,
+                        "language_id": lid.value,
+                        **marker[lid_name.lower()],
+                    },
+                )
 
 db.commit()
 cur.close()

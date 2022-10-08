@@ -31,6 +31,6 @@ interface MapInfoDao {
     suspend fun insertAll(mapInfos: Collection<MapInfo>)
 
     /** Returns a [MapInfo] with the provided map name. */
-    @Query("SELECT * FROM map_infos WHERE map_name = :name")
+    @Query("SELECT * FROM map_info WHERE name = :name")
     suspend fun loadByName(name: String): MapInfo
 }

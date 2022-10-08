@@ -42,6 +42,7 @@ import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.data.model.SearchHistoryEntry
 import ru.spbu.depnav.data.repository.MarkerWithTextRepo
 import ru.spbu.depnav.data.repository.SearchHistoryRepo
+import ru.spbu.depnav.utils.preferences.PreferencesManager
 import javax.inject.Inject
 
 private const val TAG = "MarkerSearchViewModel"
@@ -54,7 +55,8 @@ private const val SEARCH_HISTORY_SIZE = 10
 @OptIn(FlowPreview::class, ExperimentalCoroutinesApi::class)
 class SearchScreenViewModel @Inject constructor(
     private val markerWithTextRepo: MarkerWithTextRepo,
-    private val searchHistoryRepo: SearchHistoryRepo
+    private val searchHistoryRepo: SearchHistoryRepo,
+    private val prefs: PreferencesManager
 ) : ViewModel() {
     /** Current search query flow. Values emitted into it will be used in search. */
     val queryTextFlow = MutableSharedFlow<String?>(
@@ -81,7 +83,7 @@ class SearchScreenViewModel @Inject constructor(
             .mapLatest { if (it.isNotEmpty()) search(it) else clearMatches() } // Cancel unfinished
             .launchIn(viewModelScope)
 
-        searchHistoryRepo.loadAll()
+        searchHistoryRepo.loadByMap(prefs.selectedMap.persistedName)
             .distinctUntilChanged() // Filter out identical search entity lists
             .mapLatest { entries -> // Cancel previous if unfinished
                 searchHistory = entries.associate { markerWithTextRepo.loadById(it.markerId) }
@@ -90,7 +92,9 @@ class SearchScreenViewModel @Inject constructor(
     }
 
     private suspend fun search(query: String) {
-        val matches = withContext(Dispatchers.IO) { markerWithTextRepo.loadByQuery(query) }
+        val matches = withContext(Dispatchers.IO) {
+            markerWithTextRepo.loadByMapAndQuery(prefs.selectedMap.persistedName, query)
+        }
         Log.v(TAG, "Query '$query' has ${matches.size} matches")
         searchMatches = matches
     }

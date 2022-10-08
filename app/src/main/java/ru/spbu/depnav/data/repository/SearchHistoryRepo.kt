@@ -26,7 +26,8 @@ import javax.inject.Inject
 class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
     /**
      * Saves the provided entry and deletes the oldest ones if needed so that [maxEntriesNum] is not
-     * exceeded. If an entry with the same marker ID is already saved it is replaced.
+     * exceeded for the corresponding map. If an entry with the same marker ID is already saved it
+     * is replaced.
      *
      * Note that the provided entry will not be saved if maxEntriesNum is exceeded and the provided
      * entry is among the ones that are deleted.
@@ -34,6 +35,6 @@ class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
     suspend fun insertNotExceeding(entry: SearchHistoryEntry, maxEntriesNum: Int) =
         dao.insertNotExceeding(entry, maxEntriesNum)
 
-    /** Loads all the current entries sorted by timestamps (more recent last). */
-    fun loadAll() = dao.loadAll()
+    /** Loads the current entries for the specified map sorted by timestamps (older first). */
+    fun loadByMap(mapName: String) = dao.loadByMap(mapName)
 }

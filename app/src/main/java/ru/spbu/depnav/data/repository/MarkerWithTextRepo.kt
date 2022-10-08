@@ -57,12 +57,12 @@ class MarkerWithTextRepo(
     }
 
     /**
-     * Loads all [Markers][Marker] on the specified floor with their corresponding [MarkerText] on
-     * the current language.
+     * Loads all [Markers][Marker] from the specified map and floor with their corresponding
+     * [MarkerTexts][MarkerText] on the current language.
      */
-    suspend fun loadByFloor(floor: Int): Map<Marker, MarkerText> {
+    suspend fun loadByMapAndFloor(mapName: String, floor: Int): Map<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
-        val markersWithTexts = dao.loadByFloor(floor, language)
+        val markersWithTexts = dao.loadByMapAndFloor(mapName, floor, language)
         return markersWithTexts.entries.associate { (marker, markerTexts) ->
             val markerText = markerTexts.squeezedFor(marker, language)
             marker to markerText
@@ -76,15 +76,16 @@ class MarkerWithTextRepo(
         }
 
     /**
-     * Loads a [Marker] and its corresponding [MarkerText] on the current language so that the text
-     * has the specified tokens in it as prefixes. The results are sorted by relevance and text.
+     * Loads [Markers][Marker] from the specified map with their corresponding
+     * [MarkerTexts][MarkerText] on the current language so that the text satisfies the specified
+     * query. The results are sorted first by relevance, then alphabetically.
      */
-    suspend fun loadByQuery(query: String): Map<Marker, MarkerText> {
+    suspend fun loadByMapAndQuery(mapName: String, query: String): Map<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
         val tokenized = query.tokenized()
 
         Log.d(TAG, "Loading query '$query' tokenized as '$tokenized'")
-        val rankedTextsWithMarkers = dao.loadByTokens(tokenized, language).map {
+        val rankedTextsWithMarkers = dao.loadByMapAndTokens(mapName, tokenized, language).map {
             val rank = it.key.run {
                 when (query) {
                     markerText.title -> Double.POSITIVE_INFINITY
@@ -109,8 +110,6 @@ class MarkerWithTextRepo(
             }
     }
 
-    private fun String.tokenized() = Regex("\\W+")
-        .split(this)
-        .filter { it.isNotBlank() }
-        .joinToString(" ") { "$it*" }
+    private fun String.tokenized() =
+        plus(" ").replace(Regex("\\W+"), Regex.escapeReplacement("* "))
 }

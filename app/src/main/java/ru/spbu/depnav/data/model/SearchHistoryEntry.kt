@@ -20,10 +20,21 @@ package ru.spbu.depnav.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.ForeignKey
 import androidx.room.PrimaryKey
 
 /** Information about a marker that was searched. */
-@Entity(tableName = "search_history")
+@Entity(
+    tableName = "search_history_entry",
+    foreignKeys = [
+        ForeignKey(
+            entity = Marker::class,
+            parentColumns = ["id"],
+            childColumns = ["marker_id"],
+            onDelete = ForeignKey.RESTRICT
+        )
+    ]
+)
 data class SearchHistoryEntry(
     /** ID of the searched marker. */
     @PrimaryKey
