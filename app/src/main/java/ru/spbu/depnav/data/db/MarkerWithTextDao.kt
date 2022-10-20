@@ -19,7 +19,6 @@
 package ru.spbu.depnav.data.db
 
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.Query
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
@@ -28,14 +27,6 @@ import ru.spbu.depnav.data.model.MarkerTextWithMatchInfo
 /** DAO for the tables containing the available [Marker] and [MarkerText] entries. */
 @Dao
 interface MarkerWithTextDao {
-    /** Inserts the provided [Marker] entries into the database. */
-    @Insert
-    suspend fun insertMarkers(markers: Collection<Marker>)
-
-    /** Inserts the provided [MarkerText] entries into the database. */
-    @Insert
-    suspend fun insertMarkerTexts(markerTexts: Collection<MarkerText>)
-
     /**
      * Returns [Marker] entries with the provided ID and the corresponding [MarkerText] entries on
      * the specified language.

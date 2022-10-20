@@ -41,12 +41,6 @@ class MarkerWithTextRepo(
     @Inject
     constructor(dao: MarkerWithTextDao) : this(dao, Bm25())
 
-    /** Saves the provided objects. */
-    suspend fun insertAll(markersWithText: Map<Marker, MarkerText>) {
-        dao.insertMarkers(markersWithText.keys)
-        dao.insertMarkerTexts(markersWithText.values)
-    }
-
     /** Loads a [Marker] by its ID and its corresponding [MarkerText] on the current language. */
     suspend fun loadById(id: Int): Pair<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()

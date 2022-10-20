@@ -24,7 +24,11 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.SearchHistoryEntry
+
+private val INSERTED_MAP = MapInfo("test map", 100, 100, 128, 5, 3)
 
 /** Instrumentation tests for [SearchHistoryDao]. */
 class SearchHistoryDaoTest : AppDatabaseDaoTest() {
@@ -35,11 +39,20 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         searchHistoryDao = db.searchHistoryDao()
     }
 
+    /** Fills database with a minimal set of entities to satisfy the constraints. */
+    @Before
+    fun preFillDb() {
+        db.insertAll(listOf(INSERTED_MAP))
+    }
+
     private fun testInsertNotExceeding(maxEntriesNum: Int, insertEntriesNum: Int) {
         val expected = mutableListOf<SearchHistoryEntry>()
         runBlocking {
-            repeat(insertEntriesNum) { index ->
-                val entry = SearchHistoryEntry(index, index.toLong())
+            repeat(insertEntriesNum) { id ->
+                db.insertAll(
+                    listOf(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+                )
+                val entry = SearchHistoryEntry(id, id.toLong())
                 searchHistoryDao.insertNotExceeding(entry, maxEntriesNum)
                 expected += entry
             }
@@ -47,7 +60,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         expected.sortBy { it.timestamp }
         while (expected.size > maxEntriesNum) expected.removeFirst()
 
-        val actual = runBlocking { searchHistoryDao.loadAll().first() }
+        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name).first() }
 
         assertEquals(expected.size, actual.size)
         for (entry in actual) {
