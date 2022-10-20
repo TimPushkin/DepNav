@@ -64,12 +64,24 @@ private fun AppDatabase.insertAllValues(tableName: String, allValues: List<List<
 }
 
 @JvmName("insertAllMapInfos")
+fun AppDatabase.insertAll(vararg mapInfos: MapInfo) =
+    insertAllValues("map_info", mapInfos.map { it.values() })
+
+@JvmName("insertAllMapInfos")
 fun AppDatabase.insertAll(mapInfos: Iterable<MapInfo>) =
     insertAllValues("map_info", mapInfos.map { it.values() })
 
 @JvmName("insertAllMarkers")
+fun AppDatabase.insertAll(vararg markers: Marker) =
+    insertAllValues("marker", markers.map { it.values() })
+
+@JvmName("insertAllMarkers")
 fun AppDatabase.insertAll(markers: Iterable<Marker>) =
     insertAllValues("marker", markers.map { it.values() })
+
+@JvmName("insertAllMarkerTexts")
+fun AppDatabase.insertAll(vararg markerTexts: MarkerText) =
+    insertAllValues("marker_text", markerTexts.map { it.values() })
 
 @JvmName("insertAllMarkerTexts")
 fun AppDatabase.insertAll(markerTexts: Iterable<MarkerText>) =

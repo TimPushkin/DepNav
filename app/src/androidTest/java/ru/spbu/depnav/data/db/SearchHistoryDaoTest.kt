@@ -45,17 +45,35 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         db.insertAll(listOf(INSERTED_MAP))
     }
 
-    private fun testInsertNotExceeding(maxEntriesNum: Int, insertEntriesNum: Int) {
-        val expected = mutableListOf<SearchHistoryEntry>()
+    /** Checks that [SearchHistoryDao.loadByMap] returns entries for the specified map. */
+    @Test
+    fun loadByMap_returnsEntriesForSpecifiedMap() {
+        val expectedMap = INSERTED_MAP.copy(name = "another map")
+        db.insertAll(expectedMap)
+        val expectedId = 2
+        val unexpectedId = 1
+        db.insertAll(
+            Marker(unexpectedId, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0),
+            Marker(expectedId, expectedMap.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
+        )
         runBlocking {
-            repeat(insertEntriesNum) { id ->
-                db.insertAll(
-                    listOf(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
-                )
-                val entry = SearchHistoryEntry(id, id.toLong())
-                searchHistoryDao.insertNotExceeding(entry, maxEntriesNum)
-                expected += entry
-            }
+            searchHistoryDao.insertNotExceeding(SearchHistoryEntry(unexpectedId, 1L), 10)
+            searchHistoryDao.insertNotExceeding(SearchHistoryEntry(expectedId, 1L), 10)
+        }
+
+        val actual = runBlocking { searchHistoryDao.loadByMap(expectedMap.name).first() }
+
+        assertTrue("Loaded entry list is empty", actual.isNotEmpty())
+        actual.forEach { assertEquals(expectedId, it.markerId) }
+    }
+
+    private fun testInsertNotExceedingSingleMap(maxEntriesNum: Int, insertEntriesNum: Int) {
+        val expected = mutableListOf<SearchHistoryEntry>()
+        repeat(insertEntriesNum) { id ->
+            db.insertAll(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            val entry = SearchHistoryEntry(id, id.toLong())
+            runBlocking { searchHistoryDao.insertNotExceeding(entry, maxEntriesNum) }
+            expected += entry
         }
         expected.sortBy { it.timestamp }
         while (expected.size > maxEntriesNum) expected.removeFirst()
@@ -76,9 +94,9 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
      * amount is less than maxEntriesNum.
      */
     @Test
-    fun insertNotExceedingLessThanMax_loadAllReturnsAllInserted() {
+    fun insertNotExceedingLessThanMax_loadReturnsAllInserted() {
         val maxEntriesNum = 2
-        testInsertNotExceeding(maxEntriesNum, maxEntriesNum - 1)
+        testInsertNotExceedingSingleMap(maxEntriesNum, maxEntriesNum - 1)
     }
 
     /**
@@ -86,9 +104,9 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
      * amount equals maxEntriesNum.
      */
     @Test
-    fun insertNotExceedingExactlyMax_loadAllReturnsAllInserted() {
+    fun insertNotExceedingExactlyMax_loadReturnsAllInserted() {
         val maxEntriesNum = 3
-        testInsertNotExceeding(maxEntriesNum, maxEntriesNum)
+        testInsertNotExceedingSingleMap(maxEntriesNum, maxEntriesNum)
     }
 
     /**
@@ -96,9 +114,9 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
      * oldest one of them when their total amount is maxEntriesNum + 1.
      */
     @Test
-    fun insertNotExceedingOneMoreThanMax_loadAllReturnsAllInsertedExceptOldest() {
+    fun insertNotExceedingOneMoreThanMax_loadReturnsAllInsertedExceptOldest() {
         val maxEntriesNum = 5
-        testInsertNotExceeding(maxEntriesNum, maxEntriesNum + 1)
+        testInsertNotExceedingSingleMap(maxEntriesNum, maxEntriesNum + 1)
     }
 
     /**
@@ -106,8 +124,35 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
      * oldest of them when their total amount greatly exceeds maxEntriesNum.
      */
     @Test
-    fun insertNotExceedingManyMoreThanMax_loadAllReturnsAllInsertedExceptOldest() {
+    fun insertNotExceedingManyMoreThanMax_loadReturnsAllInsertedExceptOldest() {
         val maxEntriesNum = 5
-        testInsertNotExceeding(maxEntriesNum, maxEntriesNum + 5)
+        testInsertNotExceedingSingleMap(maxEntriesNum, maxEntriesNum + 5)
+    }
+
+    /**
+     * Checks that [SearchHistoryDao.insertNotExceeding] count the maximum number of entries
+     * separately for each map.
+     * */
+    @Test
+    fun insertNotExceedingExactlyMaxForMultipleMaps_loadReturnsSameNumberAsInserted() {
+        val anotherMap = INSERTED_MAP.copy(name = "another map")
+        db.insertAll(anotherMap)
+        val maxEntriesNum = 2
+        for (id in 1..maxEntriesNum) {
+            db.insertAll(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            runBlocking {
+                searchHistoryDao.insertNotExceeding(SearchHistoryEntry(id, 1L), maxEntriesNum)
+            }
+        }
+        for (id in maxEntriesNum + 1..2 * maxEntriesNum) {
+            db.insertAll(Marker(id, anotherMap.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            runBlocking {
+                searchHistoryDao.insertNotExceeding(SearchHistoryEntry(id, 1L), maxEntriesNum)
+            }
+        }
+
+        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name).first() }
+
+        assertEquals(maxEntriesNum, actual.size)
     }
 }
