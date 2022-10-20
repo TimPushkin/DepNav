@@ -166,7 +166,7 @@ class MapScreenViewModel @Inject constructor(
                 val floorNum = it + 1
                 val layers = listOf(makeTileStreamProvider(mapName, floorNum))
                 val markers = withContext(Dispatchers.IO) {
-                    async { markerWithTextRepo.loadByMapAndFloor(mapName, floorNum) }
+                    async { markerWithTextRepo.loadByFloor(mapName, floorNum) }
                 }
                 floorNum to Floor(layers, markers)
             }.toMap()

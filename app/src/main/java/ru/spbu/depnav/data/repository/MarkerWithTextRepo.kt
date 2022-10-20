@@ -54,9 +54,9 @@ class MarkerWithTextRepo(
      * Loads all [Markers][Marker] from the specified map and floor with their corresponding
      * [MarkerTexts][MarkerText] on the current language.
      */
-    suspend fun loadByMapAndFloor(mapName: String, floor: Int): Map<Marker, MarkerText> {
+    suspend fun loadByFloor(mapName: String, floor: Int): Map<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
-        val markersWithTexts = dao.loadByMapAndFloor(mapName, floor, language)
+        val markersWithTexts = dao.loadByFloor(mapName, floor, language)
         return markersWithTexts.entries.associate { (marker, markerTexts) ->
             val markerText = markerTexts.squeezedFor(marker, language)
             marker to markerText
@@ -74,12 +74,12 @@ class MarkerWithTextRepo(
      * [MarkerTexts][MarkerText] on the current language so that the text satisfies the specified
      * query. The results are sorted first by relevance, then alphabetically.
      */
-    suspend fun loadByMapAndQuery(mapName: String, query: String): Map<Marker, MarkerText> {
+    suspend fun loadByQuery(mapName: String, query: String): Map<Marker, MarkerText> {
         val language = MarkerText.LanguageId.getCurrent()
         val tokenized = query.tokenized()
 
         Log.d(TAG, "Loading query '$query' tokenized as '$tokenized'")
-        val rankedTextsWithMarkers = dao.loadByMapAndTokens(mapName, tokenized, language).map {
+        val rankedTextsWithMarkers = dao.loadByTokens(mapName, tokenized, language).map {
             val rank = it.key.run {
                 when (query) {
                     markerText.title -> Double.POSITIVE_INFINITY

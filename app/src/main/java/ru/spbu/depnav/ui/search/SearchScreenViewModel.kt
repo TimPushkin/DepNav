@@ -93,7 +93,7 @@ class SearchScreenViewModel @Inject constructor(
 
     private suspend fun search(query: String) {
         val matches = withContext(Dispatchers.IO) {
-            markerWithTextRepo.loadByMapAndQuery(prefs.selectedMap.persistedName, query)
+            markerWithTextRepo.loadByQuery(prefs.selectedMap.persistedName, query)
         }
         Log.v(TAG, "Query '$query' has ${matches.size} matches")
         searchMatches = matches

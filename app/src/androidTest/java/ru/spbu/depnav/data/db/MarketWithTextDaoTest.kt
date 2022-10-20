@@ -103,7 +103,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     }
 
     /**
-     * Checks that [MarkerWithTextDao.loadByMapAndFloor] returns all [Markers][Marker] placed on the
+     * Checks that [MarkerWithTextDao.loadByFloor] returns all [Markers][Marker] placed on the
      * specified floor.
      */
     @Test
@@ -122,11 +122,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
 
         for (floor in floors) {
             val actualMarkers = runBlocking {
-                markerWithTextDao.loadByMapAndFloor(
-                    INSERTED_MAP.name,
-                    floor,
-                    languageId
-                ).keys
+                markerWithTextDao.loadByFloor(INSERTED_MAP.name, floor, languageId).keys
             }
 
             assertTrue("Loaded markers are empty", actualMarkers.isNotEmpty())
@@ -135,7 +131,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     }
 
     /**
-     * Checks that [MarkerWithTextDao.loadByMapAndFloor] returns [MarkerTexts][MarkerText] with the
+     * Checks that [MarkerWithTextDao.loadByFloor] returns [MarkerTexts][MarkerText] with the
      * specified language.
      */
     @Test
@@ -155,7 +151,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         for (floor in floors) {
             for (languageId in MarkerText.LanguageId.values()) {
                 val actual = runBlocking {
-                    markerWithTextDao.loadByMapAndFloor(
+                    markerWithTextDao.loadByFloor(
                         INSERTED_MAP.name,
                         floor,
                         languageId
@@ -169,8 +165,8 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     }
 
     /**
-     * Checks that [MarkerWithTextDao.loadByMapAndTokens] returns all inserted
-     * [MarkerTexts][MarkerText] with the queried tokens on the default language (English).
+     * Checks that [MarkerWithTextDao.loadByTokens] returns all inserted [MarkerTexts][MarkerText]
+     * with the queried tokens on the default language (English).
      */
     @Test
     fun loadByTokensEnglish_returnsAllTextsWithAllQueriedTokensInDescription() {
@@ -195,8 +191,8 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         )
         db.insertAll(markerTexts)
 
-        val actual = runBlocking {
-            markerWithTextDao.loadByMapAndTokens(INSERTED_MAP.name, "Lorem ipsum", language).keys
+        val actual =runBlocking {
+            markerWithTextDao.loadByTokens(INSERTED_MAP.name, "Lorem ipsum", language).keys
         }
 
         actual.forEach { assertEquals(expectedTitle, it.markerText.title) }
@@ -204,8 +200,8 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     }
 
     /**
-     * Checks that [MarkerWithTextDao.loadByMapAndTokens] returns all inserted
-     * [MarkerTexts][MarkerText] with the queried tokens on a non-default language.
+     * Checks that [MarkerWithTextDao.loadByTokens] returns all inserted [MarkerTexts][MarkerText]
+     * with the queried tokens on a non-default language.
      */
     @Test
     fun loadByTokensNotEnglish_returnsAllTextsWithAllQueriedTokensInDescription() {
@@ -232,7 +228,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         db.insertAll(markerTexts)
 
         val actual = runBlocking {
-            markerWithTextDao.loadByMapAndTokens(INSERTED_MAP.name, "Лорем ипсум", language).keys
+            markerWithTextDao.loadByTokens(INSERTED_MAP.name, "Лорем ипсум", language).keys
         }
 
         actual.forEach { assertEquals(expectedTitle, it.markerText.title) }
@@ -240,8 +236,8 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     }
 
     /**
-     * Checks that [MarkerWithTextDao.loadByMapAndTokens] returns a single Marker for each
-     * MarkerText and that it has a corresponding ID.
+     * Checks that [MarkerWithTextDao.loadByTokens] returns a single Marker for each [MarkerText]
+     * and that it has a corresponding ID.
      */
     @Test
     fun loadByTokens_returnsSingleMarkerWithCorrectIdForEachMarkerText() {
@@ -256,7 +252,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         db.insertAll(markersWithText.values)
 
         val actual =
-            runBlocking { markerWithTextDao.loadByMapAndTokens(INSERTED_MAP.name, title, language) }
+            runBlocking { markerWithTextDao.loadByTokens(INSERTED_MAP.name, title, language) }
 
         for ((markerTextWithMatchInfo, markers) in actual) {
             assertTrue(

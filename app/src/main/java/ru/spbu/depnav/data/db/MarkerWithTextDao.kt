@@ -40,9 +40,7 @@ interface MarkerWithTextDao {
                 AND marker_text.language_id = :language
         """
     )
-    suspend fun loadById(
-        id: Int, language: MarkerText.LanguageId
-    ): Map<Marker, List<MarkerText>>
+    suspend fun loadById(id: Int, language: MarkerText.LanguageId): Map<Marker, List<MarkerText>>
 
     /**
      * Returns [Marker] entries from the specified map and floor with the corresponding [MarkerText]
@@ -58,7 +56,7 @@ interface MarkerWithTextDao {
                 AND marker_text.language_id = :language
         """
     )
-    suspend fun loadByMapAndFloor(
+    suspend fun loadByFloor(
         mapName: String, floor: Int, language: MarkerText.LanguageId
     ): Map<Marker, List<MarkerText>>
 
@@ -82,7 +80,7 @@ interface MarkerWithTextDao {
                 AND marker_text.language_id = :language;
         """
     )
-    suspend fun loadByMapAndTokens(
+    suspend fun loadByTokens(
         mapName: String, tokens: String, language: MarkerText.LanguageId
     ): Map<MarkerTextWithMatchInfo, List<Marker>>
 }
