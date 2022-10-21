@@ -21,13 +21,21 @@ package ru.spbu.depnav.data.model
 import androidx.compose.ui.text.intl.Locale
 import androidx.room.ColumnInfo
 import androidx.room.Entity
-import androidx.room.Fts4
-import androidx.room.FtsOptions
+import androidx.room.ForeignKey
 
 /** Text information related to a [Marker]. */
-// Using FTS4 built-in `languageid` column leads to crash when querying it on Huawei devices
-@Fts4(notIndexed = ["marker_id", "language_id"], tokenizer = FtsOptions.TOKENIZER_UNICODE61)
-@Entity(tableName = "marker_texts")
+@Entity(
+    tableName = "marker_text",
+    primaryKeys = ["marker_id", "language_id"],
+    foreignKeys = [
+        ForeignKey(
+            entity = Marker::class,
+            parentColumns = ["id"],
+            childColumns = ["marker_id"],
+            onDelete = ForeignKey.RESTRICT
+        )
+    ]
+)
 data class MarkerText(
     /** ID of the [Marker] to which this text relates. */
     @ColumnInfo(name = "marker_id") val markerId: Int,

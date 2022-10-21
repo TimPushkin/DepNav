@@ -19,18 +19,13 @@
 package ru.spbu.depnav.data.db
 
 import androidx.room.Dao
-import androidx.room.Insert
 import androidx.room.Query
 import ru.spbu.depnav.data.model.MapInfo
 
 /** DAO for the table containing the available [MapInfo] entries. */
 @Dao
 interface MapInfoDao {
-    /** Inserts the provided [MapInfo] entries into the database. */
-    @Insert
-    suspend fun insertAll(mapInfos: Collection<MapInfo>)
-
     /** Returns a [MapInfo] with the provided map name. */
-    @Query("SELECT * FROM map_infos WHERE map_name = :name")
+    @Query("SELECT * FROM map_info WHERE name = :name")
     suspend fun loadByName(name: String): MapInfo
 }

@@ -29,7 +29,7 @@ import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
 
-private const val DB_ASSET = "markers.db"
+private const val DB_ASSET = "maps.db"
 
 /** Database-related providers for Hilt. */
 @Module

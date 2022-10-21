@@ -18,7 +18,6 @@
 
 package ru.spbu.depnav.ui.map
 
-import android.app.Application
 import android.util.Log
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -29,7 +28,7 @@ import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.graphicsLayer
-import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
@@ -62,7 +61,6 @@ import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
-import ru.spbu.depnav.DepNavApplication
 import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
@@ -71,7 +69,7 @@ import ru.spbu.depnav.data.repository.MarkerWithTextRepo
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.utils.preferences.PreferencesManager
 import ru.spbu.depnav.utils.tiles.Floor
-import ru.spbu.depnav.utils.tiles.TileProviderFactory
+import ru.spbu.depnav.utils.tiles.TileStreamProviderFactory
 import javax.inject.Inject
 
 private const val TAG = "MapScreenViewModel"
@@ -87,12 +85,12 @@ private const val PIN_ID = "Pin" // Real IDs are integers
 @OptIn(ExperimentalClusteringApi::class)
 @HiltViewModel
 class MapScreenViewModel @Inject constructor(
-    application: Application,
+    private val tileStreamProviderFactory: TileStreamProviderFactory,
     private val mapInfoRepo: MapInfoRepo,
     private val markerWithTextRepo: MarkerWithTextRepo,
     /** User preferences. */
     val prefs: PreferencesManager
-) : AndroidViewModel(application) {
+) : ViewModel() {
     /** State of the map currently displayed. */
     var mapState by mutableStateOf(MapState(0, 0, 0))
         private set
@@ -150,12 +148,12 @@ class MapScreenViewModel @Inject constructor(
                 }
             }
             .launchIn(viewModelScope)
-        snapshotFlow { prefs.mapStoredName }
-            .onEach { initMap(it.storedName, it.tilesSubdir) }
+        snapshotFlow { prefs.selectedMap }
+            .onEach { initMap(it.persistedName) }
             .launchIn(viewModelScope)
     }
 
-    private suspend fun initMap(mapName: String, tilesSubdir: String) {
+    private suspend fun initMap(mapName: String) {
         Log.i(TAG, "Initializing map $mapName")
 
         minScaleCollectionJob?.cancel("State changed")
@@ -164,17 +162,16 @@ class MapScreenViewModel @Inject constructor(
         val mapInfo = withContext(Dispatchers.IO) { mapInfoRepo.loadByName(mapName) }
         setMapParamsFrom(mapInfo)
 
-        floors =
-            with(TileProviderFactory(getApplication<DepNavApplication>().assets, tilesSubdir)) {
-                List(mapInfo.floorsNum) {
-                    val floorNum = it + 1
-                    val layers = listOf(makeTileProviderForFloor(floorNum))
-                    val markers = withContext(Dispatchers.IO) {
-                        async { markerWithTextRepo.loadByFloor(floorNum) }
-                    }
-                    floorNum to Floor(layers, markers)
-                }.toMap()
-            }
+        floors = with(tileStreamProviderFactory) {
+            List(mapInfo.floorsNum) {
+                val floorNum = it + 1
+                val layers = listOf(makeTileStreamProvider(mapName, floorNum))
+                val markers = withContext(Dispatchers.IO) {
+                    async { markerWithTextRepo.loadByFloor(mapName, floorNum) }
+                }
+                floorNum to Floor(layers, markers)
+            }.toMap()
+        }
         floorsNum = floors.size
         val firstFloor = floors.keys.firstOrNull() ?: 0.also { Log.e(TAG, "No floors provided") }
         setFloor(firstFloor)

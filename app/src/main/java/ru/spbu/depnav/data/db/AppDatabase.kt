@@ -24,12 +24,16 @@ import androidx.room.TypeConverters
 import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.model.MarkerTextFts
 import ru.spbu.depnav.data.model.SearchHistoryEntry
 
 /** Room database containing information about maps and their markers. */
 @Database(
-    entities = [MapInfo::class, Marker::class, MarkerText::class, SearchHistoryEntry::class],
-    version = 4
+    entities = [
+        MapInfo::class, Marker::class, MarkerText::class, MarkerTextFts::class,
+        SearchHistoryEntry::class
+    ],
+    version = 5
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {

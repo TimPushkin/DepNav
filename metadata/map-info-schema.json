@@ -14,7 +14,7 @@
     "tileSize": {
       "type": "integer"
     },
-    "levelsNum": {
+    "zoomLevelsNum": {
       "type": "integer"
     },
     "floors": {
@@ -120,6 +120,7 @@
     "floorWidth",
     "floorHeight",
     "tileSize",
+    "zoomLevelsNum",
     "floors"
   ]
 }

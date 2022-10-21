@@ -40,15 +40,10 @@ class MapInfoDaoTest : AppDatabaseDaoTest() {
             MapInfo("abc", 100, 100, 1024, 1, 5),
             MapInfo("cba", 100, 200, 512, 2, 100)
         )
-        runBlocking { mapInfoDao.insertAll(expected) }
+        db.insertAll(expected)
 
-        val actual = runBlocking {
-            listOf(
-                mapInfoDao.loadByName(expected[0].mapName),
-                mapInfoDao.loadByName(expected[1].mapName)
-            )
-        }
+        val actual = runBlocking { expected.map { mapInfoDao.loadByName(it.name) } }
 
-        for (i in 0..1) assertEquals(expected[i], actual[i])
+        for ((exp, act) in expected.zip(actual)) assertEquals(exp, act)
     }
 }

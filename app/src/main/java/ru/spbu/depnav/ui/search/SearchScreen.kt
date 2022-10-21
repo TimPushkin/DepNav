@@ -211,7 +211,7 @@ private fun SearchResult(
 private fun SearchResultUsualPreview() {
     DepNavTheme {
         SearchResult(
-            marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
+            marker = Marker(1, "", Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
             markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
             onClick = {}
         ) {}
@@ -224,7 +224,7 @@ private fun SearchResultUsualPreview() {
 private fun SearchResultHistoryPreview() {
     DepNavTheme {
         SearchResult(
-            marker = Marker(1, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
+            marker = Marker(1, "", Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
             markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
             onClick = {}
         ) {

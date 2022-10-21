@@ -36,11 +36,16 @@ import ru.spbu.depnav.ui.map.MapScreenViewModel
 import ru.spbu.depnav.ui.search.SearchScreen
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.utils.preferences.PreferencesManager
+import javax.inject.Inject
 
 @AndroidEntryPoint
 @Suppress("UndocumentedPublicClass") // Class name is self-explanatory
 class MainActivity : ComponentActivity() {
     private val mapScreenVm: MapScreenViewModel by viewModels()
+
+    /** User preferences. */
+    @Inject
+    lateinit var prefs: PreferencesManager
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -49,7 +54,7 @@ class MainActivity : ComponentActivity() {
 
         setContent {
             DepNavTheme(
-                darkTheme = when (mapScreenVm.prefs.themeMode) {
+                darkTheme = when (prefs.themeMode) {
                     PreferencesManager.ThemeMode.LIGHT -> false
                     PreferencesManager.ThemeMode.DARK -> true
                     PreferencesManager.ThemeMode.SYSTEM -> isSystemInDarkTheme()
@@ -73,7 +78,7 @@ class MainActivity : ComponentActivity() {
 
                         SearchScreen(
                             onResultClick = {
-                                mapScreenVm.run { viewModelScope.launch { focusOnMarker(it) } }
+                                with(mapScreenVm) { viewModelScope.launch { focusOnMarker(it) } }
                                 navigateToMap()
                             },
                             onNavigateBack = ::navigateToMap

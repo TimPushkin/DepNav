@@ -17,7 +17,6 @@
 import json
 from argparse import ArgumentParser
 
-
 # This script applies a linear transformation to the marker coordinates in the specified map info
 # json file corresponding to 'map-info-schema.json'.
 #
@@ -27,15 +26,21 @@ from argparse import ArgumentParser
 
 parser = ArgumentParser()
 parser.add_argument("json_file", type=str, help="path to the json file")
-parser.add_argument("x_multiplier", type=float,
-                    help="number on which x coordinate will be multiplied")
-parser.add_argument("y_multiplier", type=float,
-                    help="number on which y coordinate will be multiplied")
-parser.add_argument("x_shift", type=int, help="number which will be added to x coordinate")
-parser.add_argument("y_shift", type=int, help="number which will be added to y coordinate")
+parser.add_argument(
+    "x_multiplier", type=float, help="number on which x coordinate will be multiplied"
+)
+parser.add_argument(
+    "y_multiplier", type=float, help="number on which y coordinate will be multiplied"
+)
+parser.add_argument(
+    "x_shift", type=int, help="number which will be added to x coordinate"
+)
+parser.add_argument(
+    "y_shift", type=int, help="number which will be added to y coordinate"
+)
 args = parser.parse_args()
 
-with open(args.json_file, 'r+', encoding="utf8") as f:
+with open(args.json_file, "r+", encoding="utf8") as f:
     jf = json.load(f)
 
     for floor_obj in jf["floors"]:

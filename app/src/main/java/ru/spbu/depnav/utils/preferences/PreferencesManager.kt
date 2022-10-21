@@ -39,7 +39,7 @@ private const val ENABLE_ROTATION_KEY = "rotation"
 private const val ENABLE_ROTATION_DEFAULT = false
 
 private const val MAP_STORED_NAME_KEY = "map"
-private val MAP_STORED_NAME_DEFAULT = PreferencesManager.MapStoredName.SPBU_MM.name
+private val MAP_STORED_NAME_DEFAULT = PreferencesManager.AvailableMap.SPBU_MM.name
 
 /** Helper class to load ans save user settings. */
 @Singleton
@@ -90,26 +90,23 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
             _enableRotation = value
         }
 
-    private var _mapStoredName by mutableStateOf(
+    private var _selectedMap by mutableStateOf(
         prefs.getString(MAP_STORED_NAME_KEY, MAP_STORED_NAME_DEFAULT) ?: MAP_STORED_NAME_DEFAULT
     )
 
     /** Defines what map the app shows. */
-    var mapStoredName: MapStoredName
-        get() = MapStoredName.valueOf(_mapStoredName)
+    var selectedMap: AvailableMap
+        get() = AvailableMap.valueOf(_selectedMap)
         set(value) {
             prefs.edit { putString(MAP_STORED_NAME_KEY, value.name) }
-            _mapStoredName = value.name
+            _selectedMap = value.name
         }
 
-    /** Maps available in the app. */
-    enum class MapStoredName(
+    /** Map available in the app. */
+    enum class AvailableMap(
         /** Map's name as it is stored in the corresponding [MapInfo] in the database. */
-        val storedName: String
+        val persistedName: String
     ) {
         SPBU_MM("spbu-mm");
-
-        /** Subdirectory with map's tiles in assets. */
-        val tilesSubdir = "$storedName/tiles"
     }
 }

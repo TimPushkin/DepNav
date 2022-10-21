@@ -25,12 +25,10 @@ import androidx.room.PrimaryKey
 /**
  * Information about a map required to display it.
  */
-@Entity(tableName = "map_infos")
+@Entity(tableName = "map_info")
 data class MapInfo(
     /** Name of this map. */
-    @PrimaryKey
-    @ColumnInfo(name = "map_name")
-    val mapName: String,
+    @PrimaryKey val name: String,
     /** Width of floors of this map in pixels. */
     @ColumnInfo(name = "floor_width") val floorWidth: Int,
     /** Height of floors of this map in pixels. */

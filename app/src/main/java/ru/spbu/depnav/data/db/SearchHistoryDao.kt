@@ -31,8 +31,8 @@ import ru.spbu.depnav.data.model.SearchHistoryEntry
 abstract class SearchHistoryDao {
     /**
      * Inserts the provided [SearchHistoryEntry] deleting the oldest ones if needed so that
-     * [maxEntriesNum] is not exceeded after the insertion. If an entry with the same marker ID is
-     * already inserted it is replaced.
+     * [maxEntriesNum] is not exceeded for this entry's map after the insertion. If an entry with
+     * the same marker ID is already inserted it is replaced.
      *
      * Note that the provided entry will not end up in the table if maxEntriesNum is exceeded after
      * the insertion and the provided entry is among the ones that are deleted.
@@ -40,24 +40,51 @@ abstract class SearchHistoryDao {
     @Transaction
     open suspend fun insertNotExceeding(entry: SearchHistoryEntry, maxEntriesNum: Int) {
         insert(entry)
-        repeat(getEntriesNum() - maxEntriesNum) { deleteOldest() }
+        val mapName = loadMapNameByMarkerId(entry.markerId)
+        repeat(loadEntriesNumFor(mapName) - maxEntriesNum) { deleteOldestFor(mapName) }
     }
-
-    @Query("SELECT COUNT(*) FROM search_history")
-    protected abstract suspend fun getEntriesNum(): Int
-
-    @Query(
-        "DELETE FROM search_history WHERE timestamp = (SELECT MIN(timestamp) FROM search_history)"
-    )
-    protected abstract suspend fun deleteOldest()
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     protected abstract suspend fun insert(entry: SearchHistoryEntry)
 
+    @Query("SELECT map_name FROM marker WHERE id = :id")
+    protected abstract suspend fun loadMapNameByMarkerId(id: Int): String
+
+    @Query(
+        """
+            SELECT count(*)
+            FROM search_history_entry
+                JOIN marker ON search_history_entry.marker_id = marker.id
+            WHERE marker.map_name = :mapName
+        """
+    )
+    protected abstract suspend fun loadEntriesNumFor(mapName: String): Int
+
+    @Query(
+        """
+            DELETE FROM search_history_entry
+            WHERE timestamp = (
+                SELECT min(timestamp)
+                FROM search_history_entry
+                    JOIN marker ON search_history_entry.marker_id = marker.id
+                WHERE marker.map_name = :mapName
+            )
+        """
+    )
+    protected abstract suspend fun deleteOldestFor(mapName: String)
+
     /**
-     * Returns all [marker search history entries][SearchHistoryEntry] sorted by timestamps (more
-     * recent last).
+     * Returns [marker search history entries][SearchHistoryEntry] for the specified map sorted by
+     * timestamps (older first).
      */
-    @Query("SELECT * FROM search_history ORDER BY timestamp ASC")
-    abstract fun loadAll(): Flow<List<SearchHistoryEntry>>
+    @Query(
+        """
+            SELECT search_history_entry.*
+            FROM search_history_entry
+                JOIN marker ON search_history_entry.marker_id = marker.id
+            WHERE marker.map_name = :mapName
+            ORDER BY timestamp ASC
+        """
+    )
+    abstract fun loadByMap(mapName: String): Flow<List<SearchHistoryEntry>>
 }
