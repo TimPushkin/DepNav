@@ -29,8 +29,10 @@ import ru.spbu.depnav.data.model.SearchHistoryEntry
 
 /** Room database containing information about maps and their markers. */
 @Database(
-    entities = [MapInfo::class, Marker::class, MarkerText::class, MarkerTextFts::class,
-        SearchHistoryEntry::class],
+    entities = [
+        MapInfo::class, Marker::class, MarkerText::class, MarkerTextFts::class,
+        SearchHistoryEntry::class
+    ],
     version = 5
 )
 @TypeConverters(Converters::class)

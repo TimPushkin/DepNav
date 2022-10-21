@@ -90,9 +90,9 @@ cur.executescript(
         "timestamp" INTEGER NOT NULL,
         FOREIGN KEY (marker_id) REFERENCES marker(id) ON DELETE RESTRICT
     );
-    
+
     CREATE INDEX IF NOT EXISTS index_marker_map_name ON marker (map_name);
-    
+
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_BEFORE_UPDATE
         BEFORE UPDATE
         ON marker_text

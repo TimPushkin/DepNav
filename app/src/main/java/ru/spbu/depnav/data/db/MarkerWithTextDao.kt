@@ -57,7 +57,9 @@ interface MarkerWithTextDao {
         """
     )
     suspend fun loadByFloor(
-        mapName: String, floor: Int, language: MarkerText.LanguageId
+        mapName: String,
+        floor: Int,
+        language: MarkerText.LanguageId
     ): Map<Marker, List<MarkerText>>
 
     /**
@@ -81,6 +83,8 @@ interface MarkerWithTextDao {
         """
     )
     suspend fun loadByTokens(
-        mapName: String, tokens: String, language: MarkerText.LanguageId
+        mapName: String,
+        tokens: String,
+        language: MarkerText.LanguageId
     ): Map<MarkerTextWithMatchInfo, List<Marker>>
 }

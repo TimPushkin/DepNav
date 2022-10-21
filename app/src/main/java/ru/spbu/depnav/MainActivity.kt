@@ -43,6 +43,7 @@ import javax.inject.Inject
 class MainActivity : ComponentActivity() {
     private val mapScreenVm: MapScreenViewModel by viewModels()
 
+    /** User preferences. */
     @Inject
     lateinit var prefs: PreferencesManager
 

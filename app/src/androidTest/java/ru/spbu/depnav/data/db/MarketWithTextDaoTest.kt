@@ -30,6 +30,7 @@ import ru.spbu.depnav.data.model.MarkerText
 private val INSERTED_MAP = MapInfo("test map", 100, 100, 128, 5, 3)
 
 /** Instrumentation tests for [MarkerWithTextDao]. */
+@Suppress("TooManyFunctions") // OK for a test class
 class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     private lateinit var markerWithTextDao: MarkerWithTextDao
 
@@ -126,7 +127,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
             markerWithTextDao.loadByFloor(expectedMap.name, floor, MarkerText.LanguageId.EN).keys
         }
 
-        assertTrue("Loaded markers are empty", actual.isNotEmpty())
+        assertTrue("No markers loaded from ${expectedMap.name}", actual.isNotEmpty())
         actual.forEach { assertEquals(expectedMap.name, it.mapName) }
     }
 
@@ -153,7 +154,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
                 markerWithTextDao.loadByFloor(INSERTED_MAP.name, floor, language).keys
             }
 
-            assertTrue("Loaded markers are empty", actualMarkers.isNotEmpty())
+            assertTrue("No markers loaded from ${INSERTED_MAP.name}", actualMarkers.isNotEmpty())
             for (marker in actualMarkers) assertEquals(floor, marker.floor)
         }
     }
@@ -182,7 +183,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
                     ).values.flatten()
                 }
 
-                assertTrue("Loaded marker texts are empty", actual.isNotEmpty())
+                assertTrue("No marker texts loaded from ${INSERTED_MAP.name}", actual.isNotEmpty())
                 actual.forEach { assertEquals(languageId, it.languageId) }
             }
         }
@@ -212,7 +213,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
             markerWithTextDao.loadByTokens(expectedMap.name, title, language).values.flatten()
         }
 
-        assertTrue("Loaded markers are empty", actual.isNotEmpty())
+        assertTrue("No marker texts loaded from ${INSERTED_MAP.name}", actual.isNotEmpty())
         actual.forEach { assertEquals(expectedMap.name, it.mapName) }
     }
 

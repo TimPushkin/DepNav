@@ -88,6 +88,7 @@ class MapScreenViewModel @Inject constructor(
     private val tileStreamProviderFactory: TileStreamProviderFactory,
     private val mapInfoRepo: MapInfoRepo,
     private val markerWithTextRepo: MarkerWithTextRepo,
+    /** User preferences. */
     val prefs: PreferencesManager
 ) : ViewModel() {
     /** State of the map currently displayed. */
