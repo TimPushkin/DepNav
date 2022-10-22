@@ -35,7 +35,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
-/** Lines with text information about a marker. */
+/** Lines with information about a marker. */
 @Composable
 fun MarkerInfoLines(
     title: String,
@@ -53,10 +53,11 @@ fun MarkerInfoLines(
         icon()
 
         Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
-            Row(verticalAlignment = Alignment.Bottom) {
+            Row(verticalAlignment = Alignment.CenterVertically) {
                 if (title.isNotBlank()) {
                     Text(
                         text = title,
+                        modifier = Modifier.weight(1f, fill = false),
                         style = MaterialTheme.typography.h6
                     )
                 }
@@ -73,12 +74,13 @@ fun MarkerInfoLines(
                     Text(
                         text = stringResource(R.string.closed),
                         modifier = Modifier.alpha(FADED_ALPHA),
-                        fontSize = MaterialTheme.typography.h6.fontSize
+                        fontSize = MaterialTheme.typography.h6.fontSize,
+                        maxLines = 1
                     )
                 }
             }
 
-            if (description != null && description.isNotBlank()) {
+            if (!description.isNullOrBlank()) {
                 Text(
                     text = description,
                     modifier = Modifier.padding(top = DEFAULT_PADDING)
@@ -91,7 +93,7 @@ fun MarkerInfoLines(
 @Preview
 @Composable
 @Suppress("UnusedPrivateMember")
-private fun MarkerInfoPreview() {
+private fun MarkerInfoShortPreview() {
     DepNavTheme {
         Column {
             MarkerInfoLines(
@@ -100,7 +102,29 @@ private fun MarkerInfoPreview() {
                 description = "Some description"
             ) {
                 MarkerView(
-                    title = "Some title",
+                    title = "Some title 1",
+                    type = Marker.MarkerType.ROOM,
+                    isClosed = false,
+                    simplified = true
+                )
+            }
+        }
+    }
+}
+
+@Preview
+@Composable
+@Suppress("UnusedPrivateMember")
+private fun MarkerInfoLongPreview() {
+    DepNavTheme {
+        Column {
+            MarkerInfoLines(
+                title = "Some very very very very very very long title",
+                isClosed = true,
+                description = "Some very very very very very very long description"
+            ) {
+                MarkerView(
+                    title = "Some title 2",
                     type = Marker.MarkerType.ROOM,
                     isClosed = false,
                     simplified = true
