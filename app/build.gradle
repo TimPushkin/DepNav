@@ -41,8 +41,8 @@ android {
         applicationId 'ru.spbu.depnav'
         minSdk 21
         targetSdk 33
-        versionCode versionToCode(1, 1, 1)
-        versionName versionToName(1, 1, 1)
+        versionCode versionToCode(1, 2, 0)
+        versionName versionToName(1, 2, 0)
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
 
