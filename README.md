@@ -15,7 +15,6 @@ The following maps are available:
 | [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80" />](https://play.google.com/store/apps/details?id=ru.spbu.depnav&utm_source=https%3A%2F%2Fgithub.com%2FTimPushkin%2FDepNav&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [<img src="https://i.imgur.com/g5WjbFC.png" alt="AppGallery" height="80" />](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000) |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
 
-
 ## Features
 
 With **DepNav** you can do the following:
@@ -25,14 +24,15 @@ With **DepNav** you can do the following:
 - Enjoy the graphic interface in light and dark themes
 - Two languages available: English and Russian
 
-| ![Map](https://i.imgur.com/l8d5aWm.jpg) | ![Search](https://i.imgur.com/G1Rk8q6.jpg) | ![Info](https://i.imgur.com/I4dJd7e.jpg) |
+| ![Map](https://i.imgur.com/NcjEy30.png) | ![Search](https://i.imgur.com/dpTJIBV.png) | ![Info](https://i.imgur.com/hhPvKc1.png) |
 |:---------------------------------------:|:------------------------------------------:|:----------------------------------------:|
 
 ## Get it!
 
 The following download sources are available:
 
-- [Google Play](https://play.google.com/store/apps/details?id=ru.spbu.depnav&utm_source=https%3A%2F%2Fgithub.com%2FTimPushkin%2FDepNav) or [AppGallery](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000)
+- [Google Play](https://play.google.com/store/apps/details?id=ru.spbu.depnav&utm_source=https%3A%2F%2Fgithub.com%2FTimPushkin%2FDepNav)
+  or [AppGallery](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000)
   (**recommended**) – install DepNav from app stores and receive its updates automatically
 
 - [APK](https://github.com/TimPushkin/DepNav/releases) – download, install, and update DepNav manually
