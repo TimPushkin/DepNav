@@ -18,51 +18,55 @@
 
 package ru.spbu.depnav.ui.map
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.width
-import androidx.compose.material.Icon
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.Icon
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Hint that tells a user to zoom in to see map markers. */
 @Composable
 fun ZoomInHint() {
-    Row(
-        modifier = Modifier.padding(DEFAULT_PADDING),
-        verticalAlignment = Alignment.CenterVertically
+    CompositionLocalProvider(
+        LocalTextStyle provides MaterialTheme.typography.bodySmall,
+        LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant
     ) {
-        val textSize =
-            with(LocalDensity.current) { MaterialTheme.typography.caption.fontSize.toDp() }
+        Row(
+            modifier = Modifier.padding(DEFAULT_PADDING),
+            horizontalArrangement = Arrangement.spacedBy(DEFAULT_PADDING),
+            verticalAlignment = Alignment.CenterVertically
+        ) {
+            Icon(
+                painter = painterResource(R.drawable.ic_pinch_zoom_in),
+                contentDescription = "Pinch to zoom in",
+                modifier = Modifier
+                    .size(
+                        with(LocalDensity.current) {
+                            MaterialTheme.typography.bodySmall.fontSize.toDp() * 2
+                        }
+                    )
+            )
 
-        Icon(
-            painter = painterResource(R.drawable.ic_pinch_zoom_in),
-            contentDescription = "Pinch to zoom in",
-            modifier = Modifier
-                .size(textSize * 2)
-                .alpha(FADED_ALPHA)
-        )
-
-        Spacer(modifier = Modifier.width(DEFAULT_PADDING))
-
-        Text(
-            text = stringResource(R.string.zoom_in_to_see_markers),
-            modifier = Modifier.alpha(FADED_ALPHA),
-            textAlign = TextAlign.Center,
-            style = MaterialTheme.typography.caption
-        )
+            Text(
+                text = stringResource(R.string.zoom_in_to_see_markers),
+                fontWeight = FontWeight.Light,
+                textAlign = TextAlign.Center
+            )
+        }
     }
 }
