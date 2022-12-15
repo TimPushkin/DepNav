@@ -28,14 +28,15 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
-import androidx.compose.material.AlertDialog
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.RadioButton
-import androidx.compose.material.Switch
-import androidx.compose.material.Text
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.RadioButton
+import androidx.compose.material3.Switch
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
@@ -43,20 +44,24 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.utils.preferences.PreferencesManager
 
-private val HORIZONTAL_PADDING = 15.dp
-private val VERTICAL_PADDING = 5.dp
+private val HORIZONTAL_PADDING = 8.dp
+private val ADDITIONAL_START_PADDING = 4.dp
 
 /** Dialog with app settings. */
 @Composable
 fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
+    // TODO: replace with a custom dialog
     AlertDialog(
         onDismissRequest = onDismiss,
-        buttons = {
+        confirmButton = {},
+        title = { Text(stringResource(R.string.settings)) },
+        text = {
             LazyColumn(
                 modifier = Modifier.padding(
                     horizontal = HORIZONTAL_PADDING,
-                    vertical = VERTICAL_PADDING
-                )
+                    vertical = HORIZONTAL_PADDING / 2
+                ),
+                verticalArrangement = Arrangement.spacedBy(DEFAULT_PADDING)
             ) {
                 item { GroupTitle(stringResource(R.string.theme)) }
 
@@ -88,9 +93,7 @@ fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
                     )
                 }
             }
-        },
-        title = { Text(stringResource(R.string.settings), style = MaterialTheme.typography.h6) },
-        shape = MaterialTheme.shapes.large
+        }
     )
 }
 
@@ -98,8 +101,7 @@ fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
 private fun GroupTitle(title: String) {
     Text(
         text = title,
-        modifier = Modifier.padding(DEFAULT_PADDING),
-        style = MaterialTheme.typography.caption
+        style = MaterialTheme.typography.bodySmall
     )
 }
 
@@ -111,15 +113,12 @@ private fun SwitchOption(
 ) {
     Row(
         modifier = Modifier
-            .padding(DEFAULT_PADDING)
-            .fillMaxWidth(),
+            .fillMaxWidth()
+            .padding(start = ADDITIONAL_START_PADDING),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {
-        Text(
-            text = title,
-            modifier = Modifier.padding(bottom = DEFAULT_PADDING)
-        )
+        Text(text = title)
 
         Switch(checked = checked, onCheckedChange = onChecked)
     }
@@ -136,18 +135,19 @@ private fun RadioOption(
     Column(
         modifier = Modifier
             .selectableGroup()
-            .padding(horizontal = DEFAULT_PADDING)
+            .padding(horizontal = ADDITIONAL_START_PADDING)
     ) {
         for (option in options) {
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(56.dp)
+                    .height(LocalViewConfiguration.current.minimumTouchTargetSize.height)
                     .selectable(
                         selected = option == selected,
                         onClick = { onSelected(option) },
                         role = Role.RadioButton
                     ),
+                horizontalArrangement = Arrangement.spacedBy(DEFAULT_PADDING),
                 verticalAlignment = Alignment.CenterVertically
             ) {
                 RadioButton(
@@ -155,11 +155,7 @@ private fun RadioOption(
                     onClick = null
                 )
 
-                Text(
-                    text = option.string,
-                    modifier = Modifier.padding(start = DEFAULT_PADDING),
-                    style = MaterialTheme.typography.body1
-                )
+                Text(option.string)
             }
         }
     }

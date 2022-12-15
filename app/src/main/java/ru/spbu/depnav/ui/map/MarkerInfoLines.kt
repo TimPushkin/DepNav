@@ -18,22 +18,25 @@
 
 package ru.spbu.depnav.ui.map
 
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Text
+import androidx.compose.material3.LocalContentColor
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.ui.theme.FADED_ALPHA
 
 /** Lines with information about a marker. */
 @Composable
@@ -45,45 +48,44 @@ fun MarkerInfoLines(
     icon: @Composable () -> Unit
 ) {
     Row(
-        modifier = Modifier
-            .padding(horizontal = DEFAULT_PADDING * 2, vertical = DEFAULT_PADDING)
-            .then(modifier),
+        modifier = modifier,
+        horizontalArrangement = Arrangement.spacedBy(DEFAULT_PADDING),
         verticalAlignment = Alignment.CenterVertically
     ) {
         icon()
 
-        Column(modifier = Modifier.padding(start = DEFAULT_PADDING * 2)) {
-            Row(verticalAlignment = Alignment.CenterVertically) {
-                if (title.isNotBlank()) {
+        Column(verticalArrangement = Arrangement.spacedBy(DEFAULT_PADDING / 2)) {
+            CompositionLocalProvider(LocalTextStyle provides MaterialTheme.typography.titleLarge) {
+                Row(verticalAlignment = Alignment.CenterVertically) {
                     Text(
-                        text = title,
-                        modifier = Modifier.weight(1f, fill = false),
-                        style = MaterialTheme.typography.h6
-                    )
-                }
-
-                if (isClosed) {
-                    Text(
-                        text = "•",
-                        modifier = Modifier
-                            .alpha(FADED_ALPHA)
-                            .padding(horizontal = DEFAULT_PADDING),
-                        fontSize = MaterialTheme.typography.h6.fontSize
+                        text = title.ifBlank { stringResource(R.string.no_title) },
+                        modifier = Modifier.weight(1f, fill = false)
                     )
 
-                    Text(
-                        text = stringResource(R.string.closed),
-                        modifier = Modifier.alpha(FADED_ALPHA),
-                        fontSize = MaterialTheme.typography.h6.fontSize,
-                        maxLines = 1
-                    )
+                    if (isClosed) {
+                        CompositionLocalProvider(
+                            LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant
+                        ) {
+                            Text(
+                                text = "•",
+                                modifier = Modifier.padding(horizontal = DEFAULT_PADDING),
+                                fontWeight = FontWeight.Light,
+                            )
+
+                            Text(
+                                text = stringResource(R.string.closed),
+                                fontWeight = FontWeight.Light,
+                                maxLines = 1
+                            )
+                        }
+                    }
                 }
             }
 
             if (!description.isNullOrBlank()) {
                 Text(
                     text = description,
-                    modifier = Modifier.padding(top = DEFAULT_PADDING)
+                    style = MaterialTheme.typography.bodyMedium
                 )
             }
         }
