@@ -54,6 +54,7 @@ import ru.spbu.depnav.ui.map.MarkerView
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
+/** Column with clickable information about markers that were found by the search. */
 @Composable
 fun SearchResults(
     markersWithTexts: Map<Marker, MarkerText>,

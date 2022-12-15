@@ -81,7 +81,8 @@ fun TopButton(
 
 @Preview
 @Composable
-fun TopButtonPreview() {
+@Suppress("UnusedPrivateMember")
+private fun TopButtonPreview() {
     DepNavTheme {
         TopButton(
             text = "Search markers",

@@ -16,6 +16,8 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
+@file:Suppress("UndocumentedPublicProperty") // No point in documenting generated colors
+
 package ru.spbu.depnav.ui.theme
 
 import androidx.compose.ui.graphics.Color
