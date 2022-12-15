@@ -54,15 +54,20 @@ fun SearchScreen(
             modifier = Modifier.windowInsetsPadding(WindowInsets.systemBars),
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            val fillMaxWidthModifier = Modifier.fillMaxWidth(0.9f)
+
             SearchField(
                 onTextChange = vm.queryTextFlow::tryEmit,
                 onClear = vm::clearMatches,
                 onBackClick = onNavigateBack,
-                modifier = Modifier.fillMaxWidth(),
+                modifier = fillMaxWidthModifier,
                 placeholder = stringResource(R.string.search_markers)
             )
 
-            Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f))
+            Divider(
+                modifier = fillMaxWidthModifier,
+                color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.2f)
+            )
 
             if (vm.searchMatches.let { it == null || it.isNotEmpty() }) {
                 val keyboard = LocalSoftwareKeyboardController.current
@@ -74,7 +79,8 @@ fun SearchScreen(
                     onResultClick = { markerId ->
                         vm.addToSearchHistory(markerId)
                         onResultClick(markerId)
-                    }
+                    },
+                    modifier = fillMaxWidthModifier
                 )
             } else {
                 CompositionLocalProvider(

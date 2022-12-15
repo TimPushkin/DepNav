@@ -21,15 +21,14 @@ package ru.spbu.depnav.ui.search
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
-import androidx.compose.material3.Divider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalContentColor
 import androidx.compose.material3.MaterialTheme
@@ -60,14 +59,17 @@ fun SearchResults(
     markersWithTexts: Map<Marker, MarkerText>,
     isHistory: Boolean,
     onStateChange: (onTop: Boolean) -> Unit,
-    onResultClick: (Int) -> Unit
+    onResultClick: (Int) -> Unit,
+    modifier: Modifier = Modifier
 ) {
     val state = rememberLazyListState()
     val scope = rememberCoroutineScope()
 
     LazyColumn(
-        modifier = Modifier.fillMaxWidth(),
-        state = state
+        modifier = modifier,
+        state = state,
+        contentPadding = PaddingValues(top = DEFAULT_PADDING / 2),
+        verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         items(markersWithTexts.toList().asReversed()) { (marker, markerText) ->
             if (markerText.title == null) return@items
@@ -91,8 +93,6 @@ fun SearchResults(
                     }
                     ).takeIf { isHistory }
             )
-
-            Divider(color = MaterialTheme.colorScheme.onSurface.copy(alpha = 0.1f))
         }
     }
 
@@ -118,7 +118,6 @@ private fun SearchResult(
         modifier = Modifier
             .clickable { onClick(markerText.markerId) }
             .fillMaxWidth()
-            .padding(horizontal = DEFAULT_PADDING)
             .height(LocalViewConfiguration.current.minimumTouchTargetSize.height),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
