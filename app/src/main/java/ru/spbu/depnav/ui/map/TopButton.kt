@@ -18,7 +18,9 @@
 
 package ru.spbu.depnav.ui.map
 
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Search
@@ -34,6 +36,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.tooling.preview.Preview
+import ru.spbu.depnav.ui.theme.DepNavTheme
 
 /** Button with a search icon and text. */
 @OptIn(ExperimentalMaterial3Api::class)
@@ -50,7 +55,10 @@ fun TopButton(
         shape = CircleShape
     ) {
         Row(verticalAlignment = Alignment.CenterVertically) {
-            IconButton(onClick = onSettingsClick) {
+            Box( // Aligns this Icon with the trailing IconButton
+                modifier = Modifier.size(LocalViewConfiguration.current.minimumTouchTargetSize),
+                contentAlignment = Alignment.Center
+            ) {
                 Icon(Icons.Rounded.Search, contentDescription = "Open menu")
             }
 
@@ -68,5 +76,17 @@ fun TopButton(
                 Icon(Icons.Rounded.Settings, contentDescription = "Open settings")
             }
         }
+    }
+}
+
+@Preview
+@Composable
+fun TopButtonPreview() {
+    DepNavTheme {
+        TopButton(
+            text = "Search markers",
+            onSettingsClick = {},
+            onSurfaceClick = {}
+        )
     }
 }

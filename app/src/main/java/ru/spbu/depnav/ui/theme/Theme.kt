@@ -98,7 +98,6 @@ private val DarkColorScheme = darkColorScheme(
 
 /** Padding applied where elements need to be spaced out by default. */
 val DEFAULT_PADDING = 16.dp
-val CLICKABLE_SIZE = 48.dp
 
 /** Theme of the application. */
 @Composable

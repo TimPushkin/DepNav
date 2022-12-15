@@ -41,6 +41,7 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
@@ -51,7 +52,6 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.map.MarkerView
-import ru.spbu.depnav.ui.theme.CLICKABLE_SIZE
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
@@ -119,7 +119,7 @@ private fun SearchResult(
             .clickable { onClick(markerText.markerId) }
             .fillMaxWidth()
             .padding(horizontal = DEFAULT_PADDING)
-            .height(CLICKABLE_SIZE),
+            .height(LocalViewConfiguration.current.minimumTouchTargetSize.height),
         horizontalArrangement = Arrangement.SpaceBetween,
         verticalAlignment = Alignment.CenterVertically
     ) {

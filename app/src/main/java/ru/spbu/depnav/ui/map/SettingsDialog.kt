@@ -36,11 +36,11 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
-import ru.spbu.depnav.ui.theme.CLICKABLE_SIZE
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.utils.preferences.PreferencesManager
 
@@ -141,7 +141,7 @@ private fun RadioOption(
             Row(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .height(CLICKABLE_SIZE)
+                    .height(LocalViewConfiguration.current.minimumTouchTargetSize.height)
                     .selectable(
                         selected = option == selected,
                         onClick = { onSelected(option) },
