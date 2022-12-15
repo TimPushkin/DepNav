@@ -1412,7 +1412,7 @@
           "type": "ROOM",
           "is_closed": false,
           "x": 2960,
-          "y": 2023,
+          "y": 1471,
           "ru": {
             "title": "1406",
             "description": null
@@ -1426,7 +1426,7 @@
           "type": "ROOM",
           "is_closed": false,
           "x": 2960,
-          "y": 1471,
+          "y": 1236,
           "ru": {
             "title": "1404",
             "description": null
@@ -5905,11 +5905,11 @@
           "y": 2541,
           "ru": {
             "title": "3515",
-            "description": null
+            "description": "Студсовет"
           },
           "en": {
             "title": "3515",
-            "description": null
+            "description": "Student Council"
           }
         },
         {
@@ -7127,7 +7127,7 @@
           },
           "en": {
             "title": "3248",
-            "description": "Programming language tools lab"
+            "description": "Programming languages and tools lab"
           }
         },
         {
@@ -9200,11 +9200,11 @@
           "y": 858,
           "ru": {
             "title": "4333",
-            "description": null
+            "description": "Управление по работе с молодёжью (УРМ)"
           },
           "en": {
             "title": "4333",
-            "description": null
+            "description": "Department for Youth Affairs (URM)"
           }
         },
         {
