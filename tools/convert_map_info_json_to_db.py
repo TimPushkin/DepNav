@@ -15,10 +15,10 @@
 # along with this program.  If not, see <https://www.gnu.org/licenses/>.
 
 import json
+import pathlib
 import sqlite3
 from argparse import ArgumentParser
 from enum import Enum
-
 
 # This script adds the contents of the specified map info json file corresponding to
 # 'map-info-schema.json' into the specified SQLite database.
@@ -35,16 +35,16 @@ class LID(Enum):
 
 
 parser = ArgumentParser()
-parser.add_argument("json_file", type=str, help="path to the json file")
+parser.add_argument("json_file", type=pathlib.Path, help="path to the json file")
 parser.add_argument(
-    "-d", "--db_file", type=str, default="maps.db", help="path to the database file"
+    "-d", "--db_file", type=pathlib.Path, default="maps.db", help="path to the database file"
 )
 args = parser.parse_args()
 
-db = sqlite3.connect(args.db_file)
+db = sqlite3.connect(str(args.db_file))
 cur = db.cursor()
 
-cur.execute("PRAGMA user_version = 5")
+cur.execute("PRAGMA user_version = 6")
 
 cur.executescript(
     """

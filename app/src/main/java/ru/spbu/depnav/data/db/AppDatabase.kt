@@ -33,7 +33,7 @@ import ru.spbu.depnav.data.model.SearchHistoryEntry
         MapInfo::class, Marker::class, MarkerText::class, MarkerTextFts::class,
         SearchHistoryEntry::class
     ],
-    version = 5
+    version = 6
 )
 @TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
