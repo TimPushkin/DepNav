@@ -21,10 +21,10 @@ With **DepNav** you can do the following:
 
 - **View** the available maps by floors
 - **Search** for specific rooms and other objects on the selected map with built-in search
-- Enjoy the graphic interface in light and dark themes
+- Enjoy Material UI 3 in selectable light and dark themes
 - Two languages available: English and Russian
 
-| ![Map](https://i.imgur.com/NcjEy30.png) | ![Search](https://i.imgur.com/dpTJIBV.png) | ![Info](https://i.imgur.com/hhPvKc1.png) |
+| ![Map](https://i.imgur.com/GwPuEbP.png) | ![Search](https://i.imgur.com/TLdCu6j.png) | ![Info](https://i.imgur.com/eXqWBcr.png) |
 |:---------------------------------------:|:------------------------------------------:|:----------------------------------------:|
 
 ## Get it!
