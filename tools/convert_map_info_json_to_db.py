@@ -44,8 +44,6 @@ args = parser.parse_args()
 db = sqlite3.connect(str(args.db_file))
 cur = db.cursor()
 
-cur.execute("PRAGMA user_version = 6")
-
 cur.executescript(
     """
     CREATE TABLE IF NOT EXISTS map_info
@@ -121,6 +119,8 @@ cur.executescript(
 )
 
 m = json.load(open(args.json_file, encoding="utf8"))
+
+cur.execute(f"PRAGMA user_version = {m['version']}")
 
 map_name = m["mapName"]
 floor_width = m["floorWidth"]

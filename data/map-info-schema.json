@@ -5,6 +5,9 @@
     "mapName": {
       "type": "string"
     },
+    "version": {
+      "type": "integer"
+    },
     "floorWidth": {
       "type": "integer"
     },
@@ -117,6 +120,7 @@
   },
   "required": [
     "mapName",
+    "version",
     "floorWidth",
     "floorHeight",
     "tileSize",
