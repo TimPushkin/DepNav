@@ -44,8 +44,6 @@ args = parser.parse_args()
 db = sqlite3.connect(str(args.db_file))
 cur = db.cursor()
 
-cur.execute("PRAGMA user_version = 6")
-
 cur.executescript(
     """
     CREATE TABLE IF NOT EXISTS map_info
@@ -71,7 +69,7 @@ cur.executescript(
     CREATE TABLE IF NOT EXISTS marker_text
     (
         marker_id   INTEGER NOT NULL,
-        language_id INTEGER NOT NULL,
+        language_id TEXT NOT NULL,
         title       TEXT,
         description TEXT,
         PRIMARY KEY (marker_id, language_id),
@@ -122,6 +120,8 @@ cur.executescript(
 
 m = json.load(open(args.json_file, encoding="utf8"))
 
+cur.execute(f"PRAGMA user_version = {m['version']}")
+
 map_name = m["mapName"]
 floor_width = m["floorWidth"]
 floor_height = m["floorHeight"]
@@ -160,13 +160,13 @@ for floor in m["floors"]:
             },
         )
 
-        for lid_name, lid in LID.__members__.items():
+        for lid_name in LID.__members__:
             cur.execute(
                 "INSERT INTO marker_text "
                 "VALUES (:marker_id, :language_id, :title, :description)",
                 {
                     "marker_id": row_id,
-                    "language_id": lid.value,
+                    "language_id": lid_name,
                     **marker[lid_name.lower()],
                 },
             )

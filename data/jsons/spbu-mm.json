@@ -1,5 +1,6 @@
 {
   "mapName": "spbu-mm",
+  "version": 7,
   "floorWidth": 8192,
   "floorHeight": 4096,
   "tileSize": 256,
@@ -416,7 +417,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "is_closed": true,
+          "is_closed": false,
           "x": 3314,
           "y": 1236,
           "ru": {
@@ -2521,7 +2522,7 @@
         },
         {
           "type": "STAIRS_DOWN",
-          "is_closed": true,
+          "is_closed": false,
           "x": 3314,
           "y": 1236,
           "ru": {

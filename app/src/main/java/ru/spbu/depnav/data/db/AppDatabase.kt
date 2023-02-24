@@ -20,7 +20,6 @@ package ru.spbu.depnav.data.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
-import androidx.room.TypeConverters
 import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
@@ -33,9 +32,8 @@ import ru.spbu.depnav.data.model.SearchHistoryEntry
         MapInfo::class, Marker::class, MarkerText::class, MarkerTextFts::class,
         SearchHistoryEntry::class
     ],
-    version = 6
+    version = 7
 )
-@TypeConverters(Converters::class)
 abstract class AppDatabase : RoomDatabase() {
     /** DAO for the table containing information about the available maps. */
     abstract fun mapInfoDao(): MapInfoDao
