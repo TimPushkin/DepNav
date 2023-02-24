@@ -2,7 +2,7 @@
   "formatVersion": 1,
   "database": {
     "version": 7,
-    "identityHash": "263fb8cdd7d80e5ffc3d30a21fe3de6a",
+    "identityHash": "4758aac06395f9babe465ff1a1274632",
     "entities": [
       {
         "tableName": "map_info",
@@ -134,7 +134,7 @@
       },
       {
         "tableName": "marker_text",
-        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`marker_id` INTEGER NOT NULL, `language_id` INTEGER NOT NULL, `title` TEXT, `description` TEXT, PRIMARY KEY(`marker_id`, `language_id`), FOREIGN KEY(`marker_id`) REFERENCES `marker`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
+        "createSql": "CREATE TABLE IF NOT EXISTS `${TABLE_NAME}` (`marker_id` INTEGER NOT NULL, `language_id` TEXT NOT NULL, `title` TEXT, `description` TEXT, PRIMARY KEY(`marker_id`, `language_id`), FOREIGN KEY(`marker_id`) REFERENCES `marker`(`id`) ON UPDATE NO ACTION ON DELETE RESTRICT )",
         "fields": [
           {
             "fieldPath": "markerId",
@@ -145,7 +145,7 @@
           {
             "fieldPath": "languageId",
             "columnName": "language_id",
-            "affinity": "INTEGER",
+            "affinity": "TEXT",
             "notNull": true
           },
           {
@@ -266,7 +266,7 @@
     "views": [],
     "setupQueries": [
       "CREATE TABLE IF NOT EXISTS room_master_table (id INTEGER PRIMARY KEY,identity_hash TEXT)",
-      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '263fb8cdd7d80e5ffc3d30a21fe3de6a')"
+      "INSERT OR REPLACE INTO room_master_table (id,identity_hash) VALUES(42, '4758aac06395f9babe465ff1a1274632')"
     ]
   }
 }

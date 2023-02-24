@@ -69,7 +69,7 @@ cur.executescript(
     CREATE TABLE IF NOT EXISTS marker_text
     (
         marker_id   INTEGER NOT NULL,
-        language_id INTEGER NOT NULL,
+        language_id TEXT NOT NULL,
         title       TEXT,
         description TEXT,
         PRIMARY KEY (marker_id, language_id),
@@ -160,13 +160,13 @@ for floor in m["floors"]:
             },
         )
 
-        for lid_name, lid in LID.__members__.items():
+        for lid_name in LID.__members__:
             cur.execute(
                 "INSERT INTO marker_text "
                 "VALUES (:marker_id, :language_id, :title, :description)",
                 {
                     "marker_id": row_id,
-                    "language_id": lid.value,
+                    "language_id": lid_name,
                     **marker[lid_name.lower()],
                 },
             )
