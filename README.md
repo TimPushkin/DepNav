@@ -1,4 +1,4 @@
-<img src="https://i.imgur.com/brORQ91.png" align="right" height="200"  alt="App icon"/>
+<img src="app/src/main/res/mipmap-xxxhdpi/ic_launcher.png" align="right" height="192" alt="App icon"/>
 
 # DepNav – Department Navigator
 
