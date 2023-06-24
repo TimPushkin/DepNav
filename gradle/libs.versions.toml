@@ -6,7 +6,7 @@ kspPlugin = "1.8.21-1.0.11"  # Should be "$kotlin-$ksp", but could not find a wa
 composeCompiler = "1.4.7"
 hilt = "2.46.1"
 lifecycle = "2.6.1"
-room = "2.5.1"
+room = "2.5.2"
 
 
 [libraries]
@@ -21,13 +21,13 @@ androidx-room-compiler = { group = "androidx.room", name = "room-compiler", vers
 google-dagger-hilt = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
 google-dagger-hiltCompiler = { group = "com.google.dagger", name = "hilt-compiler", version.ref = "hilt" }
 
-androidx-compose-bom = "androidx.compose:compose-bom:2023.05.01"
+androidx-compose-bom = "androidx.compose:compose-bom:2023.06.01"
 
 androidx-core-ktx = "androidx.core:core-ktx:1.10.1"
-androidx-activity-compose = "androidx.activity:activity-compose:1.7.1"
-androidx-navigation-compose = "androidx.navigation:navigation-compose:2.5.3"
+androidx-activity-compose = "androidx.activity:activity-compose:1.7.2"
+androidx-navigation-compose = "androidx.navigation:navigation-compose:2.6.0"
 androidx-hilt-navigationCompose = "androidx.hilt:hilt-navigation-compose:1.0.0"
-plrapps-mapcompose = "ovh.plrapps:mapcompose:2.6.1"
+plrapps-mapcompose = "ovh.plrapps:mapcompose:2.7.1"
 google-accompanist-systemuicontroller = "com.google.accompanist:accompanist-systemuicontroller:0.30.1"
 
 junit = 'junit:junit:4.13.2'
@@ -38,7 +38,7 @@ androidx-test-extJunit = "androidx.test.ext:junit:1.1.5"
 
 [plugins]
 
-android-application = "com.android.application:8.0.1"
+android-application = "com.android.application:8.0.2"
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
