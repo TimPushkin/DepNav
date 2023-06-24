@@ -1,6 +1,6 @@
 {
   "mapName": "spbu-mm",
-  "version": 7,
+  "version": 8,
   "floorWidth": 8192,
   "floorHeight": 4096,
   "tileSize": 256,
@@ -375,7 +375,7 @@
         },
         {
           "type": "STAIRS_UP",
-          "is_closed": true,
+          "is_closed": false,
           "x": 4773,
           "y": 866,
           "ru": {
@@ -2480,7 +2480,7 @@
         },
         {
           "type": "STAIRS_BOTH",
-          "is_closed": true,
+          "is_closed": false,
           "x": 4773,
           "y": 866,
           "ru": {
@@ -5397,7 +5397,7 @@
         },
         {
           "type": "STAIRS_BOTH",
-          "is_closed": true,
+          "is_closed": false,
           "x": 4773,
           "y": 866,
           "ru": {
@@ -8216,7 +8216,7 @@
         },
         {
           "type": "STAIRS_DOWN",
-          "is_closed": true,
+          "is_closed": false,
           "x": 4773,
           "y": 866,
           "ru": {
