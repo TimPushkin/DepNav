@@ -18,15 +18,14 @@
 
 package ru.spbu.depnav.ui.map
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
 import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.ColorFilter
-import androidx.compose.ui.graphics.ColorMatrix
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
@@ -51,7 +50,7 @@ fun MarkerView(
 ) = when (type) {
     MarkerType.ROOM -> if (simplified) {
         MarkerIcon(
-            painter = painterResource(R.drawable.key_emoji),
+            painter = painterResource(R.drawable.mrk_room),
             faded = isClosed,
             contentDescription = "Room",
             modifier = modifier
@@ -64,55 +63,55 @@ fun MarkerView(
         )
     }
     MarkerType.ENTRANCE -> MarkerIcon(
-        painter = painterResource(R.drawable.door_emoji),
+        painter = painterResource(R.drawable.mrk_entrance),
         faded = isClosed,
         contentDescription = "Entrance",
         modifier = modifier
     )
     MarkerType.STAIRS_UP -> MarkerIcon(
-        painter = painterResource(R.drawable.up_arrow_emoji),
+        painter = painterResource(R.drawable.mrk_stairs_up),
         faded = isClosed,
         contentDescription = "Stairs up",
         modifier = modifier
     )
     MarkerType.STAIRS_DOWN -> MarkerIcon(
-        painter = painterResource(R.drawable.down_arrow_emoji),
+        painter = painterResource(R.drawable.mrk_stairs_down),
         faded = isClosed,
         contentDescription = "Stairs down",
         modifier = modifier
     )
     MarkerType.STAIRS_BOTH -> MarkerIcon(
-        painter = painterResource(R.drawable.up_down_arrow_emoji),
+        painter = painterResource(R.drawable.mrk_stairs),
         faded = isClosed,
         contentDescription = "Stairs up and down",
         modifier = modifier
     )
     MarkerType.ELEVATOR -> MarkerIcon(
-        painter = painterResource(R.drawable.elevator_emoji),
+        painter = painterResource(R.drawable.mrk_elevator),
         faded = isClosed,
         contentDescription = "Elevator",
         modifier = modifier
     )
     MarkerType.WC_MAN -> MarkerIcon(
-        painter = painterResource(R.drawable.mens_room_emoji),
+        painter = painterResource(R.drawable.mrk_wc_man),
         faded = isClosed,
         contentDescription = "Men's room",
         modifier = modifier
     )
     MarkerType.WC_WOMAN -> MarkerIcon(
-        painter = painterResource(R.drawable.womens_room_emoji),
+        painter = painterResource(R.drawable.mrk_wc_woman),
         faded = isClosed,
         contentDescription = "Women's room",
         modifier = modifier
     )
     MarkerType.WC -> MarkerIcon(
-        painter = painterResource(R.drawable.restroom_emoji),
+        painter = painterResource(R.drawable.mrk_wc),
         faded = isClosed,
         contentDescription = "Restroom",
         modifier = modifier
     )
     MarkerType.OTHER -> MarkerIcon(
-        painter = painterResource(R.drawable.keycap_asterisk_emoji),
+        painter = painterResource(R.drawable.mrk_other),
         faded = isClosed,
         contentDescription = "Other marker",
         modifier = modifier
@@ -126,15 +125,13 @@ private fun MarkerIcon(
     contentDescription: String?,
     modifier: Modifier = Modifier
 ) {
-    Image(
+    Icon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = Modifier
             .size(ICON_SIZE)
-            .then(modifier),
-        alpha = if (faded) 0.38f else 1f,
-        colorFilter = ColorFilter.colorMatrix(ColorMatrix().apply { setToSaturation(0f) })
-            .takeIf { faded }
+            .alpha(if (faded) 0.38f else 1f)
+            .then(modifier)
     )
 }
 

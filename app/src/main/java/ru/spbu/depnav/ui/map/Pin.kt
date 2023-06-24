@@ -18,9 +18,10 @@
 
 package ru.spbu.depnav.ui.map
 
-import androidx.compose.foundation.Image
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.size
+import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.painterResource
@@ -32,12 +33,13 @@ private val SIZE = 30.dp
 /** Pin for highlighting map markers. */
 @Composable
 fun Pin(modifier: Modifier = Modifier) {
-    Image(
-        painter = painterResource(id = R.drawable.round_pushpin_emoji),
+    Icon(
+        painter = painterResource(R.drawable.pin),
         contentDescription = "Pin",
         modifier = Modifier
             .size(SIZE)
             .offset(y = -SIZE / 2)
-            .then(modifier)
+            .then(modifier),
+        tint = MaterialTheme.colorScheme.primary
     )
 }
