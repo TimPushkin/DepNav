@@ -1,15 +1,38 @@
 <resources>
     <string name="app_name" translatable="false">DepNav</string>
+
+    <!-- General -->
+    <string name="ok" translatable="false">OK</string>
+
+    <!-- Markers -->
     <string name="no_title">No title</string>
-    <string name="search_markers">Search markers</string>
     <string name="closed">Closed</string>
+
+    <!-- Search -->
+    <string name="search_markers">Search markers</string>
+    <string name="nothing_found">Nothing was found</string>
+
+    <!-- Map legend -->
+    <string name="map_legend">Map legend</string>
+    <string name="entrance_descr">building entrance</string>
+    <string name="stairs_up_descr">stairs to the floor above</string>
+    <string name="stairs_down_descr">stairs to the floor below</string>
+    <string name="stairs_both_descr">stairs in both directions</string>
+    <string name="elevator_descr">elevator</string>
+    <string name="wc_man_descr">men\'s restroom</string>
+    <string name="wc_woman_descr">women\'s restroom</string>
+    <string name="wc_descr">unisex restroom</string>
+    <string name="other_descr">miscellaneous</string>
+
+    <!-- Settings -->
     <string name="settings">Settings</string>
     <string name="theme">Theme</string>
     <string name="dark_theme">Dark</string>
     <string name="light_theme">Light</string>
     <string name="system_theme">Match system</string>
-    <string name="zoom_in_to_see_markers">Zoom in to see markers</string>
-    <string name="nothing_found">Nothing was found</string>
-    <string name="rotation_gesture">Rotation gesture</string>
     <string name="map">Map</string>
+    <string name="rotation_gesture">Rotation gesture</string>
+
+    <!-- Etc -->
+    <string name="zoom_in_to_see_markers">Zoom in to see markers</string>
 </resources>
