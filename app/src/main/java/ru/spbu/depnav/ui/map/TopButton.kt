@@ -39,7 +39,9 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 /** Button with a search icon, text, and additional nested buttons. */
@@ -62,7 +64,10 @@ fun TopButton(
                 modifier = Modifier.size(LocalViewConfiguration.current.minimumTouchTargetSize),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(Icons.Rounded.Search, contentDescription = "Search")
+                Icon(
+                    Icons.Rounded.Search,
+                    contentDescription = stringResource(R.string.label_search)
+                )
             }
 
             CompositionLocalProvider(
@@ -78,11 +83,17 @@ fun TopButton(
             }
 
             IconButton(onClick = onInfoClick) {
-                Icon(Icons.Rounded.Info, contentDescription = "Open map info")
+                Icon(
+                    Icons.Rounded.Info,
+                    contentDescription = stringResource(R.string.label_open_map_info)
+                )
             }
 
             IconButton(onClick = onSettingsClick) {
-                Icon(Icons.Rounded.Settings, contentDescription = "Open settings")
+                Icon(
+                    Icons.Rounded.Settings,
+                    contentDescription = stringResource(R.string.label_open_settings)
+                )
             }
         }
     }

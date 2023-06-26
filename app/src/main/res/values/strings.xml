@@ -35,4 +35,24 @@
 
     <!-- Etc -->
     <string name="zoom_in_to_see_markers">Zoom in to see markers</string>
+
+    <!-- Content descriptions for accessibility-->
+    <string name="label_to_floor_above">To the floor above</string>
+    <string name="label_to_floor_below">To the floor below</string>
+    <string name="label_room_icon">Room</string>
+    <string name="label_entrance_icon">Entrance</string>
+    <string name="label_stairs_up_icon">Stairs to the floor above</string>
+    <string name="label_stairs_down_icon">Stairs to the floor below</string>
+    <string name="label_stairs_both_icon">Stairs in both directions</string>
+    <string name="label_elevator_icon">Elevator</string>
+    <string name="label_wc_man_icon">Men\'s restroom</string>
+    <string name="label_wc_woman_icon">Women\'s restroom</string>
+    <string name="label_wc_icon">Unisex restroom</string>
+    <string name="label_other_icon">Miscellaneous place</string>
+    <string name="label_selected_place">Selected place</string>
+    <string name="label_search">Search</string>
+    <string name="label_open_map_info">Open map info</string>
+    <string name="label_open_settings">Open settings</string>
+    <string name="label_navigate_back">Navigate back</string>
+    <string name="label_clear_text_field">Clear text field</string>
 </resources>

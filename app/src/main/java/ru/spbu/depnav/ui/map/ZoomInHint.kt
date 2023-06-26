@@ -53,7 +53,7 @@ fun ZoomInHint() {
         ) {
             Icon(
                 painter = painterResource(R.drawable.ic_pinch_zoom_in),
-                contentDescription = "Pinch to zoom in",
+                contentDescription = null,
                 modifier = Modifier.size(
                     with(LocalDensity.current) {
                         MaterialTheme.typography.bodySmall.fontSize.toDp() * 2

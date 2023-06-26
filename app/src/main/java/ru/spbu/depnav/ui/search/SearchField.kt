@@ -48,7 +48,9 @@ import androidx.compose.ui.focus.focusRequester
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.RectangleShape
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.input.ImeAction
+import ru.spbu.depnav.R
 
 /** Text field with a search icon. */
 @Composable
@@ -67,7 +69,10 @@ fun SearchField(
         val keyboard = LocalSoftwareKeyboardController.current
 
         IconButton(onClick = onBackClick) {
-            Icon(imageVector = Icons.Rounded.ArrowBack, contentDescription = "Navigate back")
+            Icon(
+                imageVector = Icons.Rounded.ArrowBack,
+                contentDescription = stringResource(R.string.label_navigate_back)
+            )
         }
 
         TextField(
@@ -92,7 +97,10 @@ fun SearchField(
                             onClear()
                         }
                     ) {
-                        Icon(Icons.Rounded.Close, contentDescription = "Clear field")
+                        Icon(
+                            Icons.Rounded.Close,
+                            contentDescription = stringResource(R.string.label_clear_text_field)
+                        )
                     }
                 }
             },

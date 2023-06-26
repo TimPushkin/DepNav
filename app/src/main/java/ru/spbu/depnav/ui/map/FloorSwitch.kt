@@ -38,7 +38,9 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 /** Two buttons to switch the current map one floor up or down. */
@@ -60,7 +62,10 @@ fun FloorSwitch(
                 onClick = { onClick(floor + 1) },
                 enabled = floor < maxFloor
             ) {
-                Icon(Icons.Rounded.KeyboardArrowUp, contentDescription = "Up arrow")
+                Icon(
+                    Icons.Rounded.KeyboardArrowUp,
+                    contentDescription = stringResource(R.string.label_to_floor_above)
+                )
             }
 
             AnimatedContent(
@@ -82,7 +87,10 @@ fun FloorSwitch(
                 onClick = { onClick(floor - 1) },
                 enabled = floor > minFloor
             ) {
-                Icon(Icons.Rounded.KeyboardArrowDown, contentDescription = "Down arrow")
+                Icon(
+                    Icons.Rounded.KeyboardArrowDown,
+                    contentDescription = stringResource(R.string.label_to_floor_below)
+                )
             }
         }
     }

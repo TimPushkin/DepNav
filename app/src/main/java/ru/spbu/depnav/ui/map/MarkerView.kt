@@ -29,6 +29,7 @@ import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.graphics.Shadow
 import androidx.compose.ui.graphics.painter.Painter
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,7 +53,7 @@ fun MarkerView(
         MarkerIcon(
             painter = painterResource(R.drawable.mrk_room),
             faded = isClosed,
-            contentDescription = "Room",
+            contentDescription = stringResource(R.string.label_room_icon),
             modifier = modifier
         )
     } else {
@@ -65,55 +66,55 @@ fun MarkerView(
     MarkerType.ENTRANCE -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_entrance),
         faded = isClosed,
-        contentDescription = "Entrance",
+        contentDescription = stringResource(R.string.label_entrance_icon),
         modifier = modifier
     )
     MarkerType.STAIRS_UP -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_stairs_up),
         faded = isClosed,
-        contentDescription = "Stairs up",
+        contentDescription = stringResource(R.string.label_stairs_up_icon),
         modifier = modifier
     )
     MarkerType.STAIRS_DOWN -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_stairs_down),
         faded = isClosed,
-        contentDescription = "Stairs down",
+        contentDescription = stringResource(R.string.label_stairs_down_icon),
         modifier = modifier
     )
     MarkerType.STAIRS_BOTH -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_stairs),
         faded = isClosed,
-        contentDescription = "Stairs up and down",
+        contentDescription = stringResource(R.string.label_stairs_both_icon),
         modifier = modifier
     )
     MarkerType.ELEVATOR -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_elevator),
         faded = isClosed,
-        contentDescription = "Elevator",
+        contentDescription = stringResource(R.string.label_elevator_icon),
         modifier = modifier
     )
     MarkerType.WC_MAN -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_wc_man),
         faded = isClosed,
-        contentDescription = "Men's room",
+        contentDescription = stringResource(R.string.label_wc_man_icon),
         modifier = modifier
     )
     MarkerType.WC_WOMAN -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_wc_woman),
         faded = isClosed,
-        contentDescription = "Women's room",
+        contentDescription = stringResource(R.string.label_wc_woman_icon),
         modifier = modifier
     )
     MarkerType.WC -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_wc),
         faded = isClosed,
-        contentDescription = "Restroom",
+        contentDescription = stringResource(R.string.label_wc_icon),
         modifier = modifier
     )
     MarkerType.OTHER -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_other),
         faded = isClosed,
-        contentDescription = "Other marker",
+        contentDescription = stringResource(R.string.label_other_icon),
         modifier = modifier
     )
 }

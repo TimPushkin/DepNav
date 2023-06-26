@@ -87,7 +87,7 @@ fun SearchResults(
                         ) {
                             Icon(
                                 painter = painterResource(R.drawable.ic_searched_for),
-                                contentDescription = "Search history",
+                                contentDescription = null,
                                 modifier = Modifier.size(28.dp)
                             )
                         }

@@ -31,4 +31,24 @@
 
     <!-- Etc -->
     <string name="zoom_in_to_see_markers">Приблизьте, чтобы увидеть метки</string>
+
+    <!-- Content descriptions for accessibility-->
+    <string name="label_to_floor_above">На этаж выше</string>
+    <string name="label_to_floor_below">На этаж ниже</string>
+    <string name="label_room_icon">Помещение</string>
+    <string name="label_entrance_icon">Вход</string>
+    <string name="label_stairs_up_icon">Лестница вверх</string>
+    <string name="label_stairs_down_icon">Лестница вниз</string>
+    <string name="label_stairs_both_icon">Лестница в оба направления</string>
+    <string name="label_elevator_icon">Лифт</string>
+    <string name="label_wc_man_icon">Мужской туалет</string>
+    <string name="label_wc_woman_icon">Женский туалет</string>
+    <string name="label_wc_icon">Общий туалет</string>
+    <string name="label_other_icon">Иное место</string>
+    <string name="label_selected_place">Выбранное место</string>
+    <string name="label_search">Искать</string>
+    <string name="label_open_map_info">Открыть информацию о карте</string>
+    <string name="label_open_settings">Открыть настройки</string>
+    <string name="label_navigate_back">Вернуться назад</string>
+    <string name="label_clear_text_field">Очистить поле ввода</string>
 </resources>
