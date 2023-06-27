@@ -98,6 +98,7 @@ fun FloorSwitch(
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun FloorSwitchPreview() {
     DepNavTheme {
         FloorSwitch(

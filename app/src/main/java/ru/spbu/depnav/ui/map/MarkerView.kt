@@ -151,6 +151,7 @@ private fun RoomName(name: String, lineTrough: Boolean, modifier: Modifier = Mod
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun MarkerIconPreview() {
     DepNavTheme {
         MarkerView(
@@ -163,6 +164,7 @@ private fun MarkerIconPreview() {
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun MarkerIconClosedPreview() {
     DepNavTheme {
         MarkerView(
@@ -175,6 +177,7 @@ private fun MarkerIconClosedPreview() {
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun RoomIconPreview() {
     DepNavTheme(darkTheme = false) {
         MarkerView(
@@ -187,6 +190,7 @@ private fun RoomIconPreview() {
 
 @Preview
 @Composable
+@Suppress("UnusedPrivateMember")
 private fun RoomIconClosedPreview() {
     DepNavTheme {
         MarkerView(
