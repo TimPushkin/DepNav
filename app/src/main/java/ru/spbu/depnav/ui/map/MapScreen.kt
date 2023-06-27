@@ -80,11 +80,16 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
         return
     }
 
-    var openMenu by rememberSaveable { mutableStateOf(false) }
-    if (openMenu) {
+    var openMapLegend by rememberSaveable { mutableStateOf(false) }
+    if (openMapLegend) {
+        MapLegendDialog(onDismiss = { openMapLegend = false })
+    }
+
+    var openSettings by rememberSaveable { mutableStateOf(false) }
+    if (openSettings) {
         SettingsDialog(
             prefs = vm.prefs,
-            onDismiss = { openMenu = false }
+            onDismiss = { openSettings = false }
         )
     }
 
@@ -97,7 +102,8 @@ fun MapScreen(vm: MapScreenViewModel = hiltViewModel(), onStartSearch: () -> Uni
                     visible = vm.showUI,
                     currentFloor = vm.currentFloor,
                     maxFloor = vm.floorsNum,
-                    onOpenMenuClick = { openMenu = true },
+                    onOpenMapLegendClick = { openMapLegend = true },
+                    onOpenSettingsClick = { openSettings = true },
                     onStartSearchClick = onStartSearch,
                     onSwitchFloorClick = { vm.viewModelScope.launch { vm.setFloor(it) } }
                 )
@@ -127,7 +133,8 @@ private fun BoxScope.TopUi(
     visible: Boolean,
     currentFloor: Int,
     maxFloor: Int,
-    onOpenMenuClick: () -> Unit,
+    onOpenMapLegendClick: () -> Unit,
+    onOpenSettingsClick: () -> Unit,
     onStartSearchClick: () -> Unit,
     onSwitchFloorClick: (Int) -> Unit
 ) {
@@ -149,7 +156,8 @@ private fun BoxScope.TopUi(
         ) {
             TopButton(
                 text = stringResource(R.string.search_markers),
-                onSettingsClick = onOpenMenuClick,
+                onInfoClick = onOpenMapLegendClick,
+                onSettingsClick = onOpenSettingsClick,
                 onSurfaceClick = onStartSearchClick,
                 modifier = Modifier.fillMaxWidth(0.9f)
             )

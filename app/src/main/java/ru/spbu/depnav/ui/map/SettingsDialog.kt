@@ -33,6 +33,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
@@ -50,10 +51,13 @@ private val ADDITIONAL_START_PADDING = 4.dp
 /** Dialog with app settings. */
 @Composable
 fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
-    // TODO: replace with a custom dialog
     AlertDialog(
         onDismissRequest = onDismiss,
-        confirmButton = {},
+        confirmButton = {
+            TextButton(onClick = onDismiss) {
+                Text(stringResource(R.string.ok))
+            }
+        },
         title = { Text(stringResource(R.string.settings)) },
         text = {
             LazyColumn(

@@ -1,15 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Markers -->
     <string name="no_title">Без названия</string>
-    <string name="search_markers">Поиск меток</string>
     <string name="closed">Закрыто</string>
+
+    <!-- Search -->
+    <string name="search_markers">Поиск меток</string>
+    <string name="nothing_found">Ничего не найдено</string>
+
+    <!-- Map legend -->
+    <string name="map_legend">Условные обозначения</string>
+    <string name="entrance_descr">вход в здание</string>
+    <string name="stairs_up_descr">лестница вверх</string>
+    <string name="stairs_down_descr">лестница вниз</string>
+    <string name="stairs_both_descr">лестница в оба направления</string>
+    <string name="elevator_descr">лифт</string>
+    <string name="wc_man_descr">мужской туалет</string>
+    <string name="wc_woman_descr">женский туалет</string>
+    <string name="wc_descr">общий туалет</string>
+    <string name="other_descr">прочее</string>
+
+    <!-- Settings -->
     <string name="settings">Настройки</string>
     <string name="theme">Тема</string>
     <string name="dark_theme">Тёмная</string>
     <string name="light_theme">Светлая</string>
     <string name="system_theme">Как в системе</string>
-    <string name="zoom_in_to_see_markers">Приблизьте, чтобы увидеть маркеры</string>
-    <string name="nothing_found">Ничего не найдено</string>
-    <string name="rotation_gesture">Жест поворота</string>
     <string name="map">Карта</string>
+    <string name="rotation_gesture">Жест поворота</string>
+
+    <!-- Etc -->
+    <string name="zoom_in_to_see_markers">Приблизьте, чтобы увидеть метки</string>
+
+    <!-- Content descriptions for accessibility-->
+    <string name="label_to_floor_above">На этаж выше</string>
+    <string name="label_to_floor_below">На этаж ниже</string>
+    <string name="label_room_icon">Помещение</string>
+    <string name="label_entrance_icon">Вход</string>
+    <string name="label_stairs_up_icon">Лестница вверх</string>
+    <string name="label_stairs_down_icon">Лестница вниз</string>
+    <string name="label_stairs_both_icon">Лестница в оба направления</string>
+    <string name="label_elevator_icon">Лифт</string>
+    <string name="label_wc_man_icon">Мужской туалет</string>
+    <string name="label_wc_woman_icon">Женский туалет</string>
+    <string name="label_wc_icon">Общий туалет</string>
+    <string name="label_other_icon">Иное место</string>
+    <string name="label_selected_place">Выбранное место</string>
+    <string name="label_search">Искать</string>
+    <string name="label_open_map_info">Открыть информацию о карте</string>
+    <string name="label_open_settings">Открыть настройки</string>
+    <string name="label_navigate_back">Вернуться назад</string>
+    <string name="label_clear_text_field">Очистить поле ввода</string>
 </resources>

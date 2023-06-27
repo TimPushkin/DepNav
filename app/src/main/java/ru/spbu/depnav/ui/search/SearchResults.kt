@@ -86,8 +86,8 @@ fun SearchResults(
                                 MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
                         ) {
                             Icon(
-                                painter = painterResource(R.drawable.ic_history),
-                                contentDescription = "Search history",
+                                painter = painterResource(R.drawable.ic_searched_for),
+                                contentDescription = null,
                                 modifier = Modifier.size(28.dp)
                             )
                         }
@@ -187,7 +187,7 @@ private fun SearchResultHistoryPreview() {
                 LocalContentColor provides MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
             ) {
                 Icon(
-                    painter = painterResource(R.drawable.ic_history),
+                    painter = painterResource(R.drawable.ic_searched_for),
                     contentDescription = null,
                     modifier = Modifier.size(28.dp)
                 )

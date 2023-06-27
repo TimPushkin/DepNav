@@ -18,14 +18,16 @@
 
 package ru.spbu.depnav.ui.map
 
+import androidx.compose.foundation.ExperimentalFoundationApi
+import androidx.compose.foundation.basicMarquee
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Search
 import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.LocalContentColor
@@ -37,14 +39,17 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalViewConfiguration
+import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
+import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
-/** Button with a search icon and text. */
-@OptIn(ExperimentalMaterial3Api::class)
+/** Button with a search icon, text, and additional nested buttons. */
+@OptIn(ExperimentalFoundationApi::class)
 @Composable
 fun TopButton(
     text: String,
+    onInfoClick: () -> Unit,
     onSettingsClick: () -> Unit,
     onSurfaceClick: () -> Unit,
     modifier: Modifier = Modifier
@@ -59,7 +64,10 @@ fun TopButton(
                 modifier = Modifier.size(LocalViewConfiguration.current.minimumTouchTargetSize),
                 contentAlignment = Alignment.Center
             ) {
-                Icon(Icons.Rounded.Search, contentDescription = "Open menu")
+                Icon(
+                    Icons.Rounded.Search,
+                    contentDescription = stringResource(R.string.label_search)
+                )
             }
 
             CompositionLocalProvider(
@@ -67,13 +75,25 @@ fun TopButton(
             ) {
                 Text(
                     text = text,
-                    modifier = Modifier.weight(1f),
+                    modifier = Modifier
+                        .weight(1f)
+                        .basicMarquee(),
                     maxLines = 1,
                 )
             }
 
+            IconButton(onClick = onInfoClick) {
+                Icon(
+                    Icons.Rounded.Info,
+                    contentDescription = stringResource(R.string.label_open_map_info)
+                )
+            }
+
             IconButton(onClick = onSettingsClick) {
-                Icon(Icons.Rounded.Settings, contentDescription = "Open settings")
+                Icon(
+                    Icons.Rounded.Settings,
+                    contentDescription = stringResource(R.string.label_open_settings)
+                )
             }
         }
     }
@@ -86,6 +106,7 @@ private fun TopButtonPreview() {
     DepNavTheme {
         TopButton(
             text = "Search markers",
+            onInfoClick = {},
             onSettingsClick = {},
             onSurfaceClick = {}
         )
