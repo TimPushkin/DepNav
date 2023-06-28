@@ -24,7 +24,7 @@ With **DepNav** you can do the following:
 - Enjoy Material UI 3 in selectable light and dark themes
 - Two languages available: English and Russian
 
-| ![Map](https://i.imgur.com/GwPuEbP.png) | ![Search](https://i.imgur.com/TLdCu6j.png) | ![Info](https://i.imgur.com/eXqWBcr.png) |
+| ![Map](https://i.imgur.com/1qjld38.png) | ![Search](https://i.imgur.com/cE3RtaA.png) | ![Info](https://i.imgur.com/Hcis0w0.png) |
 |:---------------------------------------:|:------------------------------------------:|:----------------------------------------:|
 
 ## Get it!
