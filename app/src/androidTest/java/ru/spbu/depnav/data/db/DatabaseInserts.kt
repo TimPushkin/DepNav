@@ -1,6 +1,6 @@
 /**
  * DepNav -- department navigator.
- * Copyright (C) 2022  Timofey Pushkin
+ * Copyright (C) 2022  Timofei Pushkin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,7 +18,7 @@
 
 @file:Suppress(
     "MethodOverloading", // Overloading insertAll for different tables
-    "TooManyFunctions" // All these function belong together
+    "TooManyFunctions" // All these functions belong together
 )
 
 package ru.spbu.depnav.data.db
@@ -37,10 +37,8 @@ private fun MarkerText.values() = listOf(markerId, languageId.name, title, descr
 
 @Suppress("ComplexMethod") // Further "simplification" is unreasonable
 private fun createContentValues(columnNames: Array<String>, values: List<Any?>): ContentValues {
-    if (columnNames.size != values.size) {
-        throw IllegalArgumentException(
-            "Expected ${columnNames.size} values, but was ${values.size}"
-        )
+    require(columnNames.size == values.size) {
+        "Expected ${columnNames.size} values, but was ${values.size}"
     }
     return ContentValues().apply {
         for ((col, v) in columnNames.zip(values)) {
