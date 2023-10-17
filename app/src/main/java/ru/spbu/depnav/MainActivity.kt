@@ -18,12 +18,15 @@
 
 package ru.spbu.depnav
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
+import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
+import androidx.activity.enableEdgeToEdge
 import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
-import androidx.core.view.WindowCompat
+import androidx.compose.runtime.LaunchedEffect
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
@@ -50,16 +53,20 @@ class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        WindowCompat.setDecorFitsSystemWindows(window, false)
-
         setContent {
-            DepNavTheme(
-                darkTheme = when (prefs.themeMode) {
-                    PreferencesManager.ThemeMode.LIGHT -> false
-                    PreferencesManager.ThemeMode.DARK -> true
-                    PreferencesManager.ThemeMode.SYSTEM -> isSystemInDarkTheme()
-                }
-            ) {
+            val darkTheme = when (prefs.themeMode) {
+                PreferencesManager.ThemeMode.LIGHT -> false
+                PreferencesManager.ThemeMode.DARK -> true
+                PreferencesManager.ThemeMode.SYSTEM -> isSystemInDarkTheme()
+            }
+
+            LaunchedEffect(darkTheme) {
+                val systemBarStyle =
+                    SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { darkTheme }
+                enableEdgeToEdge(systemBarStyle, systemBarStyle)
+            }
+
+            DepNavTheme(darkTheme = darkTheme) {
                 val navController = rememberNavController()
 
                 NavHost(navController = navController, startDestination = NavDestination.MAP.name) {

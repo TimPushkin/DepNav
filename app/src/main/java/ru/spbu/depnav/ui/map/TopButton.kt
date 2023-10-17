@@ -77,6 +77,8 @@ fun TopButton(
                     text = text,
                     modifier = Modifier
                         .weight(1f)
+                        // TODO: fix this being applied in landscape mode even when there is enough
+                        //  space
                         .basicMarquee(),
                     maxLines = 1,
                 )

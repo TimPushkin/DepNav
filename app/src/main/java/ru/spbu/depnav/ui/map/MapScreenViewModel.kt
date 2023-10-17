@@ -20,6 +20,7 @@ package ru.spbu.depnav.ui.map
 
 import android.util.Log
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableIntStateOf
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.setValue
 import androidx.compose.runtime.snapshotFlow
@@ -98,11 +99,11 @@ class MapScreenViewModel @Inject constructor(
     private var floors = emptyMap<Int, Floor>()
 
     /** Number of floors the current map has. */
-    var floorsNum by mutableStateOf(floors.size)
+    var floorsNum by mutableIntStateOf(floors.size)
         private set
 
     /** The floor currently displayed. */
-    var currentFloor by mutableStateOf(0)
+    var currentFloor by mutableIntStateOf(0)
 
     /** Controls the color of map tiles. */
     var tileColor: Color = Color.Black
