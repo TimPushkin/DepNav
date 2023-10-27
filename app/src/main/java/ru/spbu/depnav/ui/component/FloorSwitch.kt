@@ -16,10 +16,9 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.ui.map
+package ru.spbu.depnav.ui.component
 
 import androidx.compose.animation.AnimatedContent
-import androidx.compose.animation.ExperimentalAnimationApi
 import androidx.compose.animation.SizeTransform
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
@@ -43,11 +42,12 @@ import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
+private const val MIN_FLOOR = 1
+
 /** Two buttons to switch the current map one floor up or down. */
 @Composable
 fun FloorSwitch(
     floor: Int,
-    minFloor: Int,
     maxFloor: Int,
     modifier: Modifier = Modifier,
     onClick: (new: Int) -> Unit
@@ -85,7 +85,7 @@ fun FloorSwitch(
 
             IconButton(
                 onClick = { onClick(floor - 1) },
-                enabled = floor > minFloor
+                enabled = floor > MIN_FLOOR
             ) {
                 Icon(
                     Icons.Rounded.KeyboardArrowDown,
@@ -103,7 +103,6 @@ private fun FloorSwitchPreview() {
     DepNavTheme {
         FloorSwitch(
             floor = 1,
-            minFloor = 1,
             maxFloor = 2,
             onClick = {}
         )

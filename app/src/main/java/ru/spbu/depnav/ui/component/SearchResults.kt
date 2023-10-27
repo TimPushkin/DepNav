@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.ui.search
+package ru.spbu.depnav.ui.component
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -50,7 +50,6 @@ import kotlinx.coroutines.flow.onEach
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
-import ru.spbu.depnav.ui.map.MarkerView
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
@@ -59,7 +58,7 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 fun SearchResults(
     markersWithTexts: Map<Marker, MarkerText>,
     isHistory: Boolean,
-    onStateChange: (onTop: Boolean) -> Unit,
+    onScroll: (onTop: Boolean) -> Unit,
     onResultClick: (Int) -> Unit,
     modifier: Modifier = Modifier
 ) {
@@ -101,7 +100,7 @@ fun SearchResults(
         snapshotFlow {
             state.run { firstVisibleItemIndex == 0 && firstVisibleItemScrollOffset == 0 }
         }
-            .onEach { onStateChange(it) }
+            .onEach { onScroll(it) }
             .launchIn(scope)
     }
 }
