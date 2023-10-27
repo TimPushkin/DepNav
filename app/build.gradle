@@ -1,8 +1,16 @@
 plugins {
     alias libs.plugins.android.application
     alias libs.plugins.jetbrains.kotlin.android
+    alias libs.plugins.androidx.room
     alias libs.plugins.google.dagger.hilt.android
     alias libs.plugins.google.devtools.ksp
+}
+
+kotlin {
+    jvmToolchain(17)
+    compilerOptions {
+        freeCompilerArgs.add('-opt-in=kotlin.RequiresOptIn')
+    }
 }
 
 def keystorePropertiesFile = rootProject.file('keystore.properties')
@@ -35,10 +43,6 @@ android {
         versionName "${version.major}.${version.minor}.${version.patch}"
 
         testInstrumentationRunner 'androidx.test.runner.AndroidJUnitRunner'
-
-        ksp {
-            arg 'room.schemaLocation', "$projectDir/schemas"
-        }
     }
 
     buildTypes {
@@ -49,12 +53,6 @@ android {
         }
     }
 
-    kotlin {
-        jvmToolchain(17)
-    }
-    kotlinOptions {
-        freeCompilerArgs += '-opt-in=kotlin.RequiresOptIn'
-    }
     buildFeatures {
         compose true
     }
@@ -95,4 +93,13 @@ dependencies {
     androidTestImplementation libs.androidx.test.runner
     androidTestImplementation libs.androidx.test.rules
     androidTestImplementation libs.androidx.test.extJunit
+}
+
+ksp {
+    arg 'room.incremental', 'true'
+    arg 'room.generateKotlin', 'true'
+}
+
+room {
+    schemaDirectory "$projectDir/schemas"
 }
