@@ -25,7 +25,7 @@ import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInVertically
 import androidx.compose.animation.slideOutVertically
-import androidx.compose.animation.with
+import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
@@ -44,7 +44,6 @@ import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
 /** Two buttons to switch the current map one floor up or down. */
-@OptIn(ExperimentalAnimationApi::class)
 @Composable
 fun FloorSwitch(
     floor: Int,
@@ -72,13 +71,14 @@ fun FloorSwitch(
                 targetState = floor,
                 transitionSpec = {
                     if (targetState > initialState) {
-                        slideInVertically { height -> -height } + fadeIn() with
+                        slideInVertically { height -> -height } + fadeIn() togetherWith
                             slideOutVertically { height -> height } + fadeOut()
                     } else {
-                        slideInVertically { height -> height } + fadeIn() with
+                        slideInVertically { height -> height } + fadeIn() togetherWith
                             slideOutVertically { height -> -height } + fadeOut()
                     } using SizeTransform(clip = false)
-                }
+                },
+                label = "floor switch scroll"
             ) { targetFloor ->
                 Text(targetFloor.toString())
             }
