@@ -18,7 +18,6 @@
 
 package ru.spbu.depnav.utils.tiles
 
-import kotlinx.coroutines.Deferred
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
@@ -27,6 +26,6 @@ import ru.spbu.depnav.data.model.MarkerText
 data class Floor(
     /** Layers of tiles that this floor consist of. */
     val layers: Iterable<TileStreamProvider>,
-    /** Markers placed on this floor. */
-    val markers: Deferred<Map<Marker, MarkerText>>
+    /** Markers placed on this floor, mapped by their IDs. */
+    val markers: Map<String, Pair<Marker, MarkerText>>
 )

@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.ui.map
+package ru.spbu.depnav.ui.dialog
 
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
@@ -34,6 +34,7 @@ import androidx.compose.ui.text.PlaceholderVerticalAlign
 import androidx.compose.ui.text.buildAnnotatedString
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
+import ru.spbu.depnav.ui.component.MarkerView
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 /** Dialog with the map legend. **/

@@ -23,7 +23,6 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Transaction
-import kotlinx.coroutines.flow.Flow
 import ru.spbu.depnav.data.model.SearchHistoryEntry
 
 /** DAO fot the table containing [marker search history entries][SearchHistoryEntry]. */
@@ -86,5 +85,5 @@ abstract class SearchHistoryDao {
             ORDER BY timestamp ASC
         """
     )
-    abstract fun loadByMap(mapName: String): Flow<List<SearchHistoryEntry>>
+    abstract suspend fun loadByMap(mapName: String): List<SearchHistoryEntry>
 }

@@ -36,5 +36,5 @@ class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
         dao.insertNotExceeding(entry, maxEntriesNum)
 
     /** Loads the current entries for the specified map sorted by timestamps (older first). */
-    fun loadByMap(mapName: String) = dao.loadByMap(mapName)
+    suspend fun loadByMap(mapName: String) = dao.loadByMap(mapName)
 }

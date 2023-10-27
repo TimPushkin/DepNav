@@ -18,7 +18,6 @@
 
 package ru.spbu.depnav.data.db
 
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
@@ -61,7 +60,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
             searchHistoryDao.insertNotExceeding(SearchHistoryEntry(expectedId, 1L), 10)
         }
 
-        val actual = runBlocking { searchHistoryDao.loadByMap(expectedMap.name).first() }
+        val actual = runBlocking { searchHistoryDao.loadByMap(expectedMap.name) }
 
         assertTrue("Loaded entry list is empty", actual.isNotEmpty())
         actual.forEach { assertEquals(expectedId, it.markerId) }
@@ -78,7 +77,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         expected.sortBy { it.timestamp }
         while (expected.size > maxEntriesNum) expected.removeFirst()
 
-        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name).first() }
+        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name) }
 
         assertEquals(expected.size, actual.size)
         for (entry in actual) {
@@ -151,7 +150,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
             }
         }
 
-        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name).first() }
+        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name) }
 
         assertEquals(maxEntriesNum, actual.size)
     }

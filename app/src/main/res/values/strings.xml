@@ -50,7 +50,6 @@
     <string name="label_wc_icon">Unisex restroom</string>
     <string name="label_other_icon">Miscellaneous place</string>
     <string name="label_selected_place">Selected place</string>
-    <string name="label_search">Search</string>
     <string name="label_open_map_info">Open map info</string>
     <string name="label_open_settings">Open settings</string>
     <string name="label_navigate_back">Navigate back</string>

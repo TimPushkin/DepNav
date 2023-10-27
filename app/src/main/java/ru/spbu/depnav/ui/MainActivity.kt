@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav
+package ru.spbu.depnav.ui
 
 import android.graphics.Color
 import android.os.Bundle
@@ -24,19 +24,10 @@ import androidx.activity.ComponentActivity
 import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
-import androidx.activity.viewModels
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
-import androidx.lifecycle.viewModelScope
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
-import ru.spbu.depnav.ui.NavDestination
-import ru.spbu.depnav.ui.map.MapScreen
-import ru.spbu.depnav.ui.map.MapScreenViewModel
-import ru.spbu.depnav.ui.search.SearchScreen
+import ru.spbu.depnav.ui.screen.MapScreen
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.utils.preferences.PreferencesManager
 import javax.inject.Inject
@@ -44,8 +35,6 @@ import javax.inject.Inject
 @AndroidEntryPoint
 @Suppress("UndocumentedPublicClass") // Class name is self-explanatory
 class MainActivity : ComponentActivity() {
-    private val mapScreenVm: MapScreenViewModel by viewModels()
-
     /** User preferences. */
     @Inject
     lateinit var prefs: PreferencesManager
@@ -66,33 +55,7 @@ class MainActivity : ComponentActivity() {
                 enableEdgeToEdge(systemBarStyle, systemBarStyle)
             }
 
-            DepNavTheme(darkTheme = darkTheme) {
-                val navController = rememberNavController()
-
-                NavHost(navController = navController, startDestination = NavDestination.MAP.name) {
-                    composable(NavDestination.MAP.name) {
-                        MapScreen(vm = mapScreenVm) {
-                            navController.navigate(NavDestination.SEARCH.name)
-                        }
-                    }
-                    composable(NavDestination.SEARCH.name) {
-                        fun navigateToMap() {
-                            navController.popBackStack(
-                                route = NavDestination.MAP.name,
-                                inclusive = false
-                            )
-                        }
-
-                        SearchScreen(
-                            onResultClick = {
-                                with(mapScreenVm) { viewModelScope.launch { focusOnMarker(it) } }
-                                navigateToMap()
-                            },
-                            onNavigateBack = ::navigateToMap
-                        )
-                    }
-                }
-            }
+            DepNavTheme(darkTheme = darkTheme) { MapScreen() }
         }
     }
 }
