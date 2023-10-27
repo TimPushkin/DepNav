@@ -73,7 +73,14 @@ private val ACTIVATION_EXIT_SPEC = tween<Float>(
     easing = CubicBezierEasing(0.0f, 1.0f, 0.0f, 1.0f)
 )
 
+/**
+ * Search bar for querying map markers on [ru.spbu.depnav.ui.screen.MapScreen].
+ */
 @Composable
+@Suppress(
+    "LongMethod", // No point in further shrinking
+    "LongParameterList" // Considered OK for composables
+)
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 fun MapSearchBar(
     query: String,
@@ -116,66 +123,19 @@ fun MapSearchBar(
             .then(modifier),
         placeholder = { Text(stringResource(R.string.search_markers), maxLines = 1) },
         leadingIcon = {
-            AnimatedContent(
-                active,
-                modifier = Modifier.padding(start = innerStartPadding),
-                label = "Map search bar leading icon change"
-            ) { active ->
-                if (active) {
-                    IconButton(onClick = { onActiveChange(false) }) {
-                        Icon(
-                            Icons.Rounded.ArrowBack,
-                            contentDescription = stringResource(R.string.label_navigate_back)
-                        )
-                    }
-                } else {
-                    Icon(
-                        Icons.Rounded.Search,
-                        contentDescription = null,
-                        // To have the same size as the back button above
-                        modifier = Modifier.minimumInteractiveComponentSize()
-                    )
-                }
+            AnimatedLeadingIcon(active, modifier = Modifier.padding(start = innerStartPadding)) {
+                onActiveChange(false)
             }
         },
         trailingIcon = {
-            AnimatedContent(
-                active to query.isEmpty(),
-                modifier = Modifier.padding(end = innerEndPadding),
-                transitionSpec = { fadeIn() togetherWith fadeOut() },
-                label = "Map search bar trailing icon change"
-            ) { (active, emptyQuery) ->
-                if (active) {
-                    if (emptyQuery) {
-                        Spacer(modifier = Modifier.minimumInteractiveComponentSize())
-                    } else {
-                        IconButton(
-                            onClick = { onQueryChange("") }
-                        ) {
-                            Icon(
-                                Icons.Rounded.Clear,
-                                contentDescription = stringResource(R.string.label_clear_text_field)
-                            )
-                        }
-                    }
-                } else {
-                    Row {
-                        IconButton(onClick = onInfoClick) {
-                            Icon(
-                                Icons.Rounded.Info,
-                                contentDescription = stringResource(R.string.label_open_map_info)
-                            )
-                        }
-
-                        IconButton(onClick = onSettingsClick) {
-                            Icon(
-                                Icons.Rounded.Settings,
-                                contentDescription = stringResource(R.string.label_open_settings)
-                            )
-                        }
-                    }
-                }
-            }
+            AnimatedTrailingIcons(
+                active,
+                query.isEmpty(),
+                onClearClick = { onQueryChange("") },
+                onInfoClick = onInfoClick,
+                onSettingsClick = onSettingsClick,
+                modifier = Modifier.padding(end = innerEndPadding)
+            )
         }
     ) {
         val keyboard = LocalSoftwareKeyboardController.current
@@ -201,5 +161,81 @@ fun MapSearchBar(
                         .calculateBottomPadding()
                 )
         )
+    }
+}
+
+@Composable
+private fun AnimatedLeadingIcon(
+    searchBarActive: Boolean,
+    modifier: Modifier = Modifier,
+    onNavigateBackClick: () -> Unit
+) {
+    AnimatedContent(
+        searchBarActive,
+        modifier = modifier,
+        label = "Map search bar leading icon change"
+    ) { showBackButton ->
+        if (showBackButton) {
+            IconButton(onClick = onNavigateBackClick) {
+                Icon(
+                    Icons.Rounded.ArrowBack,
+                    contentDescription = stringResource(R.string.label_navigate_back)
+                )
+            }
+        } else {
+            Icon(
+                Icons.Rounded.Search,
+                contentDescription = null,
+                // To have the same size as the back button above
+                modifier = Modifier.minimumInteractiveComponentSize()
+            )
+        }
+    }
+}
+
+@Composable
+@Suppress("LongParameterList") // Considered OK for composables
+private fun AnimatedTrailingIcons(
+    searchBarActive: Boolean,
+    queryEmpty: Boolean,
+    onClearClick: () -> Unit,
+    onInfoClick: () -> Unit,
+    onSettingsClick: () -> Unit,
+    modifier: Modifier = Modifier
+) {
+    AnimatedContent(
+        searchBarActive to queryEmpty,
+        modifier = modifier,
+        transitionSpec = { fadeIn() togetherWith fadeOut() },
+        label = "Map search bar trailing icon change"
+    ) { (active, emptyQuery) ->
+        if (active) {
+            if (emptyQuery) {
+                Spacer(modifier = Modifier.minimumInteractiveComponentSize())
+            } else {
+                IconButton(onClick = onClearClick) {
+                    Icon(
+                        Icons.Rounded.Clear,
+                        contentDescription = stringResource(R.string.label_clear_text_field)
+                    )
+                }
+            }
+        } else {
+            Row {
+                IconButton(onClick = onInfoClick) {
+                    Icon(
+                        Icons.Rounded.Info,
+                        contentDescription = stringResource(R.string.label_open_map_info)
+                    )
+                }
+
+                IconButton(onClick = onSettingsClick) {
+                    Icon(
+                        Icons.Rounded.Settings,
+                        contentDescription = stringResource(R.string.label_open_settings)
+                    )
+                }
+            }
+        }
     }
 }

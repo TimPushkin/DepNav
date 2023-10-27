@@ -123,16 +123,18 @@ class MapViewModel @Inject constructor(
         val searchQuery: String = "",
         val searchResults: Map<Marker, MarkerText> = emptyMap()
     ) {
-        fun toMapUiState(): MapUiState = when (mapState) {
-            null -> MapUiState.Loading
-            else -> MapUiState.Ready(
-                mapState = mapState,
-                floorsNum = floors.size,
-                currentFloor = currentFloorId,
-                pinnedMarker = pinnedMarker,
-                showOnMapUi = showOnMapUi
-            )
-        }
+        fun toMapUiState() =
+            if (mapState == null) {
+                MapUiState.Loading
+            } else {
+                MapUiState.Ready(
+                    mapState = mapState,
+                    floorsNum = floors.size,
+                    currentFloor = currentFloorId,
+                    pinnedMarker = pinnedMarker,
+                    showOnMapUi = showOnMapUi
+                )
+            }
 
         fun toSearchUiState() = SearchUiState(query = searchQuery, results = searchResults)
     }
@@ -388,9 +390,12 @@ class MapViewModel @Inject constructor(
     }
 }
 
+/** Describes states of map UI. */
 sealed interface MapUiState {
+    /** Map has not yet been loaded. */
     data object Loading : MapUiState
 
+    /** Map has been loaded. */
     data class Ready(
         /** State of the map. */
         val mapState: MapState,
@@ -405,7 +410,16 @@ sealed interface MapUiState {
     ) : MapUiState
 }
 
+/** Map markers search UI state. */
 data class SearchUiState(
+    /** Marker search query entered by the user. */
     val query: String = "",
+    /**
+     * Either the actual results of the query or a history of previous searches if the query was
+     * empty.
+     *
+     * Note that these result mey correspond not to the current query, but to some query in the
+     * past.
+     * */
     val results: Map<Marker, MarkerText> = emptyMap()
 )

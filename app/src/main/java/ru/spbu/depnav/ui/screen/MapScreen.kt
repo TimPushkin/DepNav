@@ -136,6 +136,7 @@ fun MapScreen(vm: MapViewModel = viewModel()) {
 }
 
 @Composable
+@Suppress("LongParameterList") // Considered OK for composables
 private fun BoxScope.AnimatedSearchBar(
     visible: Boolean,
     query: String,
