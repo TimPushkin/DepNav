@@ -6,7 +6,7 @@ kspPlugin = "1.9.10-1.0.13"  # Must be "$kotlin-$ksp"
 composeCompiler = "1.5.3"
 hilt = "2.48.1"
 lifecycle = "2.6.2"
-room = "2.5.2"
+room = "2.6.0"
 
 
 [libraries]
@@ -40,3 +40,4 @@ android-application = "com.android.application:8.1.2"
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
+androidx-room = { id = "androidx.room", version.ref = "room" }
