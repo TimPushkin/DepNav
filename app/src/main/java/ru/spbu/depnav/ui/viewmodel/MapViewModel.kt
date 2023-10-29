@@ -36,6 +36,7 @@ import kotlinx.coroutines.flow.debounce
 import kotlinx.coroutines.flow.distinctUntilChangedBy
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
@@ -248,11 +249,14 @@ class MapViewModel @Inject constructor(
             }.toMap()
         }
 
-        state.value = MapViewModelState(
-            mapName = mapName,
-            mapState = mapState,
-            floors = floors
-        )
+
+        state.getAndUpdate {
+            MapViewModelState(
+                mapName = mapName,
+                mapState = mapState,
+                floors = floors
+            )
+        }.mapState?.shutdown() // Shutdown the previous map state, if any
 
         setFloor(checkNotNull(floors.keys.firstOrNull()) { "Map has no floors" })
     }
