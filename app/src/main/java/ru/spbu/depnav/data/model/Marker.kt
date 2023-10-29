@@ -21,7 +21,6 @@ package ru.spbu.depnav.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.Ignore
 import androidx.room.PrimaryKey
 
 /** Displayable marker. */
@@ -52,10 +51,6 @@ data class Marker(
     /** Y coordinate of this marker. */
     val y: Double
 ) {
-    /** ID of this marker as a string. */
-    @Ignore
-    val idStr = id.toString()
-
     /** Type of an object represented by a [Marker]. */
     enum class MarkerType {
         /** Building entrance. */

@@ -45,6 +45,7 @@
     <string name="label_wc_woman_icon">Женский туалет</string>
     <string name="label_wc_icon">Общий туалет</string>
     <string name="label_other_icon">Иное место</string>
+    <string name="label_non_room_cluster">Множество мест</string>
     <string name="label_selected_place">Выбранное место</string>
     <string name="label_open_map_info">Открыть информацию о карте</string>
     <string name="label_open_settings">Открыть настройки</string>

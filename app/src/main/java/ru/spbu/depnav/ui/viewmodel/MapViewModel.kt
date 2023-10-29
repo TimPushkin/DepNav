@@ -47,25 +47,23 @@ import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
 import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addLayer
-import ovh.plrapps.mapcompose.api.addLazyLoader
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.centerOnMarker
 import ovh.plrapps.mapcompose.api.disableRotation
 import ovh.plrapps.mapcompose.api.enableRotation
 import ovh.plrapps.mapcompose.api.maxScale
-import ovh.plrapps.mapcompose.api.minScale
 import ovh.plrapps.mapcompose.api.onMarkerClick
 import ovh.plrapps.mapcompose.api.onTap
 import ovh.plrapps.mapcompose.api.removeAllLayers
 import ovh.plrapps.mapcompose.api.removeAllMarkers
 import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.rotateTo
-import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.setColorFilterProvider
 import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
 import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.ui.state.MapState
 import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
+import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.data.model.SearchHistoryEntry
@@ -74,24 +72,21 @@ import ru.spbu.depnav.data.repository.MarkerWithTextRepo
 import ru.spbu.depnav.data.repository.SearchHistoryRepo
 import ru.spbu.depnav.ui.component.MarkerView
 import ru.spbu.depnav.ui.component.Pin
-import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+import ru.spbu.depnav.utils.map.Floor
+import ru.spbu.depnav.utils.map.TileStreamProviderFactory
+import ru.spbu.depnav.utils.map.addClusterers
+import ru.spbu.depnav.utils.map.getClustererId
+import ru.spbu.depnav.utils.map.getMarkerAlpha
 import ru.spbu.depnav.utils.misc.updateIf
 import ru.spbu.depnav.utils.preferences.PreferencesManager
-import ru.spbu.depnav.utils.tiles.Floor
-import ru.spbu.depnav.utils.tiles.TileStreamProviderFactory
 import javax.inject.Inject
 
 private const val TAG = "MapScreenViewModel"
 
-private const val LAZY_LOADER_ID = "main"
-
-private const val MIN_MARKER_VISIBILITY_SCALE = 0.2f
-private const val MAX_MARKER_VISIBILITY_SCALE = 0.5f
-
-private const val PIN_ID = "Pin" // Real IDs are integers
-
 private const val MIN_QUERY_PERIOD_MS = 300L
 private const val SEARCH_HISTORY_SIZE = 10
+
+private const val PIN_ID = "Pin" // Real IDs start with integers
 
 /** ViewModel for [MapScreen][ru.spbu.depnav.ui.screen.MapScreen]. */
 @HiltViewModel
@@ -118,10 +113,10 @@ class MapViewModel @Inject constructor(
         val mapColor: Color = Color.Black,
         val floors: Map<Int, Floor> = emptyMap(),
         val currentFloorId: Int = 0,
-        val pinnedMarker: Pair<Marker, MarkerText>? = null,
+        val pinnedMarker: MarkerWithText? = null,
         val showOnMapUi: Boolean = true,
         val searchQuery: String = "",
-        val searchResults: Map<Marker, MarkerText> = emptyMap()
+        val searchResults: List<MarkerWithText> = emptyList()
     ) {
         fun toMapUiState() =
             if (mapState == null) {
@@ -138,18 +133,6 @@ class MapViewModel @Inject constructor(
 
         fun toSearchUiState() = SearchUiState(query = searchQuery, results = searchResults)
     }
-
-    // Not a part of state/mapUiState because can update very frequently
-    private val markerAlpha
-        get() = state.value.mapState?.run {
-            val minScale = minScale.coerceAtLeast(MIN_MARKER_VISIBILITY_SCALE)
-            val maxScale = maxScale.coerceAtMost(MAX_MARKER_VISIBILITY_SCALE)
-            (scale - minScale) / (maxScale - minScale)
-        } ?: 0f
-
-    /** Whether markers are visible on the map. */
-    val markersVisible
-        get() = markerAlpha > 0
 
     init {
         snapshotFlow { prefs.selectedMap }
@@ -188,9 +171,7 @@ class MapViewModel @Inject constructor(
                 val results = if (query.isNotEmpty()) {
                     markerRepo.loadByQuery(mapName, query)
                 } else {
-                    searchHistoryRepo.loadByMap(mapName).associate {
-                        markerRepo.loadById(it.markerId)
-                    }
+                    searchHistoryRepo.loadByMap(mapName).map { markerRepo.loadById(it.markerId) }
                 }
                 Log.d(TAG, "Searched '$query' on map $mapName, got ${results.size} results")
                 mapName to results
@@ -214,10 +195,12 @@ class MapViewModel @Inject constructor(
         }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
             setColorFilterProvider { _, _, _ -> ColorFilter.tint(state.value.mapColor) }
-            addLazyLoader(LAZY_LOADER_ID, padding = (DEFAULT_PADDING * 2))
+            addClusterers()
             shouldLoopScale = true
 
-            if (prefs.enableRotation) enableRotation()
+            if (prefs.enableRotation) {
+                enableRotation()
+            }
 
             onTap { _, _ ->
                 state.updateIf(condition = { it.mapState == this }) { state ->
@@ -242,25 +225,25 @@ class MapViewModel @Inject constructor(
                 val floor = checkNotNull(currentState.run { floors[currentFloorId] }) {
                     "Illegal current floor"
                 }
-                val (marker, markerText) = checkNotNull(floor.markers[id]) {
+                val markerWithText = checkNotNull(floor.markers[id]) {
                     "Unknown marker $id clicked"
                 }
-                pinMarker(marker)
+                pinMarker(markerWithText.marker)
 
                 state.compareAndSet(
                     currentState,
-                    currentState.copy(pinnedMarker = marker to markerText, showOnMapUi = true)
+                    currentState.copy(pinnedMarker = markerWithText, showOnMapUi = true)
                 )
             }
         }
 
         val floors = with(tileStreamProviderFactory) {
-            List(mapInfo.floorsNum) {
-                val floorNum = it + 1
+            List(mapInfo.floorsNum) { i ->
+                val floorNum = i + 1
                 val layers = listOf(makeTileStreamProvider(mapName, floorNum))
                 val markers = withContext(Dispatchers.IO) {
-                    markerRepo.loadByFloor(mapName, floorNum).entries
-                }.associate { (marker, markerText) -> marker.idStr to (marker to markerText) }
+                    markerRepo.loadByFloor(mapName, floorNum)
+                }.associateBy { it.extendedId }
                 floorNum to Floor(layers, markers)
             }.toMap()
         }
@@ -325,8 +308,8 @@ class MapViewModel @Inject constructor(
             for (layer in floor.layers) {
                 addLayer(layer)
             }
-            for ((marker, markerText) in floor.markers.values) {
-                addMarker(marker, markerText)
+            for (markerWithText in floor.markers.values) {
+                addMarker(markerWithText.extendedId, markerWithText.marker, markerWithText.text)
             }
 
             state.updateIf(condition = { it.mapState == this@setFloor }) {
@@ -337,22 +320,23 @@ class MapViewModel @Inject constructor(
         }
     }
 
-    private fun MapState.addMarker(marker: Marker, markerText: MarkerText) {
+    private fun MapState.addMarker(id: String, marker: Marker, markerText: MarkerText) {
         addMarker(
-            id = marker.idStr,
+            id = id,
             x = marker.x,
             y = marker.y,
             clickable = markerText.run { !title.isNullOrBlank() || !description.isNullOrBlank() },
             relativeOffset = Offset(-0.5f, -0.5f),
             clipShape = null,
-            renderingStrategy = RenderingStrategy.LazyLoading(LAZY_LOADER_ID)
+            renderingStrategy = RenderingStrategy.Clustering(getClustererId(marker.type))
         ) {
-            if (markerAlpha > 0f) { // Not to consume clicks
+            val alpha = getMarkerAlpha()
+            if (alpha > 0f) { // Not to consume clicks when invisible
                 MarkerView(
-                    title = markerText.title ?: "",
+                    title = markerText.title,
                     type = marker.type,
                     isClosed = marker.isClosed,
-                    modifier = Modifier.alpha(markerAlpha)
+                    modifier = Modifier.alpha(alpha)
                 )
             }
         }
@@ -363,16 +347,18 @@ class MapViewModel @Inject constructor(
         Log.d(TAG, "Focusing on marker $markerId")
         val mapState = checkNotNull(state.value.mapState) { "No map to do focusing on" }
         viewModelScope.launch {
-            val (marker, markerText) = withContext(Dispatchers.IO) { markerRepo.loadById(markerId) }
-            mapState.setFloor(marker.floor) // Updates the state internally
+            val markerWithText = withContext(Dispatchers.IO) { markerRepo.loadById(markerId) }
+            mapState.setFloor(markerWithText.marker.floor) // Updates the state internally
             state.updateIf(
-                condition = { it.mapState == mapState && it.currentFloorId == marker.floor }
+                condition = {
+                    it.mapState == mapState && it.currentFloorId == markerWithText.marker.floor
+                }
             ) { state ->
                 with(mapState) {
-                    pinMarker(marker)
-                    launch { centerOnMarker(marker.idStr, 1f) }
+                    pinMarker(markerWithText.marker)
+                    launch { centerOnMarker(markerWithText.extendedId, maxScale) }
                 }
-                state.copy(pinnedMarker = marker to markerText, showOnMapUi = true)
+                state.copy(pinnedMarker = markerWithText, showOnMapUi = true)
             }
         }
     }
@@ -404,7 +390,7 @@ sealed interface MapUiState {
         /** The floor currently displayed. */
         val currentFloor: Int,
         /** Latest pinned marker. */
-        val pinnedMarker: Pair<Marker, MarkerText>?,
+        val pinnedMarker: MarkerWithText?,
         /** Whether any UI is displayed above the map. */
         val showOnMapUi: Boolean
     ) : MapUiState
@@ -421,5 +407,5 @@ data class SearchUiState(
      * Note that these result mey correspond not to the current query, but to some query in the
      * past.
      * */
-    val results: Map<Marker, MarkerText> = emptyMap()
+    val results: List<MarkerWithText> = emptyList()
 )

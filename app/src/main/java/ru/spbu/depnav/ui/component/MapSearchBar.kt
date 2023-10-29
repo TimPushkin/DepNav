@@ -57,8 +57,7 @@ import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import ru.spbu.depnav.R
-import ru.spbu.depnav.data.model.Marker
-import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 
 // These are basically copied from SearchBar implementation
@@ -87,7 +86,7 @@ fun MapSearchBar(
     onQueryChange: (String) -> Unit,
     active: Boolean,
     onActiveChange: (Boolean) -> Unit,
-    results: Map<Marker, MarkerText>,
+    results: List<MarkerWithText>,
     onResultClick: (Int) -> Unit,
     onInfoClick: () -> Unit,
     onSettingsClick: () -> Unit,
