@@ -45,6 +45,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 /** Maximum size a marker cluster composable can have in each dimension. */
 val MAX_MARKER_CLUSTER_VIEW_SIZE = 50.dp
 
+/** Multiple markers clustered together. */
 @Composable
 fun MarkersCluster(
     markerIds: List<String>,

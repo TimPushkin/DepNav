@@ -38,6 +38,7 @@ private const val ELEVATOR_CLUSTERER_ID = "elevators"
 private const val WC_CLUSTERER_ID = "wcs"
 private const val OTHER_CLUSTERER_ID = "others"
 
+/** Adds clusterers for each marker type group. */
 @OptIn(ExperimentalClusteringApi::class)
 fun MapState.addClusterers() {
     val clusterAlphaState = derivedStateOf { getMarkerAlpha() }
@@ -83,6 +84,7 @@ private fun createClusterFactory(alphaState: State<Float>, type: Marker.MarkerTy
         }
     }
 
+/** Returns ID of the clustersr responsible for the specified marker type. */
 fun getClustererId(markerType: Marker.MarkerType) = when (markerType) {
     Marker.MarkerType.ROOM -> ROOMS_CLUSTERER_ID
     Marker.MarkerType.ENTRANCE -> ENTRANCE_CLUSTERER_ID
