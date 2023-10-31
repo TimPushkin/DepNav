@@ -38,12 +38,13 @@ import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.Marker.MarkerType
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
-private val ICON_SIZE = 20.dp
+/** Size of marker icon in each dimension. */
+val MARKER_ICON_SIZE = 20.dp
 
 /** Visual representation of a [Marker]. */
 @Composable
 fun MarkerView(
-    title: String,
+    title: String?,
     type: MarkerType,
     isClosed: Boolean,
     modifier: Modifier = Modifier,
@@ -58,7 +59,7 @@ fun MarkerView(
         )
     } else {
         RoomName(
-            name = title,
+            name = requireNotNull(title) { "Room markers must have titles" },
             lineTrough = isClosed,
             modifier = modifier
         )
@@ -130,7 +131,7 @@ private fun MarkerIcon(
         painter = painter,
         contentDescription = contentDescription,
         modifier = Modifier
-            .size(ICON_SIZE)
+            .size(MARKER_ICON_SIZE)
             .alpha(if (faded) 0.38f else 1f)
             .then(modifier)
     )

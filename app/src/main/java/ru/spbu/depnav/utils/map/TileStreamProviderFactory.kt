@@ -16,7 +16,7 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.utils.tiles
+package ru.spbu.depnav.utils.map
 
 import android.content.Context
 import android.content.res.AssetManager
@@ -26,7 +26,7 @@ import dagger.hilt.android.scopes.ViewModelScoped
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import javax.inject.Inject
 
-private const val TAG = "TileProviderFactory"
+private const val TAG = "TileStreamProviderFactory"
 
 /** Factory for creating [TileStreamProviders][TileStreamProvider] for tiles from a certain path. */
 @ViewModelScoped

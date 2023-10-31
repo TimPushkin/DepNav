@@ -47,6 +47,7 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
@@ -63,8 +64,7 @@ import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
-import ru.spbu.depnav.data.model.Marker
-import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.ui.component.FloorSwitch
 import ru.spbu.depnav.ui.component.MapSearchBar
 import ru.spbu.depnav.ui.component.MarkerInfoLines
@@ -76,6 +76,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.viewmodel.MapUiState
 import ru.spbu.depnav.ui.viewmodel.MapViewModel
 import ru.spbu.depnav.ui.viewmodel.SearchUiState
+import ru.spbu.depnav.utils.map.getMarkerAlpha
 
 /** Screen containing a navigable map. */
 @Composable
@@ -126,9 +127,13 @@ fun MapScreen(vm: MapViewModel = viewModel()) {
                     onFloorSwitch = vm::setFloor
                 )
 
+                val markersVisible by remember {
+                    derivedStateOf { mapUiState.mapState.getMarkerAlpha() > 0f }
+                }
+
                 AnimatedBottom(
                     pinnedMarker = mapUiState.pinnedMarker,
-                    showZoomInHint = !vm.markersVisible
+                    showZoomInHint = !markersVisible
                 )
             }
         }
@@ -141,7 +146,7 @@ private fun BoxScope.AnimatedSearchBar(
     visible: Boolean,
     query: String,
     onQueryChange: (String) -> Unit,
-    searchResults: Map<Marker, MarkerText>,
+    searchResults: List<MarkerWithText>,
     onResultClick: (Int) -> Unit,
     onInfoCLick: () -> Unit,
     onSettingsClick: () -> Unit
@@ -215,10 +220,7 @@ private fun BoxScope.AnimatedFloorSwitch(
 }
 
 @Composable
-private fun BoxScope.AnimatedBottom(
-    pinnedMarker: Pair<Marker, MarkerText>?,
-    showZoomInHint: Boolean
-) {
+private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHint: Boolean) {
     val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
 
     // Not using insets here to let the Surface reside under bottom bar

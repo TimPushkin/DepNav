@@ -16,16 +16,15 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.utils.tiles
+package ru.spbu.depnav.utils.map
 
 import ovh.plrapps.mapcompose.core.TileStreamProvider
-import ru.spbu.depnav.data.model.Marker
-import ru.spbu.depnav.data.model.MarkerText
+import ru.spbu.depnav.data.composite.MarkerWithText
 
 /** Displayable floor of a map. */
 data class Floor(
     /** Layers of tiles that this floor consist of. */
     val layers: Iterable<TileStreamProvider>,
     /** Markers placed on this floor, mapped by their IDs. */
-    val markers: Map<String, Pair<Marker, MarkerText>>
+    val markers: Map<String, MarkerWithText>
 )

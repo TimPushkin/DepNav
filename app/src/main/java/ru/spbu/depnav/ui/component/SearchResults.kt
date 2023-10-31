@@ -48,15 +48,21 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.spbu.depnav.R
+import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
 
-/** Column with clickable information about markers that were found by the search. */
+/**
+ * Column with clickable information about markers that were found by the search.
+ *
+ * @param markersWithTexts results sorted by importance: elements listed first will be displayed on
+ * top.
+ */
 @Composable
 fun SearchResults(
-    markersWithTexts: Map<Marker, MarkerText>,
+    markersWithTexts: List<MarkerWithText>,
     isHistory: Boolean,
     onScroll: (onTop: Boolean) -> Unit,
     onResultClick: (Int) -> Unit,
@@ -71,7 +77,7 @@ fun SearchResults(
         contentPadding = PaddingValues(top = DEFAULT_PADDING / 2),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        items(markersWithTexts.toList().asReversed()) { (marker, markerText) ->
+        items(markersWithTexts.asReversed()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
             SearchResult(

@@ -19,6 +19,7 @@
 package ru.spbu.depnav.data.repository
 
 import android.util.Log
+import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.data.db.MarkerWithTextDao
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
@@ -42,24 +43,24 @@ class MarkerWithTextRepo(
     constructor(dao: MarkerWithTextDao) : this(dao, Bm25())
 
     /** Loads a [Marker] by its ID and its corresponding [MarkerText] on the current language. */
-    suspend fun loadById(id: Int): Pair<Marker, MarkerText> {
+    suspend fun loadById(id: Int): MarkerWithText {
         val language = MarkerText.LanguageId.getCurrent()
-        val (marker, markerTexts) = dao.loadById(id, language).entries.firstOrNull()
-            ?: throw IllegalArgumentException("No markers with ID $id")
+        val (marker, markerTexts) = checkNotNull(dao.loadById(id, language).entries.firstOrNull()) {
+            "No markers with ID $id"
+        }
         val markerText = markerTexts.squeezedFor(marker, language)
-        return marker to markerText
+        return MarkerWithText(marker, markerText)
     }
 
     /**
-     * Loads all [Markers][Marker] from the specified map and floor with their corresponding
-     * [MarkerTexts][MarkerText] on the current language.
+     * Loads [Marker]s from the specified map and floor with their corresponding [MarkerText]s on
+     * the current language.
      */
-    suspend fun loadByFloor(mapName: String, floor: Int): Map<Marker, MarkerText> {
+    suspend fun loadByFloor(mapName: String, floor: Int): List<MarkerWithText> {
         val language = MarkerText.LanguageId.getCurrent()
         val markersWithTexts = dao.loadByFloor(mapName, floor, language)
-        return markersWithTexts.entries.associate { (marker, markerTexts) ->
-            val markerText = markerTexts.squeezedFor(marker, language)
-            marker to markerText
+        return markersWithTexts.entries.map { (marker, texts) ->
+            MarkerWithText(marker, text = texts.squeezedFor(marker, language))
         }
     }
 
@@ -70,11 +71,11 @@ class MarkerWithTextRepo(
         }
 
     /**
-     * Loads [Markers][Marker] from the specified map with their corresponding
-     * [MarkerTexts][MarkerText] on the current language so that the text satisfies the specified
-     * query. The results are sorted first by relevance, then alphabetically.
+     * Loads [Marker]s from the specified map with their corresponding [MarkerText]s on the current
+     * language so that the text satisfies the specified query. The results are sorted first by
+     * relevance, then alphabetically.
      */
-    suspend fun loadByQuery(mapName: String, query: String): Map<Marker, MarkerText> {
+    suspend fun loadByQuery(mapName: String, query: String): List<MarkerWithText> {
         val language = MarkerText.LanguageId.getCurrent()
         val tokenized = query.tokenized()
 
@@ -97,10 +98,9 @@ class MarkerWithTextRepo(
                     .thenByDescending { it.first.title }
                     .thenByDescending { it.first.description }
             )
-            .associate { (markerText, markers, _) ->
-                val marker = markers.firstOrNull()
-                checkNotNull(marker) { "$markerText has no associated marker" }
-                marker to markerText
+            .map { (markerText, markers, _) ->
+                val marker = checkNotNull(markers.firstOrNull()) { "No marker for $markerText" }
+                MarkerWithText(marker, markerText)
             }
     }
 
