@@ -1,9 +1,9 @@
 [versions]
 
-kotlin = "1.9.10"
-ksp = "1.0.13"
-kspPlugin = "1.9.10-1.0.13"  # Must be "$kotlin-$ksp"
-composeCompiler = "1.5.3"
+kotlin = "1.9.20"
+ksp = "1.0.14"
+kspPlugin = "1.9.20-1.0.14"  # Must be "$kotlin-$ksp"
+composeCompiler = "1.5.4"
 hilt = "2.48.1"
 lifecycle = "2.6.2"
 room = "2.6.0"
@@ -25,8 +25,8 @@ google-dagger-hiltCompiler = { group = "com.google.dagger", name = "hilt-compile
 androidx-compose-bom = "androidx.compose:compose-bom:2023.10.01"
 
 androidx-core-ktx = "androidx.core:core-ktx:1.12.0"
-androidx-activity-compose = "androidx.activity:activity-compose:1.8.0"
-plrapps-mapcompose = "ovh.plrapps:mapcompose:2.9.5"
+androidx-activity-compose = "androidx.activity:activity-compose:1.8.1"
+plrapps-mapcompose = "ovh.plrapps:mapcompose:2.9.6"
 
 junit = "junit:junit:4.13.2"
 androidx-test-runner = "androidx.test:runner:1.5.2"
@@ -36,7 +36,7 @@ androidx-test-extJunit = "androidx.test.ext:junit:1.1.5"
 
 [plugins]
 
-android-application = "com.android.application:8.1.2"
+android-application = "com.android.application:8.1.4"
 jetbrains-kotlin-android = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 google-dagger-hilt-android = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
 google-devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "kspPlugin" }
