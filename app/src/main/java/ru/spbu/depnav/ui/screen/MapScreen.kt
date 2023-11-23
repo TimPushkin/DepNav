@@ -34,16 +34,19 @@ import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeContentPadding
 import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.material3.DrawerValue
 import androidx.compose.material3.LocalAbsoluteTonalElevation
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Surface
+import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
@@ -51,21 +54,28 @@ import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalConfiguration
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.intl.Locale
 import androidx.compose.ui.unit.LayoutDirection
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.zIndex
+import androidx.core.os.ConfigurationCompat
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.lifecycle.viewmodel.compose.viewModel
+import kotlinx.coroutines.launch
 import ovh.plrapps.mapcompose.ui.MapUI
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.composite.MarkerWithText
+import ru.spbu.depnav.data.preferences.PreferencesManager
 import ru.spbu.depnav.ui.component.FloorSwitch
+import ru.spbu.depnav.ui.component.MainMenuSheet
 import ru.spbu.depnav.ui.component.MapSearchBar
 import ru.spbu.depnav.ui.component.MarkerInfoLines
 import ru.spbu.depnav.ui.component.MarkerView
@@ -75,68 +85,98 @@ import ru.spbu.depnav.ui.dialog.SettingsDialog
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.viewmodel.MapUiState
 import ru.spbu.depnav.ui.viewmodel.MapViewModel
-import ru.spbu.depnav.ui.viewmodel.SearchUiState
-import ru.spbu.depnav.utils.map.getMarkerAlpha
+import ru.spbu.depnav.ui.viewmodel.SearchResults
+import ru.spbu.depnav.ui.viewmodel.SearchViewModel
 
 /** Screen containing a navigable map. */
 @Composable
-fun MapScreen(vm: MapViewModel = viewModel()) {
-    val uncheckedMapUiState by vm.mapUiState.collectAsStateWithLifecycle(MapUiState.Loading)
-    val mapUiState = uncheckedMapUiState // Direct usage won't allow auto-cast
-    if (mapUiState !is MapUiState.Ready) {
-        return
+fun MapScreen(
+    prefs: PreferencesManager,
+    mapVm: MapViewModel = viewModel(),
+    searchVm: SearchViewModel = viewModel()
+) {
+    var openSettings by rememberSaveable { mutableStateOf(false) }
+    if (openSettings) {
+        SettingsDialog(prefs, onDismiss = { openSettings = false })
     }
-
-    val searchUiState by vm.searchUiState.collectAsStateWithLifecycle(SearchUiState())
-
-    val mapColor = MaterialTheme.colorScheme.outline
-    LaunchedEffect(mapColor) { vm.setMapColor(mapColor) }
 
     var openMapLegend by rememberSaveable { mutableStateOf(false) }
     if (openMapLegend) {
         MapLegendDialog(onDismiss = { openMapLegend = false })
     }
 
-    var openSettings by rememberSaveable { mutableStateOf(false) }
-    if (openSettings) {
-        SettingsDialog(prefs = vm.prefs, onDismiss = { openSettings = false })
-    }
-
     Surface(color = MaterialTheme.colorScheme.background) {
-        MapUI(state = mapUiState.mapState)
+        val selectedMapId by prefs.selectedMapIdFlow.collectAsStateWithLifecycle()
+        val mapUiState by mapVm.uiState.collectAsStateWithLifecycle()
 
-        Box(modifier = Modifier.fillMaxSize()) {
-            CompositionLocalProvider(LocalAbsoluteTonalElevation provides 4.dp) {
-                AnimatedSearchBar(
-                    visible = mapUiState.showOnMapUi,
-                    query = searchUiState.query,
-                    onQueryChange = vm::searchForMarker,
-                    searchResults = searchUiState.results,
-                    onResultClick = { markerId ->
-                        vm.focusOnMarker(markerId)
-                        vm.addToMarkerSearchHistory(markerId)
+        val scope = rememberCoroutineScope()
+        val drawerState = rememberDrawerState(
+            initialValue = if (selectedMapId != null) DrawerValue.Closed else DrawerValue.Open,
+            confirmStateChange = { selectedMapId != null }
+        )
+
+        ModalNavigationDrawer(
+            drawerContent = {
+                MainMenuSheet(
+                    selectedMapId = selectedMapId,
+                    availableMaps = mapUiState.availableMaps,
+                    onMapSelected = {
+                        prefs.updateSelectedMapId(it)
+                        scope.launch { drawerState.close() }
                     },
-                    onInfoCLick = { openMapLegend = true },
-                    onSettingsClick = { openSettings = true }
+                    onSettingsClick = { openSettings = true },
+                    onMapLegendClick = { openMapLegend = true }
                 )
+            },
+            drawerState = drawerState,
+            gesturesEnabled = selectedMapId != null
+        ) {
+            val readyMapUiState = mapUiState as? MapUiState.Ready ?: return@ModalNavigationDrawer
+            val searchUiState by searchVm.uiState.collectAsStateWithLifecycle()
 
-                AnimatedFloorSwitch(
-                    visible = mapUiState.showOnMapUi,
-                    currentFloor = mapUiState.currentFloor,
-                    maxFloor = mapUiState.floorsNum,
-                    onFloorSwitch = vm::setFloor
-                )
+            val mapColor = MaterialTheme.colorScheme.outline
+            LaunchedEffect(mapColor) { mapVm.setMapColor(mapColor) }
 
-                val markersVisible by remember {
-                    derivedStateOf { mapUiState.mapState.getMarkerAlpha() > 0f }
+            MapUI(state = readyMapUiState.mapState)
+
+            Box(modifier = Modifier.fillMaxSize()) {
+                CompositionLocalProvider(LocalAbsoluteTonalElevation provides 4.dp) {
+                    AnimatedSearchBar(
+                        visible = readyMapUiState.showOnMapUi,
+                        mapTitle = readyMapUiState.mapTitle,
+                        query = searchUiState.query,
+                        onQueryChange = searchVm::search,
+                        searchResults = searchUiState.results,
+                        onResultClick = { markerId ->
+                            mapVm.focusOnMarker(markerId)
+                            searchVm.addToSearchHistory(markerId)
+                        },
+                        onMenuCLick = { scope.launch { drawerState.open() } }
+                    )
+
+                    AnimatedFloorSwitch(
+                        visible = readyMapUiState.showOnMapUi,
+                        currentFloor = readyMapUiState.currentFloor,
+                        maxFloor = readyMapUiState.floorsNum,
+                        onFloorSwitch = mapVm::setFloor
+                    )
+
+                    val markerAlpha by mapVm.markerAlpha.collectAsStateWithLifecycle()
+                    val markersVisible by remember { derivedStateOf { markerAlpha > 0f } }
+
+                    AnimatedBottom(
+                        pinnedMarker = readyMapUiState.pinnedMarker,
+                        showZoomInHint = !markersVisible
+                    )
                 }
-
-                AnimatedBottom(
-                    pinnedMarker = mapUiState.pinnedMarker,
-                    showZoomInHint = !markersVisible
-                )
             }
         }
+    }
+
+    val locale = Locale.current // This one is not a State
+    LaunchedEffect(key1 = ConfigurationCompat.getLocales(LocalConfiguration.current)[0]) {
+        searchVm.onLocaleChange(locale)
+        mapVm.onLocaleChange(locale)
     }
 }
 
@@ -144,12 +184,12 @@ fun MapScreen(vm: MapViewModel = viewModel()) {
 @Suppress("LongParameterList") // Considered OK for composables
 private fun BoxScope.AnimatedSearchBar(
     visible: Boolean,
+    mapTitle: String,
     query: String,
     onQueryChange: (String) -> Unit,
-    searchResults: List<MarkerWithText>,
+    searchResults: SearchResults,
     onResultClick: (Int) -> Unit,
-    onInfoCLick: () -> Unit,
-    onSettingsClick: () -> Unit
+    onMenuCLick: () -> Unit
 ) {
     var searchBarActive by rememberSaveable { mutableStateOf(false) }
     if (!visible) {
@@ -176,12 +216,12 @@ private fun BoxScope.AnimatedSearchBar(
         MapSearchBar(
             query = query,
             onQueryChange = onQueryChange,
+            mapTitle = mapTitle,
             active = searchBarActive,
             onActiveChange = { searchBarActive = it },
             results = searchResults,
             onResultClick = onResultClick,
-            onInfoClick = onInfoCLick,
-            onSettingsClick = onSettingsClick,
+            onMenuClick = onMenuCLick,
             modifier = Modifier.padding(horizontal = horizontalPadding)
         )
     }
@@ -221,8 +261,6 @@ private fun BoxScope.AnimatedFloorSwitch(
 
 @Composable
 private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHint: Boolean) {
-    val insetsNoTop = WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
-
     // Not using insets here to let the Surface reside under bottom bar
     AnimatedVisibility(
         visible = pinnedMarker != null,
@@ -231,7 +269,9 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
         exit = slideOutVertically(targetOffsetY = { it }) + fadeOut()
     ) {
         Surface(
-            modifier = Modifier.fillMaxWidth(),
+            modifier = Modifier
+                .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+                .width(640.dp),
             shape = MaterialTheme.shapes.large.copy(
                 bottomStart = CornerSize(0),
                 bottomEnd = CornerSize(0)
@@ -257,7 +297,7 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
                     isClosed = marker.isClosed,
                     modifier = Modifier
                         .padding(DEFAULT_PADDING)
-                        .windowInsetsPadding(insetsNoTop)
+                        .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
                 ) {
                     MarkerView(
                         title = markerText.title ?: stringResource(R.string.no_title),
@@ -274,7 +314,9 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
         visible = showZoomInHint && pinnedMarker == null,
         modifier = Modifier
             .align(Alignment.BottomCenter)
-            .windowInsetsPadding(insetsNoTop),
+            .windowInsetsPadding(
+                WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
+            ),
         enter = fadeIn(),
         exit = fadeOut()
     ) {

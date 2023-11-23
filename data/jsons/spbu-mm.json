@@ -1,6 +1,9 @@
 {
-  "mapName": "spbu-mm",
-  "version": 8,
+  "internalName": "spbu-mm",
+  "title": {
+    "ru": "МатМех",
+    "en": "MathMech"
+  },
   "floorWidth": 8192,
   "floorHeight": 4096,
   "tileSize": 256,
@@ -659,7 +662,7 @@
           "x": 6300,
           "y": 2978,
           "ru": {
-            "title": "\"Аквариум\"",
+            "title": "«Аквариум»",
             "description": null
           },
           "en": {
@@ -1248,7 +1251,7 @@
           "y": 419,
           "ru": {
             "title": "Столовая",
-            "description": "\"Яма\""
+            "description": "«Яма»"
           },
           "en": {
             "title": "Dining room",
@@ -2680,7 +2683,7 @@
           "x": 7638,
           "y": 2963,
           "ru": {
-            "title": "\"Баобаб\"",
+            "title": "«Баобаб»",
             "description": null
           },
           "en": {

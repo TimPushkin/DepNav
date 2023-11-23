@@ -1,6 +1,6 @@
 /**
  * DepNav -- department navigator.
- * Copyright (C) 2022  Timofei Pushkin
+ * Copyright (C) 2023  Timofei Pushkin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -16,16 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.data.db
+package ru.spbu.depnav.data.model
 
-import androidx.room.Dao
-import androidx.room.Query
-import ru.spbu.depnav.data.model.MapInfo
+import androidx.compose.ui.text.intl.Locale
 
-/** DAO for the table containing the available [MapInfo] entries. */
-@Dao
-interface MapInfoDao {
-    /** Returns a [MapInfo] with the provided map name. */
-    @Query("SELECT * FROM map_info WHERE name = :name")
-    suspend fun loadByName(name: String): MapInfo
-}
+/** Supported app language. */
+enum class Language { EN, RU }
+
+/** Returns [Language] of this locale. */
+fun Locale.toLanguage() = if (language == "ru") Language.RU else Language.EN

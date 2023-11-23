@@ -38,7 +38,7 @@ class TileStreamProviderFactory(
     @Inject
     constructor(@ApplicationContext context: Context) : this(context.assets)
 
-    /** Returns a [TileStreamProvider] for the specified floor and theme. */
+    /** Returns a [TileStreamProvider] for the specified map floor. */
     fun makeTileStreamProvider(mapName: String, floor: Int) = TileStreamProvider { row, col, lvl ->
         val path = "$tilesPath/$mapName/$floorPrefix$floor/$lvl/${row}_$col.png"
 

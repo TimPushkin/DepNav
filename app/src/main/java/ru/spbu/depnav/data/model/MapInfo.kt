@@ -20,15 +20,21 @@ package ru.spbu.depnav.data.model
 
 import androidx.room.ColumnInfo
 import androidx.room.Entity
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /**
  * Information about a map required to display it.
  */
-@Entity(tableName = "map_info")
+@Entity(
+    tableName = "map_info",
+    indices = [Index("internal_name", unique = true)]
+)
 data class MapInfo(
-    /** Name of this map. */
-    @PrimaryKey val name: String,
+    /** ID of this map. */
+    @PrimaryKey(autoGenerate = true) val id: Int,
+    /** Internal name used for data storage outside of the database. */
+    @ColumnInfo(name = "internal_name") val internalName: String,
     /** Width of floors of this map in pixels. */
     @ColumnInfo(name = "floor_width") val floorWidth: Int,
     /** Height of floors of this map in pixels. */

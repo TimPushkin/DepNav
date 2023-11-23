@@ -1,0 +1,32 @@
+{
+  "internalName": "spbu-pf",
+  "title": {
+    "ru": "ФизФак",
+    "en": "PhysFac"
+  },
+  "floorWidth": 256,
+  "floorHeight": 256,
+  "tileSize": 128,
+  "zoomLevelsNum": 1,
+  "floors": [
+    {
+      "floor": 1,
+      "markers": [
+        {
+          "type": "ROOM",
+          "is_closed": false,
+          "x": 128,
+          "y": 128,
+          "ru": {
+            "title": "Тест",
+            "description": "Тестовая комната"
+          },
+          "en": {
+            "title": "Test",
+            "description": "Test room"
+          }
+        }
+      ]
+    }
+  ]
+}

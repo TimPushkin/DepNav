@@ -20,129 +20,154 @@ package ru.spbu.depnav.ui.viewmodel
 
 import android.util.Log
 import androidx.compose.runtime.snapshotFlow
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.geometry.Offset
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
+import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
-import kotlinx.coroutines.FlowPreview
+import kotlinx.coroutines.Job
+import kotlinx.coroutines.cancel
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChangedBy
-import kotlinx.coroutines.flow.filter
-import kotlinx.coroutines.flow.flowOn
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.distinctUntilChanged
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.getAndUpdate
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.map
 import kotlinx.coroutines.flow.mapLatest
+import kotlinx.coroutines.flow.mapNotNull
 import kotlinx.coroutines.flow.onEach
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.sync.Mutex
-import kotlinx.coroutines.sync.withLock
 import kotlinx.coroutines.withContext
-import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addLayer
 import ovh.plrapps.mapcompose.api.addMarker
 import ovh.plrapps.mapcompose.api.centerOnMarker
 import ovh.plrapps.mapcompose.api.disableRotation
 import ovh.plrapps.mapcompose.api.enableRotation
 import ovh.plrapps.mapcompose.api.maxScale
+import ovh.plrapps.mapcompose.api.minScale
 import ovh.plrapps.mapcompose.api.onMarkerClick
 import ovh.plrapps.mapcompose.api.onTap
 import ovh.plrapps.mapcompose.api.removeAllLayers
 import ovh.plrapps.mapcompose.api.removeAllMarkers
 import ovh.plrapps.mapcompose.api.removeMarker
 import ovh.plrapps.mapcompose.api.rotateTo
+import ovh.plrapps.mapcompose.api.scale
 import ovh.plrapps.mapcompose.api.setColorFilterProvider
 import ovh.plrapps.mapcompose.api.setScrollOffsetRatio
 import ovh.plrapps.mapcompose.api.shouldLoopScale
 import ovh.plrapps.mapcompose.ui.state.MapState
-import ovh.plrapps.mapcompose.ui.state.markers.model.RenderingStrategy
 import ru.spbu.depnav.data.composite.MarkerWithText
+import ru.spbu.depnav.data.model.Language
+import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
-import ru.spbu.depnav.data.model.MarkerText
-import ru.spbu.depnav.data.model.SearchHistoryEntry
-import ru.spbu.depnav.data.repository.MapInfoRepo
+import ru.spbu.depnav.data.model.toLanguage
+import ru.spbu.depnav.data.preferences.PreferencesManager
+import ru.spbu.depnav.data.repository.MapRepo
 import ru.spbu.depnav.data.repository.MarkerWithTextRepo
-import ru.spbu.depnav.data.repository.SearchHistoryRepo
-import ru.spbu.depnav.ui.component.MarkerView
 import ru.spbu.depnav.ui.component.Pin
 import ru.spbu.depnav.utils.map.Floor
 import ru.spbu.depnav.utils.map.TileStreamProviderFactory
 import ru.spbu.depnav.utils.map.addClusterers
-import ru.spbu.depnav.utils.map.getClustererId
+import ru.spbu.depnav.utils.map.addMarker
 import ru.spbu.depnav.utils.map.getMarkerAlpha
-import ru.spbu.depnav.utils.misc.updateIf
-import ru.spbu.depnav.utils.preferences.PreferencesManager
 import javax.inject.Inject
 
-private const val TAG = "MapScreenViewModel"
-
-private const val MIN_QUERY_PERIOD_MS = 300L
-private const val SEARCH_HISTORY_SIZE = 10
+private const val TAG = "MapViewModel"
 
 private const val PIN_ID = "Pin" // Real IDs start with integers
 
-/** ViewModel for [MapScreen][ru.spbu.depnav.ui.screen.MapScreen]. */
+/** View model for [MapState]-related parts of [MapScreen][ru.spbu.depnav.ui.screen.MapScreen]. */
 @HiltViewModel
-@OptIn(ExperimentalClusteringApi::class, ExperimentalCoroutinesApi::class, FlowPreview::class)
+@OptIn(ExperimentalCoroutinesApi::class)
 class MapViewModel @Inject constructor(
     private val tileStreamProviderFactory: TileStreamProviderFactory,
-    private val mapInfoRepo: MapInfoRepo,
+    private val mapRepo: MapRepo,
     private val markerRepo: MarkerWithTextRepo,
-    private val searchHistoryRepo: SearchHistoryRepo,
-    /** User preferences. */
-    val prefs: PreferencesManager
+    prefs: PreferencesManager
 ) : ViewModel() {
-    private val state = MutableStateFlow(MapViewModelState())
+    // Updated only on the main thread
+    private val state = MutableStateFlow(PrivateState())
 
-    /** State of the main map UI. */
-    val mapUiState = state.map { it.toMapUiState() }
+    /** UI-visible state. */
+    val uiState = state.map { it.toMapUiState() }.stateIn(
+        viewModelScope,
+        started = SharingStarted.WhileSubscribed(5000),
+        initialValue = state.value.toMapUiState()
+    )
 
-    /** State of marker search UI. */
-    val searchUiState = state.map { it.toSearchUiState() }
-
-    private data class MapViewModelState(
-        val mapName: String? = null,
-        val mapState: MapState? = null,
-        val mapColor: Color = Color.Black,
-        val floors: Map<Int, Floor> = emptyMap(),
-        val currentFloorId: Int = 0,
+    private data class PrivateState(
+        val language: Language = Locale.current.toLanguage(),
+        val availableMaps: List<AvailableMap> = emptyList(),
+        val displayedMap: DisplayedMap? = null,
+        val mapColor: Color = Color.Unspecified,
         val pinnedMarker: MarkerWithText? = null,
-        val showOnMapUi: Boolean = true,
-        val searchQuery: String = "",
-        val searchResults: List<MarkerWithText> = emptyList()
+        val showOnMapUi: Boolean = false
     ) {
-        fun toMapUiState() =
-            if (mapState == null) {
-                MapUiState.Loading
-            } else {
-                MapUiState.Ready(
-                    mapState = mapState,
-                    floorsNum = floors.size,
-                    currentFloor = currentFloorId,
-                    pinnedMarker = pinnedMarker,
-                    showOnMapUi = showOnMapUi
-                )
-            }
+        data class DisplayedMap(
+            val id: Int,
+            val internalName: String,
+            val mapState: MapState,
+            val title: String,
+            val floorsNum: Int,
+            val floor: Floor
+        ) {
+            constructor(mapInfo: MapInfo, mapState: MapState, title: String, floor: Floor) :
+                this(mapInfo.id, mapInfo.internalName, mapState, title, mapInfo.floorsNum, floor)
+        }
 
-        fun toSearchUiState() = SearchUiState(query = searchQuery, results = searchResults)
+        fun toMapUiState() = if (displayedMap == null) {
+            MapUiState.Loading(availableMaps)
+        } else {
+            MapUiState.Ready(
+                availableMaps,
+                displayedMap.mapState,
+                displayedMap.title,
+                displayedMap.floorsNum,
+                displayedMap.floor.number,
+                pinnedMarker,
+                showOnMapUi
+            )
+        }
     }
 
+    private var _markerAlpha = MutableStateFlow(0f)
+
+    /** Alpha of marker views and clusters. */
+    val markerAlpha = _markerAlpha.asStateFlow()
+    private var markerAlphaUpdater: Job = Job().apply { complete() }
+
     init {
-        snapshotFlow { prefs.selectedMap }
-            .onEach { initMap(it.persistedName) }
+        viewModelScope.launch {
+            state.update {
+                val availableMaps = withContext(Dispatchers.IO) {
+                    mapRepo.loadAll(it.language).map { (info, title) ->
+                        AvailableMap(info.id, info.internalName, title)
+                    }
+                }
+                it.copy(availableMaps = availableMaps)
+            }
+        }
+
+        prefs.selectedMapIdFlow
+            .filterNotNull() // Can only be null initially, but not set to null by the user
+            .onEach(::initMap)
             .launchIn(viewModelScope)
 
-        snapshotFlow { prefs.enableRotation }
-            .mapLatest { enableRotation ->
-                state.value.mapState?.apply {
+        state
+            .mapNotNull { it.displayedMap?.mapState }
+            .distinctUntilChanged() // State can change for other reasons
+            .combine(prefs.enableRotationFlow) { a, b -> a to b }
+            .mapLatest { (mapState, enableRotation) ->
+                with(mapState) {
                     if (enableRotation) {
                         enableRotation()
                     } else {
@@ -154,63 +179,44 @@ class MapViewModel @Inject constructor(
             .launchIn(viewModelScope)
 
         state
-            .distinctUntilChangedBy { it.mapColor }
-            .onEach {
-                state.value.mapState?.setColorFilterProvider { _, _, _ ->
-                    ColorFilter.tint(it.mapColor)
-                }
+            .mapNotNull {
+                val (mapState, color) = with(it) { displayedMap?.mapState to mapColor }
+                if (mapState != null && color != Color.Unspecified) mapState to color else null
             }
-            .launchIn(viewModelScope)
-
-        state
-            .debounce(MIN_QUERY_PERIOD_MS)
-            .filter { it.mapName != null }
-            .distinctUntilChangedBy { it.searchQuery }
-            .mapLatest { state ->
-                val mapName = checkNotNull(state.mapName)
-                val query = state.searchQuery
-                val results = if (query.isNotEmpty()) {
-                    markerRepo.loadByQuery(mapName, query)
-                } else {
-                    searchHistoryRepo.loadByMap(mapName).map { markerRepo.loadById(it.markerId) }
-                }
-                Log.d(TAG, "Searched '$query' on map $mapName, got ${results.size} results")
-                mapName to results
-            }
-            .flowOn(Dispatchers.IO)
-            .onEach { (searchedMapName, results) ->
-                state.updateIf(condition = { it.mapName == searchedMapName }) {
-                    it.copy(searchResults = results)
-                }
+            .distinctUntilChanged() // State can change for other reasons
+            .onEach { (mapState, color) ->
+                mapState.setColorFilterProvider { _, _, _ -> ColorFilter.tint(color) }
             }
             .launchIn(viewModelScope)
     }
 
-    private suspend fun initMap(mapName: String) {
-        Log.i(TAG, "Initializing map $mapName")
+    private suspend fun initMap(mapId: Int) {
+        Log.d(TAG, "Initializing map $mapId")
+        val mapInfo = withContext(Dispatchers.IO) { mapRepo.loadInfoById(mapId) }
 
-        val mapInfo = withContext(Dispatchers.IO) { mapInfoRepo.loadByName(mapName) }
+        var mapTitle: String
+        var firstFloor: Floor
+        do {
+            val language = state.value.language
+            mapTitle = mapRepo.loadTitleById(mapId, language)
+            firstFloor = loadFloor(mapInfo.id, mapInfo.internalName, 1, language)
+        } while (state.value.language != language)
 
         val mapState = with(mapInfo) {
             MapState(levelsNum, floorWidth, floorHeight, tileSize) { scale(0f) }
         }.apply {
             setScrollOffsetRatio(0.5f, 0.5f)
-            setColorFilterProvider { _, _, _ -> ColorFilter.tint(state.value.mapColor) }
-            addClusterers()
+            addClusterers(markerAlpha)
             shouldLoopScale = true
 
-            if (prefs.enableRotation) {
-                enableRotation()
-            }
-
             onTap { _, _ ->
-                state.updateIf(condition = { it.mapState == this }) { state ->
-                    state.copy(
-                        showOnMapUi = if (state.pinnedMarker != null) {
+                state.update {
+                    it.copy(
+                        showOnMapUi = if (it.pinnedMarker != null) {
                             removeMarker(PIN_ID)
-                            state.showOnMapUi
+                            it.showOnMapUi
                         } else {
-                            !state.showOnMapUi
+                            !it.showOnMapUi
                         },
                         pinnedMarker = null
                     )
@@ -218,48 +224,58 @@ class MapViewModel @Inject constructor(
             }
 
             onMarkerClick { id, _, _ ->
-                val currentState = state.value
-                if (currentState.mapState != this) {
-                    return@onMarkerClick
-                }
-
-                val floor = checkNotNull(currentState.run { floors[currentFloorId] }) {
-                    "Illegal current floor"
-                }
+                val floor = checkNotNull(state.value.displayedMap) {
+                    "Marker can be clicked only when a map is displayed"
+                }.floor
                 val markerWithText = checkNotNull(floor.markers[id]) {
-                    "Unknown marker $id clicked"
+                    "Marker outside of the current floor got clicked"
                 }
                 pinMarker(markerWithText.marker)
+                state.update { it.copy(pinnedMarker = markerWithText, showOnMapUi = true) }
+            }
 
-                state.compareAndSet(
-                    currentState,
-                    currentState.copy(pinnedMarker = markerWithText, showOnMapUi = true)
+            for (layer in firstFloor.layers) {
+                addLayer(layer)
+            }
+            for (markerWithText in firstFloor.markers.values) {
+                addMarker(
+                    markerWithText.extendedId,
+                    markerWithText.marker,
+                    markerWithText.text,
+                    markerAlpha
                 )
             }
-        }
 
-        val floors = with(tileStreamProviderFactory) {
-            List(mapInfo.floorsNum) { i ->
-                val floorNum = i + 1
-                val layers = listOf(makeTileStreamProvider(mapName, floorNum))
-                val markers = withContext(Dispatchers.IO) {
-                    markerRepo.loadByFloor(mapName, floorNum)
-                }.associateBy { it.extendedId }
-                floorNum to Floor(layers, markers)
-            }.toMap()
+            markerAlphaUpdater.cancel("New map state arrived")
+            markerAlphaUpdater = snapshotFlow { getMarkerAlpha(minScale, scale, maxScale) }
+                .onEach { _markerAlpha.value = it }
+                .launchIn(viewModelScope)
         }
-
 
         state.getAndUpdate {
-            MapViewModelState(
-                mapName = mapName,
-                mapState = mapState,
-                floors = floors
+            PrivateState(
+                availableMaps = it.availableMaps,
+                displayedMap = PrivateState.DisplayedMap(mapInfo, mapState, mapTitle, firstFloor),
+                mapColor = it.mapColor,
+                pinnedMarker = null,
+                showOnMapUi = true
             )
-        }.mapState?.shutdown() // Shutdown the previous map state, if any
+        }.displayedMap?.mapState?.shutdown() // Shutdown the previous map state, if any
 
-        setFloor(checkNotNull(floors.keys.firstOrNull()) { "Map has no floors" })
+        Log.i(TAG, "Initialized map $mapInfo titled $mapTitle")
     }
+
+    private suspend fun loadFloor(
+        mapId: Int,
+        internalMapName: String,
+        floorNo: Int,
+        language: Language
+    ) = Floor(
+        number = floorNo,
+        layers = listOf(tileStreamProviderFactory.makeTileStreamProvider(internalMapName, floorNo)),
+        markers = withContext(Dispatchers.IO) { markerRepo.loadByFloor(mapId, floorNo, language) }
+            .associateBy { it.extendedId }
+    )
 
     private fun MapState.pinMarker(marker: Marker) {
         removeMarker(PIN_ID)
@@ -274,121 +290,177 @@ class MapViewModel @Inject constructor(
         ) { Pin() }
     }
 
-    /** Sets the color of map tiles. */
+    /** Asynchronously sets the color of map tiles. */
     fun setMapColor(color: Color) {
-        state.update { it.copy(mapColor = color) }
-    }
-
-    /** Sets the map floor to display. */
-    fun setFloor(floorId: Int) {
-        val mapState = checkNotNull(state.value.mapState) { "No map to switch floors on" }
-        viewModelScope.launch { mapState.setFloor(floorId) }
-    }
-
-    private val floorSwitchLock = Mutex()
-
-    private suspend fun MapState.setFloor(floorId: Int) {
-        // No need to worry about floors changing concurrently since then the map state would also
-        // change and we check for that
-        val floor = state.value.floors[floorId]
-        if (floor == null) {
-            Log.w(TAG, "Tried switch to floor $floorId which does not exist")
-            return
+        if (state.value.mapColor != color) {
+            state.update { it.copy(mapColor = color) }
+            Log.i(TAG, "Updated map color to $color")
         }
+    }
 
-        // Using a lock because otherwise if this method is called twice concurrently with the same
-        // parameter state.update {} will allow the same layers and markers to be added twice: CAS
-        // will succeed for the second update since the state will have the value it expects from
-        // the first update
-        floorSwitchLock.withLock(floorId) {
-            if (floorId == state.value.currentFloorId) {
-                return
-            }
-            Log.i(TAG, "Switching to floor $floorId")
+    /** Asynchronously sets the map floor to be displayed. */
+    fun setFloor(floorNo: Int) {
+        Log.d(TAG, "Switching to floor $floorNo")
+        val mapState = checkNotNull(state.value.displayedMap?.mapState) { "No map to set floors" }
+        viewModelScope.launch { mapState.setFloor(floorNo) }
+    }
 
-            removeAllLayers()
+    private suspend fun MapState.setFloor(floorNo: Int) {
+        var displayedMap = state.value.displayedMap.takeIf { it?.mapState == this } ?: return
+        var floor: Floor
+        do {
+            val language = state.value.language
+            floor = with(displayedMap) { loadFloor(id, internalName, floorNo, language) }
+            displayedMap = state.value.displayedMap.takeIf { it?.mapState == this } ?: return
+        } while (state.value.language != language)
+
+        with(displayedMap.mapState) {
             removeAllMarkers()
-
-            for (layer in floor.layers) {
-                addLayer(layer)
+            if (displayedMap.floor.number != floorNo) {
+                removeAllLayers()
+                for (layer in floor.layers) {
+                    addLayer(layer)
+                }
             }
             for (markerWithText in floor.markers.values) {
-                addMarker(markerWithText.extendedId, markerWithText.marker, markerWithText.text)
-            }
-
-            state.updateIf(condition = { it.mapState == this@setFloor }) {
-                it.copy(currentFloorId = floorId, pinnedMarker = null)
-            }
-
-            Log.d(TAG, "Switched to floor $floorId")
-        }
-    }
-
-    private fun MapState.addMarker(id: String, marker: Marker, markerText: MarkerText) {
-        addMarker(
-            id = id,
-            x = marker.x,
-            y = marker.y,
-            clickable = markerText.run { !title.isNullOrBlank() || !description.isNullOrBlank() },
-            relativeOffset = Offset(-0.5f, -0.5f),
-            clipShape = null,
-            renderingStrategy = RenderingStrategy.Clustering(getClustererId(marker.type))
-        ) {
-            val alpha = getMarkerAlpha()
-            if (alpha > 0f) { // Not to consume clicks when invisible
-                MarkerView(
-                    title = markerText.title,
-                    type = marker.type,
-                    isClosed = marker.isClosed,
-                    modifier = Modifier.alpha(alpha)
+                addMarker(
+                    markerWithText.extendedId,
+                    markerWithText.marker,
+                    markerWithText.text,
+                    markerAlpha
                 )
             }
         }
+        state.update {
+            it.copy(
+                displayedMap = displayedMap.copy(floor = floor),
+                pinnedMarker = it.pinnedMarker?.takeIf { displayedMap.floor.number == floorNo }
+            )
+        }
+
+        Log.i(
+            TAG,
+            with(state.value) {
+                "Changed floor of map ${displayedMap.internalName} to $floorNo on $language"
+            }
+        )
     }
 
-    /** Centers on the specified marker and pins it. */
+    /** Asynchronously centers on the specified marker and pins it. */
     fun focusOnMarker(markerId: Int) {
         Log.d(TAG, "Focusing on marker $markerId")
-        val mapState = checkNotNull(state.value.mapState) { "No map to do focusing on" }
+        val mapState = checkNotNull(state.value.displayedMap?.mapState) { "No map to do focusing" }
         viewModelScope.launch {
-            val markerWithText = withContext(Dispatchers.IO) { markerRepo.loadById(markerId) }
-            mapState.setFloor(markerWithText.marker.floor) // Updates the state internally
-            state.updateIf(
-                condition = {
-                    it.mapState == mapState && it.currentFloorId == markerWithText.marker.floor
+            var markerWithText: MarkerWithText
+            do {
+                val language = state.value.language
+                markerWithText = withContext(Dispatchers.IO) {
+                    markerRepo.loadById(markerId, language)
                 }
-            ) { state ->
-                with(mapState) {
-                    pinMarker(markerWithText.marker)
-                    launch { centerOnMarker(markerWithText.extendedId, maxScale) }
+                mapState.setFloor(markerWithText.marker.floor)
+                if (
+                    state.value.displayedMap?.let {
+                        it.mapState == mapState && it.floor.number == markerWithText.marker.floor
+                    } != true
+                ) {
+                    return@launch // Map or floor got switched
                 }
-                state.copy(pinnedMarker = markerWithText, showOnMapUi = true)
+            } while (state.value.language != language)
+
+            state.update { it.copy(pinnedMarker = markerWithText, showOnMapUi = true) }
+            with(mapState) {
+                pinMarker(markerWithText.marker)
+                centerOnMarker(markerWithText.extendedId, maxScale)
             }
+            Log.i(TAG, "Finished focusing on marker with text ${markerWithText.text}")
         }
     }
 
-    /** Runs marker search with the specified query. */
-    fun searchForMarker(query: String) {
-        state.update { it.copy(searchQuery = query) }
-    }
+    /**
+     * Asynchronously updates language of the map-related UI parts that come from the persisted
+     * storage and thus are not updated automatically by Android.
+     */
+    fun onLocaleChange(locale: Locale) {
+        val language = locale.toLanguage()
+        if (state.value.language == language) {
+            return
+        }
+        Log.d(TAG, "Updating language to $language")
 
-    /** Adds the provided marker ID to the marker search history. */
-    fun addToMarkerSearchHistory(markerId: Int) {
-        viewModelScope.launch(Dispatchers.IO) {
-            searchHistoryRepo.insertNotExceeding(SearchHistoryEntry(markerId), SEARCH_HISTORY_SIZE)
+        viewModelScope.launch {
+            val newAvailableMaps = withContext(Dispatchers.IO) {
+                mapRepo.loadAll(language).map { (info, title) ->
+                    AvailableMap(info.id, info.internalName, title)
+                }
+            }
+
+            while (true) {
+                val stateSnapshot = state.value
+
+                val (newDisplayedMap, newPinnedMarker) = stateSnapshot.displayedMap?.run {
+                    val newMapTitle = mapRepo.loadTitleById(id, language)
+                    val newFloor = loadFloor(id, internalName, floor.number, language)
+                    val newPinnedMarker = stateSnapshot.pinnedMarker?.let { (marker) ->
+                        newFloor.markers.values.first { it.marker.id == marker.id }
+                    }
+                    copy(title = newMapTitle, floor = newFloor) to newPinnedMarker
+                } ?: (null to null)
+
+                val currentState = state.value
+                if (currentState.language == language) {
+                    return@launch // The language has already been set
+                }
+                if (currentState.displayedMap?.let { it != stateSnapshot.displayedMap } == true ||
+                    currentState.pinnedMarker?.let { it != stateSnapshot.pinnedMarker } == true) {
+                    continue // State got changed significantly, need to try again
+                }
+
+                val newState = stateSnapshot.copy(
+                    language = language,
+                    availableMaps = newAvailableMaps,
+                    displayedMap = newDisplayedMap.takeIf { currentState.displayedMap != null },
+                    pinnedMarker = newPinnedMarker.takeIf { currentState.pinnedMarker != null }
+                )
+                state.value = newState
+
+                newState.displayedMap?.run {
+                    mapState.removeAllMarkers()
+                    for (markerWithText in floor.markers.values) {
+                        mapState.addMarker(
+                            markerWithText.extendedId,
+                            markerWithText.marker,
+                            markerWithText.text,
+                            markerAlpha
+                        )
+                    }
+                }
+
+                Log.i(TAG, "Updated language to $language")
+                return@launch
+            }
         }
     }
 }
 
 /** Describes states of map UI. */
 sealed interface MapUiState {
-    /** Map has not yet been loaded. */
-    data object Loading : MapUiState
+    sealed interface WithAvailableMaps : MapUiState {
+        /** Maps available in the app. */
+        val availableMaps: List<AvailableMap>
+    }
 
-    /** Map has been loaded. */
+    /** State in which a map has not yet been loaded. */
+    data class Loading(
+        override val availableMaps: List<AvailableMap> = emptyList()
+    ) : WithAvailableMaps
+
+    /** State in which a map has been loaded. */
     data class Ready(
+        override val availableMaps: List<AvailableMap>,
         /** State of the map. */
         val mapState: MapState,
+        /** Localized title of the map. */
+        val mapTitle: String,
         /** Number of floors the current map has. */
         val floorsNum: Int,
         /** The floor currently displayed. */
@@ -397,19 +469,15 @@ sealed interface MapUiState {
         val pinnedMarker: MarkerWithText?,
         /** Whether any UI is displayed above the map. */
         val showOnMapUi: Boolean
-    ) : MapUiState
+    ) : WithAvailableMaps
 }
 
-/** Map markers search UI state. */
-data class SearchUiState(
-    /** Marker search query entered by the user. */
-    val query: String = "",
-    /**
-     * Either the actual results of the query or a history of previous searches if the query was
-     * empty.
-     *
-     * Note that these result mey correspond not to the current query, but to some query in the
-     * past.
-     * */
-    val results: List<MarkerWithText> = emptyList()
+/** Map description for the UI. */
+data class AvailableMap(
+    /** ID of the map. */
+    val id: Int,
+    /** Name needed to retrieve resources and assets for the map. */
+    val internalName: String,
+    /** Localized title of the map. */
+    val title: String
 )

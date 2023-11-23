@@ -1,5 +1,5 @@
 # DepNav -- department navigator.
-# Copyright (C) 2022  Timofey Pushkin
+# Copyright (C) 2022  Timofei Pushkin
 #
 # This program is free software: you can redistribute it and/or modify
 # it under the terms of the GNU General Public License as published by
@@ -44,36 +44,45 @@ args = parser.parse_args()
 db = sqlite3.connect(str(args.db_file))
 cur = db.cursor()
 
+db_version = 9  # Database version that this script supports
+cur.execute(f"PRAGMA user_version = {db_version}")
+
 cur.executescript(
     """
     CREATE TABLE IF NOT EXISTS map_info
     (
-        "name"       TEXT    NOT NULL PRIMARY KEY,
-        floor_width  INTEGER NOT NULL,
-        floor_height INTEGER NOT NULL,
-        tile_size    INTEGER NOT NULL,
-        levels_num   INTEGER NOT NULL,
-        floors_num   INTEGER NOT NULL
+        id            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        internal_name TEXT    NOT NULL,
+        floor_width   INTEGER NOT NULL,
+        floor_height  INTEGER NOT NULL,
+        tile_size     INTEGER NOT NULL,
+        levels_num    INTEGER NOT NULL,
+        floors_num    INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS map_title
+    (
+        map_id      INTEGER NOT NULL REFERENCES map_info (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+        language_id TEXT    NOT NULL,
+        title       TEXT    NOT NULL,
+        PRIMARY KEY (map_id, language_id)
     );
     CREATE TABLE IF NOT EXISTS marker
     (
-        id        INTEGER NOT NULL PRIMARY KEY,
-        map_name  TEXT    NOT NULL,
+        id        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        map_id    INTEGER NOT NULL REFERENCES map_info (id) ON UPDATE CASCADE ON DELETE RESTRICT,
         "type"    TEXT    NOT NULL,
         is_closed INTEGER NOT NULL,
         floor     INTEGER NOT NULL,
         x         REAL    NOT NULL,
-        y         REAL    NOT NULL,
-        FOREIGN KEY (map_name) REFERENCES map_info ("name") ON DELETE RESTRICT
+        y         REAL    NOT NULL
     );
     CREATE TABLE IF NOT EXISTS marker_text
     (
-        marker_id   INTEGER NOT NULL,
-        language_id TEXT NOT NULL,
+        marker_id   INTEGER NOT NULL REFERENCES marker (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+        language_id TEXT    NOT NULL,
         title       TEXT,
         description TEXT,
-        PRIMARY KEY (marker_id, language_id),
-        FOREIGN KEY (marker_id) REFERENCES marker(id) ON DELETE RESTRICT
+        PRIMARY KEY (marker_id, language_id)
     );
     CREATE VIRTUAL TABLE IF NOT EXISTS marker_text_fts USING FTS4
     (
@@ -84,34 +93,30 @@ cur.executescript(
     );
     CREATE TABLE IF NOT EXISTS search_history_entry
     (
-        marker_id   INTEGER NOT NULL PRIMARY KEY,
-        "timestamp" INTEGER NOT NULL,
-        FOREIGN KEY (marker_id) REFERENCES marker(id) ON DELETE RESTRICT
+        marker_id   INTEGER NOT NULL PRIMARY KEY REFERENCES marker (id) ON UPDATE CASCADE ON DELETE RESTRICT,
+        "timestamp" INTEGER NOT NULL
     );
 
-    CREATE INDEX IF NOT EXISTS index_marker_map_name ON marker (map_name);
+    CREATE UNIQUE INDEX IF NOT EXISTS index_map_info_internal_name ON map_info (internal_name);
+    CREATE        INDEX IF NOT EXISTS index_marker_map_id_floor    ON marker   (map_id, floor);
 
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_BEFORE_UPDATE
-        BEFORE UPDATE
-        ON marker_text
+        BEFORE UPDATE ON marker_text
     BEGIN
         DELETE FROM marker_text_fts WHERE docid = old.rowid;
     END;
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_BEFORE_DELETE
-        BEFORE DELETE
-        ON marker_text
+        BEFORE DELETE ON marker_text
     BEGIN
         DELETE FROM marker_text_fts WHERE docid = old.rowid;
     END;
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_AFTER_UPDATE
-        AFTER UPDATE
-        ON marker_text
+        AFTER UPDATE  ON marker_text
     BEGIN
         INSERT INTO marker_text_fts(docid, title, description) VALUES (new.rowid, new.title, new.description);
     END;
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_AFTER_INSERT
-        AFTER INSERT
-        ON marker_text
+        AFTER INSERT ON marker_text
     BEGIN
         INSERT INTO marker_text_fts(docid, title, description) VALUES (new.rowid, new.title, new.description);
     END;
@@ -120,17 +125,14 @@ cur.executescript(
 
 m = json.load(open(args.json_file, encoding="utf8"))
 
-cur.execute(f"PRAGMA user_version = {m['version']}")
-
-map_name = m["mapName"]
 floor_width = m["floorWidth"]
 floor_height = m["floorHeight"]
 
 cur.execute(
-    "INSERT INTO map_info "
-    "VALUES (:name, :floor_width, :floor_height, :tile_size, :levels_num, :floors_num)",
+    "INSERT INTO map_info (internal_name, floor_width, floor_height, tile_size, levels_num, floors_num) "
+    "VALUES (:internal_name, :floor_width, :floor_height, :tile_size, :levels_num, :floors_num)",
     {
-        "name": map_name,
+        "internal_name": m["internalName"],
         "floor_width": floor_width,
         "floor_height": floor_height,
         "tile_size": m["tileSize"],
@@ -138,34 +140,40 @@ cur.execute(
         "floors_num": len(m["floors"]),
     },
 )
+map_id = cur.lastrowid
 
-row_id = 0
+for lid_name in LID.__members__:
+    cur.execute(
+        "INSERT INTO map_title (map_id, language_id, title) VALUES (:map_id, :language_id, :title)",
+        {
+            "map_id": map_id,
+            "language_id": lid_name,
+            "title": m["title"][lid_name.lower()]
+        },
+    )
+
 for floor in m["floors"]:
     for marker in sorted(floor["markers"], key=lambda it: it["type"]):
-        row_id += 1
-
-        marker_type, is_closed, x, y, *_ = marker.values()
-
         cur.execute(
-            "INSERT INTO marker "
-            "VALUES (:id, :map_name, :type, :is_closed, :floor, :x, :y)",
+            "INSERT INTO marker (map_id, type, is_closed, floor, x, y)"
+            "VALUES (:map_id, :type, :is_closed, :floor, :x, :y)",
             {
-                "id": row_id,
-                "map_name": map_name,
-                "type": marker_type,
-                "is_closed": is_closed,
+                "map_id": map_id,
+                "type": marker["type"],
+                "is_closed": marker["is_closed"],
                 "floor": floor["floor"],
-                "x": x / floor_width,
-                "y": y / floor_height,
+                "x": marker["x"] / floor_width,
+                "y": marker["y"] / floor_height,
             },
         )
+        marker_id = cur.lastrowid
 
         for lid_name in LID.__members__:
             cur.execute(
                 "INSERT INTO marker_text "
                 "VALUES (:marker_id, :language_id, :title, :description)",
                 {
-                    "marker_id": row_id,
+                    "marker_id": marker_id,
                     "language_id": lid_name,
                     **marker[lid_name.lower()],
                 },

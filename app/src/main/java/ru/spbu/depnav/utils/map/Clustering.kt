@@ -19,11 +19,11 @@
 package ru.spbu.depnav.utils.map
 
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.State
-import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.alpha
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
+import kotlinx.coroutines.flow.StateFlow
 import ovh.plrapps.mapcompose.api.ExperimentalClusteringApi
 import ovh.plrapps.mapcompose.api.addClusterer
 import ovh.plrapps.mapcompose.ui.state.MapState
@@ -40,44 +40,43 @@ private const val OTHER_CLUSTERER_ID = "others"
 
 /** Adds clusterers for each marker type group. */
 @OptIn(ExperimentalClusteringApi::class)
-fun MapState.addClusterers() {
-    val clusterAlphaState = derivedStateOf { getMarkerAlpha() }
+fun MapState.addClusterers(markerAlpha: StateFlow<Float>) {
     addClusterer(
         ROOMS_CLUSTERER_ID,
         clusteringThreshold = MAX_MARKER_CLUSTER_VIEW_SIZE,
-        clusterFactory = createClusterFactory(clusterAlphaState, Marker.MarkerType.ROOM)
+        clusterFactory = createClusterFactory(markerAlpha, Marker.MarkerType.ROOM)
     )
     addClusterer(
         ENTRANCE_CLUSTERER_ID,
         clusteringThreshold = MAX_MARKER_CLUSTER_VIEW_SIZE,
-        clusterFactory = createClusterFactory(clusterAlphaState, Marker.MarkerType.ENTRANCE)
+        clusterFactory = createClusterFactory(markerAlpha, Marker.MarkerType.ENTRANCE)
     )
     addClusterer(
         STAIRS_CLUSTERER_ID,
         clusteringThreshold = MAX_MARKER_CLUSTER_VIEW_SIZE,
-        clusterFactory = createClusterFactory(clusterAlphaState, Marker.MarkerType.STAIRS_BOTH)
+        clusterFactory = createClusterFactory(markerAlpha, Marker.MarkerType.STAIRS_BOTH)
     )
     addClusterer(
         ELEVATOR_CLUSTERER_ID,
         clusteringThreshold = MAX_MARKER_CLUSTER_VIEW_SIZE,
-        clusterFactory = createClusterFactory(clusterAlphaState, Marker.MarkerType.ELEVATOR)
+        clusterFactory = createClusterFactory(markerAlpha, Marker.MarkerType.ELEVATOR)
     )
     addClusterer(
         WC_CLUSTERER_ID,
         clusteringThreshold = MAX_MARKER_CLUSTER_VIEW_SIZE,
-        clusterFactory = createClusterFactory(clusterAlphaState, Marker.MarkerType.WC)
+        clusterFactory = createClusterFactory(markerAlpha, Marker.MarkerType.WC)
     )
     addClusterer(
         OTHER_CLUSTERER_ID,
         clusteringThreshold = MAX_MARKER_CLUSTER_VIEW_SIZE,
-        clusterFactory = createClusterFactory(clusterAlphaState, Marker.MarkerType.OTHER)
+        clusterFactory = createClusterFactory(markerAlpha, Marker.MarkerType.OTHER)
     )
 }
 
-private fun createClusterFactory(alphaState: State<Float>, type: Marker.MarkerType) =
+private fun createClusterFactory(alphaFlow: StateFlow<Float>, type: Marker.MarkerType) =
     { ids: List<String> ->
         @Composable {
-            val alpha by alphaState
+            val alpha by alphaFlow.collectAsStateWithLifecycle()
             if (alpha > 0f) { // To not consume clicks when invisible
                 MarkersCluster(ids, type, modifier = Modifier.alpha(alpha))
             }

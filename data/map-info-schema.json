@@ -2,11 +2,23 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
-    "mapName": {
+    "internalName": {
       "type": "string"
     },
-    "version": {
-      "type": "integer"
+    "title": {
+      "type": "object",
+      "properties": {
+        "ru": {
+          "type": "string"
+        },
+        "en": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "ru",
+        "en"
+      ]
     },
     "floorWidth": {
       "type": "integer"
@@ -119,8 +131,8 @@
     }
   },
   "required": [
-    "mapName",
-    "version",
+    "internalName",
+    "title",
     "floorWidth",
     "floorHeight",
     "tileSize",

@@ -23,6 +23,8 @@ import ru.spbu.depnav.data.composite.MarkerWithText
 
 /** Displayable floor of a map. */
 data class Floor(
+    /** Number of this floor among other floors on the same map. */
+    val number: Int,
     /** Layers of tiles that this floor consist of. */
     val layers: Iterable<TileStreamProvider>,
     /** Markers placed on this floor, mapped by their IDs. */

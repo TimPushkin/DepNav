@@ -27,7 +27,7 @@ import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.SearchHistoryEntry
 
-private val INSERTED_MAP = MapInfo("test map", 100, 100, 128, 5, 3)
+private val INSERTED_MAP = MapInfo(123, "test-map", 100, 100, 128, 5, 3)
 
 /** Instrumentation tests for [SearchHistoryDao]. */
 class SearchHistoryDaoTest : AppDatabaseDaoTest() {
@@ -47,20 +47,20 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
     /** Checks that [SearchHistoryDao.loadByMap] returns entries for the specified map. */
     @Test
     fun loadByMap_returnsEntriesForSpecifiedMap() {
-        val expectedMap = INSERTED_MAP.copy(name = "another map")
+        val expectedMap = INSERTED_MAP.copy(id = 999, internalName = "another map")
         db.insertAll(expectedMap)
         val expectedId = 2
         val unexpectedId = 1
         db.insertAll(
-            Marker(unexpectedId, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0),
-            Marker(expectedId, expectedMap.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
+            Marker(unexpectedId, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0),
+            Marker(expectedId, expectedMap.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
         )
         runBlocking {
             searchHistoryDao.insertNotExceeding(SearchHistoryEntry(unexpectedId, 1L), 10)
             searchHistoryDao.insertNotExceeding(SearchHistoryEntry(expectedId, 1L), 10)
         }
 
-        val actual = runBlocking { searchHistoryDao.loadByMap(expectedMap.name) }
+        val actual = runBlocking { searchHistoryDao.loadByMap(expectedMap.id) }
 
         assertTrue("Loaded entry list is empty", actual.isNotEmpty())
         actual.forEach { assertEquals(expectedId, it.markerId) }
@@ -69,7 +69,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
     private fun testInsertNotExceedingSingleMap(maxEntriesNum: Int, insertEntriesNum: Int) {
         val expected = mutableListOf<SearchHistoryEntry>()
         repeat(insertEntriesNum) { id ->
-            db.insertAll(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
             val entry = SearchHistoryEntry(id, id.toLong())
             runBlocking { searchHistoryDao.insertNotExceeding(entry, maxEntriesNum) }
             expected += entry
@@ -77,7 +77,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         expected.sortBy { it.timestamp }
         while (expected.size > maxEntriesNum) expected.removeFirst()
 
-        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name) }
+        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.id) }
 
         assertEquals(expected.size, actual.size)
         for (entry in actual) {
@@ -134,23 +134,23 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
      * */
     @Test
     fun insertNotExceedingExactlyMaxForMultipleMaps_loadReturnsSameNumberAsInserted() {
-        val anotherMap = INSERTED_MAP.copy(name = "another map")
+        val anotherMap = INSERTED_MAP.copy(id = 999, internalName = "another map")
         db.insertAll(anotherMap)
         val maxEntriesNum = 2
         for (id in 1..maxEntriesNum) {
-            db.insertAll(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
             runBlocking {
                 searchHistoryDao.insertNotExceeding(SearchHistoryEntry(id, 1L), maxEntriesNum)
             }
         }
         for (id in maxEntriesNum + 1..2 * maxEntriesNum) {
-            db.insertAll(Marker(id, anotherMap.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            db.insertAll(Marker(id, anotherMap.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
             runBlocking {
                 searchHistoryDao.insertNotExceeding(SearchHistoryEntry(id, 1L), maxEntriesNum)
             }
         }
 
-        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.name) }
+        val actual = runBlocking { searchHistoryDao.loadByMap(INSERTED_MAP.id) }
 
         assertEquals(maxEntriesNum, actual.size)
     }

@@ -48,22 +48,21 @@ import androidx.compose.ui.unit.dp
 import kotlinx.coroutines.flow.launchIn
 import kotlinx.coroutines.flow.onEach
 import ru.spbu.depnav.R
-import ru.spbu.depnav.data.composite.MarkerWithText
+import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.DepNavTheme
+import ru.spbu.depnav.ui.viewmodel.SearchResults
 
 /**
  * Column with clickable information about markers that were found by the search.
  *
- * @param markersWithTexts results sorted by importance: elements listed first will be displayed on
- * top.
+ * @param results results sorted by importance: elements listed first will be displayed on top.
  */
 @Composable
-fun SearchResults(
-    markersWithTexts: List<MarkerWithText>,
-    isHistory: Boolean,
+fun SearchResultsView(
+    results: SearchResults,
     onScroll: (onTop: Boolean) -> Unit,
     onResultClick: (Int) -> Unit,
     modifier: Modifier = Modifier
@@ -77,10 +76,10 @@ fun SearchResults(
         contentPadding = PaddingValues(top = DEFAULT_PADDING / 2),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
-        items(markersWithTexts.asReversed()) { (marker, markerText) ->
+        items(results.items.asReversed()) { (marker, markerText) ->
             if (markerText.title == null) return@items
 
-            SearchResult(
+            SearchResultView(
                 marker = marker,
                 markerText = markerText,
                 onClick = onResultClick,
@@ -97,7 +96,7 @@ fun SearchResults(
                             )
                         }
                     }
-                    ).takeIf { isHistory }
+                    ).takeIf { results.isHistory }
             )
         }
     }
@@ -112,7 +111,7 @@ fun SearchResults(
 }
 
 @Composable
-private fun SearchResult(
+private fun SearchResultView(
     marker: Marker,
     markerText: MarkerText,
     onClick: (Int) -> Unit,
@@ -170,9 +169,9 @@ private fun SearchResult(
 @Suppress("UnusedPrivateMember")
 private fun SearchResultUsualPreview() {
     DepNavTheme {
-        SearchResult(
-            marker = Marker(1, "", Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
-            markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
+        SearchResultView(
+            marker = Marker(1, 0, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
+            markerText = MarkerText(1, Language.EN, "1234", "Some description"),
             onClick = {}
         ) {}
     }
@@ -183,9 +182,9 @@ private fun SearchResultUsualPreview() {
 @Suppress("UnusedPrivateMember")
 private fun SearchResultHistoryPreview() {
     DepNavTheme {
-        SearchResult(
-            marker = Marker(1, "", Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
-            markerText = MarkerText(1, MarkerText.LanguageId.EN, "1234", "Some description"),
+        SearchResultView(
+            marker = Marker(1, 0, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
+            markerText = MarkerText(1, Language.EN, "1234", "Some description"),
             onClick = {}
         ) {
             CompositionLocalProvider(

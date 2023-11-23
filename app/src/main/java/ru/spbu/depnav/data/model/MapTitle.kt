@@ -1,6 +1,6 @@
 /**
  * DepNav -- department navigator.
- * Copyright (C) 2022  Timofei Pushkin
+ * Copyright (C) 2023  Timofei Pushkin
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -21,29 +21,28 @@ package ru.spbu.depnav.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
-import androidx.room.PrimaryKey
 
-/** Information about a marker that was searched. */
+/**
+ * Localized map title.
+ */
 @Entity(
-    tableName = "search_history_entry",
+    tableName = "map_title",
+    primaryKeys = ["map_id", "language_id"],
     foreignKeys = [
         ForeignKey(
-            entity = Marker::class,
+            entity = MapInfo::class,
             parentColumns = ["id"],
-            childColumns = ["marker_id"],
+            childColumns = ["map_id"],
             onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.RESTRICT
         )
     ]
 )
-data class SearchHistoryEntry(
-    /** ID of the searched marker. */
-    @PrimaryKey
-    @ColumnInfo(name = "marker_id")
-    val markerId: Int,
-    /**
-     * The "wall clock" timestamp of the moment when the search for the marker was performed in
-     * milliseconds.
-     */
-    val timestamp: Long = System.currentTimeMillis()
+data class MapTitle(
+    /** ID of the [MapInfo] describing the map whose title this is. */
+    @ColumnInfo(name = "map_id") val mapId: Int,
+    /** Language of this title. */
+    @ColumnInfo(name = "language_id") val languageId: Language,
+    /** Localized title of the map. */
+    val title: String
 )

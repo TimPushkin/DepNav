@@ -26,10 +26,13 @@ import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
 import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.getValue
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import dagger.hilt.android.AndroidEntryPoint
+import ru.spbu.depnav.data.preferences.PreferencesManager
+import ru.spbu.depnav.data.preferences.ThemeMode
 import ru.spbu.depnav.ui.screen.MapScreen
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.utils.preferences.PreferencesManager
 import javax.inject.Inject
 
 @AndroidEntryPoint
@@ -43,19 +46,19 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val darkTheme = when (prefs.themeMode) {
-                PreferencesManager.ThemeMode.LIGHT -> false
-                PreferencesManager.ThemeMode.DARK -> true
-                PreferencesManager.ThemeMode.SYSTEM -> isSystemInDarkTheme()
+            val themeMode by prefs.themeModeFlow.collectAsStateWithLifecycle()
+            val darkTheme = when (themeMode) {
+                ThemeMode.LIGHT -> false
+                ThemeMode.DARK -> true
+                ThemeMode.SYSTEM -> isSystemInDarkTheme()
             }
 
             LaunchedEffect(darkTheme) {
-                val systemBarStyle =
-                    SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { darkTheme }
-                enableEdgeToEdge(systemBarStyle, systemBarStyle)
+                val style = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { darkTheme }
+                enableEdgeToEdge(style, style)
             }
 
-            DepNavTheme(darkTheme = darkTheme) { MapScreen() }
+            DepNavTheme(darkTheme = darkTheme) { MapScreen(prefs) }
         }
     }
 }

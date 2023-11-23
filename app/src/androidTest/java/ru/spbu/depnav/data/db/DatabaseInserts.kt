@@ -26,12 +26,16 @@ package ru.spbu.depnav.data.db
 import android.content.ContentValues
 import android.database.sqlite.SQLiteDatabase
 import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.model.MapTitle
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 
-private fun MapInfo.values() = listOf(name, floorWidth, floorHeight, tileSize, levelsNum, floorsNum)
+private fun MapInfo.values() =
+    listOf(id, internalName, floorWidth, floorHeight, tileSize, levelsNum, floorsNum)
 
-private fun Marker.values() = listOf(id, mapName, type.name, isClosed, floor, x, y)
+private fun MapTitle.values() = listOf(mapId, languageId.name, title)
+
+private fun Marker.values() = listOf(id, mapId, type.name, isClosed, floor, x, y)
 
 private fun MarkerText.values() = listOf(markerId, languageId.name, title, description)
 
@@ -79,22 +83,32 @@ fun AppDatabase.insertAll(vararg mapInfos: MapInfo) =
 fun AppDatabase.insertAll(mapInfos: Iterable<MapInfo>) =
     insertAllValues("map_info", mapInfos.map { it.values() })
 
-/** Inserts all [MapInfo]s into the corresponding table in the database. */
+/** Inserts all [MapTitle]s into the corresponding table in the database. */
+@JvmName("insertAllMapTitles")
+fun AppDatabase.insertAll(vararg mapTitles: MapTitle) =
+    insertAllValues("map_title", mapTitles.map { it.values() })
+
+/** Inserts all [MapTitle]s into the corresponding table in the database. */
+@JvmName("insertAllMapTitles")
+fun AppDatabase.insertAll(mapTitles: Iterable<MapTitle>) =
+    insertAllValues("map_title", mapTitles.map { it.values() })
+
+/** Inserts all [Marker]s into the corresponding table in the database. */
 @JvmName("insertAllMarkers")
 fun AppDatabase.insertAll(vararg markers: Marker) =
     insertAllValues("marker", markers.map { it.values() })
 
-/** Inserts all [MapInfo]s into the corresponding table in the database. */
+/** Inserts all [Marker]s into the corresponding table in the database. */
 @JvmName("insertAllMarkers")
 fun AppDatabase.insertAll(markers: Iterable<Marker>) =
     insertAllValues("marker", markers.map { it.values() })
 
-/** Inserts all [MapInfo]s into the corresponding table in the database. */
+/** Inserts all [MarkerText]s into the corresponding table in the database. */
 @JvmName("insertAllMarkerTexts")
 fun AppDatabase.insertAll(vararg markerTexts: MarkerText) =
     insertAllValues("marker_text", markerTexts.map { it.values() })
 
-/** Inserts all [MapInfo]s into the corresponding table in the database. */
+/** Inserts all [MarkerText]s into the corresponding table in the database. */
 @JvmName("insertAllMarkerTexts")
 fun AppDatabase.insertAll(markerTexts: Iterable<MarkerText>) =
     insertAllValues("marker_text", markerTexts.map { it.values() })

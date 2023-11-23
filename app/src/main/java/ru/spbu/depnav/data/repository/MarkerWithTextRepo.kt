@@ -21,6 +21,7 @@ package ru.spbu.depnav.data.repository
 import android.util.Log
 import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.data.db.MarkerWithTextDao
+import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.data.model.rankWith
@@ -30,57 +31,51 @@ import javax.inject.Inject
 
 private const val TAG = "MarkerWithTextRepo"
 
-/** Repository for [Marker] objects with associated [MarkerText] objects. */
+/** Repository for [Marker]s and [MarkerText]s. */
 class MarkerWithTextRepo(
     private val dao: MarkerWithTextDao,
-    /** Ranking algorithm used to sort queried entries. */
+    /** Ranking algorithm used to sort FTS-queried entries. */
     var ranker: Ranker
 ) {
-    /**
-     * Repository for [Marker] objects with associated [MarkerText] objects with BM25 as a ranker.
-     */
+    /** Repository for [Marker]s and [MarkerText]s with [Bm25] as a ranker. */
     @Inject
     constructor(dao: MarkerWithTextDao) : this(dao, Bm25())
 
-    /** Loads a [Marker] by its ID and its corresponding [MarkerText] on the current language. */
-    suspend fun loadById(id: Int): MarkerWithText {
-        val language = MarkerText.LanguageId.getCurrent()
-        val (marker, markerTexts) = checkNotNull(dao.loadById(id, language).entries.firstOrNull()) {
-            "No markers with ID $id"
+    /** Loads a [Marker] by its ID and its corresponding [MarkerText] on the specified language. */
+    suspend fun loadById(id: Int, language: Language): MarkerWithText {
+        val (marker, markerTexts) = requireNotNull(
+            dao.loadById(id, language).entries.firstOrNull()
+        ) { "No markers with ID $id" }
+        val markerText = checkNotNull(markerTexts.firstOrNull()) {
+            "No text on $language for $marker"
         }
-        val markerText = markerTexts.squeezedFor(marker, language)
         return MarkerWithText(marker, markerText)
     }
 
     /**
      * Loads [Marker]s from the specified map and floor with their corresponding [MarkerText]s on
-     * the current language.
+     * the specified language.
      */
-    suspend fun loadByFloor(mapName: String, floor: Int): List<MarkerWithText> {
-        val language = MarkerText.LanguageId.getCurrent()
-        val markersWithTexts = dao.loadByFloor(mapName, floor, language)
+    suspend fun loadByFloor(mapId: Int, floor: Int, language: Language): List<MarkerWithText> {
+        val markersWithTexts = dao.loadByFloor(mapId, floor, language)
         return markersWithTexts.entries.map { (marker, texts) ->
-            MarkerWithText(marker, text = texts.squeezedFor(marker, language))
+            MarkerWithText(
+                marker,
+                text = checkNotNull(texts.firstOrNull()) { "No text on $language for $marker" }
+            )
         }
     }
 
-    private fun List<MarkerText>.squeezedFor(marker: Marker, language: MarkerText.LanguageId) =
-        firstOrNull() ?: run {
-            Log.w(TAG, "Marker $marker has no text on $language")
-            MarkerText(marker.id, language, null, null)
-        }
-
     /**
-     * Loads [Marker]s from the specified map with their corresponding [MarkerText]s on the current
+     * Loads [Marker]s from the specified map with their corresponding [MarkerText]s on the given
      * language so that the text satisfies the specified query. The results are sorted first by
-     * relevance, then alphabetically.
+     * relevance (most relevant first), then alphabetically.
      */
-    suspend fun loadByQuery(mapName: String, query: String): List<MarkerWithText> {
-        val language = MarkerText.LanguageId.getCurrent()
+    suspend fun loadByQuery(mapId: Int, query: String, language: Language): List<MarkerWithText> {
         val tokenized = query.tokenized()
 
         Log.d(TAG, "Loading query '$query' tokenized as '$tokenized'")
-        val rankedTextsWithMarkers = dao.loadByTokens(mapName, tokenized, language).map {
+        val rankedTextsWithMarkers = dao.loadByTokens(mapId, tokenized, language).map {
             val rank = it.key.run {
                 when (query) {
                     markerText.title -> Double.POSITIVE_INFINITY

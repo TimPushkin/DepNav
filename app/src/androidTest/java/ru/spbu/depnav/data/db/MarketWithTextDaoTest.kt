@@ -23,11 +23,12 @@ import org.junit.Assert.assertEquals
 import org.junit.Assert.assertTrue
 import org.junit.Before
 import org.junit.Test
+import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.MapInfo
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 
-private val INSERTED_MAP = MapInfo("test map", 100, 100, 128, 5, 3)
+private val INSERTED_MAP = MapInfo(123, "test-map", 100, 100, 128, 5, 3)
 
 /** Instrumentation tests for [MarkerWithTextDao]. */
 @Suppress("TooManyFunctions") // OK for a test class
@@ -52,13 +53,13 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         for (id in listOf(1, 2, 5)) {
             expected += Marker(
                 id,
-                INSERTED_MAP.name,
+                INSERTED_MAP.id,
                 Marker.MarkerType.OTHER,
                 false,
                 1,
                 0.0,
                 0.0
-            ) to MarkerText(id, MarkerText.LanguageId.EN, null, null)
+            ) to MarkerText(id, Language.EN, null, null)
         }
         db.insertAll(expected.keys)
         db.insertAll(expected.values)
@@ -80,10 +81,10 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     fun loadById_returnsMarkerWithSpecifiedLanguage() {
         val markersWithTexts = mutableMapOf<Marker, List<MarkerText>>()
         for (id in listOf(1, 2, 5)) {
-            val marker = Marker(id, INSERTED_MAP.name, Marker.MarkerType.OTHER, false, 1, 0.0, 0.0)
+            val marker = Marker(id, INSERTED_MAP.id, Marker.MarkerType.OTHER, false, 1, 0.0, 0.0)
             markersWithTexts[marker] = listOf(
-                MarkerText(id, MarkerText.LanguageId.EN, null, null),
-                MarkerText(id, MarkerText.LanguageId.RU, null, null)
+                MarkerText(id, Language.EN, null, null),
+                MarkerText(id, Language.RU, null, null)
             )
         }
         db.insertAll(markersWithTexts.keys)
@@ -108,15 +109,15 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
      */
     @Test
     fun loadByFloor_returnsMarkersFromSpecifiedMap() {
-        val expectedMap = INSERTED_MAP.copy(name = "another map")
+        val expectedMap = INSERTED_MAP.copy(id = 999, internalName = "another map")
         db.insertAll(expectedMap)
         val expectedId = 2
         val unexpectedId = 1
         val floor = 2
-        val language = MarkerText.LanguageId.EN
+        val language = Language.EN
         db.insertAll(
-            Marker(unexpectedId, INSERTED_MAP.name, Marker.MarkerType.WC, true, floor, 0.0, 0.0),
-            Marker(expectedId, expectedMap.name, Marker.MarkerType.WC, true, floor, 0.0, 0.0)
+            Marker(unexpectedId, INSERTED_MAP.id, Marker.MarkerType.WC, true, floor, 0.0, 0.0),
+            Marker(expectedId, expectedMap.id, Marker.MarkerType.WC, true, floor, 0.0, 0.0)
         )
         db.insertAll(
             MarkerText(unexpectedId, language, "Some 1", "Some 2"),
@@ -124,11 +125,11 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         )
 
         val actual = runBlocking {
-            markerWithTextDao.loadByFloor(expectedMap.name, floor, MarkerText.LanguageId.EN).keys
+            markerWithTextDao.loadByFloor(expectedMap.id, floor, Language.EN).keys
         }
 
-        assertTrue("No markers loaded from ${expectedMap.name}", actual.isNotEmpty())
-        actual.forEach { assertEquals(expectedMap.name, it.mapName) }
+        assertTrue("No markers loaded from ${expectedMap.id}", actual.isNotEmpty())
+        actual.forEach { assertEquals(expectedMap.id, it.mapId) }
     }
 
     /**
@@ -137,13 +138,13 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
      */
     @Test
     fun loadByFloor_returnsAllMarkersWithSpecifiedFloor() {
-        val language = MarkerText.LanguageId.EN
+        val language = Language.EN
         val floors = List(INSERTED_MAP.floorsNum) { it * 2 }
         val markers = mutableMapOf<Int, MutableList<Marker>>()
         val markerTexts = mutableListOf<MarkerText>()
         for ((floor, id) in floors.zip(List(INSERTED_MAP.floorsNum) { it + 1 })) {
             markers.getOrPut(floor) { mutableListOf() } +=
-                Marker(id, INSERTED_MAP.name, Marker.MarkerType.OTHER, false, floor, 1.1, -2.0)
+                Marker(id, INSERTED_MAP.id, Marker.MarkerType.OTHER, false, floor, 1.1, -2.0)
             markerTexts += MarkerText(id, language, null, null)
         }
         db.insertAll(markers.values.flatten())
@@ -151,10 +152,10 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
 
         for (floor in floors) {
             val actualMarkers = runBlocking {
-                markerWithTextDao.loadByFloor(INSERTED_MAP.name, floor, language).keys
+                markerWithTextDao.loadByFloor(INSERTED_MAP.id, floor, language).keys
             }
 
-            assertTrue("No markers loaded from ${INSERTED_MAP.name}", actualMarkers.isNotEmpty())
+            assertTrue("No markers loaded from ${INSERTED_MAP.id}", actualMarkers.isNotEmpty())
             for (marker in actualMarkers) assertEquals(floor, marker.floor)
         }
     }
@@ -167,23 +168,23 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     fun loadByFloor_returnsMarkersWithSpecifiedLanguage() {
         val floors = List(INSERTED_MAP.floorsNum) { it * 2 }
         for ((floor, id) in floors.zip(List(floors.size) { it + 1 })) {
-            db.insertAll(Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, floor, 0.0, 0.0))
-            for (languageId in MarkerText.LanguageId.values()) {
+            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, true, floor, 0.0, 0.0))
+            for (languageId in Language.values()) {
                 db.insertAll(MarkerText(id, languageId, null, null))
             }
         }
 
         for (floor in floors) {
-            for (languageId in MarkerText.LanguageId.values()) {
+            for (languageId in Language.values()) {
                 val actual = runBlocking {
                     markerWithTextDao.loadByFloor(
-                        INSERTED_MAP.name,
+                        INSERTED_MAP.id,
                         floor,
                         languageId
                     ).values.flatten()
                 }
 
-                assertTrue("No marker texts loaded from ${INSERTED_MAP.name}", actual.isNotEmpty())
+                assertTrue("No marker texts loaded from ${INSERTED_MAP.id}", actual.isNotEmpty())
                 actual.forEach { assertEquals(languageId, it.languageId) }
             }
         }
@@ -194,15 +195,15 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
      */
     @Test
     fun loadByTokens_returnsMarkersFromSpecifiedMap() {
-        val expectedMap = INSERTED_MAP.copy(name = "another map")
+        val expectedMap = INSERTED_MAP.copy(id = 999, internalName = "another map")
         db.insertAll(expectedMap)
         val expectedId = 2
         val unexpectedId = 1
         val title = "Title"
-        val language = MarkerText.LanguageId.EN
+        val language = Language.EN
         db.insertAll(
-            Marker(unexpectedId, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0),
-            Marker(expectedId, expectedMap.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
+            Marker(unexpectedId, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0),
+            Marker(expectedId, expectedMap.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
         )
         db.insertAll(
             MarkerText(unexpectedId, language, title, "Description"),
@@ -210,11 +211,11 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         )
 
         val actual = runBlocking {
-            markerWithTextDao.loadByTokens(expectedMap.name, title, language).values.flatten()
+            markerWithTextDao.loadByTokens(expectedMap.id, title, language).values.flatten()
         }
 
-        assertTrue("No marker texts loaded from ${INSERTED_MAP.name}", actual.isNotEmpty())
-        actual.forEach { assertEquals(expectedMap.name, it.mapName) }
+        assertTrue("No marker texts loaded from ${INSERTED_MAP.id}", actual.isNotEmpty())
+        actual.forEach { assertEquals(expectedMap.id, it.mapId) }
     }
 
     /**
@@ -226,7 +227,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         val expectedTitle = "+"
         val unexpectedTitle = "-"
         var maxMarkerId = 0
-        val language = MarkerText.LanguageId.EN
+        val language = Language.EN
         val markerTexts = listOf(
             MarkerText(maxMarkerId++, language, expectedTitle, "Lorem ipsum dolor sit amet"),
             MarkerText(maxMarkerId++, language, expectedTitle, "123 lorem iPsUm"),
@@ -239,13 +240,13 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         )
         db.insertAll(
             List(maxMarkerId) {
-                Marker(it, INSERTED_MAP.name, Marker.MarkerType.WC, false, 1, 0.0, 0.0)
+                Marker(it, INSERTED_MAP.id, Marker.MarkerType.WC, false, 1, 0.0, 0.0)
             }
         )
         db.insertAll(markerTexts)
 
         val actual = runBlocking {
-            markerWithTextDao.loadByTokens(INSERTED_MAP.name, "Lorem ipsum", language).keys
+            markerWithTextDao.loadByTokens(INSERTED_MAP.id, "Lorem ipsum", language).keys
         }
 
         actual.forEach { assertEquals(expectedTitle, it.markerText.title) }
@@ -261,7 +262,7 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
         val expectedTitle = "+"
         val unexpectedTitle = "-"
         var maxMarkerId = 0
-        val language = MarkerText.LanguageId.RU
+        val language = Language.RU
         val markerTexts = listOf(
             MarkerText(maxMarkerId++, language, expectedTitle, "Лорем ипсум долор сит амет"),
             MarkerText(maxMarkerId++, language, expectedTitle, "123 лорем иПсУм"),
@@ -275,13 +276,13 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
 
         db.insertAll(
             List(maxMarkerId) {
-                Marker(it, INSERTED_MAP.name, Marker.MarkerType.WC, false, 1, 0.0, 0.0)
+                Marker(it, INSERTED_MAP.id, Marker.MarkerType.WC, false, 1, 0.0, 0.0)
             }
         )
         db.insertAll(markerTexts)
 
         val actual = runBlocking {
-            markerWithTextDao.loadByTokens(INSERTED_MAP.name, "Лорем ипсум", language).keys
+            markerWithTextDao.loadByTokens(INSERTED_MAP.id, "Лорем ипсум", language).keys
         }
 
         actual.forEach { assertEquals(expectedTitle, it.markerText.title) }
@@ -295,17 +296,17 @@ class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     @Test
     fun loadByTokens_returnsSingleMarkerWithCorrectIdForEachMarkerText() {
         val title = "title"
-        val language = MarkerText.LanguageId.EN
+        val language = Language.EN
         val markersWithText = mutableMapOf<Marker, MarkerText>()
         for (id in listOf(1, 2, 5)) {
-            val marker = Marker(id, INSERTED_MAP.name, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
+            val marker = Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
             markersWithText[marker] = MarkerText(id, language, title, null)
         }
         db.insertAll(markersWithText.keys)
         db.insertAll(markersWithText.values)
 
         val actual =
-            runBlocking { markerWithTextDao.loadByTokens(INSERTED_MAP.name, title, language) }
+            runBlocking { markerWithTextDao.loadByTokens(INSERTED_MAP.id, title, language) }
 
         for ((markerTextWithMatchInfo, markers) in actual) {
             assertTrue(
