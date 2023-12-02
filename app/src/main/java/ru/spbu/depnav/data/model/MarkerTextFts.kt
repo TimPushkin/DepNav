@@ -31,6 +31,8 @@ import androidx.room.FtsOptions
 data class MarkerTextFts(
     /** Column for indexing [MarkerText.title]. */
     val title: String?,
+    /** Column for indexing [MarkerText.location]. */
+    val location: String?,
     /** Column for indexing [MarkerText.description]. */
     val description: String?
 )

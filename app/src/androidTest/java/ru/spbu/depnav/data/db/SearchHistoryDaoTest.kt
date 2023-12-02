@@ -52,8 +52,8 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         val expectedId = 2
         val unexpectedId = 1
         db.insertAll(
-            Marker(unexpectedId, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0),
-            Marker(expectedId, expectedMap.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0)
+            Marker(unexpectedId, INSERTED_MAP.id, Marker.MarkerType.WC, 1, 0.0, 0.0),
+            Marker(expectedId, expectedMap.id, Marker.MarkerType.WC, 1, 0.0, 0.0)
         )
         runBlocking {
             searchHistoryDao.insertNotExceeding(SearchHistoryEntry(unexpectedId, 1L), 10)
@@ -69,7 +69,7 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
     private fun testInsertNotExceedingSingleMap(maxEntriesNum: Int, insertEntriesNum: Int) {
         val expected = mutableListOf<SearchHistoryEntry>()
         repeat(insertEntriesNum) { id ->
-            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, 1, 0.0, 0.0))
             val entry = SearchHistoryEntry(id, id.toLong())
             runBlocking { searchHistoryDao.insertNotExceeding(entry, maxEntriesNum) }
             expected += entry
@@ -138,13 +138,13 @@ class SearchHistoryDaoTest : AppDatabaseDaoTest() {
         db.insertAll(anotherMap)
         val maxEntriesNum = 2
         for (id in 1..maxEntriesNum) {
-            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            db.insertAll(Marker(id, INSERTED_MAP.id, Marker.MarkerType.WC, 1, 0.0, 0.0))
             runBlocking {
                 searchHistoryDao.insertNotExceeding(SearchHistoryEntry(id, 1L), maxEntriesNum)
             }
         }
         for (id in maxEntriesNum + 1..2 * maxEntriesNum) {
-            db.insertAll(Marker(id, anotherMap.id, Marker.MarkerType.WC, true, 1, 0.0, 0.0))
+            db.insertAll(Marker(id, anotherMap.id, Marker.MarkerType.WC, 1, 0.0, 0.0))
             runBlocking {
                 searchHistoryDao.insertNotExceeding(SearchHistoryEntry(id, 1L), maxEntriesNum)
             }

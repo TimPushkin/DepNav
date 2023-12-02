@@ -19,9 +19,20 @@
 package ru.spbu.depnav.data.model
 
 import androidx.compose.ui.text.intl.Locale
+import androidx.compose.ui.text.toLowerCase
 
 /** Supported app language. */
-enum class Language { EN, RU }
+enum class Language {
+    EN, RU;
+
+    /** IETF BCP47 compliant language tag. */
+    fun tag() = name.lowercase()
+}
 
 /** Returns [Language] of this locale. */
-fun Locale.toLanguage() = if (language == "ru") Language.RU else Language.EN
+fun Locale.toLanguage() = if (language == Language.RU.tag()) Language.RU else Language.EN
+
+/**
+ * Returns this string converted to lowercase using Unicode mapping rules of the specified language.
+ */
+fun String.lowercase(language: Language) = toLowerCase(Locale(language.tag()))

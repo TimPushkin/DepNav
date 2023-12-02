@@ -6,7 +6,6 @@
 
     <!-- Markers -->
     <string name="no_title">No title</string>
-    <string name="closed">Closed</string>
 
     <!-- Search -->
     <string name="search_on_map">Search on map \"%s\"</string>

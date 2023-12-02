@@ -16,34 +16,31 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package ru.spbu.depnav.data.model
+package ru.spbu.depnav.data.composite
 
 import androidx.room.ColumnInfo
 import androidx.room.Embedded
-import ru.spbu.depnav.data.model.MarkerTextWithMatchInfo.Companion.formatString
+import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.utils.ranking.Ranker
 import java.nio.ByteBuffer
 import java.nio.ByteOrder
 
 /** [MarkerText] with its `matchinfo` collected by SQLite FTS4 during matching. */
-data class MarkerTextWithMatchInfo(
+data class MarkerTextMatch(
     /** [MarkerText] that was matched. */
     @Embedded val markerText: MarkerText,
     /**
      * [`matchinfo`](https://www.sqlite.org/fts3.html#matchinfo) that was collected during FTS4
-     * matching with [formatString] as format string.
+     * matching with [MarkerTextMatch.Companion.FORMAT_STRING] as format string.
      */
     @ColumnInfo(name = "match_info") val matchInfo: ByteArray
 ) {
     // Required because of a ByteArray property
     override fun equals(other: Any?): Boolean {
         if (this === other) return true
-        if (other !is MarkerTextWithMatchInfo) return false
-
+        if (other !is MarkerTextMatch) return false
         if (markerText != other.markerText) return false
-        if (!matchInfo.contentEquals(other.matchInfo)) return false
-
-        return true
+        return matchInfo.contentEquals(other.matchInfo)
     }
 
     // Required because of a ByteArray property
@@ -51,12 +48,12 @@ data class MarkerTextWithMatchInfo(
 
     companion object {
         /** Format string that must be used for [matchInfo] retrieval from a FTS4 table. */
-        const val formatString = "pcxnal"
+        const val FORMAT_STRING = "pcxnal"
     }
 }
 
-/** Calculate this match's rank using the provided ranker. */
-fun MarkerTextWithMatchInfo.rankWith(ranker: Ranker): Double {
+/** Rank a match based on its matchinfo. */
+fun Ranker.rank(matchInfo: ByteArray): Double {
     val buf = ByteBuffer.wrap(matchInfo).apply { order(ByteOrder.nativeOrder()) }
 
     val p = buf.int // Number of matchable phrases in the query
@@ -85,7 +82,7 @@ fun MarkerTextWithMatchInfo.rankWith(ranker: Ranker): Double {
     var lSum = 0 // Number of tokens in the whole row
     repeat(c) { lSum += buf.int }
 
-    return ranker.rank(
+    return rank(
         queryWordStats = queryWordStats,
         docWordNum = lSum,
         avgWordNum = aSum,

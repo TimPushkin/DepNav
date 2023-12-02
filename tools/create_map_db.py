@@ -71,7 +71,6 @@ cur.executescript(
         id        INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
         map_id    INTEGER NOT NULL REFERENCES map_info (id) ON UPDATE CASCADE ON DELETE RESTRICT,
         "type"    TEXT    NOT NULL,
-        is_closed INTEGER NOT NULL,
         floor     INTEGER NOT NULL,
         x         REAL    NOT NULL,
         y         REAL    NOT NULL
@@ -81,12 +80,14 @@ cur.executescript(
         marker_id   INTEGER NOT NULL REFERENCES marker (id) ON UPDATE CASCADE ON DELETE RESTRICT,
         language_id TEXT    NOT NULL,
         title       TEXT,
+        location    TEXT,
         description TEXT,
         PRIMARY KEY (marker_id, language_id)
     );
     CREATE VIRTUAL TABLE IF NOT EXISTS marker_text_fts USING FTS4
     (
         title       TEXT,
+        location    TEXT,
         description TEXT,
         tokenize=unicode61,
         content=`marker_text`
@@ -113,12 +114,14 @@ cur.executescript(
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_AFTER_UPDATE
         AFTER UPDATE  ON marker_text
     BEGIN
-        INSERT INTO marker_text_fts(docid, title, description) VALUES (new.rowid, new.title, new.description);
+        INSERT INTO marker_text_fts(docid, title, location, description)
+        VALUES (new.rowid, new.title, new.location, new.description);
     END;
     CREATE TRIGGER IF NOT EXISTS room_fts_content_sync_marker_text_fts_AFTER_INSERT
         AFTER INSERT ON marker_text
     BEGIN
-        INSERT INTO marker_text_fts(docid, title, description) VALUES (new.rowid, new.title, new.description);
+        INSERT INTO marker_text_fts(docid, title, location, description)
+        VALUES (new.rowid, new.title, new.location, new.description);
     END;
     """
 )
@@ -155,12 +158,11 @@ for lid_name in LID.__members__:
 for floor in m["floors"]:
     for marker in sorted(floor["markers"], key=lambda it: it["type"]):
         cur.execute(
-            "INSERT INTO marker (map_id, type, is_closed, floor, x, y)"
-            "VALUES (:map_id, :type, :is_closed, :floor, :x, :y)",
+            "INSERT INTO marker (map_id, type, floor, x, y)"
+            "VALUES (:map_id, :type, :floor, :x, :y)",
             {
                 "map_id": map_id,
                 "type": marker["type"],
-                "is_closed": marker["is_closed"],
                 "floor": floor["floor"],
                 "x": marker["x"] / floor_width,
                 "y": marker["y"] / floor_height,
@@ -170,8 +172,8 @@ for floor in m["floors"]:
 
         for lid_name in LID.__members__:
             cur.execute(
-                "INSERT INTO marker_text "
-                "VALUES (:marker_id, :language_id, :title, :description)",
+                "INSERT INTO marker_text (marker_id, language_id, title, location, description) "
+                "VALUES (:marker_id, :language_id, :title, :location, :description)",
                 {
                     "marker_id": marker_id,
                     "language_id": lid_name,

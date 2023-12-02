@@ -43,6 +43,8 @@ data class MarkerText(
     @ColumnInfo(name = "language_id") val languageId: Language,
     /** Title of the [Marker] to which this text relates. */
     val title: String?,
+    /** Name of the location of the [Marker] to which this text relates. */
+    val location: String?,
     /** Description of the [Marker] to which this text relates. */
     val description: String?
 )

@@ -60,9 +60,6 @@
                     "OTHER"
                   ]
                 },
-                "is_closed": {
-                  "type": "boolean"
-                },
                 "x": {
                   "type": "integer"
                 },
@@ -78,22 +75,7 @@
                         "null"
                       ]
                     },
-                    "description": {
-                      "type": [
-                        "string",
-                        "null"
-                      ]
-                    }
-                  },
-                  "required": [
-                    "title",
-                    "description"
-                  ]
-                },
-                "en": {
-                  "type": "object",
-                  "properties": {
-                    "title": {
+                    "location": {
                       "type": [
                         "string",
                         "null"
@@ -108,13 +90,41 @@
                   },
                   "required": [
                     "title",
+                    "location",
+                    "description"
+                  ]
+                },
+                "en": {
+                  "type": "object",
+                  "properties": {
+                    "title": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "location": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    },
+                    "description": {
+                      "type": [
+                        "string",
+                        "null"
+                      ]
+                    }
+                  },
+                  "required": [
+                    "title",
+                    "location",
                     "description"
                   ]
                 }
               },
               "required": [
                 "type",
-                "is_closed",
                 "x",
                 "y",
                 "ru",

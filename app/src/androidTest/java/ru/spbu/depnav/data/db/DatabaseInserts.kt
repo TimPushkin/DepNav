@@ -35,9 +35,9 @@ private fun MapInfo.values() =
 
 private fun MapTitle.values() = listOf(mapId, languageId.name, title)
 
-private fun Marker.values() = listOf(id, mapId, type.name, isClosed, floor, x, y)
+private fun Marker.values() = listOf(id, mapId, type.name, floor, x, y)
 
-private fun MarkerText.values() = listOf(markerId, languageId.name, title, description)
+private fun MarkerText.values() = listOf(markerId, languageId.name, title, location, description)
 
 @Suppress("ComplexMethod") // Further "simplification" is unreasonable
 private fun createContentValues(columnNames: Array<String>, values: List<Any?>): ContentValues {

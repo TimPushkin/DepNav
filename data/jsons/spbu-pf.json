@@ -14,15 +14,16 @@
       "markers": [
         {
           "type": "ROOM",
-          "is_closed": false,
           "x": 128,
           "y": 128,
           "ru": {
             "title": "Тест",
+            "location": "Тестовая локация",
             "description": "Тестовая комната"
           },
           "en": {
             "title": "Test",
+            "location": "Test location",
             "description": "Test room"
           }
         }

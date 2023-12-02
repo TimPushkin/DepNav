@@ -2,7 +2,6 @@
 <resources>
     <!-- Markers -->
     <string name="no_title">Без названия</string>
-    <string name="closed">Закрыто</string>
 
     <!-- Search -->
     <string name="search_on_map">Поиск по карте «%s»</string>

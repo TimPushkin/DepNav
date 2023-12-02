@@ -39,7 +39,7 @@ interface Ranker {
     data class QueryWordStat(
         /** Number of appearances the word has in the document being ranked. */
         val appearanceNum: Int,
-        /** Total number of documents in which the word appear. */
+        /** Total number of documents in which the word appears. */
         val matchedDocsNum: Int
     )
 }

@@ -71,7 +71,6 @@ fun MapState.addMarker(
             MarkerView(
                 title = markerText.title,
                 type = marker.type,
-                isClosed = marker.isClosed,
                 modifier = Modifier.alpha(alpha)
             )
         }

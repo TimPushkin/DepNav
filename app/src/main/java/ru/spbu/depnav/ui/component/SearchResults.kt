@@ -30,18 +30,19 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.lazy.rememberLazyListState
 import androidx.compose.material3.Icon
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.alpha
 import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
@@ -52,6 +53,7 @@ import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+import ru.spbu.depnav.ui.theme.DISABLED_ALPHA
 import ru.spbu.depnav.ui.theme.DepNavTheme
 import ru.spbu.depnav.ui.viewmodel.SearchResults
 
@@ -85,16 +87,13 @@ fun SearchResultsView(
                 onClick = onResultClick,
                 trailingIcon = (
                     @Composable {
-                        CompositionLocalProvider(
-                            LocalContentColor provides
-                                MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-                        ) {
-                            Icon(
-                                painter = painterResource(R.drawable.ic_searched_for),
-                                contentDescription = null,
-                                modifier = Modifier.size(28.dp)
-                            )
-                        }
+                        Icon(
+                            painter = painterResource(R.drawable.ic_searched_for),
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(26.dp)
+                                .alpha(DISABLED_ALPHA)
+                        )
                     }
                     ).takeIf { results.isHistory }
             )
@@ -117,11 +116,9 @@ private fun SearchResultView(
     onClick: (Int) -> Unit,
     trailingIcon: (@Composable () -> Unit)?
 ) {
-    checkNotNull(markerText.title) { "MarkerText title cannot be null in SearchResult" }
-
     Row(
         modifier = Modifier
-            .clickable { onClick(markerText.markerId) }
+            .clickable { onClick(marker.id) }
             .fillMaxWidth()
             .height(LocalViewConfiguration.current.minimumTouchTargetSize.height),
         horizontalArrangement = Arrangement.SpaceBetween,
@@ -133,30 +130,17 @@ private fun SearchResultView(
             verticalAlignment = Alignment.CenterVertically
         ) {
             MarkerView(
-                title = markerText.title,
+                title = null, // Not needed for a simplified view
                 type = marker.type,
-                isClosed = marker.isClosed,
                 simplified = true
             )
 
-            Column {
-                Text(
-                    text = markerText.title,
-                    overflow = TextOverflow.Ellipsis,
-                    maxLines = 1
+            with(markerText) {
+                MarkerTextLines(
+                    title = if (title.isNullOrBlank()) stringResource(R.string.no_title) else title,
+                    location = location,
+                    description = description
                 )
-
-                markerText.description?.let {
-                    CompositionLocalProvider(
-                        LocalContentColor provides
-                            MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
-                    ) {
-                        Text(
-                            text = it,
-                            overflow = TextOverflow.Ellipsis
-                        )
-                    }
-                }
             }
         }
 
@@ -165,15 +149,75 @@ private fun SearchResultView(
 }
 
 @Composable
+private fun MarkerTextLines(title: String, location: String?, description: String?) {
+    Column {
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            val lineLength = title.length.toFloat() + (location?.length ?: 0)
+
+            if (!location.isNullOrBlank()) {
+                Text(
+                    location,
+                    maxLines = 1,
+                    overflow = TextOverflow.Ellipsis,
+                    modifier = Modifier.weight(location.length / lineLength, fill = false)
+                )
+
+                Text(" › ")
+            }
+
+            Text(
+                title,
+                fontWeight = FontWeight.Bold,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.weight(title.length / lineLength, fill = false)
+            )
+        }
+
+        if (!description.isNullOrBlank()) {
+            Text(
+                description,
+                maxLines = 1,
+                overflow = TextOverflow.Ellipsis,
+                modifier = Modifier.alpha(DISABLED_ALPHA),
+            )
+        }
+    }
+}
+
+@Composable
 @Preview
 @Suppress("UnusedPrivateMember")
 private fun SearchResultUsualPreview() {
     DepNavTheme {
-        SearchResultView(
-            marker = Marker(1, 0, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
-            markerText = MarkerText(1, Language.EN, "1234", "Some description"),
-            onClick = {}
-        ) {}
+        Surface {
+            SearchResultView(
+                marker = Marker(1, 0, Marker.MarkerType.ROOM, 1, 0.0, 0.0),
+                markerText = MarkerText(1, Language.EN, "1234", "Location", "Some description"),
+                onClick = {}
+            ) {}
+        }
+    }
+}
+
+@Composable
+@Preview
+@Suppress("UnusedPrivateMember")
+private fun SearchResultLongContentsPreview() {
+    DepNavTheme {
+        Surface {
+            SearchResultView(
+                marker = Marker(1, 0, Marker.MarkerType.ROOM, 1, 0.0, 0.0),
+                markerText = MarkerText(
+                    1,
+                    Language.EN,
+                    "Some very very very very very long title",
+                    "Some very very very very very very long location",
+                    "Some description"
+                ),
+                onClick = {}
+            ) {}
+        }
     }
 }
 
@@ -182,18 +226,18 @@ private fun SearchResultUsualPreview() {
 @Suppress("UnusedPrivateMember")
 private fun SearchResultHistoryPreview() {
     DepNavTheme {
-        SearchResultView(
-            marker = Marker(1, 0, Marker.MarkerType.ROOM, false, 1, 0.0, 0.0),
-            markerText = MarkerText(1, Language.EN, "1234", "Some description"),
-            onClick = {}
-        ) {
-            CompositionLocalProvider(
-                LocalContentColor provides MaterialTheme.colorScheme.onSurface.copy(alpha = 0.38f)
+        Surface {
+            SearchResultView(
+                marker = Marker(1, 0, Marker.MarkerType.ROOM, 1, 0.0, 0.0),
+                markerText = MarkerText(1, Language.EN, "1234", "Location", "Some description"),
+                onClick = {}
             ) {
                 Icon(
                     painter = painterResource(R.drawable.ic_searched_for),
                     contentDescription = null,
-                    modifier = Modifier.size(28.dp)
+                    modifier = Modifier
+                        .size(28.dp)
+                        .alpha(DISABLED_ALPHA)
                 )
             }
         }

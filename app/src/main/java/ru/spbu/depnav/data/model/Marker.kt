@@ -45,8 +45,6 @@ data class Marker(
     @ColumnInfo(name = "map_id") val mapId: Int,
     /** Type of this marker. */
     val type: MarkerType,
-    /** Whether this marker indicates a closed object. */
-    @ColumnInfo(name = "is_closed") val isClosed: Boolean,
     /** Number of the floor on which this marker is placed. */
     val floor: Int,
     /** X coordinate of this marker. */

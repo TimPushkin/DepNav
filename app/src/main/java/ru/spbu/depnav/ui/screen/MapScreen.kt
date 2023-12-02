@@ -293,8 +293,8 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
 
                 MarkerInfoLines(
                     title = markerText.title ?: stringResource(R.string.no_title),
+                    location = markerText.location,
                     description = markerText.description,
-                    isClosed = marker.isClosed,
                     modifier = Modifier
                         .padding(DEFAULT_PADDING)
                         .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
@@ -302,7 +302,6 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
                     MarkerView(
                         title = markerText.title ?: stringResource(R.string.no_title),
                         type = marker.type,
-                        isClosed = marker.isClosed,
                         simplified = true
                     )
                 }

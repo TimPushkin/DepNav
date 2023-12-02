@@ -20,11 +20,12 @@ package ru.spbu.depnav.data.repository
 
 import android.util.Log
 import ru.spbu.depnav.data.composite.MarkerWithText
+import ru.spbu.depnav.data.composite.rank
 import ru.spbu.depnav.data.db.MarkerWithTextDao
 import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
-import ru.spbu.depnav.data.model.rankWith
+import ru.spbu.depnav.data.model.lowercase
 import ru.spbu.depnav.utils.ranking.Bm25
 import ru.spbu.depnav.utils.ranking.Ranker
 import javax.inject.Inject
@@ -75,28 +76,30 @@ class MarkerWithTextRepo(
         val tokenized = query.tokenized()
 
         Log.d(TAG, "Loading query '$query' tokenized as '$tokenized'")
-        val rankedTextsWithMarkers = dao.loadByTokens(mapId, tokenized, language).map {
-            val rank = it.key.run {
-                when (query) {
-                    markerText.title -> Double.POSITIVE_INFINITY
-                    markerText.description -> Double.MAX_VALUE
-                    else -> rankWith(ranker)
-                }
-            }
-            Log.v(TAG, "${it.key.markerText} ranked $rank")
-            Triple(it.key.markerText, it.value, rank)
-        }
-
-        return rankedTextsWithMarkers
-            .sortedWith(
-                compareBy<Triple<MarkerText, List<Marker>, Double>> { it.third }
-                    .thenByDescending { it.first.title }
-                    .thenByDescending { it.first.description }
-            )
-            .map { (markerText, markers, _) ->
+        val rankedMarkerWithTexts = dao.loadByTokens(mapId, tokenized, language)
+            .map { (match, markers) ->
+                val (markerText, matchInfo) = match
                 val marker = checkNotNull(markers.firstOrNull()) { "No marker for $markerText" }
-                MarkerWithText(marker, markerText)
+                val rank = with(markerText) {
+                    when (query.lowercase(language)) {
+                        title?.lowercase(language) -> Double.POSITIVE_INFINITY
+                        location?.lowercase(language) -> Double.MAX_VALUE
+                        description?.lowercase(language) -> Double.MAX_VALUE
+                        else -> ranker.rank(matchInfo)
+                    }
+                }
+                Log.v(TAG, "$markerText ranked $rank")
+                Pair(MarkerWithText(marker, markerText), rank)
             }
+
+        return rankedMarkerWithTexts
+            .sortedWith(
+                compareBy<Pair<MarkerWithText, Double>> { it.second }
+                    .thenByDescending { it.first.text.location } // Location dominates the title
+                    .thenByDescending { it.first.text.title }
+                    .thenByDescending { it.first.text.description }
+            )
+            .map { it.first }
     }
 
     private fun String.tokenized() =

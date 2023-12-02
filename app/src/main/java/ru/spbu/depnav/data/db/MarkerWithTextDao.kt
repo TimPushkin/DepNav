@@ -20,10 +20,10 @@ package ru.spbu.depnav.data.db
 
 import androidx.room.Dao
 import androidx.room.Query
+import ru.spbu.depnav.data.composite.MarkerTextMatch
 import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
-import ru.spbu.depnav.data.model.MarkerTextWithMatchInfo
 
 /** DAO for [Marker] and [MarkerText] tables. */
 @Dao
@@ -64,15 +64,15 @@ interface MarkerWithTextDao {
     ): Map<Marker, List<MarkerText>>
 
     /**
-     * Returns [MarkerTextWithMatchInfo]s from the specified map containing the specified tokens as
-     * a prefix on the specified language with the corresponding [Marker]s.
+     * Returns [MarkerTextMatch]es from the specified map containing the specified tokens as a
+     * prefix on the specified language with the corresponding [Marker]s.
      */
     @Query(
         """
             SELECT marker_text.*, match_info, marker.*
             FROM (
                 SELECT docid, matchinfo(
-                    marker_text_fts, '${MarkerTextWithMatchInfo.formatString}'
+                    marker_text_fts, '${MarkerTextMatch.FORMAT_STRING}'
                 ) AS match_info
                 FROM marker_text_fts
                 WHERE marker_text_fts MATCH :tokens
@@ -87,5 +87,5 @@ interface MarkerWithTextDao {
         mapId: Int,
         tokens: String,
         language: Language
-    ): Map<MarkerTextWithMatchInfo, List<Marker>>
+    ): Map<MarkerTextMatch, List<Marker>>
 }
