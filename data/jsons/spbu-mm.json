@@ -578,26 +578,12 @@
           "x": 7673,
           "y": 3248,
           "ru": {
-            "title": "Банкоматы",
-            "description": "Сбербанк, ВТБ"
+            "title": "Банкомат",
+            "description": "ВТБ"
           },
           "en": {
-            "title": "ATMs",
-            "description": "Sberbank, VTB"
-          }
-        },
-        {
-          "type": "OTHER",
-          "is_closed": false,
-          "x": 7735,
-          "y": 3248,
-          "ru": {
-            "title": "Копировальный автомат",
-            "description": "Копиркин"
-          },
-          "en": {
-            "title": "Copy machine",
-            "description": "Kopirkin"
+            "title": "ATM",
+            "description": "VTB"
           }
         },
         {
