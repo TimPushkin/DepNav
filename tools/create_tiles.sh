@@ -53,16 +53,6 @@ get_unpadded_zoom_levels_num() {
   '
 }
 
-# Prints the amount of rows or columns on the specified zoom level.
-#
-# Args: $1 -- image width (to get the number of columns) or height (to get the number of rows).
-#       $2 -- zoom level (0 is the most detailed level).
-get_rows_cols_num() {
-  awk -v size="$1" -v lvl="$2" -v tile_size="$TILE_SIZE" 'BEGIN { print size / tile_size / 2 ^ lvl }'
-}
-
-EMPTY_TILE="empty.webp"
-
 LVLS_TO_DEL_USER=-1
 REMEMBER_LVLS_TO_DEL_USER="?"
 
@@ -101,12 +91,12 @@ for IMAGE in *.webp; do
     exit 1
   fi
 
-  # Calculate the amount of levels to delete, prompting the user if needed
+  # Calculate the amount of levels to delete and prompt the user to confirm
   LVLS_TO_DEL=$((LVLS_GENERATED - LVLS_TO_RETAIN))
   if [ "$REMEMBER_LVLS_TO_DEL_USER" != "y" ] ||
     [ "$LVLS_TO_DEL_USER" -lt "$LVLS_TO_DEL" ] || [ "$LVLS_TO_DEL_USER" -ge "$LVLS_GENERATED" ]; then
     while [ "$LVLS_TO_DEL_USER" -lt "$LVLS_TO_DEL" ] || [ "$LVLS_TO_DEL_USER" -ge "$LVLS_GENERATED" ]; do
-      echo "How many least detailed zoom levels to remove? ($LVLS_TO_DEL..$((LVLS_GENERATED - 1)))"
+      echo "How many least detailed zoom levels to delete? ($LVLS_TO_DEL..$((LVLS_GENERATED - 1)))"
       read -r LVLS_TO_DEL_USER
     done
   fi
@@ -116,46 +106,14 @@ for IMAGE in *.webp; do
   done
   LVLS_TO_DEL="$LVLS_TO_DEL_USER"
 
-  # Create a fully transparent 1x1 tile to place instead of skipped blank tiles
-  vips black 'empty.webp[lossless=1,Q=100,min_size=1,effort=6,strip=1]' 1 1 --bands 4
-
+  # Delete the selected levels and shift the remaining ones
   for LVL in $(seq 0 $((LVLS_GENERATED - 1))); do
-    # Remove the level if needed
     if [ "$LVL" -lt "$LVLS_TO_DEL" ]; then
       rm -r "$LVL" || exit
-      continue
-    fi
-    cd "$LVL" || exit
-
-    ROWS=$(get_rows_cols_num "$HEIGHT" $((LVLS_GENERATED - LVL - 1)))
-    for ROW in $(seq 0 $((ROWS - 1))); do
-      # Create the row if missing (skipped as fully blank)
-      if ! [ -e "$ROW" ]; then
-        mkdir "$ROW"
-      fi
-      cd "$ROW" || exit
-
-      # Place 1x1 transparent files instead of non-existent (skipped as blank) tiles
-      COLS=$(get_rows_cols_num "$WIDTH" $((LVLS_GENERATED - LVL - 1)))
-      for COL in $(seq 0 $((COLS - 1))); do
-        if ! [ -e "$COL.webp" ]; then
-          cp "../../$EMPTY_TILE" "$COL.webp" || exit
-        fi
-      done
-
-      cd .. # Leave ROW
-    done
-
-    cd .. # Leave LVL
-
-    # Shift the level if any previous levels have been deleted
-    if [ "$LVLS_TO_DEL" -gt 0 ]; then
+    elif [ "$LVLS_TO_DEL" -gt 0 ]; then
       mv "$LVL" "$((LVL - LVLS_TO_DEL))" || exit
     fi
   done
-
-  # Remove the 1x1 transparent tile we previously created and copied
-  rm "$EMPTY_TILE"
 
   cd .. # Leave FLOOR
 done
