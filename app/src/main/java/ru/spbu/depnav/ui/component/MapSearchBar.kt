@@ -115,7 +115,7 @@ fun MapSearchBar(
         active = active,
         onActiveChange = onActiveChange,
         modifier = Modifier
-            .apply {
+            .run {
                 if (active) padding(start = outerStartPadding, end = outerEndPadding)
                 else windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
             }
