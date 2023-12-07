@@ -34,6 +34,7 @@ interface MapDao {
             FROM map_info
                 JOIN map_title ON map_info.id = map_title.map_id
             WHERE map_title.language_id = :language
+            ORDER BY map_info.id ASC
         """
     )
     suspend fun loadAll(language: Language): Map<MapInfo, List<MapTitle>>

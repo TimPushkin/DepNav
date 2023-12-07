@@ -51,7 +51,7 @@ cur.executescript(
     """
     CREATE TABLE IF NOT EXISTS map_info
     (
-        id            INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+        id            INTEGER NOT NULL PRIMARY KEY,
         internal_name TEXT    NOT NULL,
         floor_width   INTEGER NOT NULL,
         floor_height  INTEGER NOT NULL,
@@ -132,9 +132,10 @@ floor_width = m["floorWidth"]
 floor_height = m["floorHeight"]
 
 cur.execute(
-    "INSERT INTO map_info (internal_name, floor_width, floor_height, tile_size, levels_num, floors_num) "
-    "VALUES (:internal_name, :floor_width, :floor_height, :tile_size, :levels_num, :floors_num)",
+    "INSERT INTO map_info (id, internal_name, floor_width, floor_height, tile_size, levels_num, floors_num) "
+    "VALUES (:id, :internal_name, :floor_width, :floor_height, :tile_size, :levels_num, :floors_num)",
     {
+        "id": m["id"],
         "internal_name": m["internalName"],
         "floor_width": floor_width,
         "floor_height": floor_height,
@@ -143,13 +144,12 @@ cur.execute(
         "floors_num": len(m["floors"]),
     },
 )
-map_id = cur.lastrowid
 
 for lid_name in LID.__members__:
     cur.execute(
         "INSERT INTO map_title (map_id, language_id, title) VALUES (:map_id, :language_id, :title)",
         {
-            "map_id": map_id,
+            "map_id": m["id"],
             "language_id": lid_name,
             "title": m["title"][lid_name.lower()]
         },
@@ -161,7 +161,7 @@ for floor in m["floors"]:
             "INSERT INTO marker (map_id, type, floor, x, y)"
             "VALUES (:map_id, :type, :floor, :x, :y)",
             {
-                "map_id": map_id,
+                "map_id": m["id"],
                 "type": marker["type"],
                 "floor": floor["floor"],
                 "x": marker["x"] / floor_width,

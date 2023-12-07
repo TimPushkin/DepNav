@@ -2,6 +2,9 @@
   "$schema": "http://json-schema.org/draft-04/schema#",
   "type": "object",
   "properties": {
+    "id": {
+      "type": "integer"
+    },
     "internalName": {
       "type": "string"
     },
@@ -141,6 +144,7 @@
     }
   },
   "required": [
+    "id",
     "internalName",
     "title",
     "floorWidth",
