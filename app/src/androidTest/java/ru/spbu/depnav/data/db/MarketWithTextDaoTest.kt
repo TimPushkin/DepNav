@@ -31,7 +31,7 @@ import ru.spbu.depnav.data.model.MarkerText
 private val INSERTED_MAP = MapInfo(123, "test-map", 100, 100, 128, 5, 3)
 
 /** Instrumentation tests for [MarkerWithTextDao]. */
-@Suppress("TooManyFunctions") // OK for a test class
+@Suppress("TooManyFunctions", "StringLiteralDuplication") // OK for a test class
 class MarketWithTextDaoTest : AppDatabaseDaoTest() {
     private lateinit var markerWithTextDao: MarkerWithTextDao
 

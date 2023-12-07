@@ -86,6 +86,7 @@ import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.viewmodel.MapUiState
 import ru.spbu.depnav.ui.viewmodel.MapViewModel
 import ru.spbu.depnav.ui.viewmodel.SearchResults
+import ru.spbu.depnav.ui.viewmodel.SearchUiState
 import ru.spbu.depnav.ui.viewmodel.SearchViewModel
 
 /** Screen containing a navigable map. */
@@ -134,54 +135,76 @@ fun MapScreen(
             val readyMapUiState = mapUiState as? MapUiState.Ready ?: return@ModalNavigationDrawer
             val searchUiState by searchVm.uiState.collectAsStateWithLifecycle()
 
+            val markerAlpha by mapVm.markerAlpha.collectAsStateWithLifecycle()
+            val markersVisible by remember { derivedStateOf { markerAlpha > 0f } }
+
             val mapColor = MaterialTheme.colorScheme.outline
             LaunchedEffect(mapColor) { mapVm.setMapColor(mapColor) }
 
             MapUI(state = readyMapUiState.mapState)
 
-            Box(modifier = Modifier.fillMaxSize()) {
-                CompositionLocalProvider(LocalAbsoluteTonalElevation provides 4.dp) {
-                    AnimatedSearchBar(
-                        visible = readyMapUiState.showOnMapUi,
-                        mapTitle = readyMapUiState.mapTitle,
-                        query = searchUiState.query,
-                        onQueryChange = searchVm::search,
-                        searchResults = searchUiState.results,
-                        onResultClick = { markerId ->
-                            mapVm.focusOnMarker(markerId)
-                            searchVm.addToSearchHistory(markerId)
-                        },
-                        onMenuCLick = { scope.launch { drawerState.open() } }
-                    )
-
-                    AnimatedFloorSwitch(
-                        visible = readyMapUiState.showOnMapUi,
-                        currentFloor = readyMapUiState.currentFloor,
-                        maxFloor = readyMapUiState.floorsNum,
-                        onFloorSwitch = mapVm::setFloor
-                    )
-
-                    val markerAlpha by mapVm.markerAlpha.collectAsStateWithLifecycle()
-                    val markersVisible by remember { derivedStateOf { markerAlpha > 0f } }
-
-                    AnimatedBottom(
-                        pinnedMarker = readyMapUiState.pinnedMarker,
-                        showZoomInHint = !markersVisible
-                    )
-                }
-            }
+            OnMapUi(
+                mapUiState = readyMapUiState,
+                searchUiState = searchUiState,
+                onSearchQueryChange = searchVm::search,
+                onSearchResultClick = { markerId ->
+                    mapVm.focusOnMarker(markerId)
+                    searchVm.addToSearchHistory(markerId)
+                },
+                onMainMenuClick = { scope.launch { drawerState.open() } },
+                onFloorSwitch = mapVm::setFloor,
+                markersVisible = markersVisible
+            )
         }
     }
 
-    val locale = Locale.current // This one is not a State
-    LaunchedEffect(key1 = ConfigurationCompat.getLocales(LocalConfiguration.current)[0]) {
+    LaunchedEffect(ConfigurationCompat.getLocales(LocalConfiguration.current)[0]) {
+        val locale = Locale.current // This is not a State
         searchVm.onLocaleChange(locale)
         mapVm.onLocaleChange(locale)
     }
 }
 
 @Composable
-@Suppress("LongParameterList") // Considered OK for composables
+@Suppress("LongParameterList") // Considered OK for a composable
+private fun OnMapUi(
+    mapUiState: MapUiState.Ready,
+    searchUiState: SearchUiState,
+    onSearchQueryChange: (String) -> Unit,
+    onSearchResultClick: (Int) -> Unit,
+    onMainMenuClick: () -> Unit,
+    onFloorSwitch: (Int) -> Unit,
+    markersVisible: Boolean
+) {
+    CompositionLocalProvider(LocalAbsoluteTonalElevation provides 4.dp) {
+        Box(modifier = Modifier.fillMaxSize()) {
+            AnimatedSearchBar(
+                visible = mapUiState.showOnMapUi,
+                mapTitle = mapUiState.mapTitle,
+                query = searchUiState.query,
+                onQueryChange = onSearchQueryChange,
+                searchResults = searchUiState.results,
+                onResultClick = onSearchResultClick,
+                onMenuClick = onMainMenuClick
+            )
+
+            AnimatedFloorSwitch(
+                visible = mapUiState.showOnMapUi,
+                currentFloor = mapUiState.currentFloor,
+                maxFloor = mapUiState.floorsNum,
+                onFloorSwitch = onFloorSwitch
+            )
+
+            AnimatedBottom(
+                pinnedMarker = mapUiState.pinnedMarker,
+                showZoomInHint = !markersVisible
+            )
+        }
+    }
+}
+
+@Composable
+@Suppress("LongParameterList") // Considered OK for a composable
 private fun BoxScope.AnimatedSearchBar(
     visible: Boolean,
     mapTitle: String,
@@ -189,7 +212,7 @@ private fun BoxScope.AnimatedSearchBar(
     onQueryChange: (String) -> Unit,
     searchResults: SearchResults,
     onResultClick: (Int) -> Unit,
-    onMenuCLick: () -> Unit
+    onMenuClick: () -> Unit
 ) {
     var searchBarActive by rememberSaveable { mutableStateOf(false) }
     if (!visible) {
@@ -221,7 +244,7 @@ private fun BoxScope.AnimatedSearchBar(
             onActiveChange = { searchBarActive = it },
             results = searchResults,
             onResultClick = onResultClick,
-            onMenuClick = onMenuCLick,
+            onMenuClick = onMenuClick,
             modifier = Modifier.padding(horizontal = horizontalPadding)
         )
     }

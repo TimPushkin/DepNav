@@ -213,7 +213,7 @@ private fun SearchResultLongContentsPreview() {
                     Language.EN,
                     "Some very very very very very long title",
                     "Some very very very very very very long location",
-                    "Some description"
+                    "Some very very very very very very long description"
                 ),
                 onClick = {}
             ) {}

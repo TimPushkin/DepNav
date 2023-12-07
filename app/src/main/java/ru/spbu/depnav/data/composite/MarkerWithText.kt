@@ -39,6 +39,6 @@ data class MarkerWithText(val marker: Marker, val text: MarkerText) {
     }
 
     companion object {
-        val ID_DIVIDER = ':'
+        const val ID_DIVIDER = ':'
     }
 }

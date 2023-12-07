@@ -211,15 +211,12 @@ class MapViewModel @Inject constructor(
 
             onTap { _, _ ->
                 state.update {
-                    it.copy(
-                        showOnMapUi = if (it.pinnedMarker != null) {
-                            removeMarker(PIN_ID)
-                            it.showOnMapUi
-                        } else {
-                            !it.showOnMapUi
-                        },
-                        pinnedMarker = null
-                    )
+                    if (it.pinnedMarker != null) {
+                        removeMarker(PIN_ID)
+                        it.copy(pinnedMarker = null)
+                    } else {
+                        it.copy(showOnMapUi = !it.showOnMapUi)
+                    }
                 }
             }
 
@@ -238,12 +235,7 @@ class MapViewModel @Inject constructor(
                 addLayer(layer)
             }
             for (markerWithText in firstFloor.markers.values) {
-                addMarker(
-                    markerWithText.extendedId,
-                    markerWithText.marker,
-                    markerWithText.text,
-                    markerAlpha
-                )
+                with(markerWithText) { addMarker(extendedId, marker, text, markerAlpha) }
             }
 
             markerAlphaUpdater.cancel("New map state arrived")
@@ -323,12 +315,7 @@ class MapViewModel @Inject constructor(
                 }
             }
             for (markerWithText in floor.markers.values) {
-                addMarker(
-                    markerWithText.extendedId,
-                    markerWithText.marker,
-                    markerWithText.text,
-                    markerAlpha
-                )
+                with(markerWithText) { addMarker(extendedId, marker, text, markerAlpha) }
             }
         }
         state.update {
@@ -444,6 +431,7 @@ class MapViewModel @Inject constructor(
 
 /** Describes states of map UI. */
 sealed interface MapUiState {
+    /** State that has a list of available maps. */
     sealed interface WithAvailableMaps : MapUiState {
         /** Maps available in the app. */
         val availableMaps: List<AvailableMap>

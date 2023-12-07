@@ -76,7 +76,7 @@ private val ACTIVATION_EXIT_SPEC = tween<Float>(
 @Composable
 @Suppress(
     "LongMethod", // No point in further shrinking
-    "LongParameterList" // Considered OK for composables
+    "LongParameterList" // Considered OK for a composable
 )
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 fun MapSearchBar(

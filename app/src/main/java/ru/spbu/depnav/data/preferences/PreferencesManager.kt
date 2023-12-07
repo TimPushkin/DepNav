@@ -71,7 +71,6 @@ class PreferencesManager @Inject constructor(@ApplicationContext context: Contex
         _enableRotationFlow.value = enableRotation
     }
 
-
     private var selectedMapId: Int?
         get() = prefs.getInt(SELECTED_MAP_KEY, -1).takeIf { it >= 0 }
         set(value) {
