@@ -420,6 +420,7 @@ class MapViewModel @Inject constructor(
                             markerAlpha
                         )
                     }
+                    newPinnedMarker?.run { mapState.pinMarker(marker) }
                 }
 
                 Log.i(TAG, "Updated language to $language")
