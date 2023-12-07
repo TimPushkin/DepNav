@@ -21,6 +21,7 @@ package ru.spbu.depnav.data.db
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import ru.spbu.depnav.data.model.MapInfo
+import ru.spbu.depnav.data.model.MapTitle
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
 import ru.spbu.depnav.data.model.MarkerTextFts
@@ -29,14 +30,14 @@ import ru.spbu.depnav.data.model.SearchHistoryEntry
 /** Room database containing information about maps and their markers. */
 @Database(
     entities = [
-        MapInfo::class, Marker::class, MarkerText::class, MarkerTextFts::class,
+        MapInfo::class, MapTitle::class, Marker::class, MarkerText::class, MarkerTextFts::class,
         SearchHistoryEntry::class
     ],
-    version = 8
+    version = 9
 )
 abstract class AppDatabase : RoomDatabase() {
     /** DAO for the table containing information about the available maps. */
-    abstract fun mapInfoDao(): MapInfoDao
+    abstract fun mapInfoDao(): MapDao
 
     /** DAO for the tables containing markers description and marker texts. */
     abstract fun markerWithTextDao(): MarkerWithTextDao

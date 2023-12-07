@@ -6,10 +6,9 @@
 
     <!-- Markers -->
     <string name="no_title">No title</string>
-    <string name="closed">Closed</string>
 
     <!-- Search -->
-    <string name="search_markers">Search markers</string>
+    <string name="search_on_map">Search on map \"%s\"</string>
     <string name="nothing_found">Nothing was found</string>
 
     <!-- Map legend -->
@@ -37,6 +36,8 @@
     <string name="zoom_in_to_see_markers">Zoom in to see markers</string>
 
     <!-- Content descriptions for accessibility-->
+    <string name="label_open_main_menu">Open main menu</string>
+    <string name="label_open_map">Open map</string>
     <string name="label_to_floor_above">To the floor above</string>
     <string name="label_to_floor_below">To the floor below</string>
     <string name="label_room_icon">Room</string>
@@ -51,7 +52,7 @@
     <string name="label_other_icon">Miscellaneous place</string>
     <string name="label_non_room_cluster">Cluster of several places</string>
     <string name="label_selected_place">Selected place</string>
-    <string name="label_open_map_info">Open map info</string>
+    <string name="label_open_map_legend">Open map legend</string>
     <string name="label_open_settings">Open settings</string>
     <string name="label_navigate_back">Navigate back</string>
     <string name="label_clear_text_field">Clear text field</string>

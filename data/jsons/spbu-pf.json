@@ -1,0 +1,7764 @@
+{
+  "id": 2,
+  "internalName": "spbu-pf",
+  "title": {
+    "ru": "ФизФак",
+    "en": "PhysFac"
+  },
+  "floorWidth": 12288,
+  "floorHeight": 8192,
+  "tileSize": 256,
+  "zoomLevelsNum": 4,
+  "floors": [
+    {
+      "floor": 1,
+      "markers": [
+        {
+          "type": "STAIRS_UP",
+          "x": 5262,
+          "y": 228,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 6902,
+          "y": 480,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 9017,
+          "y": 480,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 6902,
+          "y": 2731,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 9017,
+          "y": 2731,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 7127,
+          "y": 4853,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 4376,
+          "y": 5386,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 5862,
+          "y": 5386,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 9426,
+          "y": 5311,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 8614,
+          "y": 5818,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 10251,
+          "y": 5611,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 11898,
+          "y": 4907,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 11907,
+          "y": 5459,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 11907,
+          "y": 5762,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 11898,
+          "y": 6317,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 857,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 1007,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 1436,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 1588,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 3150,
+          "y": 7570,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_UP",
+          "x": 1120,
+          "y": 7540,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 7265,
+          "y": 867,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 7265,
+          "y": 3111,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 1212,
+          "y": 7601,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC",
+          "x": 5133,
+          "y": 142,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 6742,
+          "y": 871,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 7527,
+          "y": 871,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 6742,
+          "y": 3110,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 7527,
+          "y": 3110,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 4770,
+          "y": 5274,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 5160,
+          "y": 5274,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 11892,
+          "y": 5323,
+          "ru": {
+            "title": "121",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "121",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 11881,
+          "y": 5940,
+          "ru": {
+            "title": "122",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "121",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 2888,
+          "y": 7520,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 82,
+          "y": 7560,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4123,
+          "y": 213,
+          "ru": {
+            "title": "136",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "136",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4384,
+          "y": 213,
+          "ru": {
+            "title": "137",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "137",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4645,
+          "y": 213,
+          "ru": {
+            "title": "138",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "138",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4920,
+          "y": 213,
+          "ru": {
+            "title": "139",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "139",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4513,
+          "y": 694,
+          "ru": {
+            "title": "140",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "140",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4990,
+          "y": 573,
+          "ru": {
+            "title": "142",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "142",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4990,
+          "y": 802,
+          "ru": {
+            "title": "141",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "141",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5749,
+          "y": 450,
+          "ru": {
+            "title": "101",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "101",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6013,
+          "y": 450,
+          "ru": {
+            "title": "103",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "103",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6280,
+          "y": 450,
+          "ru": {
+            "title": "105",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "105",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6556,
+          "y": 568,
+          "ru": {
+            "title": "107",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "107",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6742,
+          "y": 450,
+          "ru": {
+            "title": "109",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "109",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5749,
+          "y": 871,
+          "ru": {
+            "title": "102",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "102",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6013,
+          "y": 871,
+          "ru": {
+            "title": "104",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "104",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6280,
+          "y": 871,
+          "ru": {
+            "title": "106",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "106",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6546,
+          "y": 871,
+          "ru": {
+            "title": "108",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "108",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7135,
+          "y": 997,
+          "ru": {
+            "title": "100а",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "100a",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7265,
+          "y": 763,
+          "ru": {
+            "title": "112",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "112",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7273,
+          "y": 450,
+          "ru": {
+            "title": "111",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "111",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7405,
+          "y": 450,
+          "ru": {
+            "title": "113",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "113",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7594,
+          "y": 450,
+          "ru": {
+            "title": "115",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "115",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7855,
+          "y": 450,
+          "ru": {
+            "title": "117",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "117",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8070,
+          "y": 450,
+          "ru": {
+            "title": "119",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "119",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8210,
+          "y": 450,
+          "ru": {
+            "title": "121",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "121",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8405,
+          "y": 450,
+          "ru": {
+            "title": "123",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "123",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8659,
+          "y": 450,
+          "ru": {
+            "title": "125",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "125",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8856,
+          "y": 450,
+          "ru": {
+            "title": "127",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "127",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7395,
+          "y": 871,
+          "ru": {
+            "title": "114а",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "114a",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7648,
+          "y": 871,
+          "ru": {
+            "title": "114",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "114",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7787,
+          "y": 871,
+          "ru": {
+            "title": "116",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "116",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7930,
+          "y": 871,
+          "ru": {
+            "title": "118",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "118",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8070,
+          "y": 871,
+          "ru": {
+            "title": "120",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "120",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8210,
+          "y": 871,
+          "ru": {
+            "title": "122",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "122",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8405,
+          "y": 871,
+          "ru": {
+            "title": "124",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "124",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8659,
+          "y": 871,
+          "ru": {
+            "title": "126",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "126",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9173,
+          "y": 450,
+          "ru": {
+            "title": "129",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "129",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9435,
+          "y": 450,
+          "ru": {
+            "title": "131",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "131",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9709,
+          "y": 450,
+          "ru": {
+            "title": "133",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "133",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9990,
+          "y": 450,
+          "ru": {
+            "title": "135",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "135",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9173,
+          "y": 871,
+          "ru": {
+            "title": "128",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "128",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9435,
+          "y": 871,
+          "ru": {
+            "title": "130",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "130",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9709,
+          "y": 871,
+          "ru": {
+            "title": "132",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "132",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9990,
+          "y": 871,
+          "ru": {
+            "title": "134",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "134",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 2337,
+          "ru": {
+            "title": "10",
+            "location": "Между корп. А и Б",
+            "description": null
+          },
+          "en": {
+            "title": "10",
+            "location": "Btwn. bldgs A and B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5747,
+          "y": 2698,
+          "ru": {
+            "title": "101",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "101",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5945,
+          "y": 2698,
+          "ru": {
+            "title": "103",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "103",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6214,
+          "y": 2698,
+          "ru": {
+            "title": "105",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "105",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6543,
+          "y": 2698,
+          "ru": {
+            "title": "107",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "107",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6742,
+          "y": 2698,
+          "ru": {
+            "title": "109",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "109",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5747,
+          "y": 3110,
+          "ru": {
+            "title": "102",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "102",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6007,
+          "y": 3110,
+          "ru": {
+            "title": "104",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "104",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6280,
+          "y": 3110,
+          "ru": {
+            "title": "106",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "106",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6543,
+          "y": 3110,
+          "ru": {
+            "title": "108",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "108",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7190,
+          "y": 3215,
+          "ru": {
+            "title": "111а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "111a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7136,
+          "y": 3009,
+          "ru": {
+            "title": "110а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "110a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7265,
+          "y": 3009,
+          "ru": {
+            "title": "110б",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "110b",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7106,
+          "y": 2676,
+          "ru": {
+            "title": "111",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "111",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7322,
+          "y": 2698,
+          "ru": {
+            "title": "113",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "113",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7539,
+          "y": 2698,
+          "ru": {
+            "title": "115",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "115",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7660,
+          "y": 2698,
+          "ru": {
+            "title": "117",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "117",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7846,
+          "y": 2698,
+          "ru": {
+            "title": "119",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "119",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8070,
+          "y": 2698,
+          "ru": {
+            "title": "121",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "121",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8209,
+          "y": 2698,
+          "ru": {
+            "title": "123",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "123",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8409,
+          "y": 2698,
+          "ru": {
+            "title": "125",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "125",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8658,
+          "y": 2698,
+          "ru": {
+            "title": "127",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "127",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8857,
+          "y": 2698,
+          "ru": {
+            "title": "129",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "129",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7395,
+          "y": 3021,
+          "ru": {
+            "title": "112а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "112a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7649,
+          "y": 3110,
+          "ru": {
+            "title": "112",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "112",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7928,
+          "y": 3110,
+          "ru": {
+            "title": "114",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "114",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8212,
+          "y": 3110,
+          "ru": {
+            "title": "116",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "116",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8409,
+          "y": 3110,
+          "ru": {
+            "title": "118",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "118",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8658,
+          "y": 3110,
+          "ru": {
+            "title": "120",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "120",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9117,
+          "y": 2698,
+          "ru": {
+            "title": "131",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "131",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9247,
+          "y": 2698,
+          "ru": {
+            "title": "133",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "133",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9434,
+          "y": 2698,
+          "ru": {
+            "title": "135",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "135",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9845,
+          "y": 2906,
+          "ru": {
+            "title": "126",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "126",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9434,
+          "y": 3110,
+          "ru": {
+            "title": "124",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "124",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9173,
+          "y": 3110,
+          "ru": {
+            "title": "122",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "122",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3385,
+          "ru": {
+            "title": "11",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "11",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3710,
+          "ru": {
+            "title": "12",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "12",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3841,
+          "ru": {
+            "title": "13",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "13",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3972,
+          "ru": {
+            "title": "14",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "14",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 4112,
+          "ru": {
+            "title": "15",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "15",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 4242,
+          "ru": {
+            "title": "16",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "16",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 4374,
+          "ru": {
+            "title": "17",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "17",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 4520,
+          "ru": {
+            "title": "18",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "18",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 7178,
+          "y": 4600,
+          "ru": {
+            "title": "Касса",
+            "location": "Между корп. Б и В",
+            "description": "Оплата за обучение и проживание"
+          },
+          "en": {
+            "title": "Cashier's office",
+            "location": "Btwn. bldgs B and V",
+            "description": "Tuition and dormitory fees"
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 7338,
+          "y": 4875,
+          "ru": {
+            "title": "Вендинговые автоматы",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Vending machines",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 7288,
+          "y": 5160,
+          "ru": {
+            "title": "Банкомат",
+            "location": "Корпус В",
+            "description": "ВТБ"
+          },
+          "en": {
+            "title": "ATM",
+            "location": "Building V",
+            "description": "VTB"
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 7696,
+          "y": 5300,
+          "ru": {
+            "title": "Гардероб",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Cloakroom",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ENTRANCE",
+          "x": 7003,
+          "y": 5935,
+          "ru": {
+            "title": "Главный вход",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Main entrance",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3355,
+          "y": 5262,
+          "ru": {
+            "title": "103",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "103",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3476,
+          "y": 5246,
+          "ru": {
+            "title": "105",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "105",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3605,
+          "y": 5262,
+          "ru": {
+            "title": "107",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "107",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3737,
+          "y": 5262,
+          "ru": {
+            "title": "109",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "109",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3872,
+          "y": 5262,
+          "ru": {
+            "title": "111",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "111",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4000,
+          "y": 5262,
+          "ru": {
+            "title": "113",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "113",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4093,
+          "y": 5407,
+          "ru": {
+            "title": "115",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "115",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4880,
+          "y": 5418,
+          "ru": {
+            "title": "119",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "119",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5047,
+          "y": 5418,
+          "ru": {
+            "title": "121",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "121",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5354,
+          "y": 5300,
+          "ru": {
+            "title": "127",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "127",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5606,
+          "y": 5275,
+          "ru": {
+            "title": "129",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "129",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8335,
+          "y": 5360,
+          "ru": {
+            "title": "131",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "131",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8426,
+          "y": 5360,
+          "ru": {
+            "title": "133",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "133",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8536,
+          "y": 5360,
+          "ru": {
+            "title": "135",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "135",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8739,
+          "y": 5279,
+          "ru": {
+            "title": "137",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "137",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9025,
+          "y": 5300,
+          "ru": {
+            "title": "139а",
+            "location": "Корпус В",
+            "description": "Бывшая киностудия"
+          },
+          "en": {
+            "title": "139a",
+            "location": "Building V",
+            "description": "Former movie studio"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8725,
+          "y": 5416,
+          "ru": {
+            "title": "131",
+            "location": "Корпус В",
+            "description": "Факультетское Бюро Рисования (ФБР)"
+          },
+          "en": {
+            "title": "131",
+            "location": "Building V",
+            "description": "Faculty Bureau of Illustration (FBI)"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9288,
+          "y": 5415,
+          "ru": {
+            "title": "139",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "139",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9604,
+          "y": 5314,
+          "ru": {
+            "title": "141",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "141",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3275,
+          "y": 5716,
+          "ru": {
+            "title": "102",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "102",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3872,
+          "y": 5750,
+          "ru": {
+            "title": "104",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "104",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4253,
+          "y": 5750,
+          "ru": {
+            "title": "106",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "106",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4568,
+          "y": 5638,
+          "ru": {
+            "title": "108а",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "108a",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4568,
+          "y": 5773,
+          "ru": {
+            "title": "108",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "108",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4770,
+          "y": 5750,
+          "ru": {
+            "title": "108б",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "108b",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5024,
+          "y": 5750,
+          "ru": {
+            "title": "110",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "110",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5335,
+          "y": 5750,
+          "ru": {
+            "title": "112а",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "112a",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5508,
+          "y": 5750,
+          "ru": {
+            "title": "112б",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "112b",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5805,
+          "y": 5750,
+          "ru": {
+            "title": "114",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "114",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1221,
+          "y": 4850,
+          "ru": {
+            "title": "Спортзал",
+            "location": "Корпус Д",
+            "description": null
+          },
+          "en": {
+            "title": "Gym",
+            "location": "Building D",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 174,
+          "y": 5145,
+          "ru": {
+            "title": "Снарядная",
+            "location": "Корпус Д",
+            "description": null
+          },
+          "en": {
+            "title": "Equipment storage",
+            "location": "Building D",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 874,
+          "y": 5628,
+          "ru": {
+            "title": "Мужская раздевалка",
+            "location": "Корпус Д",
+            "description": null
+          },
+          "en": {
+            "title": "Men's locker room",
+            "location": "Building D",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1259,
+          "y": 5628,
+          "ru": {
+            "title": "Мужская душевая",
+            "location": "Корпус Д",
+            "description": null
+          },
+          "en": {
+            "title": "Men's shower room",
+            "location": "Building D",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1337,
+          "y": 5628,
+          "ru": {
+            "title": "Женская душевая",
+            "location": "Корпус Д",
+            "description": null
+          },
+          "en": {
+            "title": "Women's shower room",
+            "location": "Building D",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1616,
+          "y": 5628,
+          "ru": {
+            "title": "Женская раздевалка",
+            "location": "Корпус Д",
+            "description": null
+          },
+          "en": {
+            "title": "Women's locker room",
+            "location": "Building D",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3232,
+          "y": 6000,
+          "ru": {
+            "title": "108",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "108",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3140,
+          "y": 6245,
+          "ru": {
+            "title": "109",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "109",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3140,
+          "y": 6565,
+          "ru": {
+            "title": "110",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "110",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3140,
+          "y": 6758,
+          "ru": {
+            "title": "111",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "111",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3140,
+          "y": 7015,
+          "ru": {
+            "title": "112",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "112",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 219,
+          "y": 7647,
+          "ru": {
+            "title": "101а",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "101a",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 470,
+          "y": 7560,
+          "ru": {
+            "title": "103",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "103",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 843,
+          "y": 7560,
+          "ru": {
+            "title": "105",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "105",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1760,
+          "y": 7560,
+          "ru": {
+            "title": "107",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "107",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2508,
+          "y": 7560,
+          "ru": {
+            "title": "109",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "109",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2922,
+          "y": 7640,
+          "ru": {
+            "title": "113",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "113",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 175,
+          "y": 7955,
+          "ru": {
+            "title": "102",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "102",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 560,
+          "y": 7955,
+          "ru": {
+            "title": "104",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "104",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 890,
+          "y": 7955,
+          "ru": {
+            "title": "106",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "106",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1313,
+          "y": 7885,
+          "ru": {
+            "title": "108",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "108",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1313,
+          "y": 7968,
+          "ru": {
+            "title": "108а",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "108a",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1313,
+          "y": 8043,
+          "ru": {
+            "title": "108б",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "108b",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1426,
+          "y": 7955,
+          "ru": {
+            "title": "110",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "110",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1595,
+          "y": 7955,
+          "ru": {
+            "title": "112",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "112",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2150,
+          "y": 7955,
+          "ru": {
+            "title": "114",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "114",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2730,
+          "y": 7955,
+          "ru": {
+            "title": "116",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "116",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2933,
+          "y": 7955,
+          "ru": {
+            "title": "120а",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "120a",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3273,
+          "y": 7955,
+          "ru": {
+            "title": "120",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "120",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3678,
+          "y": 7878,
+          "ru": {
+            "title": "121",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "121",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4008,
+          "y": 7878,
+          "ru": {
+            "title": "122",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "122",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10058,
+          "y": 4666,
+          "ru": {
+            "title": "101",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "101",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10045,
+          "y": 4950,
+          "ru": {
+            "title": "102",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "102",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10030,
+          "y": 5256,
+          "ru": {
+            "title": "103",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "103",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10030,
+          "y": 5963,
+          "ru": {
+            "title": "104",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "104",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10045,
+          "y": 6272,
+          "ru": {
+            "title": "105",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "105",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10058,
+          "y": 6550,
+          "ru": {
+            "title": "106",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "106",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9880,
+          "y": 6767,
+          "ru": {
+            "title": "107а",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "107a",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10425,
+          "y": 4980,
+          "ru": {
+            "title": "107",
+            "location": "Корпус Е",
+            "description": "«Сто-левая»"
+          },
+          "en": {
+            "title": "107",
+            "location": "Building E",
+            "description": "\"Hundred-left\""
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10425,
+          "y": 6220,
+          "ru": {
+            "title": "108",
+            "location": "Корпус Е",
+            "description": "«Сто-правая»"
+          },
+          "en": {
+            "title": "108",
+            "location": "Building E",
+            "description": "\"Hundred-right\""
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10870,
+          "y": 5611,
+          "ru": {
+            "title": "110",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "110",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11270,
+          "y": 4912,
+          "ru": {
+            "title": "112",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "112",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11868,
+          "y": 5134,
+          "ru": {
+            "title": "120",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "120",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11582,
+          "y": 5242,
+          "ru": {
+            "title": "116",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "116",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11610,
+          "y": 5459,
+          "ru": {
+            "title": "117",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "117",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11610,
+          "y": 5762,
+          "ru": {
+            "title": "118",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "118",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11577,
+          "y": 6013,
+          "ru": {
+            "title": "119",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "119",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 11280,
+          "y": 5611,
+          "ru": {
+            "title": "109",
+            "location": "Корпус Е",
+            "description": "Концертный (конференц-) зал «Апрельский»"
+          },
+          "en": {
+            "title": "109",
+            "location": "Building E",
+            "description": "Concert (conference) hall \"Aprelskiy\""
+          }
+        }
+      ]
+    },
+    {
+      "floor": 2,
+      "markers": [
+        {
+          "type": "STAIRS_DOWN",
+          "x": 5262,
+          "y": 228,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 6873,
+          "y": 450,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 8987,
+          "y": 450,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 6873,
+          "y": 2698,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 8987,
+          "y": 2698,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 7226,
+          "y": 4853,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 4318,
+          "y": 5300,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 5862,
+          "y": 5386,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 9399,
+          "y": 5311,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 8614,
+          "y": 5818,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 10251,
+          "y": 5611,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 11898,
+          "y": 4907,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 11898,
+          "y": 6317,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 857,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 1007,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 1436,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 1588,
+          "y": 5405,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 3150,
+          "y": 7570,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 1091,
+          "y": 7560,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 7265,
+          "y": 867,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 7265,
+          "y": 3111,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 1212,
+          "y": 7601,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 6742,
+          "y": 871,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 7395,
+          "y": 871,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 6742,
+          "y": 3110,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 7395,
+          "y": 3110,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 4770,
+          "y": 5274,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 5160,
+          "y": 5274,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 9603,
+          "y": 5311,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 2888,
+          "y": 7520,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 82,
+          "y": 7560,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4377,
+          "y": 213,
+          "ru": {
+            "title": "236",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "236",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4645,
+          "y": 213,
+          "ru": {
+            "title": "237",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "237",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4993,
+          "y": 213,
+          "ru": {
+            "title": "238",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "238",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4990,
+          "y": 573,
+          "ru": {
+            "title": "240",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "240",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4990,
+          "y": 802,
+          "ru": {
+            "title": "239",
+            "location": "Корпус П",
+            "description": null
+          },
+          "en": {
+            "title": "239",
+            "location": "Building P",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5819,
+          "y": 450,
+          "ru": {
+            "title": "201",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "201",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6077,
+          "y": 450,
+          "ru": {
+            "title": "203",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "203",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6279,
+          "y": 450,
+          "ru": {
+            "title": "205",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "205",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6544,
+          "y": 450,
+          "ru": {
+            "title": "207",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "207",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6742,
+          "y": 450,
+          "ru": {
+            "title": "209",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "209",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5819,
+          "y": 871,
+          "ru": {
+            "title": "202",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "202",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6077,
+          "y": 871,
+          "ru": {
+            "title": "204",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "204",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6279,
+          "y": 871,
+          "ru": {
+            "title": "206",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "206",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6544,
+          "y": 871,
+          "ru": {
+            "title": "208",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "208",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7133,
+          "y": 766,
+          "ru": {
+            "title": "210",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "210",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7265,
+          "y": 766,
+          "ru": {
+            "title": "212",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "212",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7265,
+          "y": 994,
+          "ru": {
+            "title": "238б",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "238b",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7198,
+          "y": 450,
+          "ru": {
+            "title": "211",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "211",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7589,
+          "y": 450,
+          "ru": {
+            "title": "213",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "213",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7855,
+          "y": 450,
+          "ru": {
+            "title": "215",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "215",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8135,
+          "y": 450,
+          "ru": {
+            "title": "217",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "217",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8408,
+          "y": 450,
+          "ru": {
+            "title": "219",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "219",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8661,
+          "y": 450,
+          "ru": {
+            "title": "221",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "221",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8859,
+          "y": 450,
+          "ru": {
+            "title": "223",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "223",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7528,
+          "y": 871,
+          "ru": {
+            "title": "214а",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "214a",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7644,
+          "y": 871,
+          "ru": {
+            "title": "214",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "214",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7855,
+          "y": 871,
+          "ru": {
+            "title": "216",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "216",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8135,
+          "y": 871,
+          "ru": {
+            "title": "218",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "218",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8408,
+          "y": 871,
+          "ru": {
+            "title": "220",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "220",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8661,
+          "y": 871,
+          "ru": {
+            "title": "222",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "222",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9175,
+          "y": 450,
+          "ru": {
+            "title": "225",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "225",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9380,
+          "y": 450,
+          "ru": {
+            "title": "227",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "227",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9511,
+          "y": 450,
+          "ru": {
+            "title": "229",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "229",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9641,
+          "y": 555,
+          "ru": {
+            "title": "231",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "231",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9941,
+          "y": 555,
+          "ru": {
+            "title": "233",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "233",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9107,
+          "y": 871,
+          "ru": {
+            "title": "224",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "224",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9238,
+          "y": 871,
+          "ru": {
+            "title": "226",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "226",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9370,
+          "y": 871,
+          "ru": {
+            "title": "228",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "228",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9500,
+          "y": 871,
+          "ru": {
+            "title": "230",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "230",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9633,
+          "y": 871,
+          "ru": {
+            "title": "232",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "232",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9916,
+          "y": 871,
+          "ru": {
+            "title": "234",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "234",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 1241,
+          "ru": {
+            "title": "238а",
+            "location": "Между корп. А и Б",
+            "description": null
+          },
+          "en": {
+            "title": "238a",
+            "location": "Btwn. bldgs A and B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 1986,
+          "ru": {
+            "title": "238",
+            "location": "Между корп. А и Б",
+            "description": null
+          },
+          "en": {
+            "title": "238",
+            "location": "Btwn. bldgs A and B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 2288,
+          "ru": {
+            "title": "239",
+            "location": "Между корп. А и Б",
+            "description": null
+          },
+          "en": {
+            "title": "239",
+            "location": "Btwn. bldgs A and B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 2465,
+          "ru": {
+            "title": "240",
+            "location": "Между корп. А и Б",
+            "description": null
+          },
+          "en": {
+            "title": "240",
+            "location": "Btwn. bldgs A and B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5750,
+          "y": 2698,
+          "ru": {
+            "title": "201",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "201",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6013,
+          "y": 2698,
+          "ru": {
+            "title": "203",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "203",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6283,
+          "y": 2698,
+          "ru": {
+            "title": "205",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "205",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6480,
+          "y": 2698,
+          "ru": {
+            "title": "207",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "207",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6601,
+          "y": 2698,
+          "ru": {
+            "title": "209",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "209",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6742,
+          "y": 2698,
+          "ru": {
+            "title": "211",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "211",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5750,
+          "y": 3110,
+          "ru": {
+            "title": "202",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "202",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5947,
+          "y": 3110,
+          "ru": {
+            "title": "204",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "204",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6078,
+          "y": 3110,
+          "ru": {
+            "title": "206",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "206",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6206,
+          "y": 3110,
+          "ru": {
+            "title": "208",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "208",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6348,
+          "y": 3110,
+          "ru": {
+            "title": "210",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "210",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6545,
+          "y": 3110,
+          "ru": {
+            "title": "212",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "212",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7186,
+          "y": 3217,
+          "ru": {
+            "title": "221а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "221a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7186,
+          "y": 3012,
+          "ru": {
+            "title": "212",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "212",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7105,
+          "y": 2788,
+          "ru": {
+            "title": "213",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "213",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7105,
+          "y": 2599,
+          "ru": {
+            "title": "215",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "215",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7377,
+          "y": 2698,
+          "ru": {
+            "title": "217",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "217",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7793,
+          "y": 2698,
+          "ru": {
+            "title": "219",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "219",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8072,
+          "y": 2698,
+          "ru": {
+            "title": "221",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "221",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8336,
+          "y": 2698,
+          "ru": {
+            "title": "223",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "223",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8661,
+          "y": 2698,
+          "ru": {
+            "title": "225",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "225",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8855,
+          "y": 2698,
+          "ru": {
+            "title": "227",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "227",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7528,
+          "y": 3110,
+          "ru": {
+            "title": "214",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "214",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7650,
+          "y": 3110,
+          "ru": {
+            "title": "216",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "216",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7995,
+          "y": 3110,
+          "ru": {
+            "title": "218",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "218",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8532,
+          "y": 3110,
+          "ru": {
+            "title": "220",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "220",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9172,
+          "y": 2698,
+          "ru": {
+            "title": "229",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "229",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9439,
+          "y": 2698,
+          "ru": {
+            "title": "231",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "231",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9306,
+          "y": 3110,
+          "ru": {
+            "title": "222",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "222",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9845,
+          "y": 2906,
+          "ru": {
+            "title": "224",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "224",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3380,
+          "ru": {
+            "title": "221",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "221",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3647,
+          "ru": {
+            "title": "222",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "222",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 3911,
+          "ru": {
+            "title": "223",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "223",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 4320,
+          "ru": {
+            "title": "224",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "224",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7178,
+          "y": 4655,
+          "ru": {
+            "title": "«Сачок»",
+            "location": "Между корп. Б и В",
+            "description": null
+          },
+          "en": {
+            "title": "\"Sachok\"",
+            "location": "Btwn. bldgs B and V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3275,
+          "y": 5525,
+          "ru": {
+            "title": "201",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "201",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3475,
+          "y": 5300,
+          "ru": {
+            "title": "203",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "203",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3606,
+          "y": 5300,
+          "ru": {
+            "title": "205",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "205",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3737,
+          "y": 5300,
+          "ru": {
+            "title": "207",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "207",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3870,
+          "y": 5300,
+          "ru": {
+            "title": "209",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "209",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4000,
+          "y": 5300,
+          "ru": {
+            "title": "211",
+            "location": "Корпус В",
+            "description": "Учебный отдел"
+          },
+          "en": {
+            "title": "211",
+            "location": "Building V",
+            "description": "Educational department"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4130,
+          "y": 5300,
+          "ru": {
+            "title": "213",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "213",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3275,
+          "y": 5750,
+          "ru": {
+            "title": "202",
+            "location": "Корпус В",
+            "description": "Учебный отдел"
+          },
+          "en": {
+            "title": "202",
+            "location": "Building V",
+            "description": "Educational department"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3737,
+          "y": 5750,
+          "ru": {
+            "title": "204",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "204",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3870,
+          "y": 5750,
+          "ru": {
+            "title": "206",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "206",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4067,
+          "y": 5750,
+          "ru": {
+            "title": "208",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "208",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4318,
+          "y": 5750,
+          "ru": {
+            "title": "208а",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "208a",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 4572,
+          "y": 5300,
+          "ru": {
+            "title": "«Антисачок Э. Спирина»",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "\"Antisachok of E. Spirin\"",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5555,
+          "y": 5300,
+          "ru": {
+            "title": "225",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "225",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5862,
+          "y": 5245,
+          "ru": {
+            "title": "229б",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "229b",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6170,
+          "y": 5300,
+          "ru": {
+            "title": "227",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "227",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6580,
+          "y": 5300,
+          "ru": {
+            "title": "229",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "229",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 5740,
+          "y": 5525,
+          "ru": {
+            "title": "«Семинарский проспект»",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "\"Seminary Avenue\"",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4632,
+          "y": 5750,
+          "ru": {
+            "title": "210",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "210",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5025,
+          "y": 5750,
+          "ru": {
+            "title": "212",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "212",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5419,
+          "y": 5750,
+          "ru": {
+            "title": "214",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "214",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5805,
+          "y": 5750,
+          "ru": {
+            "title": "216",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "216",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6170,
+          "y": 5750,
+          "ru": {
+            "title": "218",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "218",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6580,
+          "y": 5750,
+          "ru": {
+            "title": "220",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "220",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 7565,
+          "y": 5350,
+          "ru": {
+            "title": "Столовая",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Dining room",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 9090,
+          "y": 5300,
+          "ru": {
+            "title": "Кафе",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Cafe",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9260,
+          "y": 5311,
+          "ru": {
+            "title": "239",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "239",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "OTHER",
+          "x": 9344,
+          "y": 5475,
+          "ru": {
+            "title": "Питьевой фонтанчик",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Drinking fountain",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3232,
+          "y": 6000,
+          "ru": {
+            "title": "200",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "200",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3140,
+          "y": 6363,
+          "ru": {
+            "title": "В-02",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "V-02",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3140,
+          "y": 6868,
+          "ru": {
+            "title": "В-04",
+            "location": "Между корп. В и Г",
+            "description": null
+          },
+          "en": {
+            "title": "V-04",
+            "location": "Btwn. bldgs V and G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 219,
+          "y": 7647,
+          "ru": {
+            "title": "201",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "201",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 525,
+          "y": 7560,
+          "ru": {
+            "title": "203",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "203",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 902,
+          "y": 7560,
+          "ru": {
+            "title": "205",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "205",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1342,
+          "y": 7560,
+          "ru": {
+            "title": "207",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "207",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1895,
+          "y": 7560,
+          "ru": {
+            "title": "211",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "211",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2408,
+          "y": 7560,
+          "ru": {
+            "title": "213",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "213",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2652,
+          "y": 7560,
+          "ru": {
+            "title": "215",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "215",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2952,
+          "y": 7640,
+          "ru": {
+            "title": "219а",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "219a",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 175,
+          "y": 7970,
+          "ru": {
+            "title": "202",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "202",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 683,
+          "y": 7970,
+          "ru": {
+            "title": "204",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "204",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1427,
+          "y": 7970,
+          "ru": {
+            "title": "208",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "208",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1595,
+          "y": 7970,
+          "ru": {
+            "title": "210",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "210",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1990,
+          "y": 7970,
+          "ru": {
+            "title": "212",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "212",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2427,
+          "y": 7970,
+          "ru": {
+            "title": "214",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "214",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2653,
+          "y": 7970,
+          "ru": {
+            "title": "216",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "216",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3112,
+          "y": 7970,
+          "ru": {
+            "title": "218",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "218",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3730,
+          "y": 7970,
+          "ru": {
+            "title": "220",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "220",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4130,
+          "y": 7782,
+          "ru": {
+            "title": "221",
+            "location": "Корпус Г",
+            "description": "Дисплейный класс"
+          },
+          "en": {
+            "title": "221",
+            "location": "Building G",
+            "description": "Display classroom"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10030,
+          "y": 4862,
+          "ru": {
+            "title": "208",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "208",
+            "location": "Building E",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 10026,
+          "y": 6323,
+          "ru": {
+            "title": "205",
+            "location": "Корпус Е",
+            "description": null
+          },
+          "en": {
+            "title": "205",
+            "location": "Building E",
+            "description": null
+          }
+        }
+      ]
+    },
+    {
+      "floor": 3,
+      "markers": [
+        {
+          "type": "STAIRS_BOTH",
+          "x": 6873,
+          "y": 450,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 8987,
+          "y": 450,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 6873,
+          "y": 2698,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 8987,
+          "y": 2698,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 7226,
+          "y": 4853,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 4318,
+          "y": 5300,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 5862,
+          "y": 5386,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 9399,
+          "y": 5311,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 3150,
+          "y": 7570,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 1091,
+          "y": 7560,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 7265,
+          "y": 867,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 7265,
+          "y": 3111,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ELEVATOR",
+          "x": 1212,
+          "y": 7601,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 6742,
+          "y": 871,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 7395,
+          "y": 871,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 6742,
+          "y": 3110,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 7395,
+          "y": 3110,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 4770,
+          "y": 5274,
+          "ru": {
+            "title": "307",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "307",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 5160,
+          "y": 5274,
+          "ru": {
+            "title": "313",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "313",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 2888,
+          "y": 7520,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 82,
+          "y": 7560,
+          "ru": {
+            "title": "301",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "301",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5678,
+          "y": 661,
+          "ru": {
+            "title": "301а",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "301a",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5749,
+          "y": 450,
+          "ru": {
+            "title": "301",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "301",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6077,
+          "y": 450,
+          "ru": {
+            "title": "305",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "305",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6280,
+          "y": 450,
+          "ru": {
+            "title": "307",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "307",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6546,
+          "y": 450,
+          "ru": {
+            "title": "309",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "309",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6742,
+          "y": 450,
+          "ru": {
+            "title": "311",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "311",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5749,
+          "y": 871,
+          "ru": {
+            "title": "302",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "302",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6013,
+          "y": 871,
+          "ru": {
+            "title": "304",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "304",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6218,
+          "y": 871,
+          "ru": {
+            "title": "308",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "308",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6360,
+          "y": 871,
+          "ru": {
+            "title": "310",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "310",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6546,
+          "y": 871,
+          "ru": {
+            "title": "312",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "312",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6873,
+          "y": 871,
+          "ru": {
+            "title": "342",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "342",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7135,
+          "y": 966,
+          "ru": {
+            "title": "341",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "341",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7135,
+          "y": 762,
+          "ru": {
+            "title": "314",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "314",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7265,
+          "y": 762,
+          "ru": {
+            "title": "316",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "316",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7122,
+          "y": 450,
+          "ru": {
+            "title": "313",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "313",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7518,
+          "y": 450,
+          "ru": {
+            "title": "315",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "315",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8077,
+          "y": 450,
+          "ru": {
+            "title": "317",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "317",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8408,
+          "y": 390,
+          "ru": {
+            "title": "319",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "319",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8408,
+          "y": 520,
+          "ru": {
+            "title": "321",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "321",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8663,
+          "y": 450,
+          "ru": {
+            "title": "323",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "323",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8856,
+          "y": 450,
+          "ru": {
+            "title": "325",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "325",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7527,
+          "y": 871,
+          "ru": {
+            "title": "316а",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "316a",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7648,
+          "y": 871,
+          "ru": {
+            "title": "318",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "318",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7866,
+          "y": 871,
+          "ru": {
+            "title": "320",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "320",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8080,
+          "y": 871,
+          "ru": {
+            "title": "322",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "322",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8210,
+          "y": 871,
+          "ru": {
+            "title": "324",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "324",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8342,
+          "y": 871,
+          "ru": {
+            "title": "326",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "326",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8473,
+          "y": 871,
+          "ru": {
+            "title": "328",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "328",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8663,
+          "y": 871,
+          "ru": {
+            "title": "330",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "330",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9173,
+          "y": 450,
+          "ru": {
+            "title": "327",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "327",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9511,
+          "y": 390,
+          "ru": {
+            "title": "329",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "329",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9511,
+          "y": 520,
+          "ru": {
+            "title": "331",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "331",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9694,
+          "y": 450,
+          "ru": {
+            "title": "333",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "333",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9904,
+          "y": 450,
+          "ru": {
+            "title": "335",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "335",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9173,
+          "y": 871,
+          "ru": {
+            "title": "332",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "332",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9430,
+          "y": 871,
+          "ru": {
+            "title": "334",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "334",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9634,
+          "y": 871,
+          "ru": {
+            "title": "336",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "336",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9762,
+          "y": 871,
+          "ru": {
+            "title": "338",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "338",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9979,
+          "y": 871,
+          "ru": {
+            "title": "340",
+            "location": "Корпус А",
+            "description": null
+          },
+          "en": {
+            "title": "340",
+            "location": "Building A",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5770,
+          "y": 2698,
+          "ru": {
+            "title": "301а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "301a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6077,
+          "y": 2698,
+          "ru": {
+            "title": "301б",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "301b",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6220,
+          "y": 2698,
+          "ru": {
+            "title": "303а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "303a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6592,
+          "y": 2698,
+          "ru": {
+            "title": "303б",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "303b",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5812,
+          "y": 3110,
+          "ru": {
+            "title": "302",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "302",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6077,
+          "y": 3110,
+          "ru": {
+            "title": "304",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "304",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6409,
+          "y": 3110,
+          "ru": {
+            "title": "306",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "306",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7188,
+          "y": 3012,
+          "ru": {
+            "title": "308",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "308",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6985,
+          "y": 2698,
+          "ru": {
+            "title": "305",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "305",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7253,
+          "y": 2698,
+          "ru": {
+            "title": "307",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "307",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7537,
+          "y": 2698,
+          "ru": {
+            "title": "309",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "309",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7796,
+          "y": 2698,
+          "ru": {
+            "title": "311",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "311",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8135,
+          "y": 2698,
+          "ru": {
+            "title": "313",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "313",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7650,
+          "y": 3110,
+          "ru": {
+            "title": "310",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "310",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7997,
+          "y": 3110,
+          "ru": {
+            "title": "312а",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "312a",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8345,
+          "y": 3110,
+          "ru": {
+            "title": "313б",
+            "location": "Корпус Б",
+            "description": null
+          },
+          "en": {
+            "title": "313b",
+            "location": "Building B",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3339,
+          "y": 5300,
+          "ru": {
+            "title": "301",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "301",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3609,
+          "y": 5300,
+          "ru": {
+            "title": "303а",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "303a",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3800,
+          "y": 5300,
+          "ru": {
+            "title": "303",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "303",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4065,
+          "y": 5300,
+          "ru": {
+            "title": "305",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "305",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4884,
+          "y": 5416,
+          "ru": {
+            "title": "309",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "309",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5047,
+          "y": 5416,
+          "ru": {
+            "title": "311",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "311",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5300,
+          "y": 5300,
+          "ru": {
+            "title": "315",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "315",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5550,
+          "y": 5300,
+          "ru": {
+            "title": "317",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "317",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5862,
+          "y": 5246,
+          "ru": {
+            "title": "319",
+            "location": "Корпус В",
+            "description": "Библиотека художественной литературы"
+          },
+          "en": {
+            "title": "319",
+            "location": "Building V",
+            "description": "Fiction library"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6648,
+          "y": 5300,
+          "ru": {
+            "title": "321",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "321",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3275,
+          "y": 5750,
+          "ru": {
+            "title": "302",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "302",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3540,
+          "y": 5750,
+          "ru": {
+            "title": "304",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "304",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3870,
+          "y": 5750,
+          "ru": {
+            "title": "306",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "306",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4250,
+          "y": 5750,
+          "ru": {
+            "title": "308",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "308",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4636,
+          "y": 5750,
+          "ru": {
+            "title": "310",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "310",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5030,
+          "y": 5750,
+          "ru": {
+            "title": "312",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "312",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5418,
+          "y": 5750,
+          "ru": {
+            "title": "314",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "314",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5800,
+          "y": 5750,
+          "ru": {
+            "title": "316",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "316",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6125,
+          "y": 5750,
+          "ru": {
+            "title": "318",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "318",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6445,
+          "y": 5750,
+          "ru": {
+            "title": "320",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "320",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6836,
+          "y": 5750,
+          "ru": {
+            "title": "322",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "322",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7240,
+          "y": 5750,
+          "ru": {
+            "title": "324",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "324",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7500,
+          "y": 5750,
+          "ru": {
+            "title": "326",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "326",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8352,
+          "y": 5535,
+          "ru": {
+            "title": "Военный Учебный Центр (ВУЦ)",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "Military Training Center",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 219,
+          "y": 7647,
+          "ru": {
+            "title": "301а",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "301a",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 660,
+          "y": 7560,
+          "ru": {
+            "title": "303",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "303",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1343,
+          "y": 7560,
+          "ru": {
+            "title": "307",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "307",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1900,
+          "y": 7560,
+          "ru": {
+            "title": "311",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "311",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2510,
+          "y": 7560,
+          "ru": {
+            "title": "313",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "313",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2952,
+          "y": 7640,
+          "ru": {
+            "title": "315",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "315",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 175,
+          "y": 7970,
+          "ru": {
+            "title": "302",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "302",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 683,
+          "y": 7970,
+          "ru": {
+            "title": "304",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "304",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1135,
+          "y": 7970,
+          "ru": {
+            "title": "312",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "312",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 1640,
+          "y": 7970,
+          "ru": {
+            "title": "306",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "306",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2270,
+          "y": 7970,
+          "ru": {
+            "title": "308",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "308",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 2750,
+          "y": 7970,
+          "ru": {
+            "title": "310",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "310",
+            "location": "Building G",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3195,
+          "y": 7970,
+          "ru": {
+            "title": "314",
+            "location": "Корпус Г",
+            "description": null
+          },
+          "en": {
+            "title": "314",
+            "location": "Building G",
+            "description": null
+          }
+        }
+      ]
+    },
+    {
+      "floor": 4,
+      "markers": [
+        {
+          "type": "STAIRS_DOWN",
+          "x": 7226,
+          "y": 4853,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 4318,
+          "y": 5300,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 5862,
+          "y": 5386,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_BOTH",
+          "x": 9399,
+          "y": 5311,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_WOMAN",
+          "x": 4770,
+          "y": 5274,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC_MAN",
+          "x": 4898,
+          "y": 5274,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3343,
+          "y": 5300,
+          "ru": {
+            "title": "401",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "401",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3608,
+          "y": 5300,
+          "ru": {
+            "title": "403",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "403",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3738,
+          "y": 5300,
+          "ru": {
+            "title": "405",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "405",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3868,
+          "y": 5300,
+          "ru": {
+            "title": "407",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "407",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4130,
+          "y": 5300,
+          "ru": {
+            "title": "409",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "409",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3275,
+          "y": 5750,
+          "ru": {
+            "title": "402",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "402",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3540,
+          "y": 5750,
+          "ru": {
+            "title": "404",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "404",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3806,
+          "y": 5750,
+          "ru": {
+            "title": "406",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "406",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4064,
+          "y": 5750,
+          "ru": {
+            "title": "408",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "408",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4380,
+          "y": 5750,
+          "ru": {
+            "title": "410",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "410",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4761,
+          "y": 5750,
+          "ru": {
+            "title": "412",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "412",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5264,
+          "y": 5525,
+          "ru": {
+            "title": "414",
+            "location": "Корпус В",
+            "description": "Научный парк"
+          },
+          "en": {
+            "title": "414",
+            "location": "Building V",
+            "description": "Research park"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 5730,
+          "y": 5525,
+          "ru": {
+            "title": "416",
+            "location": "Корпус В",
+            "description": "Научный парк"
+          },
+          "en": {
+            "title": "416",
+            "location": "Building V",
+            "description": "Research park"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6250,
+          "y": 5525,
+          "ru": {
+            "title": "418",
+            "location": "Корпус В",
+            "description": "Научный парк"
+          },
+          "en": {
+            "title": "418",
+            "location": "Building V",
+            "description": "Research park"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7173,
+          "y": 5375,
+          "ru": {
+            "title": "420",
+            "location": "Корпус В",
+            "description": "Читальный зал"
+          },
+          "en": {
+            "title": "420",
+            "location": "Building V",
+            "description": "Reading room"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 6780,
+          "y": 5750,
+          "ru": {
+            "title": "422",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "422",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7173,
+          "y": 5750,
+          "ru": {
+            "title": "424",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "424",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 7565,
+          "y": 5750,
+          "ru": {
+            "title": "426",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "426",
+            "location": "Building V",
+            "description": null
+          }
+        }
+      ]
+    },
+    {
+      "floor": 5,
+      "markers": [
+        {
+          "type": "STAIRS_DOWN",
+          "x": 4318,
+          "y": 5383,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 5862,
+          "y": 5386,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "STAIRS_DOWN",
+          "x": 9399,
+          "y": 5311,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "WC",
+          "x": 5028,
+          "y": 5207,
+          "ru": {
+            "title": null,
+            "location": null,
+            "description": null
+          },
+          "en": {
+            "title": null,
+            "location": null,
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3279,
+          "y": 5300,
+          "ru": {
+            "title": "501",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "501",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3475,
+          "y": 5265,
+          "ru": {
+            "title": "503",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "503",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 3740,
+          "y": 5265,
+          "ru": {
+            "title": "505",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "505",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 4000,
+          "y": 5265,
+          "ru": {
+            "title": "507",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "507",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8400,
+          "y": 5300,
+          "ru": {
+            "title": "522",
+            "location": "Корпус В",
+            "description": "Библиотека"
+          },
+          "en": {
+            "title": "522",
+            "location": "Building V",
+            "description": "Library"
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 8744,
+          "y": 5265,
+          "ru": {
+            "title": "521",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "521",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9025,
+          "y": 5265,
+          "ru": {
+            "title": "523",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "523",
+            "location": "Building V",
+            "description": null
+          }
+        },
+        {
+          "type": "ROOM",
+          "x": 9260,
+          "y": 5265,
+          "ru": {
+            "title": "525",
+            "location": "Корпус В",
+            "description": null
+          },
+          "en": {
+            "title": "525",
+            "location": "Building V",
+            "description": null
+          }
+        }
+      ]
+    }
+  ]
+}

@@ -25,7 +25,6 @@ import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
@@ -39,9 +38,7 @@ import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Search
-import androidx.compose.material.icons.rounded.Settings
+import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
@@ -50,15 +47,16 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
-import androidx.compose.runtime.remember
 import androidx.compose.ui.ExperimentalComposeUiApi
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.style.TextOverflow
 import ru.spbu.depnav.R
-import ru.spbu.depnav.data.composite.MarkerWithText
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+import ru.spbu.depnav.ui.viewmodel.SearchResults
 
 // These are basically copied from SearchBar implementation
 private val ACTIVATION_ENTER_SPEC = tween<Float>(
@@ -78,18 +76,18 @@ private val ACTIVATION_EXIT_SPEC = tween<Float>(
 @Composable
 @Suppress(
     "LongMethod", // No point in further shrinking
-    "LongParameterList" // Considered OK for composables
+    "LongParameterList" // Considered OK for a composable
 )
 @OptIn(ExperimentalMaterial3Api::class, ExperimentalComposeUiApi::class)
 fun MapSearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
+    mapTitle: String,
     active: Boolean,
     onActiveChange: (Boolean) -> Unit,
-    results: List<MarkerWithText>,
+    results: SearchResults,
     onResultClick: (Int) -> Unit,
-    onInfoClick: () -> Unit,
-    onSettingsClick: () -> Unit,
+    onMenuClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     val activationAnimationProgress by animateFloatAsState(
@@ -108,43 +106,48 @@ fun MapSearchBar(
     val innerStartPadding = insetsStartPadding * activationAnimationProgress
     val innerEndPadding = insetsEndPadding * activationAnimationProgress
 
+    val focusManager = LocalFocusManager.current
+
     SearchBar(
         query = query,
         onQueryChange = onQueryChange,
-        onSearch = { onActiveChange(false) },
+        onSearch = { focusManager.clearFocus() },
         active = active,
         onActiveChange = onActiveChange,
         modifier = Modifier
-            .apply {
+            .run {
                 if (active) padding(start = outerStartPadding, end = outerEndPadding)
                 else windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
             }
             .then(modifier),
-        placeholder = { Text(stringResource(R.string.search_markers), maxLines = 1) },
+        placeholder = {
+            Text(
+                stringResource(R.string.search_on_map, mapTitle),
+                overflow = TextOverflow.Ellipsis,
+                maxLines = 1
+            )
+        },
         leadingIcon = {
-            AnimatedLeadingIcon(active, modifier = Modifier.padding(start = innerStartPadding)) {
-                onActiveChange(false)
-            }
+            AnimatedLeadingIcon(
+                active,
+                onMenuClick = onMenuClick,
+                modifier = Modifier.padding(start = innerStartPadding),
+                onNavigateBackClick = { onActiveChange(false) }
+            )
         },
         trailingIcon = {
-            AnimatedTrailingIcons(
+            AnimatedTrailingIcon(
                 active,
                 query.isEmpty(),
                 onClearClick = { onQueryChange("") },
-                onInfoClick = onInfoClick,
-                onSettingsClick = onSettingsClick,
                 modifier = Modifier.padding(end = innerEndPadding)
             )
         }
     ) {
         val keyboard = LocalSoftwareKeyboardController.current
-        // Without remember this may change quicker than the history itself arrives because VM
-        // debounces the queries
-        val isHistory = remember(results) { query.isEmpty() }
 
-        SearchResults(
-            markersWithTexts = results,
-            isHistory = isHistory,
+        SearchResultsView(
+            results,
             onScroll = { onTop -> keyboard?.apply { if (onTop) show() else hide() } },
             onResultClick = {
                 onActiveChange(false)
@@ -167,14 +170,15 @@ fun MapSearchBar(
 private fun AnimatedLeadingIcon(
     searchBarActive: Boolean,
     modifier: Modifier = Modifier,
+    onMenuClick: () -> Unit,
     onNavigateBackClick: () -> Unit
 ) {
     AnimatedContent(
         searchBarActive,
         modifier = modifier,
         label = "Map search bar leading icon change"
-    ) { showBackButton ->
-        if (showBackButton) {
+    ) { active ->
+        if (active) {
             IconButton(onClick = onNavigateBackClick) {
                 Icon(
                     Icons.Rounded.ArrowBack,
@@ -182,24 +186,21 @@ private fun AnimatedLeadingIcon(
                 )
             }
         } else {
-            Icon(
-                Icons.Rounded.Search,
-                contentDescription = null,
-                // To have the same size as the back button above
-                modifier = Modifier.minimumInteractiveComponentSize()
-            )
+            IconButton(onClick = onMenuClick) {
+                Icon(
+                    Icons.Rounded.Menu,
+                    contentDescription = stringResource(R.string.label_open_main_menu)
+                )
+            }
         }
     }
 }
 
 @Composable
-@Suppress("LongParameterList") // Considered OK for composables
-private fun AnimatedTrailingIcons(
+private fun AnimatedTrailingIcon(
     searchBarActive: Boolean,
     queryEmpty: Boolean,
     onClearClick: () -> Unit,
-    onInfoClick: () -> Unit,
-    onSettingsClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
     AnimatedContent(
@@ -208,32 +209,17 @@ private fun AnimatedTrailingIcons(
         transitionSpec = { fadeIn() togetherWith fadeOut() },
         label = "Map search bar trailing icon change"
     ) { (active, emptyQuery) ->
-        if (active) {
-            if (emptyQuery) {
-                Spacer(modifier = Modifier.minimumInteractiveComponentSize())
-            } else {
-                IconButton(onClick = onClearClick) {
-                    Icon(
-                        Icons.Rounded.Clear,
-                        contentDescription = stringResource(R.string.label_clear_text_field)
-                    )
-                }
-            }
+        if (!active) {
+            return@AnimatedContent
+        }
+        if (emptyQuery) {
+            Spacer(modifier = Modifier.minimumInteractiveComponentSize())
         } else {
-            Row {
-                IconButton(onClick = onInfoClick) {
-                    Icon(
-                        Icons.Rounded.Info,
-                        contentDescription = stringResource(R.string.label_open_map_info)
-                    )
-                }
-
-                IconButton(onClick = onSettingsClick) {
-                    Icon(
-                        Icons.Rounded.Settings,
-                        contentDescription = stringResource(R.string.label_open_settings)
-                    )
-                }
+            IconButton(onClick = onClearClick) {
+                Icon(
+                    Icons.Rounded.Clear,
+                    contentDescription = stringResource(R.string.label_clear_text_field)
+                )
             }
         }
     }

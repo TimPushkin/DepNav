@@ -35,15 +35,18 @@ import androidx.compose.material3.Switch
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalViewConfiguration
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.semantics.Role
 import androidx.compose.ui.unit.dp
+import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import ru.spbu.depnav.R
+import ru.spbu.depnav.data.preferences.PreferencesManager
+import ru.spbu.depnav.data.preferences.ThemeMode
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-import ru.spbu.depnav.utils.preferences.PreferencesManager
 
 private val HORIZONTAL_PADDING = 8.dp
 private val ADDITIONAL_START_PADDING = 4.dp
@@ -70,19 +73,21 @@ fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
                 item { GroupTitle(stringResource(R.string.theme)) }
 
                 item {
+                    val themeMode by prefs.themeModeFlow.collectAsStateWithLifecycle()
+
                     RadioOption(
                         options = listOf(
                             R.string.light_theme,
                             R.string.dark_theme,
                             R.string.system_theme
                         ).map { id -> StringWithId(stringResource(id), id) },
-                        selected = prefs.themeMode.titleId.let { id ->
+                        selected = themeMode.titleId.let { id ->
                             StringWithId(stringResource(id), id)
                         },
                         onSelected = { (_, id) ->
-                            val selectedMode = PreferencesManager.ThemeMode.fromTitleId(id)
+                            val selectedMode = ThemeMode.fromTitleId(id)
                             checkNotNull(selectedMode) { "Unknown theme mode selected (id $id)" }
-                            prefs.themeMode = selectedMode
+                            prefs.updateThemeMode(selectedMode)
                         }
                     )
                 }
@@ -90,10 +95,11 @@ fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
                 item { GroupTitle(stringResource(R.string.map)) }
 
                 item {
+                    val enableRotation by prefs.enableRotationFlow.collectAsStateWithLifecycle()
                     SwitchOption(
                         title = stringResource(R.string.rotation_gesture),
-                        checked = prefs.enableRotation,
-                        onChecked = prefs::enableRotation::set
+                        checked = enableRotation,
+                        onChecked = prefs::updateEnableRotation
                     )
                 }
             }

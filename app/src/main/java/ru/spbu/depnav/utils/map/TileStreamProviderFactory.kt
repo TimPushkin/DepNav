@@ -23,29 +23,57 @@ import android.content.res.AssetManager
 import android.util.Log
 import dagger.hilt.android.qualifiers.ApplicationContext
 import dagger.hilt.android.scopes.ViewModelScoped
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.async
+import kotlinx.coroutines.withContext
 import ovh.plrapps.mapcompose.core.TileStreamProvider
 import javax.inject.Inject
 
-private const val TAG = "TileStreamProviderFactory"
+private const val TAG = "TileStreamProvider"
 
 /** Factory for creating [TileStreamProviders][TileStreamProvider] for tiles from a certain path. */
 @ViewModelScoped
 class TileStreamProviderFactory(
     private val assets: AssetManager,
     private val tilesPath: String = "tiles",
-    private val floorPrefix: String = "floor"
+    private val floorPrefix: String = "floor",
+    private val tileExt: String = "webp"
 ) {
     @Inject
     constructor(@ApplicationContext context: Context) : this(context.assets)
 
-    /** Returns a [TileStreamProvider] for the specified floor and theme. */
-    fun makeTileStreamProvider(mapName: String, floor: Int) = TileStreamProvider { row, col, lvl ->
-        val path = "$tilesPath/$mapName/$floorPrefix$floor/$lvl/${row}_$col.png"
+    /** Returns a [TileStreamProvider] for the specified map floor. */
+    suspend fun makeTileStreamProvider(mapName: String, floor: Int): TileStreamProvider {
+        val tileExistenceMap = withContext(Dispatchers.IO) {
+            async { buildTileExistenceMap(mapName, floor) }
+        }
+        return TileStreamProvider { row, col, lvl ->
+            if (tileExistenceMap.await()[Triple(lvl, row, col)] == true) {
+                Log.v(TAG, "Opening tile $lvl/$row/$col")
+                assets.open("$tilesPath/$mapName/$floorPrefix$floor/$lvl/$row/$col.$tileExt")
+            } else {
+                Log.v(TAG, "Omitting tile $lvl/$row/$col")
+                null
+            }
+        }
+    }
 
-        runCatching {
-            assets.open(path)
-        }.onFailure {
-            Log.e(TAG, "Failed to load a tile from $path", it)
-        }.getOrNull()
+    private fun buildTileExistenceMap(
+        mapName: String,
+        floor: Int
+    ): Map<Triple<Int, Int, Int>, Boolean> {
+        val tileExistenceMap = mutableMapOf<Triple<Int, Int, Int>, Boolean>()
+        val floorDir = "$tilesPath/$mapName/$floorPrefix$floor"
+        assets.list(floorDir)?.forEach { lvlDir ->
+            val lvl = lvlDir.toInt()
+            assets.list("$floorDir/$lvlDir")?.forEach { rowDir ->
+                val row = rowDir.toInt()
+                assets.list("$floorDir/$lvlDir/$rowDir")?.forEach { tile ->
+                    val col = tile.removeSuffix(".$tileExt").toInt()
+                    tileExistenceMap[Triple(lvl, row, col)] = true
+                }
+            }
+        }
+        return tileExistenceMap
     }
 }

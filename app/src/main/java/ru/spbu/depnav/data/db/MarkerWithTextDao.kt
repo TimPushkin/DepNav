@@ -20,71 +20,72 @@ package ru.spbu.depnav.data.db
 
 import androidx.room.Dao
 import androidx.room.Query
+import ru.spbu.depnav.data.composite.MarkerTextMatch
+import ru.spbu.depnav.data.model.Language
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.data.model.MarkerText
-import ru.spbu.depnav.data.model.MarkerTextWithMatchInfo
 
-/** DAO for the tables containing the available [Marker] and [MarkerText] entries. */
+/** DAO for [Marker] and [MarkerText] tables. */
 @Dao
 interface MarkerWithTextDao {
     /**
-     * Returns [Marker] entries with the provided ID and the corresponding [MarkerText] entries on
-     * the specified language.
-     */
-    @Query(
-        """
-            SELECT *
-            FROM marker
-            JOIN marker_text ON marker.id = marker_text.marker_id
-            WHERE marker.id = :id
-                AND marker_text.language_id = :language
-        """
-    )
-    suspend fun loadById(id: Int, language: MarkerText.LanguageId): Map<Marker, List<MarkerText>>
-
-    /**
-     * Returns [Marker] entries from the specified map and floor with the corresponding [MarkerText]
-     * entries on the requested language.
+     * Returns [Marker]s with the provided ID and the corresponding [MarkerText]s on the specified
+     * language.
      */
     @Query(
         """
             SELECT *
             FROM marker
                 JOIN marker_text ON marker.id = marker_text.marker_id
-            WHERE marker.map_name = :mapName
+            WHERE marker.id = :id
+                AND marker_text.language_id = :language
+        """
+    )
+    suspend fun loadById(id: Int, language: Language): Map<Marker, List<MarkerText>>
+
+    /**
+     * Returns [Marker]s from the specified map and floor with the corresponding [MarkerText]son the
+     * specified language.
+     */
+    @Query(
+        """
+            SELECT *
+            FROM marker
+                JOIN marker_text ON marker.id = marker_text.marker_id
+            WHERE marker.map_id = :mapId
                 AND marker.floor = :floor
                 AND marker_text.language_id = :language
         """
     )
     suspend fun loadByFloor(
-        mapName: String,
+        mapId: Int,
         floor: Int,
-        language: MarkerText.LanguageId
+        language: Language
     ): Map<Marker, List<MarkerText>>
 
     /**
-     * Returns [MarkerTextWithMatchInfo] entries from the specified map containing the specified
-     * tokens as a prefix on the specified language with the corresponding [Marker] entry.
+     * Returns [MarkerTextMatch]es from the specified map containing the specified tokens as a
+     * prefix on the specified language with the corresponding [Marker]s.
      */
     @Query(
         """
             SELECT marker_text.*, match_info, marker.*
             FROM (
                 SELECT docid, matchinfo(
-                    marker_text_fts, '${MarkerTextWithMatchInfo.formatString}'
+                    marker_text_fts, '${MarkerTextMatch.FORMAT_STRING}'
                 ) AS match_info
                 FROM marker_text_fts
                 WHERE marker_text_fts MATCH :tokens
             ) AS fts_results
                 JOIN marker_text ON fts_results.docid = marker_text.rowid
                 JOIN marker ON marker_text.marker_id = marker.id
-            WHERE marker.map_name = :mapName
+            WHERE marker.map_id = :mapId
                 AND marker_text.language_id = :language;
         """
     )
     suspend fun loadByTokens(
-        mapName: String,
+        mapId: Int,
         tokens: String,
-        language: MarkerText.LanguageId
-    ): Map<MarkerTextWithMatchInfo, List<Marker>>
+        language: Language
+    ): Map<MarkerTextMatch, List<Marker>>
 }

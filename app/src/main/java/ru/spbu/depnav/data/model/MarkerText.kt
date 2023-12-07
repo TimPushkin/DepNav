@@ -18,7 +18,6 @@
 
 package ru.spbu.depnav.data.model
 
-import androidx.compose.ui.text.intl.Locale
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
@@ -32,6 +31,7 @@ import androidx.room.ForeignKey
             entity = Marker::class,
             parentColumns = ["id"],
             childColumns = ["marker_id"],
+            onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.RESTRICT
         )
     ]
@@ -40,23 +40,11 @@ data class MarkerText(
     /** ID of the [Marker] to which this text relates. */
     @ColumnInfo(name = "marker_id") val markerId: Int,
     /** Language used in this text. */
-    @ColumnInfo(name = "language_id") val languageId: LanguageId,
+    @ColumnInfo(name = "language_id") val languageId: Language,
     /** Title of the [Marker] to which this text relates. */
     val title: String?,
+    /** Name of the location of the [Marker] to which this text relates. */
+    val location: String?,
     /** Description of the [Marker] to which this text relates. */
     val description: String?
-) {
-    /** IDs of the supported languages. */
-    enum class LanguageId {
-        EN, RU;
-
-        companion object {
-            /** Returns the current locale's language, if it is supported, or [EN] otherwise. */
-            @Suppress("UseIfInsteadOfWhen") // Planning to add more languages later
-            fun getCurrent() = when (Locale.current.language) {
-                "ru" -> RU
-                else -> EN
-            }
-        }
-    }
-}
+)

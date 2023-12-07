@@ -85,5 +85,5 @@ private fun getInlineMarkerView(type: Marker.MarkerType) = InlineTextContent(
         PlaceholderVerticalAlign.TextCenter
     )
 ) {
-    MarkerView(title = type.name, type = type, isClosed = false)
+    MarkerView(title = null, type = type)
 }

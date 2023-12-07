@@ -21,6 +21,7 @@ package ru.spbu.depnav.data.model
 import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.ForeignKey
+import androidx.room.Index
 import androidx.room.PrimaryKey
 
 /** Displayable marker. */
@@ -29,22 +30,22 @@ import androidx.room.PrimaryKey
     foreignKeys = [
         ForeignKey(
             entity = MapInfo::class,
-            parentColumns = ["name"],
-            childColumns = ["map_name"],
+            parentColumns = ["id"],
+            childColumns = ["map_id"],
+            onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.RESTRICT
         )
-    ]
+    ],
+    indices = [Index("map_id", "floor")]
 )
 data class Marker(
     /** ID of this marker. */
-    @PrimaryKey val id: Int,
+    @PrimaryKey(autoGenerate = true) val id: Int,
     /** Name of the map to which this marker belongs. */
-    @ColumnInfo(name = "map_name", index = true) val mapName: String,
+    @ColumnInfo(name = "map_id") val mapId: Int,
     /** Type of this marker. */
     val type: MarkerType,
-    /** Whether this marker indicates a closed object. */
-    @ColumnInfo(name = "is_closed") val isClosed: Boolean,
-    /** Numbers of the floor on which this marker is placed. */
+    /** Number of the floor on which this marker is placed. */
     val floor: Int,
     /** X coordinate of this marker. */
     val x: Double,

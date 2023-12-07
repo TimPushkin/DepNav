@@ -21,17 +21,17 @@ package ru.spbu.depnav.ui.component
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
-import androidx.compose.foundation.layout.padding
-import androidx.compose.material3.LocalContentColor
-import androidx.compose.material3.LocalTextStyle
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.compose.ui.text.SpanStyle
+import androidx.compose.ui.text.buildAnnotatedString
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.withStyle
 import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
 import ru.spbu.depnav.data.model.Marker
@@ -42,8 +42,8 @@ import ru.spbu.depnav.ui.theme.DepNavTheme
 @Composable
 fun MarkerInfoLines(
     title: String,
+    location: String?,
     description: String?,
-    isClosed: Boolean,
     modifier: Modifier = Modifier,
     icon: @Composable () -> Unit
 ) {
@@ -55,32 +55,17 @@ fun MarkerInfoLines(
         icon()
 
         Column(verticalArrangement = Arrangement.spacedBy(DEFAULT_PADDING / 2)) {
-            CompositionLocalProvider(LocalTextStyle provides MaterialTheme.typography.titleLarge) {
-                Row(verticalAlignment = Alignment.CenterVertically) {
-                    Text(
-                        text = title.ifBlank { stringResource(R.string.no_title) },
-                        modifier = Modifier.weight(1f, fill = false)
-                    )
-
-                    if (isClosed) {
-                        CompositionLocalProvider(
-                            LocalContentColor provides MaterialTheme.colorScheme.onSurfaceVariant
-                        ) {
-                            Text(
-                                text = "•",
-                                modifier = Modifier.padding(horizontal = DEFAULT_PADDING),
-                                fontWeight = FontWeight.Light,
-                            )
-
-                            Text(
-                                text = stringResource(R.string.closed),
-                                fontWeight = FontWeight.Light,
-                                maxLines = 1
-                            )
-                        }
+            Text(
+                buildAnnotatedString {
+                    if (!location.isNullOrBlank()) {
+                        append("$location › ")
                     }
-                }
-            }
+                    withStyle(SpanStyle(fontWeight = FontWeight.Bold)) {
+                        append(title.ifBlank { stringResource(R.string.no_title) })
+                    }
+                },
+                style = MaterialTheme.typography.titleLarge
+            )
 
             if (!description.isNullOrBlank()) {
                 Text(
@@ -97,18 +82,19 @@ fun MarkerInfoLines(
 @Suppress("UnusedPrivateMember")
 private fun MarkerInfoShortPreview() {
     DepNavTheme {
-        Column {
-            MarkerInfoLines(
-                title = "Some title",
-                isClosed = true,
-                description = "Some description"
-            ) {
-                MarkerView(
-                    title = "Some title 1",
-                    type = Marker.MarkerType.ROOM,
-                    isClosed = false,
-                    simplified = true
-                )
+        Surface {
+            Column {
+                MarkerInfoLines(
+                    title = "Some title",
+                    location = "Location",
+                    description = "Some description"
+                ) {
+                    MarkerView(
+                        title = "Some title 1",
+                        type = Marker.MarkerType.ROOM,
+                        simplified = true
+                    )
+                }
             }
         }
     }
@@ -119,18 +105,19 @@ private fun MarkerInfoShortPreview() {
 @Suppress("UnusedPrivateMember")
 private fun MarkerInfoLongPreview() {
     DepNavTheme {
-        Column {
-            MarkerInfoLines(
-                title = "Some very very very very very very long title",
-                isClosed = true,
-                description = "Some very very very very very very long description"
-            ) {
-                MarkerView(
-                    title = "Some title 2",
-                    type = Marker.MarkerType.ROOM,
-                    isClosed = false,
-                    simplified = true
-                )
+        Surface {
+            Column {
+                MarkerInfoLines(
+                    title = "Some very very very very very very long title",
+                    location = "Some very very very very very very long location",
+                    description = "Some very very very very very very long description"
+                ) {
+                    MarkerView(
+                        title = "Some title 2",
+                        type = Marker.MarkerType.ROOM,
+                        simplified = true
+                    )
+                }
             }
         }
     }

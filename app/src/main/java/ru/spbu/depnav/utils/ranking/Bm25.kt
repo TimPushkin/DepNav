@@ -28,7 +28,7 @@ class Bm25(
      *
      * Should be in `[0, 1]`. The default value of `0,75` should be suitable in most cases.
      */
-    var b: Double = 0.75,
+    val b: Double = 0.75,
     /**
      * A free BM25 parameter which controls term frequency saturation. The lower `k1` is, the
      * quicker the number of occurrences of a word in a document stops having a noticeable effect.

@@ -96,6 +96,9 @@ private val DarkColorScheme = darkColorScheme(
 /** Padding applied where elements need to be spaced out by default. */
 val DEFAULT_PADDING = 16.dp
 
+/** Alpha value applied to disabled elements. */
+const val DISABLED_ALPHA = 0.38f
+
 /** Theme of the application. */
 @Composable
 fun DepNavTheme(

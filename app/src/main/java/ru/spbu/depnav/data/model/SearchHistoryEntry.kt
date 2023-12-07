@@ -31,6 +31,7 @@ import androidx.room.PrimaryKey
             entity = Marker::class,
             parentColumns = ["id"],
             childColumns = ["marker_id"],
+            onUpdate = ForeignKey.CASCADE,
             onDelete = ForeignKey.RESTRICT
         )
     ]

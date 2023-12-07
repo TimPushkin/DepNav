@@ -22,7 +22,7 @@ import ru.spbu.depnav.data.db.SearchHistoryDao
 import ru.spbu.depnav.data.model.SearchHistoryEntry
 import javax.inject.Inject
 
-/** Repository for [SearchHistoryEntry] objects. */
+/** Repository for [SearchHistoryEntry]s. */
 class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
     /**
      * Saves the provided entry and deletes the oldest ones if needed so that [maxEntriesNum] is not
@@ -35,6 +35,6 @@ class SearchHistoryRepo @Inject constructor(private val dao: SearchHistoryDao) {
     suspend fun insertNotExceeding(entry: SearchHistoryEntry, maxEntriesNum: Int) =
         dao.insertNotExceeding(entry, maxEntriesNum)
 
-    /** Loads the current entries for the specified map sorted by timestamps (older first). */
-    suspend fun loadByMap(mapName: String) = dao.loadByMap(mapName)
+    /** Loads the current entries for the specified map sorted by timestamps (oldest first). */
+    suspend fun loadByMap(mapId: Int) = dao.loadByMap(mapId)
 }
