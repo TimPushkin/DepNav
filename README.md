@@ -11,6 +11,7 @@ specific rooms on them.
 The following maps are available:
 
 - Mathematics and Mechanics Faculty, St. Petersburg State University
+- Faculty of Physics, St. Petersburg State University
 
 | [<img src="https://play.google.com/intl/en_us/badges/static/images/badges/en_badge_web_generic.png" alt="Get it on Google Play" height="80" />](https://play.google.com/store/apps/details?id=ru.spbu.depnav&utm_source=https%3A%2F%2Fgithub.com%2FTimPushkin%2FDepNav&pcampaignid=pcampaignidMKT-Other-global-all-co-prtnr-py-PartBadge-Mar2515-1) | [<img src="https://i.imgur.com/g5WjbFC.png" alt="AppGallery" height="80" />](https://appgallery.cloud.huawei.com/ag/n/app/C106717783?channelId=GitHub+repository&id=05d3f9cea9c44d829cd43b9f79593c88&s=A358D75497B3480E158A47713DE08E03B4047FD6FD5F2DA45C7AF9D9B5410F64&detailType=0&v=&callType=AGDLINK&installType=0000) |
 |:---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|:--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------:|
@@ -20,11 +21,11 @@ The following maps are available:
 With **DepNav** you can do the following:
 
 - **View** the available maps by floors
-- **Search** for specific rooms and other objects on the selected map with built-in search
+- **Search** for specific rooms and other objects on the selected map with the built-in search
 - Enjoy Material UI 3 in selectable light and dark themes
 - Two languages available: English and Russian
 
-| ![Map](https://i.imgur.com/1qjld38.png) | ![Search](https://i.imgur.com/cE3RtaA.png) | ![Info](https://i.imgur.com/Hcis0w0.png) |
+| ![Map](https://i.imgur.com/Tyn21xJ.png) | ![Search](https://i.imgur.com/4XGDlQH.png) | ![Info](https://i.imgur.com/35E5mkG.png) |
 |:---------------------------------------:|:------------------------------------------:|:----------------------------------------:|
 
 ## Get it!
