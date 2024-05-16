@@ -1,20 +1,28 @@
 {
-  "$schema": "http://json-schema.org/draft-04/schema#",
+  "$schema": "https://json-schema.org/draft-07/schema#",
+  "title": "Map description for DepNav",
+  "description": "Provides information on how to visualize a map and its markers in the app",
   "type": "object",
   "properties": {
     "id": {
+      "description": "Identifier of the map, must be unique among identifiers of all other maps available in the app",
       "type": "integer"
     },
     "internalName": {
-      "type": "string"
+      "description": "Name of the map not visible to app's users, it is the one used in assets and resources",
+      "type": "string",
+      "minLength": 1
     },
     "title": {
+      "description": "Name of the map that is visible to app's users",
       "type": "object",
       "properties": {
         "ru": {
+          "description": "Name in Russian",
           "type": "string"
         },
         "en": {
+          "description": "Name in English",
           "type": "string"
         }
       },
@@ -24,31 +32,44 @@
       ]
     },
     "floorWidth": {
-      "type": "integer"
+      "description": "Pixel width of map's floors (on the most detailed zoom level)",
+      "type": "integer",
+      "minimum": 1
     },
     "floorHeight": {
-      "type": "integer"
+      "description": "Pixel height of map's floors (on the most detailed zoom level)",
+      "type": "integer",
+      "minimum": 1
     },
     "tileSize": {
-      "type": "integer"
+      "description": "Pixel size of tiles' sides, e.g. if the tiles are 256x256 this should be 256",
+      "type": "integer",
+      "minimum": 1
     },
     "zoomLevelsNum": {
-      "type": "integer"
+      "description": "Number of zoom levels of map's floors",
+      "type": "integer",
+      "minimum": 1
     },
     "floors": {
+      "description": "Map's floors",
       "type": "array",
       "items": {
         "type": "object",
         "properties": {
           "floor": {
-            "type": "integer"
+            "description": "This floor's number",
+            "type": "integer",
+            "minimum": 1
           },
           "markers": {
+            "description": "Points of interest located on this floor",
             "type": "array",
             "items": {
               "type": "object",
               "properties": {
                 "type": {
+                  "description": "Type of the marker",
                   "type": "string",
                   "enum": [
                     "ENTRANCE",
@@ -64,27 +85,35 @@
                   ]
                 },
                 "x": {
-                  "type": "integer"
+                  "description": "Horizontal pixel coordinate starting from the left",
+                  "type": "integer",
+                  "minimum": 0
                 },
                 "y": {
-                  "type": "integer"
+                  "description": "Vertical pixel coordinate starting from the top",
+                  "type": "integer",
+                  "minimum": 0
                 },
                 "ru": {
+                  "description": "User-visible information about the marker in Russian",
                   "type": "object",
                   "properties": {
                     "title": {
+                      "description": "Name of the marker",
                       "type": [
                         "string",
                         "null"
                       ]
                     },
                     "location": {
+                      "description": "Name of marker's location",
                       "type": [
                         "string",
                         "null"
                       ]
                     },
                     "description": {
+                      "description": "Marker's description",
                       "type": [
                         "string",
                         "null"
@@ -98,21 +127,25 @@
                   ]
                 },
                 "en": {
+                  "description": "User-visible information about the marker in English",
                   "type": "object",
                   "properties": {
                     "title": {
+                      "description": "Name of the marker",
                       "type": [
                         "string",
                         "null"
                       ]
                     },
                     "location": {
+                      "description": "Name of marker's location",
                       "type": [
                         "string",
                         "null"
                       ]
                     },
                     "description": {
+                      "description": "Marker's description",
                       "type": [
                         "string",
                         "null"

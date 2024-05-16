@@ -20,32 +20,44 @@ import sqlite3
 from argparse import ArgumentParser
 from enum import Enum
 
-# This script adds the contents of the specified map info json file corresponding to
-# 'map-info-schema.json' into the specified SQLite database.
-# Json is expected to have absolute coordinates, while the database will have them normalized.
-# Coordinates start from top left corner of an image.
-#
-# - Prerequisites: json file corresponding to 'map-info-schema.json'.
-# - Result: database file with the contents of the json file.
-
 
 class LID(Enum):
     EN = 0
     RU = 1
 
 
-parser = ArgumentParser()
-parser.add_argument("json_file", type=pathlib.Path, help="path to the json file")
+parser = ArgumentParser(
+    description="Adds the contents of the specified JSON file (must follow map info schema) into "
+                "the specified SQLite database",
+)
 parser.add_argument(
-    "-d", "--db_file", type=pathlib.Path, default="maps.db", help="path to the database file"
+    "json",
+    type=pathlib.Path,
+    help="path to the JSON file to read",
+)
+parser.add_argument(
+    "--db",
+    type=pathlib.Path,
+    default="maps.db",
+    help="path to the database to fill, will be created if does not exist",
+)
+parser.add_argument(
+    "--db-version",
+    type=int,
+    help="if specified, database version will be set to this value",
 )
 args = parser.parse_args()
+if not args.db.exists() and args.db_version is None:
+    parser.error(
+        f"database file {str(args.db)} does not exist and will be created from scratch — "
+        "a database version must be specified in this case"
+    )
 
-db = sqlite3.connect(str(args.db_file))
+db = sqlite3.connect(str(args.db))
 cur = db.cursor()
 
-db_version = 9  # Database version that this script supports
-cur.execute(f"PRAGMA user_version = {db_version}")
+if args.db_version is not None:
+    cur.execute(f"PRAGMA user_version = {args.db_version}")
 
 cur.executescript(
     """
@@ -126,7 +138,7 @@ cur.executescript(
     """
 )
 
-m = json.load(open(args.json_file, encoding="utf8"))
+m = json.load(open(args.json, encoding="utf8"))
 
 floor_width = m["floorWidth"]
 floor_height = m["floorHeight"]

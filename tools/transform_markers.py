@@ -24,23 +24,26 @@ from argparse import ArgumentParser
 # - Result: the file is changed by applying the transformation.
 
 
-parser = ArgumentParser()
-parser.add_argument("json_file", type=str, help="path to the json file")
+parser = ArgumentParser(
+    description="Applies a linear transformation to marker coordinates in the specified JSON file "
+                "(must follow map info schema)",
+)
+parser.add_argument("json", type=str, help="path to the json file")
 parser.add_argument(
-    "x_multiplier", type=float, help="number on which x coordinate will be multiplied"
+    "x_multiplier", type=float, help="number on which x coordinates will be multiplied"
 )
 parser.add_argument(
-    "y_multiplier", type=float, help="number on which y coordinate will be multiplied"
+    "y_multiplier", type=float, help="number on which y coordinates will be multiplied"
 )
 parser.add_argument(
-    "x_shift", type=int, help="number which will be added to x coordinate"
+    "x_shift", type=int, help="number which will be added to x coordinates"
 )
 parser.add_argument(
-    "y_shift", type=int, help="number which will be added to y coordinate"
+    "y_shift", type=int, help="number which will be added to y coordinates"
 )
 args = parser.parse_args()
 
-with open(args.json_file, "r+", encoding="utf8") as f:
+with open(args.json, "r+", encoding="utf8") as f:
     jf = json.load(f)
 
     for floor_obj in jf["floors"]:
