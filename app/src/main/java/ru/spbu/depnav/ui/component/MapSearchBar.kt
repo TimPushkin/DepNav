@@ -33,7 +33,7 @@ import androidx.compose.foundation.layout.calculateEndPadding
 import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
@@ -95,7 +95,7 @@ fun MapSearchBar(
         label = "Map search bar activation animation progress"
     )
 
-    val (insetsStartPadding, insetsEndPadding) = with(WindowInsets.systemBars.asPaddingValues()) {
+    val (insetsStartPadding, insetsEndPadding) = with(WindowInsets.safeDrawing.asPaddingValues()) {
         val layoutDirection = LocalLayoutDirection.current
         calculateStartPadding(layoutDirection) to calculateEndPadding(layoutDirection)
     }
@@ -116,7 +116,7 @@ fun MapSearchBar(
         modifier = Modifier
             .run {
                 if (active) padding(start = outerStartPadding, end = outerEndPadding)
-                else windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+                else windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal))
             }
             .then(modifier),
         placeholder = {
@@ -157,7 +157,7 @@ fun MapSearchBar(
                 .padding(
                     start = innerStartPadding,
                     end = innerEndPadding,
-                    bottom = WindowInsets.systemBars
+                    bottom = WindowInsets.safeDrawing
                         .asPaddingValues()
                         .calculateBottomPadding()
                 )
