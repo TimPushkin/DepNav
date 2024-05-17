@@ -36,8 +36,8 @@ import androidx.compose.foundation.layout.exclude
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeContentPadding
-import androidx.compose.foundation.layout.systemBars
+import androidx.compose.foundation.layout.safeDrawing
+import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
@@ -268,7 +268,7 @@ private fun BoxScope.AnimatedFloorSwitch(
         visible = visible,
         modifier = Modifier
             .align(Alignment.TopEnd)
-            .safeContentPadding()
+            .safeDrawingPadding()
             .padding(top = 64.dp) // Estimated search bar height
             .padding(DEFAULT_PADDING),
         enter = slideInHorizontally(initialOffsetX = horizontalOffset) + fadeIn(),
@@ -293,7 +293,7 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
     ) {
         Surface(
             modifier = Modifier
-                .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Horizontal))
+                .windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal))
                 .width(640.dp),
             shape = MaterialTheme.shapes.large.copy(
                 bottomStart = CornerSize(0),
@@ -320,7 +320,9 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
                     description = markerText.description,
                     modifier = Modifier
                         .padding(DEFAULT_PADDING)
-                        .windowInsetsPadding(WindowInsets.systemBars.only(WindowInsetsSides.Bottom))
+                        .windowInsetsPadding(
+                            WindowInsets.safeDrawing.only(WindowInsetsSides.Bottom)
+                        )
                 ) {
                     MarkerView(
                         title = markerText.title ?: stringResource(R.string.no_title),
@@ -337,7 +339,7 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
         modifier = Modifier
             .align(Alignment.BottomCenter)
             .windowInsetsPadding(
-                WindowInsets.systemBars.run { exclude(only(WindowInsetsSides.Top)) }
+                WindowInsets.safeDrawing.run { exclude(only(WindowInsetsSides.Top)) }
             ),
         enter = fadeIn(),
         exit = fadeOut()
