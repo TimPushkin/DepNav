@@ -25,6 +25,7 @@ import androidx.activity.SystemBarStyle
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
 import androidx.compose.foundation.isSystemInDarkTheme
+import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
@@ -46,19 +47,27 @@ class MainActivity : ComponentActivity() {
         super.onCreate(savedInstanceState)
 
         setContent {
-            val themeMode by prefs.themeModeFlow.collectAsStateWithLifecycle()
-            val darkTheme = when (themeMode) {
-                ThemeMode.LIGHT -> false
-                ThemeMode.DARK -> true
-                ThemeMode.SYSTEM -> isSystemInDarkTheme()
-            }
+            CompositionLocalProvider(
+                // Fix for https://issuetracker.google.com/issues/336842920 -- should be removed as
+                // soon as Compose UI 1.7.0 becomes stable
+                androidx.lifecycle.compose.LocalLifecycleOwner provides
+                    androidx.compose.ui.platform.LocalLifecycleOwner.current
+            ) {
+                val themeMode by prefs.themeModeFlow.collectAsStateWithLifecycle()
+                val darkTheme = when (themeMode) {
+                    ThemeMode.LIGHT -> false
+                    ThemeMode.DARK -> true
+                    ThemeMode.SYSTEM -> isSystemInDarkTheme()
+                }
 
-            LaunchedEffect(darkTheme) {
-                val style = SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { darkTheme }
-                enableEdgeToEdge(style, style)
-            }
+                LaunchedEffect(darkTheme) {
+                    val style =
+                        SystemBarStyle.auto(Color.TRANSPARENT, Color.TRANSPARENT) { darkTheme }
+                    enableEdgeToEdge(style, style)
+                }
 
-            DepNavTheme(darkTheme = darkTheme) { MapScreen(prefs) }
+                DepNavTheme(darkTheme = darkTheme) { MapScreen(prefs) }
+            }
         }
     }
 }

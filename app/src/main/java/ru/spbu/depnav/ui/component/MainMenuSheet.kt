@@ -28,7 +28,7 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Info
 import androidx.compose.material.icons.rounded.Settings
-import androidx.compose.material3.Divider
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalDrawerSheet
@@ -65,7 +65,7 @@ fun MainMenuSheet(
 
         MapItems(selectedMapId, availableMaps, onMapSelected)
 
-        Divider(
+        HorizontalDivider(
             modifier = Modifier.padding(
                 horizontal = ITEM_HORIZONTAL_PADDING,
                 vertical = DIVIDER_VERTICAL_PADDING
