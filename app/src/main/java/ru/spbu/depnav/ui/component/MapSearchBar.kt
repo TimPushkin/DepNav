@@ -42,7 +42,9 @@ import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
+import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
 import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
@@ -55,6 +57,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
 import ru.spbu.depnav.ui.viewmodel.SearchResults
 
 // These are basically copied from SearchBar implementation
@@ -107,6 +110,9 @@ fun MapSearchBar(
 
     val focusManager = LocalFocusManager.current
 
+    val containerColorAlpha =
+        ON_MAP_SURFACE_ALPHA + (1 - ON_MAP_SURFACE_ALPHA) * activationAnimationProgress
+
     SearchBar(
         query = query,
         onQueryChange = onQueryChange,
@@ -141,7 +147,12 @@ fun MapSearchBar(
                 onClearClick = { onQueryChange("") },
                 modifier = Modifier.padding(end = innerEndPadding)
             )
-        }
+        },
+        colors = SearchBarDefaults.colors(
+            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
+                alpha = containerColorAlpha
+            )
+        )
     ) {
         val keyboard = LocalSoftwareKeyboardController.current
 
