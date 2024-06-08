@@ -95,14 +95,29 @@ fun MapState.rectangularVisibleArea(
 }
 
 /**
+ * Centroid of the area.
+ */
+fun VisibleArea.centroid() = Point((p1x + p3x) / 2, (p1y + p3y) / 2)
+
+/**
  * Top border of the area.
  */
 fun VisibleArea.top() = LineSegment(Point(p1x, p1y), Point(p2x, p2y))
 
 /**
+ * Bottom border of the area.
+ */
+fun VisibleArea.bottom() = LineSegment(Point(p4x, p4y), Point(p3x, p3y))
+
+/**
  * Left border of the area.
  */
 fun VisibleArea.left() = LineSegment(Point(p1x, p1y), Point(p4x, p4y))
+
+/**
+ * Right border of the area.
+ */
+fun VisibleArea.right() = LineSegment(Point(p2x, p2y), Point(p3x, p3y))
 
 /**
  * Returns true if the provided point lies inside this area, or false otherwise.

@@ -40,10 +40,27 @@ data class LineSegment(val p1: Point, val p2: Point) {
     fun containsProjectionOf(p: Point) = fractionOfProjectionOf(p) in 0f..1f
 
     /**
-     * Returns the fraction from the start of this segment to its point that is the closest to the
-     * specified point.
+     * Returns the fraction from the start of this segment to its intersection point with the other
+     * segment if such point exists, or null otherwise.
      */
-    fun fractionOfClosestPointTo(p: Point) = fractionOfProjectionOf(p).coerceIn(0f, 1f)
+    fun fractionOfIntersectionWith(l: LineSegment): Float? {
+        // See https://en.wikipedia.org/wiki/Line%E2%80%93line_intersection#Given_two_points_on_each_line_segment
+        val denominator = (p1.x - p2.x) * (l.p1.y - l.p2.y) - (p1.y - p2.y) * (l.p1.x - l.p2.x)
+
+        val numerator1 = (p1.x - l.p1.x) * (l.p1.y - l.p2.y) - (p1.y - l.p1.y) * (l.p1.x - l.p2.x)
+        val t1 = numerator1 / denominator
+        if (t1 < 0 || t1 > 1) {
+            return null
+        }
+
+        val numerator2 = (p1.x - p2.x) * (p1.y - l.p1.y) - (p1.y - p2.y) * (p1.x - l.p1.x)
+        val t2 = -(numerator2 / denominator)
+        if (t2 < 0 || t2 > 1) {
+            return null
+        }
+
+        return t1.toFloat()
+    }
 
     private fun fractionOfProjectionOf(p: Point): Float {
         val vecP1ToP2 = Point(p2.x - p1.x, p2.y - p1.y)

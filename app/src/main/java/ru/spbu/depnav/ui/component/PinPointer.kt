@@ -47,9 +47,12 @@ import ovh.plrapps.mapcompose.utils.AngleDegree
 import ovh.plrapps.mapcompose.utils.Point
 import ru.spbu.depnav.data.model.Marker
 import ru.spbu.depnav.utils.map.LineSegment
+import ru.spbu.depnav.utils.map.bottom
+import ru.spbu.depnav.utils.map.centroid
 import ru.spbu.depnav.utils.map.contains
 import ru.spbu.depnav.utils.map.left
 import ru.spbu.depnav.utils.map.rectangularVisibleArea
+import ru.spbu.depnav.utils.map.right
 import ru.spbu.depnav.utils.map.rotation
 import ru.spbu.depnav.utils.map.top
 
@@ -153,51 +156,22 @@ private data class PinPointerPose(
     }
 }
 
-private const val EPSILON = 1e-5f
-
 private fun calculatePointerPose(visibleArea: VisibleArea, pin: Point): PinPointerPose {
-    val topBorder = visibleArea.top()
-    val leftBorder = visibleArea.left()
+    val centroidPinSegment = LineSegment(visibleArea.centroid(), pin)
+    val direction = centroidPinSegment.slope() - 90
 
-    val horizontalFraction = topBorder.fractionOfClosestPointTo(pin)
-    val verticalFraction = leftBorder.fractionOfClosestPointTo(pin)
-
-    return when {
-        // Corners
-        horizontalFraction < EPSILON && verticalFraction < EPSILON -> {
-            val direction = LineSegment(topBorder.p1, pin).slope() - 90
-            PinPointerPose(PinPointerPose.Side.TOP, 0f, direction)
-        }
-        horizontalFraction > 1f - EPSILON && verticalFraction < EPSILON -> {
-            val direction = LineSegment(topBorder.p2, pin).slope() - 90
-            PinPointerPose(PinPointerPose.Side.TOP, 1f, direction)
-        }
-        horizontalFraction < EPSILON && verticalFraction > 1f - EPSILON -> {
-            val direction = LineSegment(leftBorder.p2, pin).slope() - 90
-            PinPointerPose(PinPointerPose.Side.BOTTOM, 0f, direction)
-        }
-        horizontalFraction > 1f - EPSILON && verticalFraction > 1f - EPSILON -> {
-            val direction = LineSegment(with(visibleArea) { Point(p3x, p3y) }, pin).slope() - 90
-            PinPointerPose(PinPointerPose.Side.BOTTOM, 1f, direction)
-        }
-        // Sides
-        horizontalFraction < EPSILON -> {
-            val direction = (topBorder.slope() - 180) - 90
-            PinPointerPose(PinPointerPose.Side.LEFT, verticalFraction, direction)
-        }
-        horizontalFraction > 1f - EPSILON -> {
-            val direction = topBorder.slope() - 90
-            PinPointerPose(PinPointerPose.Side.RIGHT, verticalFraction, direction)
-        }
-        verticalFraction < EPSILON -> {
-            val direction = (leftBorder.slope() - 180) - 90
-            PinPointerPose(PinPointerPose.Side.TOP, horizontalFraction, direction)
-        }
-        verticalFraction > 1f - EPSILON -> {
-            val direction = leftBorder.slope() - 90
-            PinPointerPose(PinPointerPose.Side.BOTTOM, horizontalFraction, direction)
-        }
-        // Pin is inside the area
-        else -> throw IllegalArgumentException("Pin lies inside the visible area")
+    visibleArea.top().fractionOfIntersectionWith(centroidPinSegment)?.let { fraction ->
+        return PinPointerPose(PinPointerPose.Side.TOP, fraction, direction)
     }
+    visibleArea.right().fractionOfIntersectionWith(centroidPinSegment)?.let { fraction ->
+        return PinPointerPose(PinPointerPose.Side.RIGHT, fraction, direction)
+    }
+    visibleArea.bottom().fractionOfIntersectionWith(centroidPinSegment)?.let { fraction ->
+        return PinPointerPose(PinPointerPose.Side.BOTTOM, fraction, direction)
+    }
+    visibleArea.left().fractionOfIntersectionWith(centroidPinSegment)?.let { fraction ->
+        return PinPointerPose(PinPointerPose.Side.LEFT, fraction, direction)
+    }
+
+    throw IllegalArgumentException("Pin lies inside the visible area")
 }
