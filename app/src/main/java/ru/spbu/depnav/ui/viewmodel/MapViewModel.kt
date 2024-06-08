@@ -277,7 +277,6 @@ class MapViewModel @Inject constructor(
             y = marker.y,
             zIndex = 1f,
             clickable = false,
-            relativeOffset = Offset(-0.5f, -0.5f),
             clipShape = null
         ) { Pin() }
     }

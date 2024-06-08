@@ -79,10 +79,12 @@ import ru.spbu.depnav.ui.component.MainMenuSheet
 import ru.spbu.depnav.ui.component.MapSearchBar
 import ru.spbu.depnav.ui.component.MarkerInfoLines
 import ru.spbu.depnav.ui.component.MarkerView
+import ru.spbu.depnav.ui.component.PinPointer
 import ru.spbu.depnav.ui.component.ZoomInHint
 import ru.spbu.depnav.ui.dialog.MapLegendDialog
 import ru.spbu.depnav.ui.dialog.SettingsDialog
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
+import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
 import ru.spbu.depnav.ui.viewmodel.MapUiState
 import ru.spbu.depnav.ui.viewmodel.MapViewModel
 import ru.spbu.depnav.ui.viewmodel.SearchResults
@@ -178,6 +180,8 @@ private fun OnMapUi(
 ) {
     CompositionLocalProvider(LocalAbsoluteTonalElevation provides 4.dp) {
         Box(modifier = Modifier.fillMaxSize()) {
+            PinPointer(mapUiState.mapState, mapUiState.pinnedMarker?.marker)
+
             AnimatedSearchBar(
                 visible = mapUiState.showOnMapUi,
                 mapTitle = mapUiState.mapTitle,
@@ -298,7 +302,8 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
             shape = MaterialTheme.shapes.large.copy(
                 bottomStart = CornerSize(0),
                 bottomEnd = CornerSize(0)
-            )
+            ),
+            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = ON_MAP_SURFACE_ALPHA)
         ) {
             // Have to remember the latest pinned marker to continue showing it while the exit
             // animation is still in progress

@@ -32,6 +32,7 @@ import androidx.compose.material.icons.rounded.KeyboardArrowDown
 import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
@@ -41,6 +42,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
+import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
 
 private const val MIN_FLOOR = 1
 
@@ -54,7 +56,8 @@ fun FloorSwitch(
 ) {
     Surface(
         modifier = modifier,
-        shape = CircleShape
+        shape = CircleShape,
+        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = ON_MAP_SURFACE_ALPHA)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             IconButton(

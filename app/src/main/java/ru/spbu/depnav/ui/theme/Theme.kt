@@ -99,6 +99,9 @@ val DEFAULT_PADDING = 16.dp
 /** Alpha value applied to disabled elements. */
 const val DISABLED_ALPHA = 0.38f
 
+/** Alpha value applied to surfaces comprising on-map UI. */
+const val ON_MAP_SURFACE_ALPHA = 0.9f
+
 /** Theme of the application. */
 @Composable
 fun DepNavTheme(
