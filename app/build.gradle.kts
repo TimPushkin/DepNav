@@ -3,6 +3,7 @@ import java.util.Properties
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.jetbrains.kotlin.android)
+    alias(libs.plugins.jetbrains.kotlin.plugin.compose)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.google.dagger.hilt.android)
     alias(libs.plugins.google.devtools.ksp)
@@ -26,12 +27,12 @@ kotlin {
 
 android {
     namespace = "ru.spbu.depnav"
-    compileSdk = 34
+    compileSdk = 35
 
     defaultConfig {
         applicationId = "ru.spbu.depnav"
         minSdk = 21
-        targetSdk = 34
+        targetSdk = 35
         versionCode = Version.CODE
         versionName = Version.NAME
 
@@ -66,9 +67,6 @@ android {
 
     buildFeatures {
         compose = true
-    }
-    composeOptions {
-        kotlinCompilerExtensionVersion = libs.versions.composeCompiler.get()
     }
     packaging {
         resources {
