@@ -12,7 +12,7 @@ plugins {
 object Version {
     private const val MAJOR = 1
     private const val MINOR = 4
-    private const val PATCH = 1
+    private const val PATCH = 2
 
     const val CODE = MAJOR * 10000 + MINOR * 100 + PATCH
     const val NAME = "$MAJOR.$MINOR.$PATCH"
