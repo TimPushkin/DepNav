@@ -12,7 +12,7 @@ plugins {
 object Version {
     private const val MAJOR = 1
     private const val MINOR = 4
-    private const val PATCH = 2
+    private const val PATCH = 3
 
     const val CODE = MAJOR * 10000 + MINOR * 100 + PATCH
     const val NAME = "$MAJOR.$MINOR.$PATCH"
@@ -102,11 +102,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.extJunit)
-}
-
-ksp {
-    arg("room.incremental", "true")
-    arg("room.generateKotlin", "true")
 }
 
 room {
