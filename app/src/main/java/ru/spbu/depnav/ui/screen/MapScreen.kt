@@ -218,12 +218,12 @@ private fun BoxScope.AnimatedSearchBar(
     onResultClick: (Int) -> Unit,
     onMenuClick: () -> Unit
 ) {
-    var searchBarActive by rememberSaveable { mutableStateOf(false) }
+    var searchBarExpanded by rememberSaveable { mutableStateOf(false) }
     if (!visible) {
-        searchBarActive = false
+        searchBarExpanded = false
     }
 
-    if (!searchBarActive && query.isNotEmpty()) {
+    if (!searchBarExpanded && query.isNotEmpty()) {
         onQueryChange("")
     }
 
@@ -236,7 +236,7 @@ private fun BoxScope.AnimatedSearchBar(
         exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
     ) {
         val horizontalPadding by animateDpAsState(
-            if (searchBarActive) 0.dp else DEFAULT_PADDING,
+            if (searchBarExpanded) 0.dp else DEFAULT_PADDING,
             label = "Map search bar horizontal padding"
         )
 
@@ -244,8 +244,8 @@ private fun BoxScope.AnimatedSearchBar(
             query = query,
             onQueryChange = onQueryChange,
             mapTitle = mapTitle,
-            active = searchBarActive,
-            onActiveChange = { searchBarActive = it },
+            expanded = searchBarExpanded,
+            onExpandedChange = { searchBarExpanded = it },
             results = searchResults,
             onResultClick = onResultClick,
             onMenuClick = onMenuClick,

@@ -104,11 +104,6 @@ dependencies {
     androidTestImplementation(libs.androidx.test.extJunit)
 }
 
-ksp {
-    arg("room.incremental", "true")
-    arg("room.generateKotlin", "true")
-}
-
 room {
     schemaDirectory("$projectDir/schemas")
 }

@@ -29,8 +29,6 @@ import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
-import androidx.compose.foundation.layout.calculateEndPadding
-import androidx.compose.foundation.layout.calculateStartPadding
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
@@ -50,23 +48,25 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
+import ovh.plrapps.mapcompose.utils.lerp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
 import ru.spbu.depnav.ui.viewmodel.SearchResults
 
 // These are basically copied from SearchBar implementation
-private val ACTIVATION_ENTER_SPEC = tween<Float>(
+private val EXPANSION_ENTER_SPEC = tween<Float>(
     durationMillis = 600,
     delayMillis = 100,
     easing = CubicBezierEasing(0.05f, 0.7f, 0.1f, 1.0f)
 )
-private val ACTIVATION_EXIT_SPEC = tween<Float>(
+private val EXPANSION_EXIT_SPEC = tween<Float>(
     durationMillis = 350,
     delayMillis = 100,
     easing = CubicBezierEasing(0.0f, 1.0f, 0.0f, 1.0f)
@@ -76,83 +76,68 @@ private val ACTIVATION_EXIT_SPEC = tween<Float>(
  * Search bar for querying map markers on [ru.spbu.depnav.ui.screen.MapScreen].
  */
 @Composable
-@Suppress(
-    "LongMethod", // No point in further shrinking
-    "LongParameterList" // Considered OK for a composable
-)
+@Suppress("LongParameterList") // Considered OK for a composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MapSearchBar(
     query: String,
     onQueryChange: (String) -> Unit,
     mapTitle: String,
-    active: Boolean,
-    onActiveChange: (Boolean) -> Unit,
+    expanded: Boolean,
+    onExpandedChange: (Boolean) -> Unit,
     results: SearchResults,
     onResultClick: (Int) -> Unit,
     onMenuClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val activationAnimationProgress by animateFloatAsState(
-        targetValue = if (active) 1f else 0f,
-        animationSpec = if (active) ACTIVATION_ENTER_SPEC else ACTIVATION_EXIT_SPEC,
+    val expansionAnimationProgress by animateFloatAsState(
+        targetValue = if (expanded) 1f else 0f,
+        animationSpec = if (expanded) EXPANSION_ENTER_SPEC else EXPANSION_EXIT_SPEC,
         label = "Map search bar activation animation progress"
     )
 
-    val (insetsStartPadding, insetsEndPadding) = with(WindowInsets.safeDrawing.asPaddingValues()) {
-        val layoutDirection = LocalLayoutDirection.current
-        calculateStartPadding(layoutDirection) to calculateEndPadding(layoutDirection)
-    }
-
-    val outerStartPadding = insetsStartPadding * (1 - activationAnimationProgress)
-    val outerEndPadding = insetsEndPadding * (1 - activationAnimationProgress)
-    val innerStartPadding = insetsStartPadding * activationAnimationProgress
-    val innerEndPadding = insetsEndPadding * activationAnimationProgress
-
-    val focusManager = LocalFocusManager.current
-
-    val containerColorAlpha =
-        ON_MAP_SURFACE_ALPHA + (1 - ON_MAP_SURFACE_ALPHA) * activationAnimationProgress
-
     SearchBar(
-        query = query,
-        onQueryChange = onQueryChange,
-        onSearch = { focusManager.clearFocus() },
-        active = active,
-        onActiveChange = onActiveChange,
-        modifier = Modifier
-            .run {
-                if (active) padding(start = outerStartPadding, end = outerEndPadding)
-                else windowInsetsPadding(WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal))
-            }
-            .then(modifier),
-        placeholder = {
-            Text(
-                stringResource(R.string.search_on_map, mapTitle),
-                overflow = TextOverflow.Ellipsis,
-                maxLines = 1
+        inputField = {
+            SearchBarDefaults.InputField(
+                query = query,
+                onQueryChange = onQueryChange,
+                onSearch = with (LocalFocusManager.current) { { clearFocus() } },
+                expanded = expanded,
+                onExpandedChange = onExpandedChange,
+                modifier = Modifier.windowInsetsPadding(
+                    WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal) *
+                        expansionAnimationProgress
+                ),
+                placeholder = {
+                    Text(
+                        stringResource(R.string.search_on_map, mapTitle),
+                        overflow = TextOverflow.Ellipsis,
+                        maxLines = 1
+                    )
+                },
+                leadingIcon = {
+                    AnimatedLeadingIcon(
+                        expanded,
+                        onMenuClick = onMenuClick,
+                        onNavigateBackClick = { onExpandedChange(false) }
+                    )
+                },
+                trailingIcon = {
+                    AnimatedTrailingIcon(
+                        expanded,
+                        queryEmpty = query.isEmpty(),
+                        onClearClick = { onQueryChange("") }
+                    )
+                }
             )
         },
-        leadingIcon = {
-            AnimatedLeadingIcon(
-                active,
-                onMenuClick = onMenuClick,
-                modifier = Modifier.padding(start = innerStartPadding),
-                onNavigateBackClick = { onActiveChange(false) }
-            )
-        },
-        trailingIcon = {
-            AnimatedTrailingIcon(
-                active,
-                query.isEmpty(),
-                onClearClick = { onQueryChange("") },
-                modifier = Modifier.padding(end = innerEndPadding)
-            )
-        },
+        expanded = expanded,
+        onExpandedChange = onExpandedChange,
+        modifier = modifier,
         colors = SearchBarDefaults.colors(
             containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
-                alpha = containerColorAlpha
+                alpha = lerp(ON_MAP_SURFACE_ALPHA, 1f, expansionAnimationProgress)
             )
-        )
+        ),
     ) {
         val keyboard = LocalSoftwareKeyboardController.current
 
@@ -160,20 +145,26 @@ fun MapSearchBar(
             results,
             onScroll = { onTop -> keyboard?.apply { if (onTop) show() else hide() } },
             onResultClick = {
-                onActiveChange(false)
+                onExpandedChange(false)
                 onResultClick(it)
             },
             modifier = Modifier
+                .windowInsetsPadding(WindowInsets.safeDrawing)
                 .padding(horizontal = DEFAULT_PADDING * 1.5f)
-                .padding(
-                    start = innerStartPadding,
-                    end = innerEndPadding,
-                    bottom = WindowInsets.safeDrawing
-                        .asPaddingValues()
-                        .calculateBottomPadding()
-                )
         )
     }
+}
+
+@Composable
+private operator fun WindowInsets.times(num: Float): WindowInsets {
+    val paddings = asPaddingValues(LocalDensity.current)
+    val layoutDirection = LocalLayoutDirection.current
+    return WindowInsets(
+        paddings.calculateLeftPadding(layoutDirection) * num,
+        paddings.calculateTopPadding() * num,
+        paddings.calculateRightPadding(layoutDirection) * num,
+        paddings.calculateBottomPadding() * num
+    )
 }
 
 @Composable

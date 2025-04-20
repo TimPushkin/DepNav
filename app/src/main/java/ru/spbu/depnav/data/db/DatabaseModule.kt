@@ -43,7 +43,7 @@ object DatabaseModule {
         DB_ASSET
     )
         .createFromAsset(DB_ASSET)
-        .fallbackToDestructiveMigration()
+        .fallbackToDestructiveMigration(false)
         .build()
 
     @Provides
