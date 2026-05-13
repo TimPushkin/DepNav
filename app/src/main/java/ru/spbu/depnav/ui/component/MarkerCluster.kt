@@ -55,12 +55,16 @@ fun MarkersCluster(
     Marker.MarkerType.ROOM -> RoomMarkersCluster(markerIds, modifier)
     Marker.MarkerType.ENTRANCE ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_entrance), modifier)
+
     Marker.MarkerType.STAIRS_UP, Marker.MarkerType.STAIRS_DOWN, Marker.MarkerType.STAIRS_BOTH ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_stairs), modifier)
+
     Marker.MarkerType.ELEVATOR ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_elevator), modifier)
+
     Marker.MarkerType.WC_MAN, Marker.MarkerType.WC_WOMAN, Marker.MarkerType.WC ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_wc), modifier)
+
     Marker.MarkerType.OTHER ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_other), modifier)
 }

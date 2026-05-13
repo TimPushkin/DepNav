@@ -2,7 +2,6 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.plugin.compose)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.google.dagger.hilt.android)
@@ -21,18 +20,18 @@ object Version {
 kotlin {
     jvmToolchain(17)
     compilerOptions {
-        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+        freeCompilerArgs.add("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
     }
 }
 
 android {
     namespace = "ru.spbu.depnav"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "ru.spbu.depnav"
-        minSdk = 21
-        targetSdk = 36
+        minSdk = 24 // ModalNavigationDrawer crashes on 23
+        targetSdk = 37
         versionCode = Version.CODE
         versionName = Version.NAME
 
@@ -42,8 +41,8 @@ android {
     signingConfigs {
         val keystorePropertiesFile = rootProject.file("keystore.properties")
         if (keystorePropertiesFile.exists()) {
-            val keystoreProperties = Properties().apply {
-                load(keystorePropertiesFile.inputStream())
+            val keystoreProperties = keystorePropertiesFile.inputStream().use {
+                Properties().apply { load(it) }
             }
             create("release") {
                 storeFile = file(keystoreProperties.getProperty("storeFile"))
@@ -57,6 +56,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -68,11 +68,10 @@ android {
     buildFeatures {
         compose = true
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
@@ -102,8 +101,4 @@ dependencies {
     androidTestImplementation(libs.androidx.test.runner)
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.extJunit)
-}
-
-room {
-    schemaDirectory("$projectDir/schemas")
 }

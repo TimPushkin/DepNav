@@ -31,16 +31,9 @@ import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
 import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.safeDrawing
-import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material.icons.rounded.Menu
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
@@ -48,10 +41,10 @@ import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import ovh.plrapps.mapcompose.utils.lerp
@@ -94,19 +87,18 @@ fun MapSearchBar(
         animationSpec = if (expanded) EXPANSION_ENTER_SPEC else EXPANSION_EXIT_SPEC,
         label = "Map search bar activation animation progress"
     )
-
+    // SearchBar always consumes the insets but adds padding only when collapsed
+    val horizontalInsetsPadding =
+        (SearchBarDefaults.windowInsets.only(WindowInsetsSides.Horizontal) *
+                expansionAnimationProgress).asPaddingValues()
     SearchBar(
         inputField = {
             SearchBarDefaults.InputField(
                 query = query,
                 onQueryChange = onQueryChange,
-                onSearch = with (LocalFocusManager.current) { { clearFocus() } },
+                onSearch = with(LocalFocusManager.current) { { clearFocus() } },
                 expanded = expanded,
                 onExpandedChange = onExpandedChange,
-                modifier = Modifier.windowInsetsPadding(
-                    WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal) *
-                        expansionAnimationProgress
-                ),
                 placeholder = {
                     Text(
                         stringResource(R.string.search_on_map, mapTitle),
@@ -127,20 +119,20 @@ fun MapSearchBar(
                         queryEmpty = query.isEmpty(),
                         onClearClick = { onQueryChange("") }
                     )
-                }
+                },
+                modifier = Modifier.padding(horizontalInsetsPadding)
             )
         },
         expanded = expanded,
         onExpandedChange = onExpandedChange,
         modifier = modifier,
         colors = SearchBarDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
+            containerColor = SearchBarDefaults.colors().containerColor.copy(
                 alpha = lerp(ON_MAP_SURFACE_ALPHA, 1f, expansionAnimationProgress)
             )
-        ),
+        )
     ) {
         val keyboard = LocalSoftwareKeyboardController.current
-
         SearchResultsView(
             results,
             onScroll = { onTop -> keyboard?.apply { if (onTop) show() else hide() } },
@@ -149,7 +141,7 @@ fun MapSearchBar(
                 onResultClick(it)
             },
             modifier = Modifier
-                .windowInsetsPadding(WindowInsets.safeDrawing)
+                .padding(horizontalInsetsPadding)
                 .padding(horizontal = DEFAULT_PADDING * 1.5f)
         )
     }
@@ -157,7 +149,7 @@ fun MapSearchBar(
 
 @Composable
 private operator fun WindowInsets.times(num: Float): WindowInsets {
-    val paddings = asPaddingValues(LocalDensity.current)
+    val paddings = asPaddingValues()
     val layoutDirection = LocalLayoutDirection.current
     return WindowInsets(
         paddings.calculateLeftPadding(layoutDirection) * num,
@@ -182,14 +174,14 @@ private fun AnimatedLeadingIcon(
         if (active) {
             IconButton(onClick = onNavigateBackClick) {
                 Icon(
-                    Icons.AutoMirrored.Rounded.ArrowBack,
+                    painterResource(R.drawable.ic_arrow_back),
                     contentDescription = stringResource(R.string.label_navigate_back)
                 )
             }
         } else {
             IconButton(onClick = onMenuClick) {
                 Icon(
-                    Icons.Rounded.Menu,
+                    painterResource(R.drawable.ic_menu),
                     contentDescription = stringResource(R.string.label_open_main_menu)
                 )
             }
@@ -218,7 +210,7 @@ private fun AnimatedTrailingIcon(
         } else {
             IconButton(onClick = onClearClick) {
                 Icon(
-                    Icons.Rounded.Clear,
+                    painterResource(R.drawable.ic_close),
                     contentDescription = stringResource(R.string.label_clear_text_field)
                 )
             }

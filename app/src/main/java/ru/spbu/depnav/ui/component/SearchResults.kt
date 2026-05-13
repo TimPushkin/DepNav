@@ -86,16 +86,16 @@ fun SearchResultsView(
                 markerText = markerText,
                 onClick = onResultClick,
                 trailingIcon = (
-                    @Composable {
-                        Icon(
-                            painter = painterResource(R.drawable.ic_searched_for),
-                            contentDescription = null,
-                            modifier = Modifier
-                                .size(26.dp)
-                                .alpha(DISABLED_ALPHA)
-                        )
-                    }
-                    ).takeIf { results.isHistory }
+                        @Composable {
+                            Icon(
+                                painter = painterResource(R.drawable.ic_searched_for),
+                                contentDescription = null,
+                                modifier = Modifier
+                                    .size(26.dp)
+                                    .alpha(DISABLED_ALPHA)
+                            )
+                        }
+                        ).takeIf { results.isHistory }
             )
         }
     }

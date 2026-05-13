@@ -12,13 +12,15 @@
 #   public *;
 #}
 
+-dontobfuscate
+
 # Uncomment this to preserve the line number information for
 # debugging stack traces.
 -keepattributes SourceFile,LineNumberTable
 
 # If you keep the line number information, uncomment this to
 # hide the original source file name.
--renamesourcefileattribute SourceFile
+#-renamesourcefileattribute SourceFile
 
 # Remove logging (https://www.guardsquare.com/manual/configuration/examples#logging)
 -assumenosideeffects class android.util.Log {

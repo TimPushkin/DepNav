@@ -26,9 +26,6 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Info
-import androidx.compose.material.icons.rounded.Settings
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -40,12 +37,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.platform.LocalResources
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.unit.dp
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.viewmodel.AvailableMap
-import androidx.compose.ui.platform.LocalResources
 
 // https://m3.material.io/components/navigation-drawer/specs#368147de-9661-4a28-9fc1-ce2f8c9eac40
 private val ITEM_HEIGHT = 56.dp
@@ -77,7 +74,7 @@ fun MainMenuSheet(
         MiscItem(
             icon = {
                 Icon(
-                    Icons.Rounded.Settings,
+                    painterResource(R.drawable.ic_settings),
                     contentDescription = stringResource(R.string.label_open_settings)
                 )
             },
@@ -88,7 +85,7 @@ fun MainMenuSheet(
         MiscItem(
             icon = {
                 Icon(
-                    Icons.Rounded.Info,
+                    painterResource(R.drawable.ic_info),
                     contentDescription = stringResource(R.string.label_open_map_legend)
                 )
             },

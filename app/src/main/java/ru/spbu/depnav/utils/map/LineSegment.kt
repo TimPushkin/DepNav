@@ -49,13 +49,13 @@ data class LineSegment(val p1: Point, val p2: Point) {
 
         val numerator1 = (p1.x - l.p1.x) * (l.p1.y - l.p2.y) - (p1.y - l.p1.y) * (l.p1.x - l.p2.x)
         val t1 = numerator1 / denominator
-        if (t1 < 0 || t1 > 1) {
+        if (t1 !in 0.0..1.0) {
             return null
         }
 
         val numerator2 = (p1.x - p2.x) * (p1.y - l.p1.y) - (p1.y - p2.y) * (p1.x - l.p1.x)
         val t2 = -(numerator2 / denominator)
-        if (t2 < 0 || t2 > 1) {
+        if (t2 !in 0.0..1.0) {
             return null
         }
 
