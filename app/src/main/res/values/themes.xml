@@ -1,5 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
 
-    <style name="Theme.DepNav" parent="android:Theme.Material.NoActionBar" />
+    <style name="Theme.DepNav.Starting" parent="Theme.SplashScreen">
+        <item name="windowSplashScreenAnimatedIcon">@drawable/ic_splashscreen</item>
+        <item name="postSplashScreenTheme">@style/Theme.DepNav</item>
+    </style>
+
+    <style name="Theme.DepNav" parent="Theme.Material3Expressive.DynamicColors.DayNight.NoActionBar" />
 </resources>

@@ -87,8 +87,8 @@ private fun RoomMarkersCluster(markerIds: List<String>, modifier: Modifier = Mod
             )
             .then(modifier),
         shape = MaterialTheme.shapes.small,
-        color = MaterialTheme.colorScheme.onBackground,
-        contentColor = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.onSurface,
+        contentColor = MaterialTheme.colorScheme.surface
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
@@ -113,8 +113,8 @@ private fun NonRoomMarkersCluster(painter: Painter, modifier: Modifier = Modifie
             )
             .then(modifier),
         shape = MaterialTheme.shapes.extraSmall,
-        color = MaterialTheme.colorScheme.onBackground,
-        contentColor = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.onSurface,
+        contentColor = MaterialTheme.colorScheme.surface
     ) {
         Box(contentAlignment = Alignment.Center) {
             Icon(

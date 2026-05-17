@@ -75,6 +75,10 @@ room {
 }
 
 dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.google.android.material)
+
     implementation(libs.androidx.lifecycle.runtimeKtx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewmodelCompose)
@@ -93,8 +97,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
+
     implementation(libs.plrapps.mapcompose)
 
     testImplementation(libs.junit)

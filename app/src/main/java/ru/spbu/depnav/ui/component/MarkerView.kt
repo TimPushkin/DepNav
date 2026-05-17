@@ -133,7 +133,7 @@ private fun RoomName(name: String, modifier: Modifier) {
         modifier = modifier,
         maxLines = 1,
         style = LocalTextStyle.current.copy(
-            shadow = Shadow(color = MaterialTheme.colorScheme.background, blurRadius = 6f)
+            shadow = Shadow(color = MaterialTheme.colorScheme.surface, blurRadius = 6f)
         )
     )
 }

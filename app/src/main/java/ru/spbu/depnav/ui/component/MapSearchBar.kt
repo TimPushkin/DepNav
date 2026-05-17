@@ -54,7 +54,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.util.lerp
 import ru.spbu.depnav.R
-import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
+import ru.spbu.depnav.ui.theme.MAP_OVERLAY_ALPHA
 import ru.spbu.depnav.ui.viewmodel.SearchResults
 
 // These are basically copied from SearchBar implementation
@@ -145,7 +145,7 @@ fun MapSearchBar(
         modifier = modifier,
         colors = SearchBarDefaults.colors(
             containerColor = SearchBarDefaults.colors().containerColor.copy(
-                alpha = lerp(ON_MAP_SURFACE_ALPHA, 1f, expansionProgress)
+                alpha = lerp(MAP_OVERLAY_ALPHA, 1f, expansionProgress)
             )
         )
     ) {

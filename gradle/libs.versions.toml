@@ -11,6 +11,10 @@ room = "2.8.4"
 # Overriding AGP's built-in Kotlin with a newer version
 jetbrains-kotlin-gradle-plugin = { group = "org.jetbrains.kotlin", name = "kotlin-gradle-plugin", version.ref = "kotlin" }
 
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.18.0" }
+androidx-core-splashscreen = { group = "androidx.core", name = "core-splashscreen", version = "1.2.0" }
+google-android-material = { group = "com.google.android.material", name = "material", version = "1.14.0" }
+
 androidx-lifecycle-runtimeKtx = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycle" }
 androidx-lifecycle-runtimeCompose = { group = "androidx.lifecycle", name = "lifecycle-runtime-compose", version.ref = "lifecycle" }
 androidx-lifecycle-viewmodelCompose = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-compose", version.ref = "lifecycle" }
@@ -28,8 +32,8 @@ androidx-compose-ui = { module = "androidx.compose.ui:ui" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling" }
 androidx-compose-ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview" }
 
-androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version = "1.18.0" }
 androidx-activity-compose = { group = "androidx.activity", name = "activity-compose", version = "1.13.0" }
+
 plrapps-mapcompose = { group = "ovh.plrapps", name = "mapcompose", version = "3.2.7" }
 
 junit = { group = "junit", name = "junit", version = "4.13.2" }

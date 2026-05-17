@@ -41,7 +41,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
+import ru.spbu.depnav.ui.theme.MAP_OVERLAY_ALPHA
 
 private const val MIN_FLOOR = 1
 
@@ -56,7 +56,7 @@ fun FloorSwitch(
     Surface(
         modifier = modifier,
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = ON_MAP_SURFACE_ALPHA)
+        color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = MAP_OVERLAY_ALPHA)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             IconButton(
