@@ -25,6 +25,7 @@ import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -75,7 +76,7 @@ fun SearchResultsView(
     LazyColumn(
         modifier = modifier,
         state = state,
-        contentPadding = PaddingValues(top = DEFAULT_PADDING / 2),
+        contentPadding = PaddingValues(vertical = DEFAULT_PADDING / 2),
         verticalArrangement = Arrangement.spacedBy(4.dp)
     ) {
         items(results.items.asReversed()) { (marker, markerText) ->
@@ -119,6 +120,7 @@ private fun SearchResultView(
     Row(
         modifier = Modifier
             .clickable { onClick(marker.id) }
+            .padding(horizontal = DEFAULT_PADDING * 1.5f)
             .fillMaxWidth()
             .height(LocalViewConfiguration.current.minimumTouchTargetSize.height),
         horizontalArrangement = Arrangement.SpaceBetween,

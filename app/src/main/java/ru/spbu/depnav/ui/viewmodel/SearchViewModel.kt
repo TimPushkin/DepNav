@@ -19,6 +19,8 @@
 package ru.spbu.depnav.ui.viewmodel
 
 import android.util.Log
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.runtime.snapshotFlow
 import androidx.compose.ui.text.intl.Locale
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
@@ -27,15 +29,10 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.FlowPreview
 import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.SharingStarted
-import kotlinx.coroutines.flow.debounce
-import kotlinx.coroutines.flow.distinctUntilChangedBy
+import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.filterNotNull
 import kotlinx.coroutines.flow.launchIn
-import kotlinx.coroutines.flow.map
-import kotlinx.coroutines.flow.mapLatest
-import kotlinx.coroutines.flow.onEach
-import kotlinx.coroutines.flow.stateIn
-import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 import ru.spbu.depnav.data.composite.MarkerWithText
@@ -48,8 +45,6 @@ import ru.spbu.depnav.data.repository.SearchHistoryRepo
 import javax.inject.Inject
 
 private const val TAG = "SearchViewModel"
-
-private const val MIN_QUERY_PERIOD_MS = 300L
 private const val SEARCH_HISTORY_SIZE = 10
 
 /** View model for map markers search on [MapScreen][ru.spbu.depnav.ui.screen.MapScreen]. */
@@ -60,61 +55,41 @@ class SearchViewModel @Inject constructor(
     private val markerRepo: MarkerWithTextRepo,
     prefs: PreferencesManager
 ) : ViewModel() {
-    // Updated only on the main thread
-    private val state = MutableStateFlow(PrivateState())
+    private val languageState = MutableStateFlow(Locale.current.toLanguage())
+    private val _resultsFlow = MutableStateFlow(SearchResults(emptyList(), true))
 
-    /** UI-visible state. */
-    val uiState = state.map { it.toSearchUiState() }.stateIn(
-        viewModelScope,
-        started = SharingStarted.WhileSubscribed(5000),
-        initialValue = state.value.toSearchUiState()
-    )
-
-    private data class PrivateState(
-        val mapId: Int? = null,
-        val query: String = "",
-        val language: Language = Locale.current.toLanguage(),
-        val results: SearchResults = SearchResults(emptyList(), true)
-    ) {
-        fun toSearchUiState() = SearchUiState(query, results)
-    }
+    val queryState = TextFieldState()
+    val resultsFlow = _resultsFlow.asStateFlow()
 
     init {
-        state
-            .debounce(MIN_QUERY_PERIOD_MS)
-            .distinctUntilChangedBy { Triple(it.mapId, it.query, it.language) }
-            .mapLatest { (mapId, query, language) ->
-                val results = withContext(Dispatchers.IO) {
-                    if (mapId == null) {
-                        SearchResults(emptyList(), true)
-                    } else if (query.isNotEmpty()) {
-                        SearchResults(
-                            items = markerRepo.loadByQuery(mapId, query, language),
-                            isHistory = false
-                        )
-                    } else {
-                        SearchResults(
-                            items = searchHistoryRepo.loadByMap(mapId).map {
-                                markerRepo.loadById(it.markerId, language)
-                            },
-                            isHistory = true
-                        )
-                    }
-                }
-                Log.d(TAG, "Query '$query', map $mapId, $language: ${results.items.size} items")
-                state.update { it.copy(results = results) }
+        combine(
+            prefs.selectedMapIdFlow.filterNotNull(),
+            snapshotFlow { queryState.text },
+            languageState
+        ) { mapId, query, language ->
+            _resultsFlow.value = search(mapId, query.toString(), language)
+        }
+            .launchIn(viewModelScope)
+    }
+
+    private suspend fun search(mapId: Int, query: String, language: Language): SearchResults =
+        withContext(Dispatchers.IO) {
+            if (query.isNotEmpty()) {
+                SearchResults(
+                    items = markerRepo.loadByQuery(mapId, query, language),
+                    isHistory = false
+                )
+            } else {
+                SearchResults(
+                    items = searchHistoryRepo.loadByMap(mapId).map {
+                        markerRepo.loadById(it.markerId, language)
+                    },
+                    isHistory = true
+                )
             }
-            .launchIn(viewModelScope)
-
-        prefs.selectedMapIdFlow
-            .onEach { mapId -> state.update { it.copy(mapId = mapId, query = "") } }
-            .launchIn(viewModelScope)
-    }
-
-    /** Updates the search query and asynchronously runs marker search with it. */
-    fun search(query: String) {
-        state.update { it.copy(query = query) }
-    }
+        }.apply {
+            Log.d(TAG, "Query '$query', map $mapId, $language: ${items.size} items")
+        }
 
     /** Asynchronously adds the provided marker ID to the search history. */
     fun addToSearchHistory(markerId: Int) {
@@ -129,11 +104,7 @@ class SearchViewModel @Inject constructor(
      * and thus are not updated automatically by Android.
      */
     fun onLocaleChange(locale: Locale) {
-        val language = locale.toLanguage()
-        if (state.value.language != language) {
-            Log.i(TAG, "Updating language to $language")
-            state.update { it.copy(language = language) }
-        }
+        languageState.value = locale.toLanguage()
     }
 }
 
@@ -143,17 +114,4 @@ data class SearchResults(
     val items: List<MarkerWithText>,
     /** Whether these are the search history entries or the actual search results. */
     val isHistory: Boolean
-)
-
-/** Map markers search UI state. */
-data class SearchUiState(
-    /** Marker search query entered by the user. */
-    val query: String = "",
-    /**
-     * Either the actual results of the query or a history of previous searches.
-     *
-     * Note that these results mey correspond not to the current query, but to some query in the
-     * past while the current query is being processed.
-     */
-    val results: SearchResults = SearchResults(emptyList(), true)
 )
