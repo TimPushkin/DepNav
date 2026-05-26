@@ -106,3 +106,26 @@ dependencies {
     androidTestImplementation(libs.androidx.test.rules)
     androidTestImplementation(libs.androidx.test.extJunit)
 }
+
+val generateMapsDatabase = tasks.register<GenerateMapsDatabaseTask>("generateMapsDatabase") {
+    schemaDirectory = project.layout.projectDirectory
+        .dir("schemas/ru.spbu.depnav.data.db.AppDatabase")
+    dataDirectory = project.layout.projectDirectory
+        .dir("maps/infos")
+    outputFile = project.layout.buildDirectory
+        .file("intermediates/maps_database/maps.db")
+    dependsOn(tasks.named("copyRoomSchemas"))
+}
+androidComponents {
+    onVariants { variant ->
+        val copyMapsDatabase = tasks.register<CopyFilesTask>(
+            "copyMapsDatabaseTo${variant.name.replaceFirstChar { it.uppercase() }}Assets"
+        ) {
+            sources.from(generateMapsDatabase.map { it.outputFile })
+        }
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            copyMapsDatabase,
+            CopyFilesTask::destination
+        )
+    }
+}
