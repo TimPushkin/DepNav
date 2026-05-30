@@ -59,46 +59,55 @@ fun MarkerView(
             modifier = modifier
         )
     }
+
     MarkerType.ENTRANCE -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_entrance),
         contentDescription = stringResource(R.string.label_entrance_icon),
         modifier = modifier
     )
+
     MarkerType.STAIRS_UP -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_stairs_up),
         contentDescription = stringResource(R.string.label_stairs_up_icon),
         modifier = modifier
     )
+
     MarkerType.STAIRS_DOWN -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_stairs_down),
         contentDescription = stringResource(R.string.label_stairs_down_icon),
         modifier = modifier
     )
+
     MarkerType.STAIRS_BOTH -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_stairs),
         contentDescription = stringResource(R.string.label_stairs_both_icon),
         modifier = modifier
     )
+
     MarkerType.ELEVATOR -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_elevator),
         contentDescription = stringResource(R.string.label_elevator_icon),
         modifier = modifier
     )
+
     MarkerType.WC_MAN -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_wc_man),
         contentDescription = stringResource(R.string.label_wc_man_icon),
         modifier = modifier
     )
+
     MarkerType.WC_WOMAN -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_wc_woman),
         contentDescription = stringResource(R.string.label_wc_woman_icon),
         modifier = modifier
     )
+
     MarkerType.WC -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_wc),
         contentDescription = stringResource(R.string.label_wc_icon),
         modifier = modifier
     )
+
     MarkerType.OTHER -> MarkerIcon(
         painter = painterResource(R.drawable.mrk_other),
         contentDescription = stringResource(R.string.label_other_icon),
@@ -124,7 +133,7 @@ private fun RoomName(name: String, modifier: Modifier) {
         modifier = modifier,
         maxLines = 1,
         style = LocalTextStyle.current.copy(
-            shadow = Shadow(color = MaterialTheme.colorScheme.background, blurRadius = 6f)
+            shadow = Shadow(color = MaterialTheme.colorScheme.surface, blurRadius = 6f)
         )
     )
 }

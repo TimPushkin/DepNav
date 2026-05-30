@@ -27,9 +27,6 @@ import androidx.compose.animation.slideOutVertically
 import androidx.compose.animation.togetherWith
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.KeyboardArrowDown
-import androidx.compose.material.icons.rounded.KeyboardArrowUp
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
@@ -38,11 +35,13 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.graphicsLayer
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.tooling.preview.Preview
 import ru.spbu.depnav.R
 import ru.spbu.depnav.ui.theme.DepNavTheme
-import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
+import ru.spbu.depnav.ui.theme.MAP_OVERLAY_ALPHA
 
 private const val MIN_FLOOR = 1
 
@@ -57,7 +56,7 @@ fun FloorSwitch(
     Surface(
         modifier = modifier,
         shape = CircleShape,
-        color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = ON_MAP_SURFACE_ALPHA)
+        color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = MAP_OVERLAY_ALPHA)
     ) {
         Column(horizontalAlignment = Alignment.CenterHorizontally) {
             IconButton(
@@ -65,7 +64,7 @@ fun FloorSwitch(
                 enabled = floor < maxFloor
             ) {
                 Icon(
-                    Icons.Rounded.KeyboardArrowUp,
+                    painterResource(R.drawable.ic_keyboard_arrow_up),
                     contentDescription = stringResource(R.string.label_to_floor_above)
                 )
             }
@@ -75,10 +74,10 @@ fun FloorSwitch(
                 transitionSpec = {
                     if (targetState > initialState) {
                         slideInVertically { height -> -height } + fadeIn() togetherWith
-                            slideOutVertically { height -> height } + fadeOut()
+                                slideOutVertically { height -> height } + fadeOut()
                     } else {
                         slideInVertically { height -> height } + fadeIn() togetherWith
-                            slideOutVertically { height -> -height } + fadeOut()
+                                slideOutVertically { height -> -height } + fadeOut()
                     } using SizeTransform(clip = false)
                 },
                 label = "floor switch scroll"
@@ -91,8 +90,9 @@ fun FloorSwitch(
                 enabled = floor > MIN_FLOOR
             ) {
                 Icon(
-                    Icons.Rounded.KeyboardArrowDown,
-                    contentDescription = stringResource(R.string.label_to_floor_below)
+                    painterResource(R.drawable.ic_keyboard_arrow_up),
+                    contentDescription = stringResource(R.string.label_to_floor_below),
+                    modifier = Modifier.graphicsLayer { rotationZ = 180f }
                 )
             }
         }

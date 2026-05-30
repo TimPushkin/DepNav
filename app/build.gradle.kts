@@ -2,7 +2,6 @@ import java.util.Properties
 
 plugins {
     alias(libs.plugins.android.application)
-    alias(libs.plugins.jetbrains.kotlin.android)
     alias(libs.plugins.jetbrains.kotlin.plugin.compose)
     alias(libs.plugins.androidx.room)
     alias(libs.plugins.google.dagger.hilt.android)
@@ -21,18 +20,18 @@ object Version {
 kotlin {
     jvmToolchain(17)
     compilerOptions {
-        freeCompilerArgs.add("-opt-in=kotlin.RequiresOptIn")
+        freeCompilerArgs.add("-XXLanguage:+PropertyParamAnnotationDefaultTargetMode")
     }
 }
 
 android {
     namespace = "ru.spbu.depnav"
-    compileSdk = 36
+    compileSdk = 37
 
     defaultConfig {
         applicationId = "ru.spbu.depnav"
-        minSdk = 21
-        targetSdk = 36
+        minSdk = 24 // ModalNavigationDrawer crashes on 23
+        targetSdk = 37
         versionCode = Version.CODE
         versionName = Version.NAME
 
@@ -42,8 +41,8 @@ android {
     signingConfigs {
         val keystorePropertiesFile = rootProject.file("keystore.properties")
         if (keystorePropertiesFile.exists()) {
-            val keystoreProperties = Properties().apply {
-                load(keystorePropertiesFile.inputStream())
+            val keystoreProperties = keystorePropertiesFile.inputStream().use {
+                Properties().apply { load(it) }
             }
             create("release") {
                 storeFile = file(keystoreProperties.getProperty("storeFile"))
@@ -57,6 +56,7 @@ android {
     buildTypes {
         release {
             isMinifyEnabled = true
+            isShrinkResources = true
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
                 "proguard-rules.pro"
@@ -68,14 +68,17 @@ android {
     buildFeatures {
         compose = true
     }
-    packaging {
-        resources {
-            excludes += "/META-INF/{AL2.0,LGPL2.1}"
-        }
-    }
+}
+
+room {
+    schemaDirectory("$projectDir/schemas")
 }
 
 dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.core.splashscreen)
+    implementation(libs.google.android.material)
+
     implementation(libs.androidx.lifecycle.runtimeKtx)
     implementation(libs.androidx.lifecycle.runtimeCompose)
     implementation(libs.androidx.lifecycle.viewmodelCompose)
@@ -94,8 +97,8 @@ dependencies {
     implementation(libs.androidx.compose.ui.tooling.preview)
     debugImplementation(libs.androidx.compose.ui.tooling)
 
-    implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.activity.compose)
+
     implementation(libs.plrapps.mapcompose)
 
     testImplementation(libs.junit)
@@ -104,6 +107,25 @@ dependencies {
     androidTestImplementation(libs.androidx.test.extJunit)
 }
 
-room {
-    schemaDirectory("$projectDir/schemas")
+val generateMapsDatabase = tasks.register<GenerateMapsDatabaseTask>("generateMapsDatabase") {
+    schemaDirectory = project.layout.projectDirectory
+        .dir("schemas/ru.spbu.depnav.data.db.AppDatabase")
+    dataDirectory = project.layout.projectDirectory
+        .dir("maps/infos")
+    outputFile = project.layout.buildDirectory
+        .file("intermediates/maps_database/maps.db")
+    dependsOn(tasks.named("copyRoomSchemas"))
+}
+androidComponents {
+    onVariants { variant ->
+        val copyMapsDatabase = tasks.register<CopyFilesTask>(
+            "copyMapsDatabaseTo${variant.name.replaceFirstChar { it.uppercase() }}Assets"
+        ) {
+            sources.from(generateMapsDatabase.map { it.outputFile })
+        }
+        variant.sources.assets?.addGeneratedSourceDirectory(
+            copyMapsDatabase,
+            CopyFilesTask::destination
+        )
+    }
 }

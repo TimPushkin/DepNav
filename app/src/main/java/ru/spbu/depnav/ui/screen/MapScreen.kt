@@ -20,7 +20,6 @@ package ru.spbu.depnav.ui.screen
 
 import androidx.compose.animation.AnimatedContent
 import androidx.compose.animation.AnimatedVisibility
-import androidx.compose.animation.core.animateDpAsState
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
 import androidx.compose.animation.slideInHorizontally
@@ -41,14 +40,14 @@ import androidx.compose.foundation.layout.safeDrawingPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.windowInsetsPadding
 import androidx.compose.foundation.shape.CornerSize
+import androidx.compose.foundation.text.input.TextFieldState
 import androidx.compose.material3.DrawerValue
-import androidx.compose.material3.LocalAbsoluteTonalElevation
+import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalNavigationDrawer
 import androidx.compose.material3.Surface
 import androidx.compose.material3.rememberDrawerState
 import androidx.compose.runtime.Composable
-import androidx.compose.runtime.CompositionLocalProvider
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.derivedStateOf
 import androidx.compose.runtime.getValue
@@ -84,11 +83,10 @@ import ru.spbu.depnav.ui.component.ZoomInHint
 import ru.spbu.depnav.ui.dialog.MapLegendDialog
 import ru.spbu.depnav.ui.dialog.SettingsDialog
 import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
+import ru.spbu.depnav.ui.theme.MAP_OVERLAY_ALPHA
 import ru.spbu.depnav.ui.viewmodel.MapUiState
 import ru.spbu.depnav.ui.viewmodel.MapViewModel
 import ru.spbu.depnav.ui.viewmodel.SearchResults
-import ru.spbu.depnav.ui.viewmodel.SearchUiState
 import ru.spbu.depnav.ui.viewmodel.SearchViewModel
 
 /** Screen containing a navigable map. */
@@ -108,7 +106,7 @@ fun MapScreen(
         MapLegendDialog(onDismiss = { openMapLegend = false })
     }
 
-    Surface(color = MaterialTheme.colorScheme.background) {
+    Surface {
         val selectedMapId by prefs.selectedMapIdFlow.collectAsStateWithLifecycle()
         val mapUiState by mapVm.uiState.collectAsStateWithLifecycle()
 
@@ -135,7 +133,7 @@ fun MapScreen(
             gesturesEnabled = selectedMapId != null
         ) {
             val readyMapUiState = mapUiState as? MapUiState.Ready ?: return@ModalNavigationDrawer
-            val searchUiState by searchVm.uiState.collectAsStateWithLifecycle()
+            val searchResults by searchVm.resultsFlow.collectAsStateWithLifecycle()
 
             val markerAlpha by mapVm.markerAlpha.collectAsStateWithLifecycle()
             val markersVisible by remember { derivedStateOf { markerAlpha > 0f } }
@@ -147,8 +145,8 @@ fun MapScreen(
 
             OnMapUi(
                 mapUiState = readyMapUiState,
-                searchUiState = searchUiState,
-                onSearchQueryChange = searchVm::search,
+                searchQuery = searchVm.queryState,
+                searchResults = searchResults,
                 onSearchResultClick = { markerId ->
                     mapVm.focusOnMarker(markerId)
                     searchVm.addToSearchHistory(markerId)
@@ -171,60 +169,55 @@ fun MapScreen(
 @Suppress("LongParameterList") // Considered OK for a composable
 private fun OnMapUi(
     mapUiState: MapUiState.Ready,
-    searchUiState: SearchUiState,
-    onSearchQueryChange: (String) -> Unit,
+    searchQuery: TextFieldState,
+    searchResults: SearchResults,
     onSearchResultClick: (Int) -> Unit,
     onMainMenuClick: () -> Unit,
     onFloorSwitch: (Int) -> Unit,
     markersVisible: Boolean
 ) {
-    CompositionLocalProvider(LocalAbsoluteTonalElevation provides 4.dp) {
-        Box(modifier = Modifier.fillMaxSize()) {
-            PinPointer(mapUiState.mapState, mapUiState.pinnedMarker?.marker)
+    Box(modifier = Modifier.fillMaxSize()) {
+        PinPointer(mapUiState.mapState, mapUiState.pinnedMarker?.marker)
 
-            AnimatedSearchBar(
-                visible = mapUiState.showOnMapUi,
-                mapTitle = mapUiState.mapTitle,
-                query = searchUiState.query,
-                onQueryChange = onSearchQueryChange,
-                searchResults = searchUiState.results,
-                onResultClick = onSearchResultClick,
-                onMenuClick = onMainMenuClick
-            )
+        AnimatedSearchBar(
+            visible = mapUiState.showOnMapUi,
+            mapTitle = mapUiState.mapTitle,
+            query = searchQuery,
+            searchResults = searchResults,
+            onResultClick = onSearchResultClick,
+            onMenuClick = onMainMenuClick
+        )
 
-            AnimatedFloorSwitch(
-                visible = mapUiState.showOnMapUi,
-                currentFloor = mapUiState.currentFloor,
-                maxFloor = mapUiState.floorsNum,
-                onFloorSwitch = onFloorSwitch
-            )
+        AnimatedFloorSwitch(
+            visible = mapUiState.showOnMapUi,
+            currentFloor = mapUiState.currentFloor,
+            maxFloor = mapUiState.floorsNum,
+            onFloorSwitch = onFloorSwitch
+        )
 
-            AnimatedBottom(
-                pinnedMarker = mapUiState.pinnedMarker,
-                showZoomInHint = !markersVisible
-            )
-        }
+        AnimatedBottom(
+            pinnedMarker = mapUiState.pinnedMarker,
+            showZoomInHint = !markersVisible
+        )
     }
 }
 
 @Composable
 @Suppress("LongParameterList") // Considered OK for a composable
+@OptIn(ExperimentalMaterial3Api::class)
 private fun BoxScope.AnimatedSearchBar(
     visible: Boolean,
     mapTitle: String,
-    query: String,
-    onQueryChange: (String) -> Unit,
+    query: TextFieldState,
     searchResults: SearchResults,
     onResultClick: (Int) -> Unit,
     onMenuClick: () -> Unit
 ) {
     var searchBarExpanded by rememberSaveable { mutableStateOf(false) }
-    if (!visible) {
-        searchBarExpanded = false
-    }
-
-    if (!searchBarExpanded && query.isNotEmpty()) {
-        onQueryChange("")
+    LaunchedEffect(visible) {
+        if (!visible) {
+            searchBarExpanded = false
+        }
     }
 
     AnimatedVisibility(
@@ -235,21 +228,14 @@ private fun BoxScope.AnimatedSearchBar(
         enter = slideInVertically(initialOffsetY = { -it }) + fadeIn(),
         exit = slideOutVertically(targetOffsetY = { -it }) + fadeOut()
     ) {
-        val horizontalPadding by animateDpAsState(
-            if (searchBarExpanded) 0.dp else DEFAULT_PADDING,
-            label = "Map search bar horizontal padding"
-        )
-
         MapSearchBar(
-            query = query,
-            onQueryChange = onQueryChange,
+            queryState = query,
             mapTitle = mapTitle,
             expanded = searchBarExpanded,
             onExpandedChange = { searchBarExpanded = it },
             results = searchResults,
             onResultClick = onResultClick,
-            onMenuClick = onMenuClick,
-            modifier = Modifier.padding(horizontal = horizontalPadding)
+            onMenuClick = onMenuClick
         )
     }
 }
@@ -303,7 +289,7 @@ private fun BoxScope.AnimatedBottom(pinnedMarker: MarkerWithText?, showZoomInHin
                 bottomStart = CornerSize(0),
                 bottomEnd = CornerSize(0)
             ),
-            color = MaterialTheme.colorScheme.surfaceVariant.copy(alpha = ON_MAP_SURFACE_ALPHA)
+            color = MaterialTheme.colorScheme.surfaceContainerHigh.copy(alpha = MAP_OVERLAY_ALPHA)
         ) {
             // Have to remember the latest pinned marker to continue showing it while the exit
             // animation is still in progress

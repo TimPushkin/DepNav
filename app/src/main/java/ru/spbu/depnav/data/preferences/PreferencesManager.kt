@@ -38,7 +38,7 @@ private const val ENABLE_ROTATION_DEFAULT = false
 
 private const val SELECTED_MAP_KEY = "map"
 
-/** Helper class to load ans save user settings. */
+/** Helper class to load and save user settings. */
 @Singleton
 class PreferencesManager @Inject constructor(@ApplicationContext context: Context) {
     private val prefs = context.getSharedPreferences(PREFERENCES_FILE_NAME, Context.MODE_PRIVATE)

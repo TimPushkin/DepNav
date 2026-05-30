@@ -33,7 +33,7 @@ import ru.spbu.depnav.data.model.SearchHistoryEntry
         MapInfo::class, MapTitle::class, Marker::class, MarkerText::class, MarkerTextFts::class,
         SearchHistoryEntry::class
     ],
-    version = 9
+    version = 10
 )
 abstract class AppDatabase : RoomDatabase() {
     /** DAO for the table containing information about the available maps. */

@@ -57,7 +57,7 @@ import ru.spbu.depnav.utils.map.rotation
 import ru.spbu.depnav.utils.map.top
 
 /**
- * When the pin is outside of the map area visible on the screen, shows a pointer towards the pin.
+ * When the pin is outside the map area visible on the screen, shows a pointer towards the pin.
  *
  * It is intended to be placed exactly over the map's composable.
  */
@@ -87,7 +87,7 @@ fun PinPointer(mapState: MapState, pin: Marker?) {
         ) {
             calculatePointerPose(visibleArea, pinPoint)
         } else {
-            null // There is no pin or it is visible on the screen
+            null // There is no pin, or it is visible on the screen
         }
 
     // Have to remember the latest non-null pointer pose to continue showing it while the exit
@@ -127,18 +127,21 @@ private data class PinPointerPose(
                     .toInt()
                     .coerceIn(0, boxSize.height - pinSize)
             )
+
             Side.RIGHT -> IntOffset(
                 x = (boxSize.width - pinSize).coerceAtLeast(0),
                 y = (boxSize.height * sideFraction - pinSize / 2f)
                     .toInt()
                     .coerceIn(0, boxSize.height - pinSize)
             )
+
             Side.TOP -> IntOffset(
                 x = (boxSize.width * sideFraction - pinSize / 2f)
                     .toInt()
                     .coerceIn(0, boxSize.width - pinSize),
                 y = 0
             )
+
             Side.BOTTOM -> IntOffset(
                 x = (boxSize.width * sideFraction - pinSize / 2f)
                     .toInt()

@@ -120,7 +120,14 @@ class MapViewModel @Inject constructor(
             val floor: Floor
         ) {
             constructor(mapInfo: MapInfo, mapState: MapState, title: String, floor: Floor) :
-                this(mapInfo.id, mapInfo.internalName, mapState, title, mapInfo.floorsNum, floor)
+                    this(
+                        mapInfo.id,
+                        mapInfo.internalName,
+                        mapState,
+                        title,
+                        mapInfo.floorsNum,
+                        floor
+                    )
         }
 
         fun toMapUiState() = if (displayedMap == null) {

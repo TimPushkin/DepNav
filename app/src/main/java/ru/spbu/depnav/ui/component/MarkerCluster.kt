@@ -55,12 +55,16 @@ fun MarkersCluster(
     Marker.MarkerType.ROOM -> RoomMarkersCluster(markerIds, modifier)
     Marker.MarkerType.ENTRANCE ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_entrance), modifier)
+
     Marker.MarkerType.STAIRS_UP, Marker.MarkerType.STAIRS_DOWN, Marker.MarkerType.STAIRS_BOTH ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_stairs), modifier)
+
     Marker.MarkerType.ELEVATOR ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_elevator), modifier)
+
     Marker.MarkerType.WC_MAN, Marker.MarkerType.WC_WOMAN, Marker.MarkerType.WC ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_wc), modifier)
+
     Marker.MarkerType.OTHER ->
         NonRoomMarkersCluster(painterResource(R.drawable.mrk_other), modifier)
 }
@@ -83,8 +87,8 @@ private fun RoomMarkersCluster(markerIds: List<String>, modifier: Modifier = Mod
             )
             .then(modifier),
         shape = MaterialTheme.shapes.small,
-        color = MaterialTheme.colorScheme.onBackground,
-        contentColor = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.onSurface,
+        contentColor = MaterialTheme.colorScheme.surface
     ) {
         Box(contentAlignment = Alignment.Center) {
             Text(
@@ -109,8 +113,8 @@ private fun NonRoomMarkersCluster(painter: Painter, modifier: Modifier = Modifie
             )
             .then(modifier),
         shape = MaterialTheme.shapes.extraSmall,
-        color = MaterialTheme.colorScheme.onBackground,
-        contentColor = MaterialTheme.colorScheme.background
+        color = MaterialTheme.colorScheme.onSurface,
+        contentColor = MaterialTheme.colorScheme.surface
     ) {
         Box(contentAlignment = Alignment.Center) {
             Icon(

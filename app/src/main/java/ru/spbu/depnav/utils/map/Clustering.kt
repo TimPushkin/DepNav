@@ -89,6 +89,7 @@ fun getClustererId(markerType: Marker.MarkerType) = when (markerType) {
     Marker.MarkerType.ENTRANCE -> ENTRANCE_CLUSTERER_ID
     Marker.MarkerType.STAIRS_UP, Marker.MarkerType.STAIRS_DOWN, Marker.MarkerType.STAIRS_BOTH ->
         STAIRS_CLUSTERER_ID
+
     Marker.MarkerType.ELEVATOR -> ELEVATOR_CLUSTERER_ID
     Marker.MarkerType.WC_MAN, Marker.MarkerType.WC_WOMAN, Marker.MarkerType.WC -> WC_CLUSTERER_ID
     Marker.MarkerType.OTHER -> OTHER_CLUSTERER_ID

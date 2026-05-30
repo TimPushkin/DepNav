@@ -19,13 +19,12 @@
 package ru.spbu.depnav.ui.component
 
 import androidx.compose.animation.AnimatedContent
+import androidx.compose.animation.AnimatedVisibility
 import androidx.compose.animation.core.CubicBezierEasing
 import androidx.compose.animation.core.animateFloatAsState
 import androidx.compose.animation.core.tween
 import androidx.compose.animation.fadeIn
 import androidx.compose.animation.fadeOut
-import androidx.compose.animation.togetherWith
-import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.WindowInsetsSides
 import androidx.compose.foundation.layout.asPaddingValues
@@ -33,31 +32,29 @@ import androidx.compose.foundation.layout.only
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.safeDrawing
 import androidx.compose.foundation.layout.windowInsetsPadding
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.rounded.ArrowBack
-import androidx.compose.material.icons.rounded.Clear
-import androidx.compose.material.icons.rounded.Menu
+import androidx.compose.foundation.text.input.TextFieldState
+import androidx.compose.foundation.text.input.clearText
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.SearchBar
 import androidx.compose.material3.SearchBarDefaults
 import androidx.compose.material3.Text
-import androidx.compose.material3.minimumInteractiveComponentSize
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.platform.LocalDensity
+import androidx.compose.ui.focus.focusProperties
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalLayoutDirection
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
-import ovh.plrapps.mapcompose.utils.lerp
+import androidx.compose.ui.util.lerp
 import ru.spbu.depnav.R
-import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
-import ru.spbu.depnav.ui.theme.ON_MAP_SURFACE_ALPHA
+import ru.spbu.depnav.ui.theme.MAP_OVERLAY_ALPHA
 import ru.spbu.depnav.ui.viewmodel.SearchResults
 
 // These are basically copied from SearchBar implementation
@@ -79,8 +76,7 @@ private val EXPANSION_EXIT_SPEC = tween<Float>(
 @Suppress("LongParameterList") // Considered OK for a composable
 @OptIn(ExperimentalMaterial3Api::class)
 fun MapSearchBar(
-    query: String,
-    onQueryChange: (String) -> Unit,
+    queryState: TextFieldState,
     mapTitle: String,
     expanded: Boolean,
     onExpandedChange: (Boolean) -> Unit,
@@ -89,24 +85,30 @@ fun MapSearchBar(
     onMenuClick: () -> Unit,
     modifier: Modifier = Modifier
 ) {
-    val expansionAnimationProgress by animateFloatAsState(
+    val expansionProgress by animateFloatAsState(
         targetValue = if (expanded) 1f else 0f,
         animationSpec = if (expanded) EXPANSION_ENTER_SPEC else EXPANSION_EXIT_SPEC,
         label = "Map search bar activation animation progress"
     )
 
+    // SearchBar always consumes the insets but adds padding only when collapsed
+    val horizontalInsetsPadding =
+        (SearchBarDefaults.windowInsets.only(WindowInsetsSides.Horizontal) *
+                expansionProgress).asPaddingValues()
+
+    // TODO: on older Android versions SearchBar auto-opens after rotation for some reason, seems
+    //  to be a Google's bug, not of just this app.
+    // TODO: SearchBar + ExpandedFullScreenSearchBar is now preferred but currently it has its own
+    //  problems (after collapsing keyboard flashes and if there are horizontal insets input field
+    //  jumps horizontally). To be revisited in the future.
     SearchBar(
         inputField = {
+            val focusManager = LocalFocusManager.current
             SearchBarDefaults.InputField(
-                query = query,
-                onQueryChange = onQueryChange,
-                onSearch = with (LocalFocusManager.current) { { clearFocus() } },
+                state = queryState,
+                onSearch = { focusManager.clearFocus() },
                 expanded = expanded,
                 onExpandedChange = onExpandedChange,
-                modifier = Modifier.windowInsetsPadding(
-                    WindowInsets.safeDrawing.only(WindowInsetsSides.Horizontal) *
-                        expansionAnimationProgress
-                ),
                 placeholder = {
                     Text(
                         stringResource(R.string.search_on_map, mapTitle),
@@ -123,24 +125,31 @@ fun MapSearchBar(
                 },
                 trailingIcon = {
                     AnimatedTrailingIcon(
-                        expanded,
-                        queryEmpty = query.isEmpty(),
-                        onClearClick = { onQueryChange("") }
+                        queryEmpty = queryState.text.isEmpty(),
+                        onClearClick = queryState::clearText
                     )
-                }
+                },
+                colors = SearchBarDefaults.inputFieldColors(
+                    focusedContainerColor = Color.Transparent,
+                    unfocusedContainerColor = Color.Transparent,
+                    disabledContainerColor = Color.Transparent
+                ),
+                modifier = Modifier
+                    .padding(horizontalInsetsPadding)
+                    // On older Android versions it is impossible to leave the search without this
+                    .focusProperties { canFocus = expanded || expansionProgress == 0f }
             )
         },
         expanded = expanded,
         onExpandedChange = onExpandedChange,
         modifier = modifier,
         colors = SearchBarDefaults.colors(
-            containerColor = MaterialTheme.colorScheme.surfaceVariant.copy(
-                alpha = lerp(ON_MAP_SURFACE_ALPHA, 1f, expansionAnimationProgress)
+            containerColor = SearchBarDefaults.colors().containerColor.copy(
+                alpha = lerp(MAP_OVERLAY_ALPHA, 1f, expansionProgress)
             )
-        ),
+        )
     ) {
         val keyboard = LocalSoftwareKeyboardController.current
-
         SearchResultsView(
             results,
             onScroll = { onTop -> keyboard?.apply { if (onTop) show() else hide() } },
@@ -149,15 +158,21 @@ fun MapSearchBar(
                 onResultClick(it)
             },
             modifier = Modifier
+                .padding(horizontalInsetsPadding)
                 .windowInsetsPadding(WindowInsets.safeDrawing)
-                .padding(horizontal = DEFAULT_PADDING * 1.5f)
         )
+    }
+
+    LaunchedEffect(expanded) {
+        if (!expanded) {
+            queryState.clearText()
+        }
     }
 }
 
 @Composable
 private operator fun WindowInsets.times(num: Float): WindowInsets {
-    val paddings = asPaddingValues(LocalDensity.current)
+    val paddings = asPaddingValues()
     val layoutDirection = LocalLayoutDirection.current
     return WindowInsets(
         paddings.calculateLeftPadding(layoutDirection) * num,
@@ -170,26 +185,21 @@ private operator fun WindowInsets.times(num: Float): WindowInsets {
 @Composable
 private fun AnimatedLeadingIcon(
     searchBarActive: Boolean,
-    modifier: Modifier = Modifier,
     onMenuClick: () -> Unit,
     onNavigateBackClick: () -> Unit
 ) {
-    AnimatedContent(
-        searchBarActive,
-        modifier = modifier,
-        label = "Map search bar leading icon change"
-    ) { active ->
+    AnimatedContent(searchBarActive) { active ->
         if (active) {
             IconButton(onClick = onNavigateBackClick) {
                 Icon(
-                    Icons.AutoMirrored.Rounded.ArrowBack,
+                    painterResource(R.drawable.ic_arrow_back),
                     contentDescription = stringResource(R.string.label_navigate_back)
                 )
             }
         } else {
             IconButton(onClick = onMenuClick) {
                 Icon(
-                    Icons.Rounded.Menu,
+                    painterResource(R.drawable.ic_menu),
                     contentDescription = stringResource(R.string.label_open_main_menu)
                 )
             }
@@ -198,30 +208,13 @@ private fun AnimatedLeadingIcon(
 }
 
 @Composable
-private fun AnimatedTrailingIcon(
-    searchBarActive: Boolean,
-    queryEmpty: Boolean,
-    onClearClick: () -> Unit,
-    modifier: Modifier = Modifier
-) {
-    AnimatedContent(
-        searchBarActive to queryEmpty,
-        modifier = modifier,
-        transitionSpec = { fadeIn() togetherWith fadeOut() },
-        label = "Map search bar trailing icon change"
-    ) { (active, emptyQuery) ->
-        if (!active) {
-            return@AnimatedContent
-        }
-        if (emptyQuery) {
-            Spacer(modifier = Modifier.minimumInteractiveComponentSize())
-        } else {
-            IconButton(onClick = onClearClick) {
-                Icon(
-                    Icons.Rounded.Clear,
-                    contentDescription = stringResource(R.string.label_clear_text_field)
-                )
-            }
+private fun AnimatedTrailingIcon(queryEmpty: Boolean, onClearClick: () -> Unit) {
+    AnimatedVisibility(!queryEmpty, enter = fadeIn(), exit = fadeOut()) {
+        IconButton(onClick = onClearClick) {
+            Icon(
+                painterResource(R.drawable.ic_close),
+                contentDescription = stringResource(R.string.label_clear_text_field)
+            )
         }
     }
 }
