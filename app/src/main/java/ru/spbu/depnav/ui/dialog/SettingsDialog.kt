@@ -21,13 +21,16 @@ package ru.spbu.depnav.ui.dialog
 import androidx.annotation.StringRes
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.IntrinsicSize
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.rememberScrollState
 import androidx.compose.foundation.selection.selectable
 import androidx.compose.foundation.selection.selectableGroup
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.RadioButton
@@ -63,47 +66,45 @@ fun SettingsDialog(prefs: PreferencesManager, onDismiss: () -> Unit) {
         },
         title = { Text(stringResource(R.string.settings)) },
         text = {
-            LazyColumn(
-                modifier = Modifier.padding(
-                    horizontal = HORIZONTAL_PADDING,
-                    vertical = HORIZONTAL_PADDING / 2
-                ),
+            Column(
+                modifier = Modifier
+                    .verticalScroll(rememberScrollState())
+                    .padding(
+                        horizontal = HORIZONTAL_PADDING,
+                        vertical = HORIZONTAL_PADDING / 2
+                    ),
                 verticalArrangement = Arrangement.spacedBy(DEFAULT_PADDING)
             ) {
-                item { GroupTitle(stringResource(R.string.theme)) }
+                GroupTitle(stringResource(R.string.theme))
 
-                item {
-                    val themeMode by prefs.themeModeFlow.collectAsStateWithLifecycle()
+                val themeMode by prefs.themeModeFlow.collectAsStateWithLifecycle()
+                RadioOption(
+                    options = listOf(
+                        R.string.light_theme,
+                        R.string.dark_theme,
+                        R.string.system_theme
+                    ).map { id -> StringWithId(stringResource(id), id) },
+                    selected = themeMode.titleId.let { id ->
+                        StringWithId(stringResource(id), id)
+                    },
+                    onSelected = { (_, id) ->
+                        val selectedMode = ThemeMode.fromTitleId(id)
+                        checkNotNull(selectedMode) { "Unknown theme mode selected (id $id)" }
+                        prefs.updateThemeMode(selectedMode)
+                    }
+                )
 
-                    RadioOption(
-                        options = listOf(
-                            R.string.light_theme,
-                            R.string.dark_theme,
-                            R.string.system_theme
-                        ).map { id -> StringWithId(stringResource(id), id) },
-                        selected = themeMode.titleId.let { id ->
-                            StringWithId(stringResource(id), id)
-                        },
-                        onSelected = { (_, id) ->
-                            val selectedMode = ThemeMode.fromTitleId(id)
-                            checkNotNull(selectedMode) { "Unknown theme mode selected (id $id)" }
-                            prefs.updateThemeMode(selectedMode)
-                        }
-                    )
-                }
+                GroupTitle(stringResource(R.string.map))
 
-                item { GroupTitle(stringResource(R.string.map)) }
-
-                item {
-                    val enableRotation by prefs.enableRotationFlow.collectAsStateWithLifecycle()
-                    SwitchOption(
-                        title = stringResource(R.string.rotation_gesture),
-                        checked = enableRotation,
-                        onChecked = prefs::updateEnableRotation
-                    )
-                }
+                val enableRotation by prefs.enableRotationFlow.collectAsStateWithLifecycle()
+                SwitchOption(
+                    title = stringResource(R.string.rotation_gesture),
+                    checked = enableRotation,
+                    onChecked = prefs::updateEnableRotation
+                )
             }
-        }
+        },
+        modifier = Modifier.width(IntrinsicSize.Max)
     )
 }
 
