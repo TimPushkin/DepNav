@@ -26,6 +26,8 @@ import androidx.compose.foundation.layout.ColumnScope
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.rememberScrollState
+import androidx.compose.foundation.verticalScroll
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
@@ -60,38 +62,42 @@ fun MainMenuSheet(
     onMapLegendClick: () -> Unit
 ) {
     ModalDrawerSheet {
-        AppTitle()
+        // Applying the modifier to ModalDrawerSheet itself stops it from occupying whole height of
+        // the window
+        Column(Modifier.verticalScroll(rememberScrollState())) {
+            AppTitle()
 
-        MapItems(selectedMapId, availableMaps, onMapSelected)
+            MapItems(selectedMapId, availableMaps, onMapSelected)
 
-        HorizontalDivider(
-            modifier = Modifier.padding(
-                horizontal = ITEM_HORIZONTAL_PADDING,
-                vertical = DIVIDER_VERTICAL_PADDING
+            HorizontalDivider(
+                modifier = Modifier.padding(
+                    horizontal = ITEM_HORIZONTAL_PADDING,
+                    vertical = DIVIDER_VERTICAL_PADDING
+                )
             )
-        )
 
-        MiscItem(
-            icon = {
-                Icon(
-                    painterResource(R.drawable.ic_settings),
-                    contentDescription = stringResource(R.string.label_open_settings)
-                )
-            },
-            labelText = stringResource(R.string.settings),
-            onClick = onSettingsClick
-        )
+            MiscItem(
+                icon = {
+                    Icon(
+                        painterResource(R.drawable.ic_settings),
+                        contentDescription = stringResource(R.string.label_open_settings)
+                    )
+                },
+                labelText = stringResource(R.string.settings),
+                onClick = onSettingsClick
+            )
 
-        MiscItem(
-            icon = {
-                Icon(
-                    painterResource(R.drawable.ic_info),
-                    contentDescription = stringResource(R.string.label_open_map_legend)
-                )
-            },
-            labelText = stringResource(R.string.map_legend),
-            onClick = onMapLegendClick
-        )
+            MiscItem(
+                icon = {
+                    Icon(
+                        painterResource(R.drawable.ic_info),
+                        contentDescription = stringResource(R.string.label_open_map_legend)
+                    )
+                },
+                labelText = stringResource(R.string.map_legend),
+                onClick = onMapLegendClick
+            )
+        }
     }
 }
 

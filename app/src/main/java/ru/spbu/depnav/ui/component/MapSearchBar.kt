@@ -54,6 +54,7 @@ import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.util.lerp
 import ru.spbu.depnav.R
+import ru.spbu.depnav.ui.theme.DEFAULT_PADDING
 import ru.spbu.depnav.ui.theme.MAP_OVERLAY_ALPHA
 import ru.spbu.depnav.ui.viewmodel.SearchResults
 
@@ -142,7 +143,7 @@ fun MapSearchBar(
         },
         expanded = expanded,
         onExpandedChange = onExpandedChange,
-        modifier = modifier,
+        modifier = modifier.padding(horizontal = DEFAULT_PADDING * (1 - expansionProgress)),
         colors = SearchBarDefaults.colors(
             containerColor = SearchBarDefaults.colors().containerColor.copy(
                 alpha = lerp(MAP_OVERLAY_ALPHA, 1f, expansionProgress)
