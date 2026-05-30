@@ -39,4 +39,4 @@ The following download sources are available:
 - [APK](https://github.com/TimPushkin/DepNav/releases) – download, install, and update DepNav
   manually
 
-Android 5.0 or newer required.
+Android 7 or newer required.
