@@ -38,6 +38,7 @@ abstract class CopyFilesTask @Inject constructor(
     abstract val destination: DirectoryProperty
 
     @TaskAction
+    @Suppress("UndocumentedPublicFunction") // Described by class'es doc
     fun copy() {
         fs.copy {
             from(sources)

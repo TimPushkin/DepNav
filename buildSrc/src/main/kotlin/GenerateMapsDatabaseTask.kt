@@ -31,8 +31,19 @@ import org.gradle.api.tasks.TaskAction
 import org.sqlite.SQLiteDataSource
 import java.io.File
 import java.sql.Connection
+import java.sql.PreparedStatement
 import java.sql.Statement
+import kotlin.io.extension
+import kotlin.io.inputStream
+import kotlin.io.nameWithoutExtension
+import kotlin.io.writeBytes
+import kotlin.use
 
+private const val TABLE_NAME_PLACEHOLDER = "\${TABLE_NAME}"
+
+/**
+ * Generates maps database from latest Room schema and map-info JSONs.
+ */
 @CacheableTask
 abstract class GenerateMapsDatabaseTask : DefaultTask() {
     @get:InputDirectory
@@ -47,6 +58,7 @@ abstract class GenerateMapsDatabaseTask : DefaultTask() {
     abstract val outputFile: RegularFileProperty
 
     @TaskAction
+    @Suppress("UndocumentedPublicFunction") // Described by class'es doc
     fun generateMapsDatabase() {
         val schemaFile = requireNotNull(
             schemaDirectory.asFileTree
@@ -82,21 +94,7 @@ abstract class GenerateMapsDatabaseTask : DefaultTask() {
         execute("PRAGMA user_version = ${schema.database.version}")
 
         for (entity in schema.database.entities) {
-            execute(entity.createSql.replace("\${TABLE_NAME}", entity.tableName))
-            for (index in entity.indices) {
-                execute(index.createSql.replace("\${TABLE_NAME}", entity.tableName))
-            }
-            if (entity is RoomSchema.Database.Entity.Fts) {
-                for (triggerCreateSql in entity.contentSyncTriggers) {
-                    // Table name seems to be hard-coded in contentSyncTriggers
-                    if (triggerCreateSql.contains("\${TABLE_NAME}")) {
-                        throw UnsupportedOperationException(
-                            "Table name parameter in contentSyncTriggers: $triggerCreateSql"
-                        )
-                    }
-                    execute(triggerCreateSql)
-                }
-            }
+            createEntity(entity)
         }
 
         // To be implemented when a need arises
@@ -105,76 +103,120 @@ abstract class GenerateMapsDatabaseTask : DefaultTask() {
         }
     }
 
+    private fun Statement.createEntity(entity: RoomSchema.Database.Entity) {
+        execute(entity.createSql.replace(TABLE_NAME_PLACEHOLDER, entity.tableName))
+
+        for (index in entity.indices) {
+            execute(index.createSql.replace(TABLE_NAME_PLACEHOLDER, entity.tableName))
+        }
+
+        if (entity is RoomSchema.Database.Entity.Fts) {
+            for (triggerCreateSql in entity.contentSyncTriggers) {
+                // Table name seems to be hard-coded in contentSyncTriggers
+                if (triggerCreateSql.contains(TABLE_NAME_PLACEHOLDER)) {
+                    throw UnsupportedOperationException(
+                        "Table name parameter in contentSyncTriggers: $triggerCreateSql"
+                    )
+                }
+                execute(triggerCreateSql)
+            }
+        }
+    }
+
     @OptIn(ExperimentalSerializationApi::class)
     private fun Connection.fillMapInfo(mapInfoFile: File) {
         logger.info("Filling data from $mapInfoFile")
         val mapInfo = mapInfoFile.inputStream().use { Json.decodeFromStream<MapInfo>(it) }
 
-        prepareStatement(
+        withPreparedStatement(
             "INSERT INTO map_info (id, internal_name, floor_width, floor_height, tile_size, levels_num, floors_num) " +
                     "VALUES (?, ?, ?, ?, ?, ?, ?)"
-        ).use { insertMapInfo ->
-            with(insertMapInfo) {
-                setInt(1, mapInfo.id)
-                setString(2, mapInfo.internalName)
-                setInt(3, mapInfo.floorWidth)
-                setInt(4, mapInfo.floorHeight)
-                setInt(5, mapInfo.tileSize)
-                setInt(6, mapInfo.zoomLevelsNum)
-                setInt(7, mapInfo.floors.size)
-                executeUpdate()
-            }
+        ) {
+            setMapInfoParameters(mapInfo)
+            executeUpdate()
         }
 
-        prepareStatement(
+        withPreparedStatement(
             "INSERT INTO map_title (map_id, language_id, title) VALUES (?, ?, ?)"
-        ).use { insertMapTitle ->
-            with(insertMapTitle) {
-                for ((language, title) in mapInfo.title.toMap()) {
-                    setInt(1, mapInfo.id)
-                    setString(2, language)
-                    setString(3, title)
-                    addBatch()
-                }
-                executeBatch()
+        ) {
+            for ((language, title) in mapInfo.title.toMap()) {
+                setMapTitleParameters(mapInfo.id, language, title)
+                addBatch()
             }
+            executeBatch()
         }
 
-        prepareStatement(
-            "INSERT INTO marker (map_id, type, floor, x, y) VALUES (?, ?, ?, ?, ?) RETURNING id"
-        ).use { insertMarker ->
-            prepareStatement(
-                "INSERT INTO marker_text (marker_id, language_id, title, location, description)" +
-                        "VALUES (?, ?, ?, ?, ?)"
-            ).use { insertMarkerText ->
-                for (floor in mapInfo.floors) {
-                    for (marker in floor.markers) {
-                        val markerId = with(insertMarker) {
-                            setInt(1, mapInfo.id)
-                            setString(2, marker.type)
-                            setInt(3, floor.floor)
-                            setDouble(4, marker.x.toDouble() / mapInfo.floorWidth)
-                            setDouble(5, marker.y.toDouble() / mapInfo.floorHeight)
-                            executeQuery().use {
-                                check(it.next())
-                                it.getLong("id")
-                            }
-                        }
-
-                        for ((language, textInfo) in marker.textInfos()) {
-                            with(insertMarkerText) {
-                                setLong(1, markerId)
-                                setString(2, language)
-                                setString(3, textInfo.title)
-                                setString(4, textInfo.location)
-                                setString(5, textInfo.description)
-                                addBatch()
-                            }
-                        }
+        usePreparedStatements(
+            "INSERT INTO marker (map_id, type, floor, x, y) VALUES (?, ?, ?, ?, ?) RETURNING id",
+            "INSERT INTO marker_text (marker_id, language_id, title, location, description)" +
+                    "VALUES (?, ?, ?, ?, ?)"
+        ) { insertMarker, insertMarkerText ->
+            for (floor in mapInfo.floors) {
+                for (marker in floor.markers) {
+                    insertMarker.setMarkerParameters(
+                        mapInfo.id, floor.floor, mapInfo.floorWidth, mapInfo.floorHeight, marker
+                    )
+                    val markerId = insertMarker.executeQuery().use {
+                        check(it.next())
+                        it.getLong("id")
+                    }
+                    for ((language, textInfo) in marker.textInfos()) {
+                        insertMarkerText.setMarkerTestParameters(markerId, language, textInfo)
+                        insertMarkerText.addBatch()
                     }
                 }
-                insertMarkerText.executeBatch()
             }
+            insertMarkerText.executeBatch()
         }
+    }
+
+    private inline fun Connection.withPreparedStatement(
+        sql: String, action: PreparedStatement.() -> Unit
+    ) {
+        prepareStatement(sql).use { it.action() }
+    }
+
+    private inline fun Connection.usePreparedStatements(
+        sql1: String, sql2: String, block: (PreparedStatement, PreparedStatement) -> Unit
+    ) {
+        prepareStatement(sql1).use { s1 -> prepareStatement(sql2).use { s2 -> block(s1, s2) } }
+    }
+
+    private fun PreparedStatement.setMapInfoParameters(mapInfo: MapInfo) {
+        setInt(1, mapInfo.id)
+        setString(2, mapInfo.internalName)
+        setInt(3, mapInfo.floorWidth)
+        setInt(4, mapInfo.floorHeight)
+        setInt(5, mapInfo.tileSize)
+        setInt(6, mapInfo.zoomLevelsNum)
+        setInt(7, mapInfo.floors.size)
+    }
+
+    private fun PreparedStatement.setMapTitleParameters(
+        mapId: Int, language: String, title: String
+    ) {
+        setInt(1, mapId)
+        setString(2, language)
+        setString(3, title)
+    }
+
+    private fun PreparedStatement.setMarkerParameters(
+        mapId: Int, floor: Int, floorWidth: Int, floorHeight: Int, marker: MapInfo.Floor.Marker
+    ) {
+        setInt(1, mapId)
+        setString(2, marker.type)
+        setInt(3, floor)
+        setDouble(4, marker.x.toDouble() / floorWidth)
+        setDouble(5, marker.y.toDouble() / floorHeight)
+    }
+
+    private fun PreparedStatement.setMarkerTestParameters(
+        markerId: Long, language: String, textInfo: MapInfo.Floor.Marker.TextInfo
+    ) {
+        setLong(1, markerId)
+        setString(2, language)
+        setString(3, textInfo.title)
+        setString(4, textInfo.location)
+        setString(5, textInfo.description)
     }
 }

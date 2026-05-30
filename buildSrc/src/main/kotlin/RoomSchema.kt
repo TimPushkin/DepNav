@@ -80,6 +80,7 @@ internal data class RoomSchema(
         }
 
         object EntitySerializer : JsonContentPolymorphicSerializer<Entity>(Entity::class) {
+            @Suppress("UseIfInsteadOfWhen") // Follows an official example
             override fun selectDeserializer(element: JsonElement) = when {
                 "ftsVersion" in element.jsonObject -> Entity.Fts.serializer()
                 else -> Entity.Normal.serializer()
